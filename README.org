@@ -1,0 +1,7 @@
+My Emacs Config.
+
+-----
+
+*Credits*
+
+- [[https://github.com/purcell/emacs.d][purcell/emacs.d]]
