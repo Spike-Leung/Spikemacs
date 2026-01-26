@@ -38,8 +38,6 @@
 	org-export-allow-bind-keywords t)
   ;; automatically rename denote buffers using the `denote-rename-buffer-format'.
   (denote-rename-buffer-mode 1)
-  ;; 修改 `denote:' 链接的导出，使其读取 `#+export_file_name'
-  (org-link-set-parameters "denote" :export #'spike-leung/denote-link-ol-export)
   (defun spike-leung/denote-dired-mode ()
     "replace `diredfl-mode' with `denote-dired-mode'."
     (interactive)
@@ -90,6 +88,11 @@ backend."
 	  ('md (format "[%s](%s)" desc path))
 	  (_ path))
       (format-message "[[Denote query for `%s']]" query))))
+
+;; 修改 `denote:' 链接的导出，使其读取 `#+export_file_name'
+(add-hook 'org-export-before-processing-hook
+          #'(lambda (backend)
+              (org-link-set-parameters "denote" :export #'spike-leung/denote-link-ol-export)))
 
 
 
