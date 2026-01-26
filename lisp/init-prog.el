@@ -1,0 +1,242 @@
+;;; init-prog.el --- Programing related -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+
+
+
+;; (use-package flycheck
+;;   :hook (after-init . global-flycheck-mode)
+;;   :config
+;;   (setq flycheck-checker-error-threshold 1024))
+
+(use-package flymake
+  :hook (prog-mode text-mode)
+  :bind (("C-c ! l" . flymake-show-buffer-diagnostics)
+         ("C-c ! p" . flymake-goto-prev-error)
+         ("C-c ! n" . flymake-goto-next-error)
+         ("C-c ! c" . flymake-start)))
+
+;; Add spell-checking in comments for all programming language modes
+(use-package flyspell
+  :diminish
+  :ensure nil
+  :hook ((prog-mode . flyspell-prog-mode)))
+(use-package consult-flyspell)
+
+
+
+(use-package eglot
+  :ensure nil
+  :config
+  (add-to-list 'eglot-server-programs
+               '(web-mode . ("vscode-html-language-server" "--stdio"))))
+
+(use-package eldoc
+  :ensure nil
+  :diminish
+  :hook (eval-expression-minibuffer-setup . eldoc-mode)
+  :config
+  (setq eldoc-documentation-function 'eldoc-documentation-compose)
+  (add-hook 'flymake-mode-hook
+            (lambda ()
+              (add-hook 'eldoc-documentation-functions 'flymake-eldoc-function nil t))))
+
+
+
+(use-package display-line-numbers
+  :hook (prog-mode . display-line-numbers-mode)
+  :config
+  (setq-default display-line-numbers-width 3))
+
+
+
+(use-package display-fill-column-indicator
+  :hook (prog-mode . display-fill-column-indicator-mode))
+
+
+
+;;; indent
+
+(setq css-indent-offset 2
+      web-mode-css-indent-offset 2
+      web-mode-code-indent-offset 2
+      web-mode-sql-indent-offset 2
+      web-mode-markup-indent-offset 2
+      js-indent-level 2)
+
+
+
+;;; is it works?
+
+(use-package dumb-jump
+  :hook (xref-backend-functions . dumb-jump-xref-activate)
+  :config
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
+
+
+
+;;; treesitter
+
+;; (use-package treesit-auto
+;;   :hook (after-init . global-treesit-auto-mode)
+;;   :custom
+;;   (treesit-auto-install 'prompt)
+;;   :config
+;;   (treesit-auto-add-to-auto-mode-alist 'all))
+
+(use-package treesit-fold
+  :diminish
+  :bind ((:map treesit-fold-mode-map
+               ("C-c t t" . treesit-fold-toggle)
+               ("C-c t o" . treesit-fold-open-all)
+               ("C-c t c" . treesit-fold-close-all))))
+
+
+
+;;; HTML
+;; tagedit: https://github.com/magnars/tagedit
+;; web-mode: https://web-mode.org/
+
+(use-package web-mode
+  :init (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+  :mode (("\\.html\\'" . web-mode)))
+
+
+
+;;; CSS
+
+
+
+;;; JS / TS
+
+(use-package js2-mode)
+(use-package prettier-js)
+
+
+
+;;; Python
+
+(setq python-shell-interpreter "python3")
+
+;; Use the python black package to reformat python buffers.
+(use-package blacken)
+(use-package pip-requirements)
+
+
+
+;;; SQL
+
+(setq-default sql-input-ring-file-name
+              (locate-user-emacs-file ".sqli_history"))
+(use-package sqlformat
+  :bind (:map sql-mode-map
+              ("C-c C-f" . sqlformat)))
+
+
+
+;;; HTTP
+;; httprepl, restclient
+
+
+
+;;; crontab
+
+(use-package crontab-mode
+  :mode "\\.?cron\\(tab\\)?\\'")
+
+
+
+;;; CSV
+
+(use-package csv-mode
+  :mode "\\.[Cc][Ss][Vv]\\'"
+  :config
+  (setq csv-separators '("," ";" "|" " ")))
+
+;; todo:
+;; flyover
+
+
+
+;;; yaml
+
+(use-package yaml-mode
+  :mode "\\.yml\\.erb\\'")
+
+
+
+;;; make URL clickable in comments
+
+(use-package goto-addr
+  :hook ( (prog-mode . goto-address-prog-mode)
+          (yaml-mode . goto-address-prog-mode)))
+
+
+
+;;; markdown
+
+;; live preview markdown
+(use-package impatient-mode
+  :commands (spike-leung/preview-markdown spike-leung/disable-preview-markdown)
+  :config
+  (defun spike-leung/imp-markdown-filter (buffer)
+    "Define imp markdown filter.
+Wrap BUFFER with HTML, render with https://github.com/markedjs/marked and style with https://github.com/sindresorhus/github-markdown-css"
+    (princ (with-current-buffer buffer
+             (format "<!DOCTYPE html>
+<html>
+  <title>Markdown Preview</title>
+  <head>
+    <link
+      rel=\"stylesheet\"
+      href=\"https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.min.css\"
+      integrity=\"sha512-BrOPA520KmDMqieeM7XFe6a3u3Sb3F1JBaQnrIAmWg3EYrciJ+Qqe6ZcKCdfPv26rGcgTrJnZ/IdQEct8h3Zhw==\"
+      crossorigin=\"anonymous\"
+      referrerpolicy=\"no-referrer\"
+    />
+    <style>
+          .markdown-body {
+                  box-sizing: border-box;
+                  min-width: 200px;
+                  max-width: 980px;
+                  margin: 0 auto;
+                  padding: 45px;
+          }
+
+          @media (max-width: 767px) {
+                  .markdown-body {
+                          padding: 15px;
+                  }
+          }
+    </style>
+    <script src=\"https://cdn.jsdelivr.net/npm/marked/marked.min.js\"></script>
+  </head>
+  <body>
+    <div id=\"markdown-body\" class=\"markdown-body\"></div>
+    <script>
+      document.getElementById('markdown-body').innerHTML = marked.parse(%s);
+    </script>
+  </body>
+</html>"
+                     (json-encode (buffer-substring-no-properties (point-min) (point-max)))))
+           (current-buffer)))
+
+  (defun spike-leung/preview-markdown ()
+    "Live Preview markdown."
+    (interactive)
+    (impatient-mode)
+    (imp-visit-buffer)
+    (imp-set-user-filter 'spike-leung/imp-markdown-filter))
+
+  (defun spike-leung/disable-preview-markdown ()
+    "Disable preview markdown."
+    (interactive)
+    (progn
+      (httpd-stop)
+      (impatient-mode -1)
+      (imp-remove-user-filter))))
+
+
+
+(provide 'init-prog)
+;;; init-prog.el ends here

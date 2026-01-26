@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: album-desc
+# key: ad
+# --
+
+#+begin_details
+#+html: <summary>专辑信息</summary>
+
+- 专辑名称：
+- 歌手：
+- 年份：
+- 风格：
+- 时长：
+#+end_details

@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: zine
+# key: zine
+# group: blog
+# --
+* News | Article
+** Others
+* Cool Bit
+
+* Tutorial | Resource
+
+* Code Related
+
+* AI Related
+
+* Tool | Library
+
+* Emacs
+
+* 一些话 | 摘抄
+
+* 多媒体
+** 书
+** 电影
+** 视频
+** 播客
+** 音乐
+** 游戏

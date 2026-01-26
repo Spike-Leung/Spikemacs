@@ -1,0 +1,35 @@
+;;; init-auth --- config for auth related -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+
+;; input pass in minibuffer
+(setq epa-pinentry-mode 'loopback)
+;;; use pass to manage auth-source
+;; (auth-source-pass-enable)
+
+
+
+;;; function to get api-key from authinfo
+(defun spike-leung/get-api-key (service &optional host)
+  "Retrieve the API key for SERVICE from authinfo.  if HOST exist, retrieve by HOST."
+  (let* ((host (or host (format "api.%s.com" service)))
+         (creds (car (auth-source-search :host host :port 443))))
+    (if creds
+        (let ((api-key (plist-get creds :secret
+                                  )))
+          (if (functionp api-key)
+              (funcall api-key)
+            api-key
+            (error "API key not found for %s" service)))
+      (error "No credentials found for %s" service))))
+
+(defun spike-leung/get-deepseek-api-key ()
+  "Retrieve the DeepSeek API key from authinfo."
+  (spike-leung/get-api-key "deepseek"))
+
+(defun spike-leung/get-openrouter-api-key ()
+  "Retrieve the OpenRouter API key from authinfo."
+  (spike-leung/get-api-key "openrouter" "openrouter.ai"))
+
+(provide 'init-auth)
+;;; init-auth.el ends here.

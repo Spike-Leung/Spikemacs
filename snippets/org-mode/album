@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: album
+# key: album
+# group: blog
+# --
+🎶 ${1:name} - ${0:singer}
