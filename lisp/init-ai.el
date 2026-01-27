@@ -6,7 +6,7 @@
 
 ;;; gptel
 
-(defconst openrouter-default-model 'deepseek/deepseek-v3.2-speciale
+(defconst openrouter-default-model 'google/gemini-3-flash-preview
   "Default model for openrouter.")
 
 (defconst openrouter-models '(;; google
@@ -20,10 +20,12 @@
                               anthropic/claude-haiku-4.5
                               anthropic/claude-sonnet-4.5
                               anthropic/claude-opus-4.5
-                              ;; opeaai
+                              ;; openai
                               openai/gpt-5.2
                               openai/gpt-5-mini
-                              openai/gpt-5-nano)
+                              openai/gpt-5-nano
+                              ;; kimi
+                              moonshotai/kimi-k2.5)
   "Openrouter models.")
 
 (use-package gptel
