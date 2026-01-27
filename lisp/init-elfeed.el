@@ -17,12 +17,12 @@
   :requires (elfeed)
   :after (elfeed)
   :hook (after-init . elfeed-org)
-  :config
+  :init
   (setq rmh-elfeed-org-files (list spike-leung/elfeed-org-files)))
 
 (use-package elfeed-autotag
   :hook (after-init . elfeed-autotag)
-  :config
+  :init
   (setq elfeed-autotag-files (list spike-leung/elfeed-org-files)))
 
 
