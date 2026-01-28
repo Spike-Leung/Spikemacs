@@ -467,12 +467,55 @@ These elements's ID will be remove: figure,details,pre ..."
 
 ;;; utils
 
+(defun spike-leung/get-export-file-name ()
+  "提取当前 buffer 的 #+export_file_name 值（不含扩展名）。"
+  (save-excursion
+    (goto-char (point-min))
+    (when (re-search-forward "^#\\+export_file_name:\\s-*\\(.+?\\)\\s-*$" nil t)
+      (file-name-sans-extension (match-string 1)))))
+
+(defun spike-leung/determine-image-dir (base-dir export-name)
+  "根据 EXPORT-NAME 决定图片目录。
+优先级：
+1. BASE-DIR/EXPORT-NAME
+2. 如果是 album-1 格式，尝试 BASE-DIR/album/1
+3. 如果是 album-1 格式，尝试 BASE-DIR/album
+4. BASE-DIR"
+  (if (or (not export-name) (string-empty-p export-name))
+      base-dir
+    (let* ((full-path (expand-file-name export-name base-dir))
+           (split-pos (string-match "-\\([0-9]+\\)$" export-name))
+           candidates)
+
+      ;; 构建候选目录列表（按优先级）
+      ;; 1. BASE-DIR/EXPORT-NAME
+      (setq candidates (list full-path))
+
+      (when split-pos
+        (let* ((parent (substring export-name 0 split-pos))
+               (child (match-string 1 export-name))
+               ;; 3. 如果是 album-1 格式，尝试 BASE-DIR/album
+               (parent-path (expand-file-name parent base-dir))
+               ;; 2. 如果是 album-1 格式，尝试 BASE-DIR/album/1
+               (nested-path (expand-file-name child parent-path)))
+          (setq candidates (append candidates
+                                   (list nested-path parent-path)))))
+
+      ;; 返回第一个存在的目录，否则返回 base-dir
+      (cl-find-if #'file-directory-p (append candidates (list base-dir))))))
+
 (defun spike-leung/insert-blog-images ()
-  "Insert images from blog."
+  "从 blog 插入图片。
+智能识别 #+export_file_name，如 album-1 会依次尝试：
+images/album-1 → images/album/1 → images/album → images/"
   (interactive)
-  (let* ((image-dir (expand-file-name "~/git/taxodium/publish/images/"))
-         (image-file (read-file-name "Select image: " image-dir))
-         (relative-path (file-relative-name image-file image-dir)))
+  (let* ((base-dir (expand-file-name "~/git/taxodium/publish/images/"))
+         (export-name (spike-leung/get-export-file-name))
+         (image-dir (file-name-as-directory
+                     (spike-leung/determine-image-dir base-dir export-name)))
+         (image-file (read-file-name "Select image: " image-dir nil t))
+         ;; 保持路径相对于 base-dir，确保子目录结构正确
+         (relative-path (file-relative-name image-file base-dir)))
     (insert (format "#+CAPTION: \n[[file:images/%s]]" relative-path))))
 
 (defun spike-leung/insert-album-href ()
