@@ -97,5 +97,12 @@
 
 
 
+(use-package gptel-magit
+  :hook (magit-mode . gptel-magit-install)
+  :config
+  (setq gptel-magit-model 'google/gemini-3-flash-preview))
+
+
+
 (provide 'init-ai)
 ;;; init-ai.el ends here
