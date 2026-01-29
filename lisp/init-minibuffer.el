@@ -14,11 +14,12 @@
   :ensure t
   :defer t
   :bind (([remap switch-to-buffer]              . consult-buffer)
-         ([remap imenu] . consult-imenu)
+         ([remap imenu]                         . consult-imenu)
+         ([remap bookmark-jump]                 . consult-bookmark)
          ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
-         ([remap switch-to-buffer-other-frame] . consult-buffer-other-frame)
-         ([remap goto-line]                      . consult-goto-line)
-         ("M-?" . sanityinc/consult-ripgrep-at-point))
+         ([remap switch-to-buffer-other-frame]  . consult-buffer-other-frame)
+         ([remap goto-line]                     . consult-goto-line)
+         ("M-?"                                 . sanityinc/consult-ripgrep-at-point))
   :config
   (defmacro sanityinc/no-consult-preview (&rest cmds)
     `(consult-customize ,@cmds :preview-key "M-P"))
