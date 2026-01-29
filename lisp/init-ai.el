@@ -71,6 +71,35 @@
     :backend "OpenRouter"
     :model 'deepseek/deepseek-v3.2)
 
+  (gptel-make-preset 'quote-format
+    :backend "OpenRouter"
+    :rewrite-message "按照以下要求，格式化内容:
+- 当存在英文和中文翻译，移除英文
+- 当涉及到缩写，需要在中文附近补充英文缩写和完整的英文，如最低合格读者 (MQR, Minimum Qualified Reader)
+- 当存在中英文混合，中文和英文/数字之间需要保留一个空格
+- 当文本中包含破折号，例如 ——、--，需要将他们替换为 ⸺ ，注意，⸺  的前后需要保留一个空格
+- 文本中的引号替换为直角引号 「」、『』，如果引号里面还有引号，则采用 「『』」的嵌套形式
+需要格式化内容："
+    :model 'google/gemini-3-flash-preview)
+
+  (gptel-make-preset 'lyric-format
+    :description "格式歌词"
+    :backend "OpenRouter"
+    :rewrite-message "格式化歌词，将原始歌词和中文翻译拆分成两部分。
+对于原文歌词，输出格式为：
+#+begin_verse
+[原文歌词]
+#+end_verse
+
+对于翻译，输出格式为：
+#+begin_details
+#+html: <summary>歌词大意</summary>
+#+begin_verse
+[翻译]
+#+end_verse
+#+end_details"
+    :model 'google/gemini-3-flash-preview)
+
   (add-hook 'gptel-mode-hook 'auto-fill-mode)
   (add-hook 'gptel-mode-hook 'visual-line-mode))
 
