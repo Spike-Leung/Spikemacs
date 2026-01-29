@@ -56,6 +56,8 @@
 
 ;; minor mode for editing parentheses
 (use-package paredit
+  ;; 先暂时禁用，我好像很少用到相关功能
+  :disabled
   :diminish
   :init
   (dolist (mode spike-leung/lispy-modes)
