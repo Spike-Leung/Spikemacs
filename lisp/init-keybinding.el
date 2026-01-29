@@ -51,6 +51,8 @@
   (defun spike-leung/gptel-rewrite-preset ()
     "Pick a preset from `gptel--known-presets' and execute `gptel--suffix-rewrite'."
     (interactive)
+    ;; gptel--suffix-rewrite 依赖 gptel-rewrite 的加载
+    (require 'gptel-rewrite)
     (unless (use-region-p) (user-error "Requires a selected region"))
     (let* ((preset-name
             ;; 过滤带有 rewrite-message 的 preset
