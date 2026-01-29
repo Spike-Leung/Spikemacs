@@ -99,8 +99,9 @@
 
 (use-package gptel-magit
   :hook (magit-mode . gptel-magit-install)
-  :config
-  (setq gptel-magit-model 'google/gemini-3-flash-preview))
+  :custom
+  (gptel-magit-commit-prompt "gptel-magit-prompt-zed")
+  (gptel-magit-model 'google/gemini-3-flash-preview))
 
 
 
