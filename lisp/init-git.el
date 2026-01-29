@@ -57,5 +57,10 @@
 
 
 
+;; Interactive Emacs functions that create URLs
+;; for files and commits in GitHub/Bitbucket/GitLab/... 
+(use-package git-link)
+
+
 (provide 'init-git)
 ;;; init-git.el ends here
