@@ -23,6 +23,7 @@
 (require 'init-ibuffer)
 (require 'init-isearch)
 (require 'init-kaomoji)
+(require 'init-keybinding)
 (require 'init-lisp)
 (require 'init-minibuffer)
 (require 'init-misc)
