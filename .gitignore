@@ -64,3 +64,4 @@ org-roam.db
 .elfeed/
 snippets/**/.*.el
 /org-persist
+ielm-history.eld
