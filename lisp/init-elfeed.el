@@ -14,11 +14,8 @@
   (setq-default elfeed-search-filter "@1-months-ago +unread +default"))
 
 (use-package elfeed-org
-  :requires (elfeed)
-  :after (elfeed)
-  :hook (after-init . elfeed-org)
-  :init
-  (setq rmh-elfeed-org-files (list spike-leung/elfeed-org-files)))
+  :hook ((after-init . elfeed-org))
+  :init (setq rmh-elfeed-org-files (list spike-leung/elfeed-org-files)))
 
 (use-package elfeed-autotag
   :hook (after-init . elfeed-autotag)
