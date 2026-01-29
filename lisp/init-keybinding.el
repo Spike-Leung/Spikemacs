@@ -3,18 +3,41 @@
 ;;; Code:
 
 
+(defun spike-leung/gptel-rewrite-preset ()
+  "Pick a preset from `gptel--known-presets' and execute `gptel--suffix-rewrite'."
+  (interactive)
+  ;; gptel--suffix-rewrite 依赖 gptel-rewrite 的加载
+  (require 'gptel-rewrite)
+  (unless (use-region-p) (user-error "Requires a selected region"))
+  (let* ((preset-name
+          ;; 选择 preset
+          (completing-read "Pick a preset: "
+                           gptel--known-presets
+                           ;; 过滤选项，只保留带有 `:rewrite-message' 的选项
+                           (lambda (preset)
+                             (plist-member (cdr preset) :rewrite-message))
+                           ;; 必须匹配选项
+                           t))
+         ;; 找到对应的 preset，获取 preset 设置
+         (preset (gptel-get-preset (intern preset-name))))
+    ;; 使用 preset 调用 gptel-rewrite
+    (gptel-with-preset preset
+      (gptel--suffix-rewrite))))
 
 (use-package transient
   :bind ("M-o" . spike-leung/transient)
   :config
   (transient-define-prefix spike-leung/transient-gptel ()
     "transient for gptel."
-    ["gptel"
-     ("g" "gptel" gptel)
-     ("a" "gptel-abort" gptel-abort)
-     ("m" "gptel-menu" gptel-menu :transient t)
-     ("M" "gptel-mode" gptel-mode)
-     ("r" "gptel-rewrite" gptel-rewrite)])
+    [["gptel"
+      ("g" "gptel" gptel)
+      ("a" "gptel-abort" gptel-abort)
+      ("m" "gptel-menu" gptel-menu :transient t)
+      ("M" "gptel-mode" gptel-mode)]
+     ["rewrite"
+      ("r" "gptel-rewrite" gptel-rewrite)
+      ("R" "gptel-rewrite-preset" spike-leung/gptel-rewrite-preset)]])
+
   (transient-define-prefix spike-leung/transient-bookmark ()
     ["Bookmark"
      ("a" "add" bookmark-set)
@@ -48,35 +71,19 @@
     ["Frequently used commands"
      ("g" "gitmoji" gitmoji-insert)])
 
-  (defun spike-leung/gptel-rewrite-preset ()
-    "Pick a preset from `gptel--known-presets' and execute `gptel--suffix-rewrite'."
-    (interactive)
-    ;; gptel--suffix-rewrite 依赖 gptel-rewrite 的加载
-    (require 'gptel-rewrite)
-    (unless (use-region-p) (user-error "Requires a selected region"))
-    (let* ((preset-name
-            ;; 过滤带有 rewrite-message 的 preset
-            (completing-read "选择一个 Preset:" (seq-filter
-                                                 (lambda (preset)
-                                                   (plist-member (cdr preset) :rewrite-message))
-                                                 gptel--known-presets)))
-           ;; 找到对应的 preset，获取 preset 设置
-           (preset (gptel-get-preset (intern preset-name))))
-      ;; 使用 preset 调用 gptel-rewrite
-      (gptel-with-preset preset
-        (gptel--suffix-rewrite))))
-
   (transient-define-prefix spike-leung/transient ()
     "A transient to list all my frequently used command."
-    [("g" "gptel" spike-leung/transient-gptel)
-     ("B" "bookmark" spike-leung/transient-bookmark)
-     ("b" "blog" spike-leung/transient-blog)
-     ("c" "commands" spike-leung/transient-commands)
-     ("r" "register" spike-leung/transient-register)
-     ("R" "gpt-rewrite-preset" spike-leung/gptel-rewrite-preset)
-     ("p" "publish" org-publish)
-     ("t" "translate" spike-leung/transient-translate)
-     ("md" "markdown-preview" spike-leung/transient-markdown)]))
+    [["(｡•̀ᴗ-)✧"
+      ("g" "gptel" spike-leung/transient-gptel)
+      ("b" "blog" spike-leung/transient-blog)
+      ("p" "publish" org-publish)
+      ("t" "translate" spike-leung/transient-translate)]
+     ["Register"
+      ("B" "bookmark" spike-leung/transient-bookmark)
+      ("r" "register" spike-leung/transient-register)]
+     ["Utils"
+      ("c" "commands" spike-leung/transient-commands)
+      ("md" "markdown-preview" spike-leung/transient-markdown)]]))
 
 
 
