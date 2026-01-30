@@ -25,7 +25,8 @@
       (gptel--suffix-rewrite))))
 
 (use-package transient
-  :bind ("M-o" . spike-leung/transient)
+  :bind (("M-o" . spike-leung/transient)
+         ("<f12>" . spike-leung/transient))
   :config
   (transient-define-prefix spike-leung/transient-gptel ()
     "transient for gptel."
@@ -57,6 +58,7 @@
      ("b" "buffer" immersive-translate-buffer)
      ("p" "paragraph" immersive-translate-paragraph)
      ("a" "abort" immersive-translate-abort)
+     ("f" "fanyi" fanyi-dwim)
      ("m" "auto-mode" immersive-translate-auto-mode)])
 
   (transient-define-prefix spike-leung/transient-markdown ()
@@ -70,7 +72,22 @@
 
   (transient-define-prefix spike-leung/transient-commands ()
     ["Frequently used commands"
-     ("g" "gitmoji" gitmoji-insert)])
+     ("g" "gitmoji" gitmoji-insert)
+     ("o" "olivetti" olivetti-mode)])
+
+  (transient-define-prefix spike-leung/transient-multi-cursors ()
+    ["Multi Cursor (quit transient with `C-q')"
+     ["mark"
+      ("a" "all" mc/mark-all-like-this :transient t)
+      ("n" "next" mc/mark-next-like-this :transient t)
+      ("p" "prev" mc/mark-previous-like-this :transient t)
+      ("h" "hide unmark" mc-hide-unmatched-lines-mode :transient t)]
+     ["unmark"
+      ("un" "unmark next" mc/unmark-next-like-this :transient t)
+      ("up" "unmark next" mc/unmark-previous-like-this :transient t)]
+     ["skip"
+      ("sn" "skip next" mc/skip-to-next-like-this :transient t)
+      ("sp" "skip next" mc/skip-to-previous-like-this :transient t)]])
 
   (transient-define-prefix spike-leung/transient ()
     "A transient to list all my frequently used command."
@@ -84,6 +101,7 @@
      ["(＠_＠)"
       ("u" "utils" spike-leung/transient-commands)
       ("t" "translate" spike-leung/transient-translate)
+      ("mc" "multi cursor" spike-leung/transient-multi-cursors)
       ("md" "markdown-preview" spike-leung/transient-markdown)]]))
 
 
