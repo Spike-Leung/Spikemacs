@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: html head extra figure
+# key: hf
+# --
+
+#+HTML_HEAD_EXTRA: <style>.figure-number { display: none }</style>
