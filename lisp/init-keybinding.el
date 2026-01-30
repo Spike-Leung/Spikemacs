@@ -31,12 +31,13 @@
     "transient for gptel."
     [["gptel"
       ("g" "gptel" gptel)
-      ("a" "gptel-abort" gptel-abort)
-      ("m" "gptel-menu" gptel-menu :transient t)
-      ("M" "gptel-mode" gptel-mode)]
+      ("m" "gptel-menu" gptel-menu :transient t)]
      ["rewrite"
-      ("r" "gptel-rewrite" gptel-rewrite)
-      ("R" "gptel-rewrite-preset" spike-leung/gptel-rewrite-preset)]])
+      ("rr" "gptel-rewrite" gptel-rewrite)
+      ("rp" "gptel-rewrite-preset" spike-leung/gptel-rewrite-preset)]
+     ["Else"
+      ("a" "gptel-abort" gptel-abort)
+      ("M" "gptel-mode" gptel-mode)]])
 
   (transient-define-prefix spike-leung/transient-bookmark ()
     ["Bookmark"
@@ -74,15 +75,15 @@
   (transient-define-prefix spike-leung/transient ()
     "A transient to list all my frequently used command."
     [["(｡•̀ᴗ-)✧"
-      ("g" "gptel" spike-leung/transient-gptel)
       ("b" "blog" spike-leung/transient-blog)
-      ("p" "publish" org-publish)
-      ("t" "translate" spike-leung/transient-translate)]
-     ["Register"
+      ("g" "gptel" spike-leung/transient-gptel)
+      ("p" "publish" org-publish)]
+     ["ヾ(･|"
       ("B" "bookmark" spike-leung/transient-bookmark)
       ("r" "register" spike-leung/transient-register)]
-     ["Utils"
-      ("c" "commands" spike-leung/transient-commands)
+     ["(＠_＠)"
+      ("u" "utils" spike-leung/transient-commands)
+      ("t" "translate" spike-leung/transient-translate)
       ("md" "markdown-preview" spike-leung/transient-markdown)]]))
 
 
