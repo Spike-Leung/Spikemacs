@@ -21,6 +21,7 @@
 	 ("C-c n g" . denote-grep)
 	 ("C-c n r" . denote-rename-file)
 	 ("C-c n R" . denote-rename-file-using-front-matter)
+         ("C-c n d" . denote-rename-file-date)
 	 :map dired-mode-map
 	 ("C-c C-d C-i" . denote-dired-link-marked-notes)
 	 ("C-c C-d C-r" . denote-dired-rename-files)
