@@ -29,6 +29,7 @@
                         ("Kagi Translate Text" . [simple-query "translate.kagi.com" "translate.kagi.com/?from=auto&to=zh_cn&text=" ""])
                         ("Kagi Translate Page" . [simple-query "translate.kagi.com" "translate.kagi.com/zh_cn/" "?kt_view=both_vertical?kt_view=both_vertical"])
                         ("Kagi LLM" . [simple-query "kagi.com" "kagi.com/assistant?q=" "&profile=kimi-k2.5-reasoning&internet=on"])
+                        ("Kagi Summary" . [simple-query "kagi.com" "kagi.com/summarizer?url=" "&target_language=ZH&summary=takeaway"])
                         ("Wikipedia" . [simple-query "wikipedia.org" "wikipedia.org/wiki/" ""])
                         ("Kagi(site:github.com)" . [simple-query "kagi.com" "kagi.com/search?q=site:github.com+" ""])
                         ("Album" . [simple-query "kagi.com" "kagi.com/images?q=" "&size=large"])
