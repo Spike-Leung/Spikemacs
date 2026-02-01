@@ -64,5 +64,14 @@
 
 
 
+;;; Force myself to use keyboard in Emacs
+;; Unfortunately, I don't have a cat available to obstruct my mouse :(
+
+(use-package disable-mouse
+  :diminish
+  :hook (after-init . global-disable-mouse-mode))
+
+
+
 (provide 'init-misc)
 ;;; init-misc.el ends here
