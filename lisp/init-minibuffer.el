@@ -45,15 +45,16 @@
 
 
 (use-package embark
-  :ensure t
-  :defer t
   :bind
   (("C-." . embark-act)
    ("M-." . embark-dwim)
    ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
   :init
   ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command))
+  (setq prefix-help-command #'embark-prefix-help-command)
+  :config
+  (keymap-set embark-general-map "W" #'spike-leung/webjump-symbol-at-point)
+  (keymap-set embark-region-map "W" #'spike-leung/webjump-symbol-at-point))
 
 (use-package embark-consult)
 
