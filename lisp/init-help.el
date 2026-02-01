@@ -24,7 +24,7 @@
 
 
 (use-package info-colors
-  :hook (Info-selectition . info-colors-fontify-node))
+  :hook (Info-selection . info-colors-fontify-node))
 
 
 (provide 'init-help)
