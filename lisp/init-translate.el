@@ -6,6 +6,7 @@
 
 (use-package immersive-translate
   :vc (:url https://github.com/Spike-Leung/emacs-immersive-translate :rev main)
+  :hook ((elfeed-show-mode . immersive-translate-setup))
   :config
   (setq immersive-translate-backend 'chatgpt
         immersive-translate-chatgpt-host "openrouter.ai/api"
