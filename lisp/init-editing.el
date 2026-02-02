@@ -8,7 +8,6 @@
 ;; Zap *up* to char is a handy pair for zap-to-char
 ;; see also: https://github.com/cute-jumper/avy-zap
 (global-set-key (kbd "M-Z") 'zap-up-to-char)
-(global-set-key (kbd "M-/") 'hippie-expand)
 
 
 
