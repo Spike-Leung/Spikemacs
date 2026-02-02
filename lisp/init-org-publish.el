@@ -210,11 +210,7 @@ TAG is string."
   "Generate sitemap as a string.
 TITLE is the sitemap title and LIST contains files to include."
   (concat
-   "#+TITLE: " title
-   "\n"
-   "#+DESCRIPTION: Spike Leung's blog."
-   "\n\n"
-   "That the powerful play goes on, and you may contribute a verse."
+   "#+INCLUDE: ./index-preamble.org"
    "\n\n"
    (org-list-to-org list '(:backend org :raw t))))
 
