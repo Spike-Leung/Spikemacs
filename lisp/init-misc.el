@@ -69,7 +69,7 @@
 ;; Unfortunately, I don't have a cat available to obstruct my mouse :(
 
 (use-package disable-mouse
-  :diminish
+  :diminish (disable-mouse-global-mode global-disable-mouse-mode)
   :hook (after-init . global-disable-mouse-mode))
 
 
