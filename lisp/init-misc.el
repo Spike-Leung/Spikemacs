@@ -55,7 +55,7 @@
                     (apply-partially #'browse-url-with-browser-kind 'internal)
                   #'browse-url))
            ;; 如果选择的是 LLM 相关的 URL，则需要输入 Prompt
-           (prompt (and (string-match-p "LLM" name) (read-string "Prompt: " "解释" t)))
+           (prompt (and (string-match-p "LLM" name) (read-string "Prompt: " "解释" nil t)))
            ;; 如果存在 prompt 则拼接 prompt
            (query (or (and prompt (concat target "\n" prompt)) target)))
       (funcall fun (webjump-url-fix
