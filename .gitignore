@@ -65,3 +65,4 @@ org-roam.db
 snippets/**/.*.el
 /org-persist
 ielm-history.eld
+dirvish/
