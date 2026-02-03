@@ -22,7 +22,6 @@
 
 
 (use-package webjump
-  :after embark
   :defer nil
   :config
   (setq webjump-sites '(("Kagi" . [simple-query "kagi.com" "kagi.com/search?q=" ""])
