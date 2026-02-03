@@ -69,6 +69,8 @@
            '(("h" "~/"                          "Home")
              ("d" "~/Downloads/"                "Downloads")
              ("a" "~/git/taxodium/publish/images/album"                "Blog Album")
+             ("i" "~/git/taxodium/publish/images"                "Blog Image")
+             ("t" "~/git/taxodium"                "Blog")
              ("e" "~/.emacs.d/" "Emacs Config")))
   :config
   ;; (dirvish-peek-mode)             ; Preview files in minibuffer
