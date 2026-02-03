@@ -94,7 +94,8 @@
     [["(｡•̀ᴗ-)✧"
       ("b" "blog" spike-leung/transient-blog)
       ("g" "gptel" spike-leung/transient-gptel)
-      ("p" "publish" org-publish)]
+      ("p" "publish" org-publish)
+      ("w" "webjump" webjump)]
      ["ヾ(･|"
       ("B" "bookmark" spike-leung/transient-bookmark)
       ("r" "register" spike-leung/transient-register)]
