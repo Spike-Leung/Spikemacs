@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: html head extra image enhance
+# key: hi
+# --
+
+#+html_head_extra: <link rel="stylesheet" href="/styles/image-enhance.css" />
