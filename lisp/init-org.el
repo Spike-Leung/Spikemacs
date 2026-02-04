@@ -130,9 +130,9 @@
          :jump-to-captured t
          :immediate-finish t)
         ("m" "Music Rank"
-         entry
-         (file+headline "~/git/taxodium/posts/20250928T170716--听歌排行__blackhole_music.org" "每周排行")
-         "* %<%Y-%m-%d W%W %A> \n #+begin_details\n#+html: <summary>Top100</summary>\n%i\n#+end_details"
+         plain
+         (file+headline "~/git/taxodium/posts/20250928T170716--听歌排行__blackhole_music.org" "网易云听歌排行")
+         "#+begin_details\n#+html: <summary>最近一周</summary>\n%i\n#+end_details"
          :jump-to-captured t
          :empty-lines 1
          :prepend t
