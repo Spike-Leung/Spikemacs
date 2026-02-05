@@ -24,9 +24,11 @@
 
 
 (use-package corfu
-  :config (setq-default
-	   corfu-auto t
-	   corfu-quit-no-match 'separator)
+  :custom
+  (corfu-auto-delay 0.55)
+  :config
+  (setq-default corfu-auto t
+	        corfu-quit-no-match 'separator)
   (corfu-popupinfo-mode)
   (corfu-history-mode)
   :defer nil
@@ -52,10 +54,13 @@
   ;; first function returning a result wins.  Note that the list of buffer-local
   ;; completion functions takes precedence over the global list.
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-abbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-keyword)
+  (add-hook 'completion-at-point-functions #'cape-elisp-symbol)
   (add-hook 'completion-at-point-functions #'cape-elisp-block)
-  (add-hook 'completion-at-point-functions #'cape-history)
-  (add-hook 'completion-at-point-functions #'cape-line))
+  (add-hook 'completion-at-point-functions #'cape-line)
+  (add-hook 'completion-at-point-functions #'cape-history))
 
 
 
