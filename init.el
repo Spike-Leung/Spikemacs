@@ -10,7 +10,6 @@
 ;; use-package should after init-elpa
 
 (require 'init-ai)
-(require 'init-auth)
 (require 'init-base)
 (require 'init-beancount)
 (require 'init-completion)
@@ -19,6 +18,7 @@
 (require 'init-editing)
 (require 'init-elfeed)
 (require 'init-git)
+(require 'init-gptel-magit)
 (require 'init-help)
 (require 'init-ibuffer)
 (require 'init-isearch)

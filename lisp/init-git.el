@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+
+
+(setq git-commit-summary-max-length 88)
+
+
+
 (use-package magit
   :config
   (setq magit-repository-directories
@@ -58,7 +64,7 @@
 
 
 ;; Interactive Emacs functions that create URLs
-;; for files and commits in GitHub/Bitbucket/GitLab/... 
+;; for files and commits in GitHub/Bitbucket/GitLab/...
 (use-package git-link)
 
 
