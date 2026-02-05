@@ -128,7 +128,7 @@ With prefix arg or when QUERY is provided, search kaomoji by name."
     ;; hug
     (("hug")                                    . "(⊃｡•́‿•̀｡)⊃")
     ;; hide
-    (("hide")                                   . "|･ω･)")
+    (("hide")                                   . "​​|･ω･)")
     (("hide_1")                                   . "|ω･)ﾉ)")
     (("hide_2")                                   . "ヾ(･|")
     ;; writing
