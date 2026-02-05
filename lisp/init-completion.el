@@ -28,7 +28,7 @@
   (corfu-auto-delay 0.55)
   :config
   (setq-default corfu-auto t
-	        corfu-quit-no-match 'separator)
+	        corfu-quit-no-match t)
   (corfu-popupinfo-mode)
   (corfu-history-mode)
   :defer nil
