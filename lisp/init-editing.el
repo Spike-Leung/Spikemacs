@@ -101,10 +101,10 @@
 ;; olivetti 是一款打字机的名字，这个模式会模仿打字机的纸张大小，写作时用
 (use-package olivetti
   :diminish
-  :config
-  (setq  olivetti-style 'fancy
-         olivetti-body-width 100
-         olivetti-margin-width 5))
+  :custom
+  (olivetti-style 'fancy)
+  (olivetti-body-width 100)
+  (olivetti-margin-width 5))
 
 
 
