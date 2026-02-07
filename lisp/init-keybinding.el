@@ -96,6 +96,9 @@
       ("g" "gptel" spike-leung/transient-gptel)
       ("p" "publish" org-publish)
       ("w" "webjump" webjump)]
+     ["(・・?)"
+      ("aa" "avy" avy-goto-char-timer)
+      ("ar" "avy-resume" avy-resume)]
      ["ヾ(･|"
       ("B" "bookmark" spike-leung/transient-bookmark)
       ("r" "register" spike-leung/transient-register)]
