@@ -24,7 +24,7 @@
 (use-package webjump
   :defer nil
   :config
-  (setq webjump-sites '(("Kagi" . [simple-query "kagi.com" "kagi.com/search?q=" ""])
+  (setq webjump-sites '(("Kagi (enable quick search with '?')" . [simple-query "kagi.com" "kagi.com/search?q=" ""])
                         ("Kagi Translate Text" . [simple-query "translate.kagi.com" "translate.kagi.com/?from=auto&to=zh_cn&text=" ""])
                         ("Kagi Translate Page" . [simple-query "translate.kagi.com" "translate.kagi.com/zh_cn/" "?kt_view=both_vertical?kt_view=both_vertical"])
                         ("Kagi LLM" . [simple-query "kagi.com" "kagi.com/assistant?q=" "&profile=kimi-k2.5-reasoning&internet=on"])
