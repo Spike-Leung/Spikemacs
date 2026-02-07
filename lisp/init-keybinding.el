@@ -76,7 +76,10 @@
      ("o" "olivetti" olivetti-mode)])
 
   (transient-define-prefix spike-leung/transient-multi-cursors ()
-    ["Multi Cursor (quit transient with `C-q')"
+    [:description
+     (lambda ()
+       (concat "Multi Cursor (quit transient with "
+               (propertize "C-q" 'face 'transient-key-exit) ")"))
      ["mark"
       ("a" "all" mc/mark-all-like-this :transient t)
       ("n" "next" mc/mark-next-like-this :transient t)
