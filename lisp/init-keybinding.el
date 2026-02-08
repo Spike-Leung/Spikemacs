@@ -109,7 +109,8 @@
       ("u" "utils" spike-leung/transient-commands)
       ("t" "translate" spike-leung/transient-translate)
       ("mc" "multi cursor" spike-leung/transient-multi-cursors)
-      ("md" "markdown-preview" spike-leung/transient-markdown)]]))
+      ("md" "markdown-preview" spike-leung/transient-markdown)
+      ("ol" "consult-outline" consult-outline)]]))
 
 
 
