@@ -4,6 +4,9 @@
 
 
 
+(defconst spike-leung/denote-directory--note "~/notes"
+  "Variable `denote-directory' for note.")
+
 (defconst spike-leung/denote-directory--taxodium "~/git/taxodium/posts"
   "Variable `denote-directory' for taxodium(my blog).")
 
@@ -12,7 +15,7 @@
 (use-package denote
   :after (org)
   :hook (dired-mode . denote-dired-mode) ; Apply colours to Denote names in Dired.
-  :bind (("C-c n n" . denote-open-or-create)
+  :bind (("C-c n n" . spike-leung/denote-open-or-create--note)
 	 ("C-c n t" . spike-leung/denote-open-or-create--taxodium)
 	 ("C-c n N" . denote-silo-open-or-create)
 	 ("C-c n i" . denote-link-or-create)
@@ -29,21 +32,31 @@
 	 ("C-c C-d C-R" . denote-dired-rename-marked-files-using-front-matter)
 	 ("C-c C-d C-f" . spike-leung/denote-dired-mode))
   :config
-  (setq denote-directory (expand-file-name "~/notes/")
-	denote-silo-directories (list denote-directory spike-leung/denote-directory--taxodium)
-	denote-infer-keywords t
-	denote-sort-keywords t
-	denote-prompts '(title keywords)
-	denote-date-prompt-use-org-read-date t
-	;; see: https://protesilaos.com/emacs/denote#h:fed09992-7c43-4237-b48f-f654bc29d1d8
-	org-export-allow-bind-keywords t)
+  (setq denote-directory (expand-file-name spike-leung/denote-directory--note)
+        denote-silo-directories (list
+                                 spike-leung/denote-directory--note
+                                 spike-leung/denote-directory--taxodium)
+        denote-infer-keywords t
+        denote-sort-keywords t
+        denote-prompts '(title keywords)
+        denote-date-prompt-use-org-read-date t
+        ;; see: https://protesilaos.com/emacs/denote#h:fed09992-7c43-4237-b48f-f654bc29d1d8
+        org-export-allow-bind-keywords t)
+
   ;; automatically rename denote buffers using the `denote-rename-buffer-format'.
   (denote-rename-buffer-mode 1)
+
   (defun spike-leung/denote-dired-mode ()
     "replace `diredfl-mode' with `denote-dired-mode'."
     (interactive)
     (diredfl-mode -1)
     (denote-dired-mode 1))
+
+  (defun spike-leung/denote-open-or-create--note ()
+    "use `denote-silo-open-or-create' to open blog dir."
+    (interactive)
+    (denote-silo-open-or-create spike-leung/denote-directory--note))
+
   (defun spike-leung/denote-open-or-create--taxodium ()
     "use `denote-silo-open-or-create' to open blog dir."
     (interactive)
