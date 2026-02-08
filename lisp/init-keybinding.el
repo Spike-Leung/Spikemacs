@@ -68,7 +68,8 @@
 
   (transient-define-prefix spike-leung/transient-blog ()
     ["Blog related"
-     ("i" "insert-image" spike-leung/insert-blog-images)])
+     ("i" "insert-image" spike-leung/insert-blog-images)
+     ("t" "toggle-publish-draft" spike-leung/denote-toggle-publish-draft)])
 
   (transient-define-prefix spike-leung/transient-commands ()
     ["Frequently used commands"

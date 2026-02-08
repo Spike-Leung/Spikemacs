@@ -592,6 +592,34 @@ Then generate a #+begin_export html block with an iframe, replacing any existing
             ;; Insert the new #+begin_export html block
             (insert (format "#+begin_export html\n<iframe style=\"width:100%%\" srcdoc=\"%s\"></iframe>\n#+end_export\n" srcdoc))))))))
 
+(defun spike-leung/denote-toggle-publish-draft ()
+  "切换博客文章的状态，在 :published: 和 :draft:preview: 之间切换。
+因为 :published: 的文章比较多，org-publish 构建比较慢，
+切换到 :draft:preview: 构建更快，方便预览。"
+  (interactive)
+  (unless (buffer-file-name)
+    (user-error "当前缓冲区没有关联文件"))
+  (let* ((file (buffer-file-name))
+         (type (denote-filetype-heuristics file))
+         (keywords (denote-retrieve-front-matter-keywords-value file type))
+         (denote-rename-confirmations nil)
+         (base-keywords (seq-remove (lambda (k)
+                                      (member k '("published" "draft" "preview")))
+                                    keywords))
+         (new-keywords (if (member "published" keywords)
+                           (append '("draft" "preview") base-keywords)
+                         (cons "published" base-keywords))))
+    (when (buffer-modified-p)
+      (save-buffer))
+    (denote-rewrite-keywords file new-keywords type)
+    (denote-rename-file-using-front-matter file)
+    (when (buffer-modified-p)
+      (save-buffer))
+    (message "状态已切换至: %s"
+             (if (member "published" new-keywords)
+                 "published"
+               "draft-preview"))))
+
 
 
 ;;; auto add id to headings
