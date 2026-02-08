@@ -391,18 +391,22 @@ holding contextual information."
 
   (advice-add 'org-html--format-image :around #'spike-leung/org-html-wrap-image-with-link)
 
-  (defadvice org-html-paragraph (before org-html-paragraph-advice (paragraph contents info) activate)
-    "Join consecutive Chinese lines into a single long line without unwanted space when exporting `org-mode' to html."
-    (let* ((origin-contents (ad-get-arg 1))
-           (fixed-contents
-            (replace-regexp-in-string
-             (rx
-              (group (or (category chinese) "<" ">"))
-              (regexp "\n")
-              (group (or (category chinese) "<" ">")))
-             "\\1\\2"
-             origin-contents)))
-      (ad-set-arg 1 fixed-contents))))
+  ;; `lambda-list' 是参数列表，`:around' 的第一个参数是原始函数，剩下的参数是原始函数原来的参数
+  ;; 下面这个函数的意思是：
+  ;; 给 `org-html-paragraph' 添加一个执行时机是 `:around' 的 advice，
+  ;; advice 名字是 `org-html-paragraph-advice'
+  ;; body 中执行的代码是将 contents 中，中文之间的换行符移除，然后将移除后的内容交给 org-html-paragraph 渲染段落
+  (define-advice org-html-paragraph (:around (orig-fn paragraph contents info) org-html-paragraph-advice)
+    "Join consecutive Chinese lines into a single long line
+     without unwanted space when exporting `org-mode' to html."
+    (let ((fixed-content (replace-regexp-in-string
+                          (rx
+                           (group (or (category chinese) "<" ">"))
+                           (regexp "\n")
+                           (group (or (category chinese) "<" ">")))
+                          "\\1\\2"
+                          contents)))
+      (funcall orig-fn paragraph fixed-content info))))
 
 
 
