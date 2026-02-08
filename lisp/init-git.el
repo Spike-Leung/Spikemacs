@@ -4,10 +4,6 @@
 
 
 
-(setq git-commit-summary-max-length 88)
-
-
-
 (use-package magit
   :config
   (setq magit-repository-directories
