@@ -156,14 +156,14 @@ there is no current file, eval the current buffer."
 
 (advice-add 'pp-display-expression :after 'sanityinc/make-read-only)
 
-(defun sanityinc/maybe-set-bundled-elisp-readonly ()
-  "If this elisp appears to be part of Emacs, then disallow editing."
+(defun spike-leung/maybe-set-elpa-elisp-readonly ()
+  "If this elisp appears in elpa related folders, then disallow editing."
   (when (and (buffer-file-name)
-             (string-match-p "\\.el\\.gz\\'" (buffer-file-name)))
+             (string-match-p ".emacs.d/elpa" (buffer-file-name)))
     (setq buffer-read-only t)
     (view-mode 1)))
 
-(add-hook 'emacs-lisp-mode-hook 'sanityinc/maybe-set-bundled-elisp-readonly)
+(add-hook 'emacs-lisp-mode-hook 'spike-leung/maybe-set-elpa-elisp-readonly)
 
 
 
