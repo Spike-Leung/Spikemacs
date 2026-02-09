@@ -1,5 +1,8 @@
 My Emacs Config.
 
+- Emacs Version >= 30.1
+- Only tested on MacOS
+
 -----
 
 *Credits*
