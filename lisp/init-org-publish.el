@@ -312,7 +312,7 @@ PROJECT is the current project."
            :publishing-directory ,spike-leung/org-publish-default-publishing-directory
            :time-stamp-file nil
            :html-head ,spike-leung/html-head-sitemap
-           :html-preamble ,spike-leung/html-preamble
+           :html-preamble ,spike-leung/html-preamble-content
            :html-postamble ,spike-leung/html-postamble-sitemap
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
