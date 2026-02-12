@@ -31,6 +31,8 @@
 	 ("C-c C-d C-k" . denote-dired-rename-marked-files-with-keywords)
 	 ("C-c C-d C-R" . denote-dired-rename-marked-files-using-front-matter)
 	 ("C-c C-d C-f" . spike-leung/denote-dired-mode))
+  :custom
+  (denote-link-description-format #'spike-leung/denote-link-description-with-signature-and-title-and-subtitle)
   :config
   (setq denote-directory (expand-file-name spike-leung/denote-directory--note)
         denote-silo-directories (list
@@ -60,7 +62,41 @@
   (defun spike-leung/denote-open-or-create--taxodium ()
     "use `denote-silo-open-or-create' to open blog dir."
     (interactive)
-    (denote-silo-open-or-create spike-leung/denote-directory--taxodium)))
+    (denote-silo-open-or-create spike-leung/denote-directory--taxodium))
+
+  (defun spike-leung/denote-link-description-with-signature-and-title-and-subtitle (file &optional file-type)
+    "Return link description for FILE with FILE-TYPE.
+For backward compatibility, FILE-TYPE is an optional parameter.  If it
+is nil, then compute FILE-TYPE internally.
+
+- If the region is active, use it as the description.
+
+- If FILE has a signature, then format the description as a sequence of
+  the signature text and the title with two spaces between them.
+
+- If FILE does not have a signature, then use its title as the
+  description.
+
+- If FILE has subtitle, append subtitle
+
+- If none of the above works, return an empty string.
+
+This function is useful as the value of the user option
+`denote-link-description-format' (which can optionally be bound to a
+function)."
+    (let* ((type (or file-type (denote-filetype-heuristics file)))
+           (signature (denote-retrieve-filename-signature file))
+           (title (denote-retrieve-title-or-filename file type))
+           (region-text (denote--get-active-region-content))
+           (subtitle (spike-leung/my-denote--get-subtitle file)))
+      (cond
+       (region-text region-text)
+       ((and signature title) (format "%s  %s" signature title))
+       ((and title subtitle) (format "%s - %s" title subtitle))
+       (title (format "%s" title))
+       (signature (format "%s" signature))
+       (t ""))))
+  )
 
 (use-package denote-silo)
 (use-package denote-org
@@ -78,6 +114,16 @@ Return nil if not found or FILE does not exist."
       (insert-file-contents file)
       (goto-char (point-min))
       (when (re-search-forward "^#\\+export_file_name: \\(.*\\)$" nil t)
+	(string-trim (match-string-no-properties 1))))))
+
+(defun spike-leung/my-denote--get-subtitle (file)
+  "Find #+subtitle in FILE and return its value.
+Return nil if not found or FILE does not exist."
+  (when (and file (file-exists-p file))
+    (with-temp-buffer
+      (insert-file-contents file)
+      (goto-char (point-min))
+      (when (re-search-forward "^#\\+subtitle: \\(.*\\)$" nil t)
 	(string-trim (match-string-no-properties 1))))))
 
 (defun spike-leung/denote-link-ol-export (link description format)
