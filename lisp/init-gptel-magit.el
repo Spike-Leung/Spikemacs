@@ -18,6 +18,7 @@
 ;; this can avoid load `gptel' when each time call `magit',
 ;; because sometime I just want to call magit to switch Repo,
 ;; I don't need `gptel-magit', so I don't need `gptel'
+;; - ask stage modified before commit
 ;;
 ;;; Code:
 
@@ -112,6 +113,10 @@ Respects configured model/backend options."
 (defun gptel-magit--generate (callback)
   "Generate a commit message for current magit repo.
 Invokes CALLBACK with the generated message when done."
+  (unless (magit-anything-staged-p)
+    (and (y-or-n-p
+          "Nothing staged.  Commit all uncommitted changes? ")
+         (magit-stage-modified)))
   (let ((diff (magit-git-output "diff" "--cached")))
     (gptel-magit--request diff
       :system gptel-magit-commit-prompt
