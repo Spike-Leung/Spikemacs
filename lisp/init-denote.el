@@ -63,7 +63,9 @@
     (denote-silo-open-or-create spike-leung/denote-directory--taxodium)))
 
 (use-package denote-silo)
-
+(use-package denote-org
+  :commands
+  (denote-org-dblock-insert-links))
 
 
 ;;; make denote-link-ol-export support #+export_file_name
