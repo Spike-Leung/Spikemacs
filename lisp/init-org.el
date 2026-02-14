@@ -215,6 +215,46 @@
         (tags category-up effort-up)
         (search category-up)))
 
+(setq
+ ;; Stuck Projcet can view with "C-c a #"
+ org-stuck-projects '("/PROJECT" ("TODO" "NEXT" "WAITING") nil "")
+ org-agenda-custom-commands `(("g" "GTD"
+                               (;; 展示 agenda 默认内容
+                                (agenda "" nil)
+                                (todo "NEXT" ((org-agenda-overriding-header "Next")
+                                              ;; 忽略排期在未来的条目
+                                              (org-agenda-todo-ignore-scheduled 'future)
+                                              ;; 忽略那些已经设置了排期的内容，例如 deadling、scheduled 等，这些在 agenda 中有呈现
+                                              (org-agenda-tags-todo-honor-ignore-options t)))
+                                ;; 搜索带有 "@inbox" 的内容，重命名为 "Inbox"，
+                                ;; 排除带有 "@inbox" 的 heading，只显示 heading 下面的 item
+                                (tags "@inbox" ((org-agenda-overriding-header "Inbox")
+                                                (org-agenda-skip-function
+                                                 ;; 排除 heading 本身
+                                                 '(lambda ()
+                                                    (org-agenda-skip-entry-if 'regexp "Capture")))))
+                                (todo "TODO" ((org-agenda-overriding-header "Tasks")))
+                                (stuck "" ((org-agenda-overriding-header "Stuck Project")))
+                                (todo "PROJECT" ((org-agenda-overriding-header "Project")))
+                                (todo "WAITING" ((org-agenda-overriding-header "Waiting")))
+                                (todo "GOAL" ((org-agenda-overriding-header "Goal")
+                                              (org-agenda-sorting-strategy
+                                               '(priority-down category-keep))))
+
+                                (tags "/DONE|CANCELLED" ((org-agenda-overriding-header "END")))))
+                              ("s" "Someday"
+                               ((todo "SOMEDAY" ((org-agenda-overriding-header "Someday")
+                                                 (org-agenda-todo-ignore-scheduled 'future)))))
+                              ("rr" "Repeat Stuff"
+                               ((agenda "" ((org-agenda-files '("~/org/mylife.org"))
+                                            (org-agenda-overriding-header "Repeat")
+                                            (org-agenda-span 'week)
+                                            (org-agenda-show-future-repeats nil)))))
+                              ("ra" "Anniversary"
+                               ((agenda "" ((org-agenda-files '("~/org/anniversary.org" "~/org/dead.org"))
+                                            (org-agenda-overriding-header "Anniversary")
+                                            (org-agenda-span 'month)))))))
+
 
 ;; Re-align tags when window shape changes
 (use-package org-agenda
