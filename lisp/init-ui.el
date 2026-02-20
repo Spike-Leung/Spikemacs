@@ -31,7 +31,7 @@
   :init
   (default-text-scale-mode))
 
-(set-face-attribute 'default nil :height 220 :font "Iosevka" :font "LXGW WenKai Mono")
+(set-face-attribute 'default nil :height 220 :font "LXGW WenKai Mono")
 
 
 
