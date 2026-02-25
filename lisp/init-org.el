@@ -134,7 +134,6 @@
          (file+headline "~/git/taxodium/posts/20250928T170716--听歌排行__blackhole_music_rank.org" "网易云听歌排行")
          "#+begin_details\n#+html: <summary>最近一周</summary>\n%i\n#+end_details"
          :jump-to-captured t
-         :empty-lines 1
          :prepend t
          :immediate-finish t)))
 
