@@ -34,42 +34,44 @@
 
 (use-package gptel
   :ensure t
+  :custom
+  (gptel-proxy "http://localhost:20171")
   :config
   (setq gptel-model   openrouter-default-model
         gptel-default-mode 'org-mode
         gptel-backend (gptel-make-openai "OpenRouter"
-                                         :host "openrouter.ai"
-                                         :endpoint "/api/v1/chat/completions"
-                                         :stream t
-                                         :key (spike-leung/get-openrouter-api-key)
-                                         :models openrouter-models
-                                         :request-params '(:reasoning ( :enable t))))
+                        :host "openrouter.ai"
+                        :endpoint "/api/v1/chat/completions"
+                        :stream t
+                        :key (spike-leung/get-openrouter-api-key)
+                        :models openrouter-models
+                        :request-params '(:reasoning ( :enable t))))
   (setopt gptel--system-message "You are a helpful assistant. Respond concisely."
           gptel-highlight-methods '(fringe face margin))
 
 
   ;; define backend
   (gptel-make-openai "DeepSeek"
-                     :host "api.deepseek.com"
-                     :endpoint "/chat/completions"
-                     :stream t
-                     :key (spike-leung/get-deepseek-api-key)
-                     :models '(deepseek-chat deepseek-coder)
-                     :request-params '(:reasoning (:enable t)))
+    :host "api.deepseek.com"
+    :endpoint "/chat/completions"
+    :stream t
+    :key (spike-leung/get-deepseek-api-key)
+    :models '(deepseek-chat deepseek-coder)
+    :request-params '(:reasoning (:enable t)))
   (gptel-make-openai "OpenRouter"
-                     :host "openrouter.ai"
-                     :endpoint "/api/v1/chat/completions"
-                     :stream t
-                     :key (spike-leung/get-openrouter-api-key)
-                     :models openrouter-models
-                     :request-params '(:reasoning (:enable t)))
+    :host "openrouter.ai"
+    :endpoint "/api/v1/chat/completions"
+    :stream t
+    :key (spike-leung/get-openrouter-api-key)
+    :models openrouter-models
+    :request-params '(:reasoning (:enable t)))
 
   ;; preset
   (defmacro spike-leung/define-gptel-preset (name &rest args)
     `(gptel-make-preset ,name
-                        :backend "OpenRouter"
-                        :model 'google/gemini-3-flash-preview
-                        ,@args))
+       :backend "OpenRouter"
+       :model 'google/gemini-3-flash-preview
+       ,@args))
 
   (spike-leung/define-gptel-preset 'quote-format
                                    :description "格式化引用"
