@@ -11,7 +11,6 @@
   (push '("\\.\\(beancount\\|bean\\)\\'" . beancount-mode) auto-mode-alist)
   (add-hook 'beancount-mode-hook #'outline-minor-mode)
 
-  ;;; https://whatacold.io/blog/2022-09-10-emacs-beancount-accout-files/
   (defvar beancount-accounts-files nil "List of account files.")
   (setq beancount-accounts-files
         (directory-files "~/Dropbox/beancount/accounts/" 'full (rx ".beancount" eos)))
@@ -31,7 +30,7 @@
               (puthash (match-string-no-properties n) nil hash)))))
       (hash-table-keys hash)))
 
-  (advice-add #'beancount-collect
+  (advice-add #'beancount-collect-unique
               :around #'w/beancount--collect-accounts-from-files
               '((name . "collect accounts from files as well"))))
 
