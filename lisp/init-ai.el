@@ -112,6 +112,7 @@
                                             :request-params '(:reasoning (:effort "none"))
                                             :models openrouter-models))
 (customize-set-value 'gptel-magit-model 'moonshotai/kimi-k2.5)
+(add-hook 'magit-mode-hook #'gptel-magit-install)
 
 
 
