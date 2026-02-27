@@ -33,6 +33,7 @@
 	 ("C-c C-d C-f" . spike-leung/denote-dired-mode))
   :custom
   (denote-link-description-format #'spike-leung/denote-link-description-with-signature-and-title-and-subtitle)
+  (denote-excluded-files-regexp "hidden")
   :config
   (setq denote-directory (expand-file-name spike-leung/denote-directory--note)
         denote-silo-directories (list
