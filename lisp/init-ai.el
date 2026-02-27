@@ -15,7 +15,7 @@
 
 (defconst openrouter-models '(;; google
                               google/gemini-3-flash-preview
-                              google/gemini-3-pro-preview
+                              google/gemini-3.1-pro-preview
                               ;; deepseek
                               deepseek/deepseek-v3.2
                               deepseek/deepseek-v3.2-speciale
@@ -35,7 +35,7 @@
 (use-package gptel
   :ensure t
   :custom
-  (gptel-proxy "http://localhost:20171")
+  (gptel-proxy "http://localhost:20172")
   :config
   (setq gptel-model   openrouter-default-model
         gptel-default-mode 'org-mode
@@ -44,8 +44,7 @@
                         :endpoint "/api/v1/chat/completions"
                         :stream t
                         :key (spike-leung/get-openrouter-api-key)
-                        :models openrouter-models
-                        :request-params '(:reasoning ( :enable t))))
+                        :models openrouter-models))
   (setopt gptel--system-message "You are a helpful assistant. Respond concisely."
           gptel-highlight-methods '(fringe face margin))
 
@@ -63,8 +62,7 @@
     :endpoint "/api/v1/chat/completions"
     :stream t
     :key (spike-leung/get-openrouter-api-key)
-    :models openrouter-models
-    :request-params '(:reasoning (:enable t)))
+    :models openrouter-models)
 
   ;; preset
   (defmacro spike-leung/define-gptel-preset (name &rest args)
