@@ -104,14 +104,14 @@
 
 
 
-;; (use-package init-gptel-magit
-;;   :vc t
-;;   :load-path "./"
-;;   :requires (magit gptel)
-;;   :hook (magit-mode . gptel-magit-install)
-;;   :custom
-;;   (gptel-magit-commit-prompt "gptel-magit-prompt-zed")
-;;   (gptel-magit-model 'google/gemini-3-flash-preview))
+(customize-set-value 'gptel-magit-backend (gptel-make-openai "OpenRouter--no-reasoning"
+                                            :host "openrouter.ai"
+                                            :endpoint "/api/v1/chat/completions"
+                                            :stream t
+                                            :key (spike-leung/get-openrouter-api-key)
+                                            :request-params '(:reasoning (:effort "none"))
+                                            :models openrouter-models))
+(customize-set-value 'gptel-magit-model 'moonshotai/kimi-k2.5)
 
 
 
