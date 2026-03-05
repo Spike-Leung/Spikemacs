@@ -123,15 +123,19 @@
 
 
 
-;; TODO: symbol 划分问题
 (use-package symbol-overlay
+  :after (modus-themes)
   :hook (prog-mode html-mode yaml-mode conf-mode)
   :diminish
   :bind (:map symbol-overlay-mode-map
               ("M-i" . symbol-overlay-put)
               ("M-I" . symbol-overlay-remove-all)
               ("M-n" . symbol-overlay-jump-next)
-              ("M-p" . symbol-overlay-jump-prev)))
+              ("M-p" . symbol-overlay-jump-prev))
+  :custom-face
+  (symbol-overlay-default-face ((t (:foreground ,(modus-themes-get-color-value 'bg-yellow-intense)
+                                                :weight bold
+                                                :background unspecified)))))
 
 
 
@@ -140,6 +144,31 @@
          ("C->" . mc/mark-next-like-this)
          ("C-+" . mc/skip-to-next-like-this)
          ("C-x C->" . mc/mark-all-like-this)))
+
+
+
+;; combine symbol-overlay and multiple-cursors to rename symbol
+;; see: https://xenodium.com/its-all-up-for-grabs-and-it-compounds
+;; (defun ar/mc-mark-all-symbol-overlays ()
+;;   "Mark all symbol overlays using multiple cursors."
+;;   (interactive)
+;;   (mc/remove-fake-cursors)
+;;   (when-let* ((overlays (symbol-overlay-get-list 0))
+;;               (point (point))
+;;               (point-overlay (seq-find
+;;                               (lambda (overlay)
+;;                                 (and (<= (overlay-start overlay) point)
+;;                                      (<= point (overlay-end overlay))))
+;;                               overlays))
+;;               (offset (- point (overlay-start point-overlay))))
+;;     (setq deactivate-mark t)
+;;     (mapc (lambda (overlay)
+;;             (unless (eq overlay point-overlay)
+;;               (mc/save-excursion
+;;                (goto-char (+ (overlay-start overlay) offset))
+;;                (mc/create-fake-cursor-at-point))))
+;;           overlays)
+;;     (mc/maybe-multiple-cursors-mode)))
 
 
 
