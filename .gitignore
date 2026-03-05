@@ -66,3 +66,4 @@ snippets/**/.*.el
 /org-persist
 ielm-history.eld
 dirvish/
+.DS_Store
