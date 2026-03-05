@@ -31,7 +31,10 @@
   :init
   (default-text-scale-mode))
 
-(set-face-attribute 'default nil :height 220 :font "LXGW WenKai Mono")
+(set-face-attribute 'default nil :height 220 :font "Iosevka")
+(dolist (fontset '(han kana hangul cjk-misc))
+  (set-fontset-font "fontset-default" fontset
+                    (font-spec :family "I.Ming")))
 
 
 
