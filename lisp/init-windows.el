@@ -7,6 +7,8 @@
 
 ;;; Code:
 
+
+
 ;; Navigate window layouts with "C-c <left>" and "C-c <right>"
 (use-package winner
   :hook (after-init . winner-mode)
@@ -19,6 +21,7 @@
                                       "*Ibuffer*")))
 
 
+
 ;; Make "C-x o" prompt for a target window when there are more than 2
 (use-package switch-window
   :ensure t
@@ -29,6 +32,23 @@
    switch-window-minibuffer-shortcut ?z)
   :bind
   (("C-x o" . switch-window)))
+
+
+
+;; Jump to Emacs windows using keyboard spatial mapping
+;; (use-package spatial-window
+;;   :vc (:url https://github.com/lewang/spatial-window :rev main)
+;;   :bind ("C-x o" . spatial-window-select))
+
+
+
+;; winpulse-mode momentarily flashes the background of Emacs windows whenever they gain
+;; focus, providing a visual cue for the active window.
+;; (use-package winpulse
+;;   :vc (:url "https://github.com/xenodium/winpulse" :rev :newest)
+;;   :config (winpulse-mode +1))
+
+
 
 (provide 'init-windows)
 ;;; init-windows.el ends here
