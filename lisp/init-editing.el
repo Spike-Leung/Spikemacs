@@ -9,6 +9,11 @@
 ;; see also: https://github.com/cute-jumper/avy-zap
 (global-set-key (kbd "M-Z") 'zap-up-to-char)
 
+;; remap to dwim version
+(define-key (current-global-map) [remap capitalize-word] 'capitalize-dwim)
+(define-key (current-global-map) [remap downcase-word] 'downcase-dwim)
+(define-key (current-global-map) [remap upcase-word] 'upcase-dwim)
+
 
 
 ;; replace selection when insert
