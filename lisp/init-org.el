@@ -26,7 +26,9 @@
   ;; TODO: 补充 org-clock 快捷键
   :bind (("C-c a" . org-agenda)
          ("C-c c" . org-capture)
-         ("C-c l" . org-store-link))
+         ("C-c l" . org-store-link)
+         (:map org-mode-map
+               (("C-c C-l" . ar/org-insert-link-dwim))))
   :bind-keymap (("C-c o" . sanityinc/org-global-prefix-map))
   :custom
   (org-export-backends '(ascii html icalendar latex md org))
@@ -269,6 +271,37 @@
 ;; https://www.youtube.com/watch?v=be8TC-i-NpE&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&index=40&t=111s
 ;; https://koenig-haunstetten.de/2019/01/06/changes-to-my-orgmode-system/
 ;; https://koenig-haunstetten.de/2018/02/17/improving-my-orgmode-workflow/
+
+;; see: https://github.com/xenodium/dotsies/blob/af52e765d853b45096b33d26498dbecf08b843a1/emacs/features/fe-org.el#L234
+(defun ar/org-insert-link-dwim (prefix)
+  "Like `org-insert-link' but with personal dwim preferences.
+With prefix, don't confirm text."
+  (interactive "P")
+  (let* ((point-in-link (org-in-regexp org-link-any-re 1))
+         (clipboard-url (when (string-match-p "^http" (current-kill 0))
+                          (current-kill 0)))
+         (region-content (when (region-active-p)
+                           (buffer-substring-no-properties (region-beginning)
+                                                           (region-end)))))
+    (cond ((and region-content clipboard-url (not point-in-link))
+           (delete-region (region-beginning) (region-end))
+           (insert (org-make-link-string clipboard-url region-content)))
+          ((and clipboard-url (not point-in-link))
+           (insert (org-make-link-string
+                    clipboard-url
+                    (let ((title (with-current-buffer (url-retrieve-synchronously clipboard-url)
+                                   (dom-text (car
+                                              (dom-by-tag (libxml-parse-html-region
+                                                           (point-min)
+                                                           (point-max))
+                                                          'title))))))
+                      (if prefix
+                          title
+                        (read-string "title: " title))))))
+          (t
+           (call-interactively 'org-insert-link)))))
+
+
 
 (provide 'init-org)
 ;;; init-org.el ends here
