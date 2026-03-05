@@ -28,7 +28,10 @@
 
 
 (use-package unfill
-  :bind ([remap fill-paragraph] . unfill-toggle))
+  :bind ([remap fill-paragraph] . unfill-toggle)
+  :config
+  (with-eval-after-load 'org
+    (keymap-set org-mode-map "M-q" #'unfill-toggle)))
 
 
 
