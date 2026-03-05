@@ -242,6 +242,26 @@ PROJECT is the current project."
 
 
 
+(defun spike-leung/org-publish-org (_plist filename pub-dir)
+  "Publish a org file and use export_file_name as filename.
+
+FILENAME is the filename of the Org file to be published.  PLIST
+is the property list for the given project.  PUB-DIR is the
+publishing directory.
+
+Return output file name."
+  (unless (file-directory-p pub-dir)
+    (make-directory pub-dir t))
+  (let* ((export-file-name (or
+                            (spike-leung/org-publish-get-org-keyword nil nil "export_file_name" filename)
+                            filename))
+         (output (file-name-with-extension (expand-file-name (file-name-nondirectory export-file-name) pub-dir) "org")))
+    (copy-file filename output t)
+    ;; Return file name.
+    output))
+
+
+
 ;;; org-publish-project-alist
 
 (defun spike-leung/setup-org-publish-project-alist (&rest _args)
@@ -305,6 +325,14 @@ PROJECT is the current project."
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
+          ("origin-orgfiles"
+           :base-directory "~/git/taxodium/posts"
+           :base-extension "org"
+           :exclude ".*"
+           :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" (rx (or "_blackhole" "_published")))
+           :publishing-directory ,spike-leung/org-publish-default-publishing-directory
+           :publishing-function spike-leung/org-publish-org)
+
           ("sitemap"
            :base-directory "~/git/taxodium/posts"
            :base-extension "org"
@@ -319,7 +347,7 @@ PROJECT is the current project."
            :email "l-yanlei@hotmail.com")
 
           ;; copy static fisrt
-          ("website" :components ("orgfiles" "black-hole" "draft" "sitemap")))))
+          ("website" :components ("orgfiles" "black-hole" "draft" "sitemap" "origin-orgfiles")))))
 
 (spike-leung/setup-org-publish-project-alist)
 (advice-add 'org-publish :before #'spike-leung/setup-org-publish-project-alist)
