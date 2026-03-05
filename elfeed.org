@@ -19,7 +19,7 @@ Checklist:
 *** [[https://anotherdayu.com/feed/][Another Dayu]]
 *** [[https://antfu.me/feed.xml][Anthony Fu]]
 *** [[https://feedpress.me/cssweekly][CSS Weekly]]                                                                  :css:weekly:
-*** [[https://cytrogen.icu/atom.xml][Cytrogen]]
+*** [[https://blog.cytrogen.icu/atom.xml][Cytrogen]]
 *** [[https://emacsformacosx.com/atom/release][Emacs For Mac OS X: Releases RSS Feed]]
 *** [[https://cprss.s3.amazonaws.com/frontendfoc.us.xml][Frontend Focus]]                                                              :weekly:
 *** [[http://html5doctor.com/feed/][HTML5 doctor]]                                                                :weekly:frontend:
@@ -86,7 +86,9 @@ Checklist:
 *** [[https://www.linggandianbo.com/rss/][灵感电波]]                                                                    :weekly:newsletter:
 *** [[https://lawtee.com/index.xml][老 T 博客]]
 *** [[https://ldbeth.sdf.org/rss.xml][LdBeth]]                                                            :emacs:
-*** [[https://quaily.com/cosine/feed/atom][FE Bits 前端周周谈]]                                             :frontend:
+*** [[https://blog.cosine.ren/rss.xml][FE Bits 前端周周谈]]                                             :frontend:
+*** [[https://candost.blog/rss.xml][Candost's Blog]]
+*** [[https://blogblog.club/blog/rss.xml][BlogBlog 同樂會]]
 ** Z3:Orchard                                                                   :z3:
 果园比后院更大，也生长得更加狂野。
 它包含我刚刚发现并种在这里的博客，因为我想了解它们。
@@ -201,6 +203,8 @@ Checklist:
 *** [[https://lynan.cn/feed.xml][Lynan's Page]]
 *** [[https://xeonzilla.top/feed.xml][x7aNote]]
 *** [[https://flowtwo.io/synd/rss][flow2]]
+*** [[https://ttio.cc/feed.xml][記緒漂流]]
+*** [[https://feeds.feedburner.com/TroyHunt][Troy Hunt's Blog]]
 ** Z4:Pasture                                                                   :z4:
 牧场比果园还要大，但密度较低。
 它包含那些我偶尔想略读的订阅源。
@@ -350,6 +354,7 @@ Checklist:
 *** [[https://elliot00.com/rss][编码与禅]]                                                                    :emacs:
 *** [[https://caa-ins.org/feed][网络社会研究所]]
 *** [[https://guozh.net/feed/][老郭种树]]
+*** [[https://egh0bww1.com/rss.xml][include-yy's blog]]
 ** Z5:Pond                                                                      :z5:
 池塘是最后一个分区：这里的文章会沉到底层，进入我的“待读”堆。
 其包含的订阅源是那些我偶尔才想粗略浏览的。
