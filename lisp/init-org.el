@@ -21,9 +21,7 @@
 
 
 ;; Key binding
-
 (use-package org
-  ;; TODO: 补充 org-clock 快捷键
   :bind (("C-c a" . org-agenda)
          ("C-c c" . org-capture)
          ("C-c l" . org-store-link)
@@ -147,7 +145,7 @@
       org-clock-into-drawer t ; Save clock data and notes in the LOGBOOK drawer
       org-clock-out-remove-zero-time-clocks t ; Removes clocked tasks with 0:00 duration
       ;; Show clock sums as hours and minutes, not "n days" etc.
-      org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+      org-duration-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 
 ;;; Show the clocked-in task - if any - in the header line
 (defun sanityinc/show-org-clock-in-header-line ()
@@ -285,9 +283,9 @@ With prefix, don't confirm text."
                                                            (region-end)))))
     (cond ((and region-content clipboard-url (not point-in-link))
            (delete-region (region-beginning) (region-end))
-           (insert (org-make-link-string clipboard-url region-content)))
+           (insert (org-link-make-string clipboard-url region-content)))
           ((and clipboard-url (not point-in-link))
-           (insert (org-make-link-string
+           (insert (org-link-make-string
                     clipboard-url
                     (let ((title (with-current-buffer (url-retrieve-synchronously clipboard-url)
                                    (dom-text (car
