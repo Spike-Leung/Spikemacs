@@ -146,7 +146,8 @@
   :bind (("C-<" . mc/mark-previous-like-this)
          ("C->" . mc/mark-next-like-this)
          ("C-+" . mc/skip-to-next-like-this)
-         ("C-x C->" . mc/mark-all-like-this)))
+         ("C-x C->" . mc/mark-all-like-this))
+  :custom (mc/always-run-for-all t))
 
 
 
