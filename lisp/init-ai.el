@@ -102,14 +102,14 @@
 
 
 
-(customize-set-value 'gptel-magit-backend (gptel-make-openai "OpenRouter--no-reasoning"
-                                            :host "openrouter.ai"
-                                            :endpoint "/api/v1/chat/completions"
-                                            :stream t
-                                            :key (spike-leung/get-openrouter-api-key)
-                                            :request-params '(:reasoning (:effort "none"))
-                                            :models openrouter-models))
-(customize-set-value 'gptel-magit-model 'moonshotai/kimi-k2.5)
+;; (customize-set-value 'gptel-magit-backend (gptel-make-openai "OpenRouter--no-reasoning"
+;;                                             :host "openrouter.ai"
+;;                                             :endpoint "/api/v1/chat/completions"
+;;                                             :stream t
+;;                                             :key (spike-leung/get-openrouter-api-key)
+;;                                             :request-params '(:reasoning (:effort "none"))
+;;                                             :models openrouter-models))
+;; (customize-set-value 'gptel-magit-model 'google/gemini-3-flash-preview)
 (add-hook 'magit-mode-hook #'gptel-magit-install)
 
 
