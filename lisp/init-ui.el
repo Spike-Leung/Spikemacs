@@ -83,22 +83,23 @@ set of themes to either dark or light variants."
   (require 'doric-themes)
   (let ((week (string-to-number (format-time-string "%u"))))
     (cond
-     ((<= 3 week)
+     ((<= week 3)
       (cond
        ((eq background-mode 'light) (ef-themes-load-random-light))
        ((eq background-mode 'dark) (ef-themes-load-random-dark))
        (t (spike-leung/load-theme-by-time #'ef-themes-load-random-light #'ef-themes-load-random-dark))))
-     ((<= 5 week)
+     ((<= week 5)
       (if background-mode
           (modus-themes-load-random background-mode)
         (spike-leung/load-theme-by-time
          (lambda () (modus-themes-load-random 'light))
          (lambda () (modus-themes-load-random 'dark)))))
      (t
-      (cond
-       ((eq background-mode 'light) (doric-themes-load-random-light))
-       ((eq background-mode 'dark) (doric-themes-load-random-dark))
-       (t (spike-leung/load-theme-by-time #'doric-themes-load-random-light #'doric-themes-load-random-dark)))))))
+      (if background-mode
+          (doric-themes-load-random background-mode)
+        (spike-leung/load-theme-by-time
+         (lambda () (doric-themes-load-random 'light))
+         (lambda () (doric-themes-load-random 'dark))))))))
 
 (defun light()
   "Load random light themes."
