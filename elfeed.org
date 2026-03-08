@@ -205,6 +205,8 @@ Checklist:
 *** [[https://flowtwo.io/synd/rss][flow2]]
 *** [[https://ttio.cc/feed.xml][記緒漂流]]
 *** [[https://feeds.feedburner.com/TroyHunt][Troy Hunt's Blog]]
+*** [[https://ginoz.bearblog.dev/feed/][GINOZ's Blog]]
+*** [[https://notes.jeddacp.com/feed/][Notes by JCProbably]]
 ** Z4:Pasture                                                                   :z4:
 牧场比果园还要大，但密度较低。
 它包含那些我偶尔想略读的订阅源。
