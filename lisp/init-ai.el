@@ -109,7 +109,7 @@
 ;;                                             :request-params '(:reasoning (:effort "none"))
 ;;                                             :models openrouter-models))
 ;; (customize-set-value 'gptel-magit-model 'google/gemini-3-flash-preview)
-(add-hook 'magit-mode-hook #'gptel-magit-install)
+;; (add-hook 'magit-mode-hook #'gptel-magit-install)
 
 
 
