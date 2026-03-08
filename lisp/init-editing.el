@@ -134,11 +134,7 @@
               ("M-i" . symbol-overlay-put)
               ("M-I" . symbol-overlay-remove-all)
               ("M-n" . symbol-overlay-jump-next)
-              ("M-p" . symbol-overlay-jump-prev))
-  :custom-face
-  (symbol-overlay-default-face ((t (:foreground ,(modus-themes-get-color-value 'bg-yellow-intense)
-                                                :weight bold
-                                                :background unspecified)))))
+              ("M-p" . symbol-overlay-jump-prev)))
 
 
 
