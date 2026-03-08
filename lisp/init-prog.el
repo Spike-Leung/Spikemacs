@@ -28,6 +28,7 @@
 (use-package eglot
   :ensure nil
   :config
+  (setq-default eglot-extend-to-xref t)
   (add-to-list 'eglot-server-programs
                '(web-mode . ("vscode-html-language-server" "--stdio"))))
 
