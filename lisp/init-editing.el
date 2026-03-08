@@ -119,10 +119,10 @@
 (use-package move-dup
   :diminish
   :hook (after-init . move-dup-mode)
-  :bind (("M-<up>"   . move-dup-move-lines-up)
-         ("M-<down>"   . move-dup-move-lines-down)
-         ("M-S-<up>" . move-dup-duplicate-up)
-         ("M-S-<down>" . move-dup-duplicate-down)))
+  :bind (("M-S-<up>"   . move-dup-move-lines-up)
+         ("M-S-<down>"   . move-dup-move-lines-down)
+         ("C-c d" . move-dup-duplicate-up)
+         ("C-c u" . move-dup-duplicate-down)))
 
 
 
