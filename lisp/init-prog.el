@@ -31,6 +31,8 @@
   (add-to-list 'eglot-server-programs
                '(web-mode . ("vscode-html-language-server" "--stdio"))))
 
+(use-package consult-eglot)
+
 (use-package eldoc
   :ensure nil
   :diminish
