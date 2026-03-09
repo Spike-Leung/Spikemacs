@@ -112,7 +112,20 @@
   :custom
   (olivetti-style 'fancy)
   (olivetti-body-width 100)
-  (olivetti-margin-width 5))
+  (olivetti-margin-width 5)
+  :hook (olivetti-mode-on . spike-leung/set-olivetti-fringe-face)
+  :config
+  (defun spike-leung/set-olivetti-fringe-face (&rest _)
+    "Set olivetti-fringe to fringe background, fallback to tab-bar."
+    (let ((bg-default (face-attribute 'default :background nil))
+          (bg-fringe (face-attribute 'fringe :background nil))
+          (bg-tab-bar (face-attribute 'tab-bar :background nil)))
+      (if (eq bg-default bg-fringe)
+          (set-face-attribute 'olivetti-fringe nil :background bg-tab-bar)
+        (set-face-attribute 'olivetti-fringe nil :background bg-fringe))))
+
+  (advice-remove 'spike-leung/themes-load-random #'spike-leung/set-olivetti-fringe-face)
+  (advice-add 'spike-leung/themes-load-random :after #'spike-leung/set-olivetti-fringe-face))
 
 
 
