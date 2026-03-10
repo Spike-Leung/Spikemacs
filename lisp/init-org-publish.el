@@ -678,6 +678,9 @@ Then generate a #+begin_export html block with an iframe, replacing any existing
 (defun spike-leung/apply-theme-when-publish (&rest args)
   "Switch theme when do `org-publish'.
 ARGS will pass to `org-publish'."
+  (require 'modus-themes)
+  (require 'ef-themes)
+  (require 'doric-themes)
   (let ((current-theme (car custom-enabled-themes)))
     (load-theme 'modus-vivendi t)
     (apply args)
@@ -686,6 +689,7 @@ ARGS will pass to `org-publish'."
       (enable-theme current-theme)
       (load-theme current-theme :no-confirm))))
 
+(advice-remove 'org-publish #'spike-leung/apply-theme-when-publish)
 (advice-add 'org-publish :around #'spike-leung/apply-theme-when-publish)
 
 
