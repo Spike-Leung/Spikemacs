@@ -690,7 +690,9 @@ ARGS will pass to `org-publish'."
       (load-theme current-theme :no-confirm))))
 
 (advice-remove 'org-publish #'spike-leung/apply-theme-when-publish)
+(advice-remove 'load-theme #'spike-leung/set-olivetti-fringe-face)
 (advice-add 'org-publish :around #'spike-leung/apply-theme-when-publish)
+(advice-add 'load-theme :after #'spike-leung/set-olivetti-fringe-face)
 
 
 

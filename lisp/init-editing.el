@@ -116,7 +116,7 @@
   :hook (olivetti-mode-on . spike-leung/set-olivetti-fringe-face)
   :config
   (defun spike-leung/set-olivetti-fringe-face (&rest _)
-    "Set olivetti-fringe to fringe background, fallback to tab-bar."
+    "Set `olivetti-fringe' to `fringe''s background, fallback to `tab-bar''s background."
     (let ((bg-default (face-attribute 'default :background nil))
           (bg-fringe (face-attribute 'fringe :background nil))
           (bg-tab-bar (face-attribute 'tab-bar :background nil)))
