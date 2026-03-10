@@ -209,7 +209,7 @@
       org-agenda-span 'day
       ;; org-agenda-window-setup 'current-window
       org-agenda-sorting-strategy
-      '((agenda habit-down time-up user-defined-up effort-up category-keep)
+      '((agenda habit-down time-up effort-up category-keep)
         (todo category-up urgency-up effort-up)
         (tags category-up effort-up)
         (search category-up)))
