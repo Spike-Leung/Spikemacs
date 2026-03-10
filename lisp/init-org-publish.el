@@ -268,6 +268,7 @@ Return output file name."
 (defun spike-leung/setup-org-publish-project-alist (&rest _args)
   "Setup `org-publish-project-alist'."
   (message "setup org-publish-project-alist")
+  (setq org-html-htmlize-output-type 'css)
   (setq org-publish-project-alist
         `(("orgfiles"
            :base-directory "~/git/taxodium/posts"
@@ -306,6 +307,7 @@ Return output file name."
            :html-head ,spike-leung/html-head
            :html-postamble ,spike-leung/html-postamble
            :html-preamble ,spike-leung/html-preamble-content
+           :html-htmlize-output-type css
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
@@ -344,6 +346,7 @@ Return output file name."
            :html-head ,spike-leung/html-head-sitemap
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble ,spike-leung/html-postamble-sitemap
+           :html-htmlize-output-type css
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
@@ -352,7 +355,16 @@ Return output file name."
           ("white-hole" :components ("black-hole" "origin-orgfiles")))))
 
 (spike-leung/setup-org-publish-project-alist)
+
+(defun spike-leung/org-publish-after-callback ()
+  "Stuff to do after `org-publish'"
+  (setq org-html-htmlize-output-type 'inline-css))
+
+(advice-remove 'org-publish #'spike-leung/setup-org-publish-project-alist)
 (advice-add 'org-publish :before #'spike-leung/setup-org-publish-project-alist)
+
+(advice-remove 'org-publish #'spike-leung/org-publish-after-callback)
+(advice-add 'org-publish :after #'spike-leung/org-publish-after-callback)
 
 
 
@@ -670,29 +682,6 @@ Then generate a #+begin_export html block with an iframe, replacing any existing
                        (string-match "taxodium" buffer-file-name))
               (add-hook 'before-save-hook 'spike-leung/org-add-custom-id-to-headings-in-blog-files nil 'local))))
 
-
-
-
-;;; pin code block theme
-
-(defun spike-leung/apply-theme-when-publish (&rest args)
-  "Switch theme when do `org-publish'.
-ARGS will pass to `org-publish'."
-  (require 'modus-themes)
-  (require 'ef-themes)
-  (require 'doric-themes)
-  (let ((current-theme (car custom-enabled-themes)))
-    (load-theme 'modus-vivendi t)
-    (apply args)
-    (when current-theme
-      (disable-theme 'modus-vivendi)
-      (enable-theme current-theme)
-      (load-theme current-theme :no-confirm))))
-
-(advice-remove 'org-publish #'spike-leung/apply-theme-when-publish)
-(advice-remove 'load-theme #'spike-leung/set-olivetti-fringe-face)
-(advice-add 'org-publish :around #'spike-leung/apply-theme-when-publish)
-(advice-add 'load-theme :after #'spike-leung/set-olivetti-fringe-face)
 
 
 
