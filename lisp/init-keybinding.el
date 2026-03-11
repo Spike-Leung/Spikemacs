@@ -56,6 +56,7 @@
   (transient-define-prefix spike-leung/transient-translate ()
     ["Immersive Translate"
      ("b" "buffer" immersive-translate-buffer)
+     ("c" "clear" immersive-translate-clear)
      ("p" "paragraph" immersive-translate-paragraph)
      ("a" "abort" immersive-translate-abort)
      ("f" "fanyi" fanyi-dwim)
