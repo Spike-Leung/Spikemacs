@@ -283,6 +283,8 @@ Return output file name."
            :html-head ,spike-leung/html-head
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble ,spike-leung/html-postamble
+           ;; 包含悬浮在代码引用上，光亮对应代码行的 JS
+           :html-head-include-scripts t
            :auto-sitemap t
            :sitemap-filename "index.org"
            :sitemap-title "Taxodium"
@@ -307,7 +309,8 @@ Return output file name."
            :html-head ,spike-leung/html-head
            :html-postamble ,spike-leung/html-postamble
            :html-preamble ,spike-leung/html-preamble-content
-           :html-htmlize-output-type css
+           ;; 包含悬浮在代码引用上，光亮对应代码行的 JS
+           :html-head-include-scripts t
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
@@ -325,6 +328,8 @@ Return output file name."
            :html-head ,spike-leung/html-head
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble ,spike-leung/html-postamble
+           ;; 包含悬浮在代码引用上，光亮对应代码行的 JS
+           :html-head-include-scripts t
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
@@ -356,7 +361,7 @@ Return output file name."
 
 (spike-leung/setup-org-publish-project-alist)
 
-(defun spike-leung/org-publish-after-callback ()
+(defun spike-leung/org-publish-after-callback (&rest _)
   "Stuff to do after `org-publish'"
   (setq org-html-htmlize-output-type 'inline-css))
 
