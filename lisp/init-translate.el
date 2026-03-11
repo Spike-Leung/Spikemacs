@@ -10,7 +10,7 @@
   :config
   (setq immersive-translate-backend 'chatgpt
         immersive-translate-chatgpt-host "openrouter.ai/api"
-        immersive-translate-chatgpt-model "google/gemini-2.5-flash"
+        immersive-translate-chatgpt-model "deepseek/deepseek-v3.2"
         immersive-translate-pending-message "(≖ᴗ≖๑)"
         immersive-translate-failed-message "(つд⊂) "))
 
