@@ -119,6 +119,7 @@
 </div>
 <script src=\"/js/sidenote.js\" defer></script>
 <script src=\"/js/code-enhanced.js\" defer></script>
+<script src=\"/js/code-highlighted.js\" defer></script>
 <script src=\"/js/heading-enhanced.js\" defer></script>
 <script src=\"/js/toc.js\" defer></script>
 <script src=\"/js/backtop.js\" defer></script>
@@ -283,8 +284,6 @@ Return output file name."
            :html-head ,spike-leung/html-head
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble ,spike-leung/html-postamble
-           ;; 包含悬浮在代码引用上，光亮对应代码行的 JS
-           :html-head-include-scripts t
            :auto-sitemap t
            :sitemap-filename "index.org"
            :sitemap-title "Taxodium"
@@ -309,8 +308,6 @@ Return output file name."
            :html-head ,spike-leung/html-head
            :html-postamble ,spike-leung/html-postamble
            :html-preamble ,spike-leung/html-preamble-content
-           ;; 包含悬浮在代码引用上，光亮对应代码行的 JS
-           :html-head-include-scripts t
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
@@ -328,8 +325,6 @@ Return output file name."
            :html-head ,spike-leung/html-head
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble ,spike-leung/html-postamble
-           ;; 包含悬浮在代码引用上，光亮对应代码行的 JS
-           :html-head-include-scripts t
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
