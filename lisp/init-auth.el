@@ -15,12 +15,13 @@
   (let* ((host (or host (format "api.%s.com" service)))
          (creds (car (auth-source-search :host host :port 443))))
     (if creds
-        (let ((api-key (plist-get creds :secret
-                                  )))
-          (if (functionp api-key)
-              (funcall api-key)
-            api-key
-            (error "API key not found for %s" service)))
+        (let ((api-key (plist-get creds :secret)))
+          (cond ((null api-key)
+                 (error "API key not found for %s" service))
+                ((functionp api-key)
+                 (funcall api-key))
+                (t
+                 api-key)))
       (error "No credentials found for %s" service))))
 
 (defun spike-leung/get-deepseek-api-key ()
