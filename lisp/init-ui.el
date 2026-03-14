@@ -53,11 +53,7 @@
   :config
   (setq modus-themes-italic-constructs t
         modus-themes-bold-constructs t
-        modus-themes-disable-other-themes t)
-  ;; remove fill-column-indicator background
-  (modus-themes-with-colors
-    (custom-set-faces
-     `(fill-column-indicator ((,c :background unspecified :foreground ,bg-dim :height 1.0))))))
+        modus-themes-disable-other-themes t))
 
 (use-package ef-themes)
 (use-package doric-themes)
