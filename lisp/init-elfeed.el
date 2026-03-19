@@ -58,37 +58,45 @@ If LEVEL exist, filter heading which level is greater or equal LEVEL."
                (lambda (hl)
                  ;; property 的值可以在这里找： https://orgmode.org/worg/dev/org-element-api.html
                  (when (or (null level) (>= (org-element-property :level hl) level))
-                   (org-link-display-format (org-element-property :raw-value hl))))
+                   (let* ((raw-title (org-element-property :raw-value hl))
+                          (title (org-link-display-format raw-title))
+                          (feed-url (when (string-match org-link-bracket-re raw-title)
+                                      (match-string 1 raw-title))))
+                     (list :items (list title) :feed-url feed-url ))))
                nil))))
    rmh-elfeed-org-files))
 
 (defun spike-leung/elfeed-preview-state (state candidate)
   "return consult state function for live elfeed preview.
 See `consult--with-preview' about STATE and CANDIDATE."
-  (pcase state
-    ('setup
-     (unless (get-buffer "*elfeed-search*")
-       (elfeed)
-       (elfeed-search-clear-filter))
-     (display-buffer "*elfeed-search*" '(display-buffer-reuse-window)))
-    ('preview
-     (elfeed-search-clear-filter)
-     (when (and candidate (get-buffer "*elfeed-search*"))
-       (unless (string-empty-p candidate)
-         (elfeed-search-set-filter (concat elfeed-search-filter " =" (string-replace " " "." candidate))))))
-    ('return
-     (unless (string-empty-p candidate)
-       (elfeed-search-set-filter (concat elfeed-search-filter " =" (string-replace " " "." candidate)))))))
+  (let* ((cand (car candidate))
+         (metadata (cdr candidate))
+         (feed-url (plist-get metadata :feed-url)))
+    (pcase state
+      ('setup
+       (unless (get-buffer "*elfeed-search*")
+         (elfeed)
+         (elfeed-search-clear-filter))
+       (display-buffer "*elfeed-search*" '(display-buffer-reuse-window)))
+      ('preview
+       (elfeed-search-clear-filter)
+       (when (and cand (get-buffer "*elfeed-search*"))
+         (unless (string-empty-p cand)
+           (elfeed-search-set-filter (concat elfeed-search-filter " =" (string-replace " " "." cand))))))
+      ('return
+       (unless (string-empty-p cand)
+         (elfeed-search-set-filter (concat elfeed-search-filter " =" (string-replace " " "." cand)))
+         (elfeed-update-feed feed-url))))))
 
 (defun spike-leung/consult-elfeed ()
   "select feed from file with live preview in elfeed."
   (interactive)
   (let* ((candidates (spike-leung/get-feed-candidates 3)))
-    (consult--read
-     candidates
-     :prompt "Feed: "
-     :history 'spike-leung/consult-elfeed--history
-     :state #'spike-leung/elfeed-preview-state)
+    (consult--multi candidates
+                    :prompt "Feed: "
+                    :state #'spike-leung/elfeed-preview-state
+                    :history 'spike-leung/consult-elfeed-history
+                    )
     (when (get-buffer "*elfeed-search*")
       (pop-to-buffer "*elfeed-search*"))))
 
