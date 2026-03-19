@@ -42,13 +42,10 @@ Checklist:
 *** [[https://www.stefanjudis.com/rss.xml][Stefan Judis]]                                                                :frontend:weekly:
 *** [[https://www.sanityinc.com/feed.xml][Steve Purcell]]                                                     :emacs:
 *** [[https://archive.casouri.cc/rock/day/atom.xml][余日摇滚]]                                                                    :music:
-*** [[https://chlo.is/feed.atom][园子里的日光]]
 *** [[https://www.geedea.pro/index.xml][极客死亡计划]]                                                                :weekly:
-*** [[https://weekly.tw93.fun/rss.xml][潮流周刊]]
-*** [[https://blog.southfox.me/feed.xml][狐狸反走矣]]
 *** [[https://ameow.xyz/feed.xml][猫鱼周刊]]                                                                    :weekly:
-*** [[https://z.arlmy.me/atom.xml][素生]]                                                                        :daily:book:quote:
 *** [[https://www.ruanyifeng.com/blog/atom.xml][阮一峰的网络日志]]                                                            :weekly:
+*** [[https://blog.southfox.me/feed.xml][狐狸反走矣]]
 ** Z2:Backyard                                                                  :z2:
 在后院里，我和那些我喜欢的博客待在一起。
 我喜欢他们的大多数帖子，但并不觉得有必要立刻把所有东西都读完。
@@ -86,10 +83,14 @@ Checklist:
 *** [[https://blog.solazy.me/feed/][So!azy]]                                                                      :daily:
 *** [[https://johnrakestraw.com/index.xml][thinking out loud]]                                                           :writing:emacs:
 *** [[https://tracydurnell.com/feed/atom/][Tracy Durnell's Mind Garden]]                                                 :weekly:
-*** [[https://www.hecaitou.com/feeds/posts/default][和菜头]]
+*** [[https://leehenry.top/rss.xml][伏枥之间]]
+*** [[https://chlo.is/feed.atom][园子里的日光]]
 *** [[https://lhasa.icu/rss.xml][游钓四方]]
+*** [[https://weekly.tw93.fun/rss.xml][潮流周刊]]
 *** [[https://www.linggandianbo.com/rss/][灵感电波]]                                                                    :weekly:newsletter:
-*** [[https://lawtee.com/index.xml][老 T 博客]]
+*** [[https://z.arlmy.me/atom.xml][素生]]                  :daily:book:quote:
+*** [[https://goldenriver.site/index.xml][金色河流]]
+*** [[https://ro3or.com/index.xml][鹅玉]]
 ** Z3:Orchard                                                                   :z3:
 果园比后院更大，也生长得更加狂野。
 它包含我刚刚发现并种在这里的博客，因为我想了解它们。
@@ -208,6 +209,8 @@ Checklist:
 *** [[https://feeds.feedburner.com/TroyHunt][Troy Hunt's Blog]]
 *** [[https://ginoz.bearblog.dev/feed/][GINOZ's Blog]]
 *** [[https://notes.jeddacp.com/feed/][Notes by JCProbably]]
+*** [[https://lawtee.com/index.xml][老 T 博客]]
+*** [[https://www.hecaitou.com/feeds/posts/default][和菜头]]
 ** Z4:Pasture                                                                   :z4:
 牧场比果园还要大，但密度较低。
 它包含那些我偶尔想略读的订阅源。
