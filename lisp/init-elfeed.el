@@ -46,5 +46,53 @@
 
 
 
+(defun spike-leung/get-feed-candidates (&optional level)
+  "Extract headings title from `rmh-elfeed-org-files' as consult candidates.
+If LEVEL exist, filter heading which level is greater or equal LEVEL."
+  (mapcan
+   (lambda (elfeed-org-file)
+     (with-current-buffer (or (find-buffer-visiting elfeed-org-file)
+                              (find-file-noselect elfeed-org-file))
+       (delq nil
+             (org-element-map (org-element-parse-buffer 'headline) 'headline
+               (lambda (hl)
+                 ;; property 的值可以在这里找： https://orgmode.org/worg/dev/org-element-api.html
+                 (when (or (null level) (>= (org-element-property :level hl) level))
+                   (org-link-display-format (org-element-property :raw-value hl))))
+               nil))))
+   rmh-elfeed-org-files))
+
+(defun spike-leung/elfeed-preview-state (state candidate)
+  "return consult state function for live elfeed preview.
+See `consult--with-preview' about STATE and CANDIDATE."
+  (pcase state
+    ('setup
+     (unless (get-buffer "*elfeed-search*")
+       (elfeed)
+       (elfeed-search-clear-filter))
+     (display-buffer "*elfeed-search*" '(display-buffer-reuse-window)))
+    ('preview
+     (elfeed-search-clear-filter)
+     (when (and candidate (get-buffer "*elfeed-search*"))
+       (unless (string-empty-p candidate)
+         (elfeed-search-set-filter (concat elfeed-search-filter " =" (string-replace " " "." candidate))))))
+    ('return
+     (unless (string-empty-p candidate)
+       (elfeed-search-set-filter (concat elfeed-search-filter " =" (string-replace " " "." candidate)))))))
+
+(defun spike-leung/consult-elfeed-feed ()
+  "select feed from file with live preview in elfeed."
+  (interactive)
+  (let* ((candidates (spike-leung/get-feed-candidates 3)))
+    (consult--read
+     candidates
+     :prompt "Feed: "
+     :sort nil
+     :state #'spike-leung/elfeed-preview-state)
+    (when (get-buffer "*elfeed-search*")
+      (pop-to-buffer "*elfeed-search*"))))
+
+
+
 (provide 'init-elfeed)
 ;;; init-elfeed.el ends here
