@@ -46,6 +46,10 @@
 
 
 
+(defcustom spike-leung/elfeed-search-filter "@3-months-ago +unread"
+  "Query string filtering shown entries."
+  :type 'string)
+
 (defun spike-leung/get-feed-candidates (&optional level)
   "Extract headings title from `rmh-elfeed-org-files' as consult candidates.
 If LEVEL exist, filter heading which level is greater or equal LEVEL."
@@ -69,24 +73,25 @@ If LEVEL exist, filter heading which level is greater or equal LEVEL."
 (defun spike-leung/elfeed-preview-state (state candidate)
   "return consult state function for live elfeed preview.
 See `consult--with-preview' about STATE and CANDIDATE."
-  (let* ((cand (car candidate))
-         (metadata (cdr candidate))
-         (feed-url (plist-get metadata :feed-url)))
-    (pcase state
-      ('setup
-       (unless (get-buffer "*elfeed-search*")
-         (elfeed)
-         (elfeed-search-clear-filter))
-       (display-buffer "*elfeed-search*" '(display-buffer-reuse-window)))
-      ('preview
-       (elfeed-search-clear-filter)
-       (when (and cand (get-buffer "*elfeed-search*"))
+  (unless (null candidate)
+    (let* ((cand (car candidate))
+           (metadata (cdr candidate))
+           (feed-url (plist-get metadata :feed-url)))
+      (pcase state
+        ('setup
+         (unless (get-buffer "*elfeed-search*")
+           (elfeed)
+           (elfeed-search-clear-filter))
+         (display-buffer "*elfeed-search*" '(display-buffer-reuse-window)))
+        ('preview
+         (elfeed-search-clear-filter)
+         (when (and cand (get-buffer "*elfeed-search*"))
+           (unless (string-empty-p cand)
+             (elfeed-search-set-filter (concat spike-leung/elfeed-search-filter " =" (string-replace " " "." cand))))))
+        ('return
          (unless (string-empty-p cand)
-           (elfeed-search-set-filter (concat elfeed-search-filter " =" (string-replace " " "." cand))))))
-      ('return
-       (unless (string-empty-p cand)
-         (elfeed-search-set-filter (concat elfeed-search-filter " =" (string-replace " " "." cand)))
-         (elfeed-update-feed feed-url))))))
+           (elfeed-search-set-filter (concat spike-leung/elfeed-search-filter " =" (string-replace " " "." cand)))
+           (elfeed-update-feed feed-url)))))))
 
 (defun spike-leung/consult-elfeed ()
   "select feed from file with live preview in elfeed."
