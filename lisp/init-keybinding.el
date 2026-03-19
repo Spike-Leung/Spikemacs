@@ -100,7 +100,7 @@
       ("b" "blog" spike-leung/transient-blog)
       ("g" "gptel" spike-leung/transient-gptel)
       ("p" "publish" org-publish)
-      ("e" "elfeed" spike-leung/consult-elfeed-feed)
+      ("e" "elfeed" spike-leung/consult-elfeed)
       ("w" "webjump" webjump)]
      ["(・・?)"
       ("aa" "avy" avy-goto-char-timer)

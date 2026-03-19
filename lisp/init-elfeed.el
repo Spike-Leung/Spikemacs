@@ -80,7 +80,7 @@ See `consult--with-preview' about STATE and CANDIDATE."
      (unless (string-empty-p candidate)
        (elfeed-search-set-filter (concat elfeed-search-filter " =" (string-replace " " "." candidate)))))))
 
-(defun spike-leung/consult-elfeed-feed ()
+(defun spike-leung/consult-elfeed ()
   "select feed from file with live preview in elfeed."
   (interactive)
   (let* ((candidates (spike-leung/get-feed-candidates 3)))
