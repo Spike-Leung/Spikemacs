@@ -87,7 +87,7 @@ See `consult--with-preview' about STATE and CANDIDATE."
     (consult--read
      candidates
      :prompt "Feed: "
-     :sort nil
+     :history 'spike-leung/consult-elfeed--history
      :state #'spike-leung/elfeed-preview-state)
     (when (get-buffer "*elfeed-search*")
       (pop-to-buffer "*elfeed-search*"))))
