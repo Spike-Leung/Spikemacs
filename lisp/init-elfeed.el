@@ -25,7 +25,7 @@
 
 
 (defun spike-leung/org-open-rss-feed-as-site-in-elfeed-org-files (orig-fun &rest args)
-  "Advice for `org-open-at-point` to redirect RSS links only in a specific file."
+  "Advice for `org-open-at-point' to redirect RSS links only in a specific file."
   (let* ((element (org-element-context))
          (link (and (eq (org-element-type element) 'link)
                     (org-element-property :raw-link element))))
@@ -71,7 +71,7 @@ If LEVEL exist, filter heading which level is greater or equal LEVEL."
    rmh-elfeed-org-files))
 
 (defun spike-leung/elfeed-preview-state (state candidate)
-  "return consult state function for live elfeed preview.
+  "Return consult state function for live `elfeed' preview.
 See `consult--with-preview' about STATE and CANDIDATE."
   (unless (null candidate)
     (let* ((cand (car candidate))
@@ -94,7 +94,7 @@ See `consult--with-preview' about STATE and CANDIDATE."
            (elfeed-update-feed feed-url)))))))
 
 (defun spike-leung/consult-elfeed ()
-  "select feed from file with live preview in elfeed."
+  "Select feed from `rmh-elfeed-org-files' with live preview in `elfeed'."
   (interactive)
   (let* ((candidates (spike-leung/get-feed-candidates 3)))
     (consult--multi candidates
