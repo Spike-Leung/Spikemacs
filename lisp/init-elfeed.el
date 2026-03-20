@@ -80,6 +80,8 @@ See `consult--with-preview' about STATE and CANDIDATE."
       (pcase state
         ('setup
          (unless (get-buffer "*elfeed-search*")
+           (elfeed-apply-hooks-now)
+           (elfeed-org)
            (elfeed)
            (elfeed-search-clear-filter))
          (display-buffer "*elfeed-search*" '(display-buffer-reuse-window)))
