@@ -104,13 +104,15 @@ set of themes to either dark or light variants."
   "Load random light themes."
   (interactive)
   (setq spike-leung/current-theme-background-mode 'light)
-  (spike-leung/themes-load-random 'light))
+  (spike-leung/themes-load-random 'light)
+  (modify-frame-parameters nil `((alpha . 100))))
 
 (defun dark()
   "Load random dark themes."
   (interactive)
   (setq spike-leung/current-theme-background-mode 'dark)
-  (spike-leung/themes-load-random 'dark))
+  (spike-leung/themes-load-random 'dark)
+  (modify-frame-parameters nil `((alpha . 75))))
 
 ;; 要在 desktop 加载后再执行，避免被 desktop 记录的主题覆盖，导致混乱
 (add-hook 'desktop-after-read-hook #'spike-leung/themes-load-random)
