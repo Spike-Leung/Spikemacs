@@ -46,9 +46,8 @@
 
 
 
-(defcustom spike-leung/elfeed-search-filter "@3-months-ago +unread"
-  "Query string filtering shown entries."
-  :type 'string)
+(defconst spike-leung/elfeed-search-filter "@3-months-ago +unread"
+  "Query string filtering shown entries.")
 
 (defun spike-leung/get-feed-candidates (&optional level)
   "Extract headings title from `rmh-elfeed-org-files' as consult candidates.
@@ -64,9 +63,10 @@ If LEVEL exist, filter heading which level is greater or equal LEVEL."
                  (when (or (null level) (>= (org-element-property :level hl) level))
                    (let* ((raw-title (org-element-property :raw-value hl))
                           (title (org-link-display-format raw-title))
+                          (annotation (org-entry-get hl "description"))
                           (feed-url (when (string-match org-link-bracket-re raw-title)
                                       (match-string 1 raw-title))))
-                     (list :items (list title) :feed-url feed-url ))))
+                     (list :items (list title) :feed-url feed-url :annotation annotation))))
                nil))))
    rmh-elfeed-org-files))
 
@@ -101,7 +101,14 @@ See `consult--with-preview' about STATE and CANDIDATE."
                     :prompt "Feed: "
                     :state #'spike-leung/elfeed-preview-state
                     :history 'spike-leung/consult-elfeed-history
-                    )
+                    :annotate (lambda (cand)
+                                (let* ((match-cand (seq-find
+                                                    (lambda (v)
+                                                      (string-match-p (car (plist-get v :items)) cand))
+                                                    candidates))
+                                       (annotation (and match-cand (plist-get match-cand :annotation))))
+                                  (when annotation
+                                    (concat (make-string 25 ?\s) annotation)))))
     (when (get-buffer "*elfeed-search*")
       (pop-to-buffer "*elfeed-search*"))))
 
