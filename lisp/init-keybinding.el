@@ -70,6 +70,7 @@
   (transient-define-prefix spike-leung/transient-blog ()
     ["Blog related"
      ("i" "insert-image" spike-leung/insert-blog-images)
+     ("v" "insert-video" spike-leung/insert-blog-video)
      ("t" "toggle-publish-draft" spike-leung/denote-toggle-publish-draft)])
 
   (transient-define-prefix spike-leung/transient-commands ()

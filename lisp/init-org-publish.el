@@ -561,6 +561,29 @@ images/album-1 → images/album/1 → images/album → images/"
          (relative-path (file-relative-name image-file base-dir)))
     (insert (format "#+CAPTION: \n[[file:images/%s]]" relative-path))))
 
+(defun spike-leung/insert-blog-video ()
+  "从 blog 插入视频。
+智能识别 #+export_file_name，如 album-1 会依次尝试：
+images/album-1 → images/album/1 → images/album → images/
+生成 HTML export 块，包含自动播放、静音、循环的视频标签。"
+  (interactive)
+  (let* ((base-dir (expand-file-name "~/git/taxodium/publish/images/"))
+         (export-name (spike-leung/get-export-file-name))
+         (video-dir (file-name-as-directory
+                     (spike-leung/determine-image-dir base-dir export-name)))
+         (video-file (read-file-name "Select video: " video-dir nil t))
+         (relative-path (file-relative-name video-file base-dir))
+         (web-path (concat "/images/"
+                           (replace-regexp-in-string "\\\\" "/" relative-path)))
+         (ext (downcase (file-name-extension video-file)))
+         (mime-type (pcase ext
+                      ("webm" "video/webm")
+                      ("mp4"  "video/mp4")
+                      ("mov"  "video/quicktime")
+                      (_      (concat "video/" ext)))))
+    (insert (format "#+begin_export html\n<a href=\"%s\" target=\"_blank\">\n  <video autoplay loop muted playsinline>\n    <source src=\"%s\" type=\"%s\">\n  </video>\n</a>\n#+end_export"
+                    web-path web-path mime-type))))
+
 (defun spike-leung/insert-album-href ()
   "Insert album wall href."
   (interactive)
