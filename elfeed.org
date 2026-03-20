@@ -38,6 +38,9 @@ Checklist:
 *** [[https://protesilaos.com/master.xml][Protesilaos]]                                                                 :emacs:
 *** [[https://sachachua.com/blog/feed/index.xml][Sacha Chua]]                                                                  :emacs:
 *** [[https://sightlessscribbles.com/feed.xml][Sightless Scribbles]]
+:PROPERTIES:
+:DESCRIPTION: 盲人作家
+:END:
 *** [[https://simonwillison.net/atom/everything/][Simon Willison]]
 *** [[https://www.stefanjudis.com/rss.xml][Stefan Judis]]                                                                :frontend:weekly:
 *** [[https://www.sanityinc.com/feed.xml][Steve Purcell]]                                                     :emacs:
