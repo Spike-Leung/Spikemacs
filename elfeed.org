@@ -17,32 +17,15 @@ Checklist:
 门廊空间不大：这能确保我能跟上这里的每一个人。
 
 *** [[https://anotherdayu.com/feed/][Another Dayu]]
-*** [[https://antfu.me/feed.xml][Anthony Fu]]
-*** [[https://feedpress.me/cssweekly][CSS Weekly]]                                                                  :css:weekly:
 *** [[https://blog.cytrogen.icu/atom.xml][Cytrogen]]
 *** [[https://emacsformacosx.com/atom/release][Emacs For Mac OS X: Releases RSS Feed]]
-*** [[https://cprss.s3.amazonaws.com/frontendfoc.us.xml][Frontend Focus]]                                                              :weekly:
-*** [[http://html5doctor.com/feed/][HTML5 doctor]]                                                                :weekly:frontend:
-*** [[https://cprss.s3.amazonaws.com/javascriptweekly.com.xml][JavaScript Weekly]]                                                           :javascript:weekly:
-*** [[https://kill-the-newsletter.com/feeds/3hl5jx56nh55vdvwhoh1.xml][kill-the-newsletter@taxodium]]
-
-处理那些没有 feed 的网站。
-
-- email: 3hl5jx56nh55vdvwhoh1@kill-the-newsletter.com
-- rss url: https://kill-the-newsletter.com/feeds/3hl5jx56nh55vdvwhoh1.xml
-
-- https://bytes.dev/
-
 *** [[https://musicforprogramming.net/rss.xml][Music For Programming]]
-*** [[https://cprss.s3.amazonaws.com/nodeweekly.com.xml][Node Weekly]]                                                                 :javascript:weekly:
 *** [[https://protesilaos.com/master.xml][Protesilaos]]                                                                 :emacs:
-*** [[https://sachachua.com/blog/feed/index.xml][Sacha Chua]]                                                                  :emacs:
 *** [[https://sightlessscribbles.com/feed.xml][Sightless Scribbles]]
 :PROPERTIES:
 :DESCRIPTION: 盲人作家
 :END:
 *** [[https://simonwillison.net/atom/everything/][Simon Willison]]
-*** [[https://www.stefanjudis.com/rss.xml][Stefan Judis]]                                                                :frontend:weekly:
 *** [[https://www.sanityinc.com/feed.xml][Steve Purcell]]                                                     :emacs:
 *** [[https://archive.casouri.cc/rock/day/atom.xml][余日摇滚]]                                                                    :music:
 *** [[https://www.geedea.pro/index.xml][极客死亡计划]]                                                                :weekly:
@@ -59,31 +42,48 @@ Checklist:
 *** [[https://blog.ursb.me/feed.xml][Airing 的博客]]
 *** [[https://manateelazycat.github.io/feed.xml][Andy Stewart]]
 *** [[https://anniemueller.com/posts_feed][annie]]
+*** [[https://antfu.me/feed.xml][Anthony Fu]]
 *** [[https://blogblog.club/blog/rss.xml][BlogBlog 同樂會]]
 *** [[https://garden.bradwoods.io/rss.xml][Brad Woods Digital Garden]]                                                   :设计有趣的博客:
 *** [[https://candost.blog/rss.xml][Candost's Blog]]
 *** [[https://cbvivi.today/feed.xml][cbvivi]]
+*** [[https://feedpress.me/cssweekly][CSS Weekly]]               :css:weekly:
 *** [[https://dbushell.com/rss.xml][dbushell.com]]                                                                :frontend:
 *** [[https://blog.cosine.ren/rss.xml][FE Bits 前端周周谈]]                                          :frontend:z1:
+*** [[https://cprss.s3.amazonaws.com/frontendfoc.us.xml][Frontend Focus]] :weekly:
 *** [[https://gwern.substack.com/feed][Gwern.net]]                                                                   :newsletter:设计超级好的网站:
+*** [[http://html5doctor.com/feed/][HTML5 doctor]]          :weekly:frontend:
+*** [[https://cprss.s3.amazonaws.com/javascriptweekly.com.xml][JavaScript Weekly]] :javascript:weekly:
 *** [[https://takeonrules.com/index.xml][Jeremy Friesen]]                                                              :emacs:writing:
 *** [[https://blog.jim-nielsen.com/feed.xml][Jim Nielsen]]
 *** [[https://www.joshwcomeau.com/rss.xml][Josh Comeau]]                                                          :css:web:frontend:
 *** [[https://kayleerowena.com/rss.xml][Kaylee Rowena]]                                                               :weekly:设计好看的博客:
 *** [[https://kedara.eu/blog/index.xml][Kedara.eu]]
+*** [[https://kill-the-newsletter.com/feeds/3hl5jx56nh55vdvwhoh1.xml][kill-the-newsletter@taxodium]]
+
+处理那些没有 feed 的网站。
+
+- email: 3hl5jx56nh55vdvwhoh1@kill-the-newsletter.com
+- rss url: https://kill-the-newsletter.com/feeds/3hl5jx56nh55vdvwhoh1.xml
+
+- https://bytes.dev/
+
 *** [[https://ldbeth.sdf.org/rss.xml][LdBeth]]                                                            :emacs:
 *** [[https://endler.dev/rss.xml][Matthias Endler]]                                                             :code:
 *** [[https://www.muliama.blog/feed/][Muliama's diaries]]
+*** [[https://cprss.s3.amazonaws.com/nodeweekly.com.xml][Node Weekly]] :javascript:weekly:
 *** [[https://overreacted.io/rss.xml][overreacted]]                                                                 :frontend:react:
 *** [[https://www.owenyoung.com/atom.xml][owenyoung]]
 *** [[http://www.aaronsw.com/2002/feeds/pgessays.rss][Paul Graham]]
 *** [[https://polebug.github.io/atom.xml][Polebug]]
 *** [[https://www.pseudoyu.com/feed.xml][Pseudoyu]]
 *** [[https://www.raptitude.com/feed/][Raptitude]]
+*** [[https://sachachua.com/blog/feed/index.xml][Sacha Chua]]         :emacs:
 *** [[https://seths.blog/feed/][SETH'S BLOG]]
 *** [[https://song.al/feed.xml][Simon]]                                                                :日本:
 *** [[https://sindresorhus.com/rss.xml][Sindre Sorhus]]
 *** [[https://blog.solazy.me/feed/][So!azy]]                                                                      :daily:
+*** [[https://www.stefanjudis.com/rss.xml][Stefan Judis]]   :frontend:weekly:
 *** [[https://johnrakestraw.com/index.xml][thinking out loud]]                                                           :writing:emacs:
 *** [[https://tracydurnell.com/feed/atom/][Tracy Durnell's Mind Garden]]                                                 :weekly:
 *** [[https://leehenry.top/rss.xml][伏枥之间]]
