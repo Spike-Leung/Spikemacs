@@ -284,13 +284,7 @@ Return output file name."
            :html-head ,spike-leung/html-head
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble ,spike-leung/html-postamble
-           :auto-sitemap t
-           :sitemap-filename "index.org"
-           :sitemap-title "Taxodium"
-           :sitemap-format-entry spike-leung/sitemap-format-entry
-           :sitemap-sort-files anti-chronologically
-           :sitemap-function spike-leung/sitemap-function
-           :sitemap-style list
+           :auto-sitemap nil
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
@@ -343,9 +337,11 @@ Return output file name."
            :exclude ".*"
            :publishing-directory ,spike-leung/org-publish-default-publishing-directory
            :time-stamp-file nil
+           :section-numbers nil
            :html-head ,spike-leung/html-head-sitemap
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble ,spike-leung/html-postamble-sitemap
+           :publishing-function spike-leung/org-html-publish-sitemap
            :html-htmlize-output-type css
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
@@ -717,6 +713,23 @@ Then generate a #+begin_export html block with an iframe, replacing any existing
 
 
 
+(defun spike-leung/org-html-publish-sitemap (plist filename pub-dir)
+  "`org-publish' `:publishing-function' for sitemap.
+Add subtitle to links which has subtitle.
+See `org-html-publish-to-html' for param PLIST,FILENAME,PUB-DIR."
+  (let ((output-filename (org-html-publish-to-html plist filename pub-dir)))
+    ;; 这里应该用 `with-temp-buffer' 而不要用 `with-current-buffer' 和 '`find-file-noselect'
+    ;; see: https://emacs.stackexchange.com/questions/2868/whats-wrong-with-find-file-noselect
+    (with-temp-buffer
+      (insert-file-contents output-filename)
+      (goto-char (point-min))
+      (while (re-search-forward
+              (rx (group "<a" (*? anychar) ">" (*? anychar)) " - " (group (*? anychar)) (group "</a>"))
+              nil t)
+        (let ((subtitle (match-string 2)))
+          (replace-match (format "\\1\\3<span class=\"sitemap-subtitle\">%s</span>" subtitle))))
+      (write-region (point-min) (point-max) output-filename))
+    output-filename))
 
 
 
