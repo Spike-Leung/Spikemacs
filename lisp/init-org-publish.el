@@ -581,7 +581,16 @@ images/album-1 → images/album/1 → images/album → images/
                       ("mp4"  "video/mp4")
                       ("mov"  "video/quicktime")
                       (_      (concat "video/" ext)))))
-    (insert (format "#+begin_export html\n<a href=\"%s\" target=\"_blank\">\n  <video autoplay loop muted playsinline>\n    <source src=\"%s\" type=\"%s\">\n  </video>\n</a>\n#+end_export"
+    (insert (format "#+begin_export html
+<figure>
+  <a href=\"%s\" target=\"_blank\">
+    <video autoplay loop muted playsinline>
+      <source src=\"%s\" type=\"%s\">
+    </video>
+  </a>
+  <figcaption></figcaption>
+</figure>
+#+end_export"
                     web-path web-path mime-type))))
 
 (defun spike-leung/insert-album-href ()
