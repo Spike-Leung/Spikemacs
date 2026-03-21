@@ -132,9 +132,9 @@ With prefix arg or when QUERY is provided, search kaomoji by name."
     (("hide_1")                                   . "|ω･)ﾉ)")
     (("hide_2")                                   . "ヾ(･|")
     ;; writing
-    (("writing")                                . "__φ(．．)")
-    (("writing_1")                                . "__φ(。。)")
-    (("writing_2")                                . "___〆(・∀・)")
+    (("writing")                                . "_​_φ(．．)")
+    (("writing_1")                                . "_​_φ(。。)")
+    (("writing_2")                                . "_​_​_〆(・∀・)")
     ;; bear
     (("bear")                                   . "ʕ •ᴥ• ʔ")
     (("bear_1")                                   . "ʕ ᵔᴥᵔ ʔ")
