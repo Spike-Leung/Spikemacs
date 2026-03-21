@@ -717,65 +717,6 @@ Then generate a #+begin_export html block with an iframe, replacing any existing
 
 
 
-;;; view-transition-name setting.
-;; DEPRECATED.
-
-(defun spike-leung/org-html-publish-to-html-orgfiles (plist filename pub-dir)
-  "Publish FILENAME to HTML with view-transition-name added to title.
-PLIST is the property list for the given project.
-FILENAME is the org file being published.
-PUB-DIR is the publishing directory."
-  (let* ((html-file (spike-leung/org-html-publish-common plist filename pub-dir))
-         (transition-name (spike-leung/get-view-transition-name (or (spike-leung/org-publish-get-org-keyword nil nil "export_file_name" filename) filename))))
-    (when (file-exists-p html-file)
-      (with-temp-buffer
-        (insert-file-contents html-file)
-        (goto-char (point-min))
-        ;; Add view-transition-name to <h1> title tags for smooth page transitions
-        (while (re-search-forward "<h1[^>]*>\\([^<]+\\)</h1>" nil t)
-          (let ((title (match-string 1)))
-            (replace-match (format "<h1 style=\"view-transition-name: spike-%s\" class=\"title\">%s</h1>"
-                                   transition-name
-                                   title))))
-        (write-region (point-min) (point-max) html-file)))))
-
-(defun spike-leung/org-html-publish-to-html-sitemap (plist filename pub-dir)
-  "Publish FILENAME to HTML with view-transition-name added to links.
-PLIST is the property list for the given project.
-FILENAME is the org file being published (typically index.org).
-PUB-DIR is the publishing directory."
-  (let ((html-file (spike-leung/org-html-publish-common plist filename pub-dir)))
-    (when (file-exists-p html-file)
-      (with-temp-buffer
-        (insert-file-contents html-file)
-        (goto-char (point-min))
-        ;; Add view-transition-name to <a> tags linking to content pages
-        ;; This enables smooth transitions when navigating from sitemap to content
-        (while (re-search-forward "<a href=\"\\([^\"]+\\)\"" nil t)
-          (let* ((href (match-string 1))
-                 (transition-name (spike-leung/get-view-transition-name href)))
-            (replace-match (format "<a href=\"%s\" style=\"view-transition-name: spike-%s\""
-                                   href
-                                   transition-name))))
-        (write-region (point-min) (point-max) html-file)))))
-
-(defun spike-leung/org-html-publish-common (plist filename pub-dir)
-  "Common HTML publishing logic for org files and sitemap.
-PLIST is the property list for the given project.
-FILENAME is the org file being published.
-PUB-DIR is the publishing directory.
-Returns the path to the generated HTML file."
-  (let ((org-html-link-org-files-as-html t)
-        ;; file will be exported with export_file_name
-        (export-file-name (or (spike-leung/org-publish-get-org-keyword nil nil "export_file_name" filename) filename)))
-    (org-html-publish-to-html plist filename pub-dir)
-    (concat pub-dir (file-name-nondirectory (file-name-sans-extension export-file-name)) ".html")))
-
-(defun spike-leung/get-view-transition-name (filename)
-  "Generate consistent view-transition-name based on FILENAME.
-Strips directory and .org extension, and converts to valid CSS identifier."
-  (let ((basename (file-name-base filename)))
-    (replace-regexp-in-string "[^a-zA-Z0-9-]" "-" basename)))
 
 
 
