@@ -10,8 +10,8 @@
 
 
 (use-package elfeed
-  :config
-  (setq-default elfeed-search-filter "@3-months-ago +unread +default"))
+  :custom
+  (elfeed-search-filter "@3-months-ago +unread +default"))
 
 (use-package elfeed-org
   :hook ((after-init . elfeed-org))
