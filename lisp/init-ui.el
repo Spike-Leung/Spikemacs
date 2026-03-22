@@ -112,12 +112,13 @@ set of themes to either dark or light variants."
   (interactive)
   (setq spike-leung/current-theme-background-mode 'dark)
   (spike-leung/themes-load-random 'dark)
+  ;; 暗色主题适当降低透明度，看起来更好看。不同的主题适合不同的透明度。
   (let ((theme (format "%s" custom-enabled-themes)))
     (cond
      ((string-match-p (rx (or "modus-" "ef-")) theme)
       (modify-frame-parameters nil `((alpha . 80))))
      ((string-match-p "doric-" theme)
-      (modify-frame-parameters nil `((alpha . 90)))))))
+      (modify-frame-parameters nil `((alpha . 95)))))))
 
 ;; 要在 desktop 加载后再执行，避免被 desktop 记录的主题覆盖，导致混乱
 (add-hook 'desktop-after-read-hook #'spike-leung/themes-load-random)
