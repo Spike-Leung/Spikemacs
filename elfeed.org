@@ -69,6 +69,7 @@ Checklist:
 *** [[https://johnrakestraw.com/index.xml][thinking out loud]]                                                           :writing:emacs:
 *** [[https://leehenry.top/rss.xml][伏枥之间]]
 *** [[https://chlo.is/feed.atom][园子里的日光]]
+*** [[https://blog.mfwt.top/index.php/feed/][枫林灯语]]              :无线电:
 *** [[https://lhasa.icu/rss.xml][游钓四方]]
 *** [[https://weekly.tw93.fun/rss.xml][潮流周刊]]
 *** [[https://www.linggandianbo.com/rss/][灵感电波]]                                                                    :weekly:newsletter:
@@ -192,7 +193,6 @@ Checklist:
 *** [[https://stephenleng.com/cn/feed/][心的道理]]
 *** [[https://www.laomuzhu.cn/feed/][木竹]]
 *** [[https://www.xiaozonglin.cn/feed/][林林杂语]]
-*** [[https://blog.mfwt.top/index.php/feed/][枫林灯语]]                                                                    :无线电:
 *** [[https://oxxx.cn/feed/][森木志]]
 *** [[https://blog.douchi.space/index.xml][椒盐豆豉]]
 *** [[https://justgoidea.com/rss.xml][槿呈 Goidea]]
@@ -214,6 +214,7 @@ Checklist:
 *** [[https://www.chenrui.com/feed.php][陈锐]]
 *** [[https://innei.in/feed][静かな森]]
 *** [[https://www.gaotianchi.com/feed.xml][高天驰]]
+*** [[https://blog.youxu.info/feed.xml][徐宥 (Eric Xu)]]
 ** Z4:Pasture                                                                   :z4:
 牧场比果园还要大，但密度较低。
 它包含那些我偶尔想略读的订阅源。
@@ -221,7 +222,6 @@ Checklist:
 我会不时查看它，以便在必要时把作者邀请到更近的平台，或把他们引导到池塘。
 
 *** [[https://pathos.page/feed.xml][2750 words]]
-*** [[https://54321.versun.me/feed][54321 Weekly]]
 *** [[https://61.life/feed.xml][61's life]]
 *** [[http://antirez.com/rss][<antirez>]]                                                                   :programing:llm:
 *** [[https://iam.skoo.bz/rss/][A Calm in the Chaos]]
