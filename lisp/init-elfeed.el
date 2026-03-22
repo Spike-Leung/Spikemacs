@@ -11,7 +11,10 @@
 
 (use-package elfeed
   :custom
-  (elfeed-search-filter "@3-months-ago +unread +default"))
+  (elfeed-search-filter "@3-months-ago +unread +default")
+  :bind ((:map elfeed-search-mode-map
+               ("t" . spike-leung/elfeed-toggle-unread)
+               ("f" . spike-leung/consult-elfeed))))
 
 (use-package elfeed-org
   :hook ((after-init . elfeed-org))
@@ -111,6 +114,15 @@ See `consult--with-preview' about STATE and CANDIDATE."
                                     (concat (make-string 25 ?\s) annotation)))))
     (when (get-buffer "*elfeed-search*")
       (pop-to-buffer "*elfeed-search*"))))
+
+
+
+(defun spike-leung/elfeed-toggle-unread ()
+  "Toggle elfeed unread status."
+  (interactive)
+  (if (string-match-p "+unread" elfeed-search-filter)
+      (elfeed-search-set-filter (string-replace "+unread" "-unread" elfeed-search-filter))
+    (elfeed-search-set-filter (string-replace "-unread" "+unread" elfeed-search-filter))))
 
 
 
