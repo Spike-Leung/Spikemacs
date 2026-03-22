@@ -347,7 +347,7 @@ Return output file name."
            :email "l-yanlei@hotmail.com")
 
           ;; copy static fisrt
-          ("website" :components ("orgfiles" "black-hole" "draft" "sitemap" "origin-orgfiles"))
+          ("posts" :components ("orgfiles" "black-hole" "origin-orgfiles"))
           ("white-hole" :components ("black-hole" "origin-orgfiles")))))
 
 (spike-leung/setup-org-publish-project-alist)
