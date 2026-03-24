@@ -14,7 +14,8 @@
   (elfeed-search-filter "@3-months-ago +unread +default")
   :bind ((:map elfeed-search-mode-map
                ("t" . spike-leung/elfeed-toggle-unread)
-               ("f" . spike-leung/consult-elfeed))))
+               ("f" . spike-leung/consult-elfeed)
+               ("B" . spike-leung/elfeed-search-browse-url-with-kagi-translate))))
 
 (use-package elfeed-org
   :hook ((after-init . elfeed-org))
@@ -123,6 +124,26 @@ See `consult--with-preview' about STATE and CANDIDATE."
   (if (string-match-p "+unread" elfeed-search-filter)
       (elfeed-search-set-filter (string-replace "+unread" "-unread" elfeed-search-filter))
     (elfeed-search-set-filter (string-replace "-unread" "+unread" elfeed-search-filter))))
+
+
+
+(defun spike-leung/elfeed-search-browse-url-with-kagi-translate ()
+  "Visit the current entry in your browser using `browse-url'.
+Prefix with 'translate.kagi.com' to browse with translated version. "
+  (interactive)
+  (let ((buffer (current-buffer))
+        (entries (elfeed-search-selected)))
+    (cl-loop for entry in entries
+             do (elfeed-untag entry 'unread)
+             when (elfeed-entry-link entry)
+             do (browse-url (format "https://translate.kagi.com/%s" it)))
+    ;; `browse-url' could have switched to another buffer if eww or another
+    ;; internal browser is used, but the remainder of the functions needs to
+    ;; run in the elfeed buffer.
+    (with-current-buffer buffer
+      (mapc #'elfeed-search-update-entry entries)
+      (unless (or elfeed-search-remain-on-entry (use-region-p))
+        (forward-line)))))
 
 
 
