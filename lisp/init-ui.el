@@ -115,8 +115,10 @@ set of themes to either dark or light variants."
   ;; 暗色主题适当降低透明度，看起来更好看。不同的主题适合不同的透明度。
   (let ((theme (format "%s" custom-enabled-themes)))
     (cond
-     ((string-match-p (rx (or "modus-" "ef-")) theme)
+     ((string-match-p "modus-" theme)
       (modify-frame-parameters nil `((alpha . 80))))
+     ((string-match-p "ef-" theme)
+      (modify-frame-parameters nil `((alpha . 92))))
      ((string-match-p "doric-" theme)
       (modify-frame-parameters nil `((alpha . 95)))))))
 
