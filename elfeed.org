@@ -363,6 +363,15 @@ Checklist:
 *** [[https://elliot00.com/rss][编码与禅]]                                                                    :emacs:
 *** [[https://caa-ins.org/feed][网络社会研究所]]
 *** [[https://guozh.net/feed/][老郭种树]]
+*** [[https://kagi.com/api/v1/smallweb/feed][Kagi Small Web]]
+*** [[https://susam.net/feed.xml][Susam Pal]]
+:PROPERTIES:
+:DESCRIPTION: 喜欢作者那篇 Writing First, Tooling Second，讲述了尽管先写点内容，先不用在意工具
+:END:
+*** [[https://www.marginalia.nu/log/index.xml][Weblog on marginalia.nu]]
+:PROPERTIES:
+:DESCRIPTION: 作者创建了 https://marginalia-search.com/ 搜索引擎，一些关于 AI、写文章的观点还不错，例如写文章应该尽早揭示主题、AI 是无聊的
+:END:
 ** Z5:Pond                                                                      :z5:
 池塘是最后一个分区：这里的文章会沉到底层，进入我的“待读”堆。
 其包含的订阅源是那些我偶尔才想粗略浏览的。
@@ -386,6 +395,5 @@ Checklist:
 *** [[https://ww0cj.radio/feed/][WW0CJ.radio]]
 *** [[https://blu30rion.wordpress.com/feed/][Your friendly neighborhood Blu]]
 ** Z6:Undefined                                                                 :z6:
-
 * 设计有趣的博客
 - [[https://licoricewhipit.tumblr.com/rss][Black Licorice]]
