@@ -21,6 +21,15 @@
 
 
 
+;;; Proxy
+
+(setq url-using-proxy "http://127.0.0.1:20172")
+(setq url-proxy-services
+      '(("http" . "127.0.0.1:20172")
+        ("https" . "127.0.0.1:20172")))
+
+
+
 (use-package webjump
   :defer nil
   :config
