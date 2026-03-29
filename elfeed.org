@@ -75,6 +75,7 @@ Checklist:
 *** [[https://www.linggandianbo.com/rss/][灵感电波]]                                                                    :weekly:newsletter:
 *** [[https://z.arlmy.me/atom.xml][素生]]                  :daily:book:quote:
 *** [[https://ro3or.com/index.xml][鹅玉]]
+*** [[https://blog.prayhand13013.top/rss.xml][Tomoe Mami]]            :emacs:
 ** Z3:Orchard                                                                   :z3:
 果园比后院更大，也生长得更加狂野。
 它包含我刚刚发现并种在这里的博客，因为我想了解它们。
