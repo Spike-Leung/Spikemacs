@@ -216,6 +216,10 @@ Checklist:
 *** [[https://innei.in/feed][静かな森]]
 *** [[https://www.gaotianchi.com/feed.xml][高天驰]]
 *** [[https://blog.youxu.info/feed.xml][徐宥 (Eric Xu)]]
+*** [[https://samsharp.bearblog.dev/feed/][sam's internet house]]
+:PROPERTIES:
+:DESCRIPTION: 有不少关于音乐的文章，喜欢那篇 i want to eat the music
+:END:
 ** Z4:Pasture                                                                   :z4:
 牧场比果园还要大，但密度较低。
 它包含那些我偶尔想略读的订阅源。
