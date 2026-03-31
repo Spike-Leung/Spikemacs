@@ -64,5 +64,16 @@
 (use-package git-link)
 
 
+
+;; 临时规避 https://github.com/califio/publications/blob/main/MADBugs/vim-vs-emacs-vs-claude/Emacs.md
+;; 如果后续有 patch 可以移除
+;; 依然需要小心检查 .git/config
+(use-package vc
+  :ensure nil
+  :config
+  (remove-hook 'find-file-hook #'vc-refresh-state))
+
+
+
 (provide 'init-git)
 ;;; init-git.el ends here
