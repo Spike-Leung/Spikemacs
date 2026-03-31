@@ -159,7 +159,9 @@ there is no current file, eval the current buffer."
 (defun spike-leung/maybe-set-elpa-elisp-readonly ()
   "If this elisp appears in elpa related folders, then disallow editing."
   (when (and (buffer-file-name)
-             (string-match-p ".emacs.d/elpa" (buffer-file-name)))
+             (or
+              (string-match-p ".emacs.d/elpa" (buffer-file-name))
+              (string-match-p "/Applications/Emacs.app/Contents/Resources/" (buffer-file-name))))
     (setq buffer-read-only t)
     (view-mode 1)))
 
