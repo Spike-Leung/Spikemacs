@@ -1,14 +1,20 @@
 ;;; init-elpa.el --- Settings and helpers for package.el -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-(require 'package)
+
 
+
+(require 'package)
+
+
+
 ;;; Install into separate package dirs for each Emacs version, to prevent bytecode incompatibility
 (setq package-user-dir
       (expand-file-name (format "elpa-%s.%s" emacs-major-version emacs-minor-version)
                         user-emacs-directory))
 
 
+
 ;;; Standard package repositories
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -25,9 +31,10 @@
 (package-initialize)
 
 ;; 让 use-package 默认开启 :defer t
-(setq
- use-package-always-defer t
- use-package-always-ensure t)
+(setq use-package-always-defer t
+      use-package-always-ensure t)
+
+
 
 (provide 'init-elpa)
 ;;; init-elpa.el ends here
