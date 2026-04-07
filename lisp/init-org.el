@@ -286,14 +286,19 @@ With prefix, don't confirm text."
            (delete-region (region-beginning) (region-end))
            (insert (org-link-make-string clipboard-url region-content)))
           ((and clipboard-url (not point-in-link))
+           (message "Fetching URL title...")
            (insert (org-link-make-string
                     clipboard-url
-                    (let ((title (with-current-buffer (plz 'get clipboard-url :timeout 15 :as 'buffer)
-                                   (dom-text (car
-                                              (dom-by-tag (libxml-parse-html-region
-                                                           (point-min)
-                                                           (point-max))
-                                                          'title))))))
+                    (let* ((response (plz 'get clipboard-url :timeout 15 :as 'buffer))
+                           (title (with-current-buffer response
+                                    (dom-text (car
+                                               (dom-by-tag (libxml-parse-html-region
+                                                            (point-min)
+                                                            (point-max))
+                                                           'title))))))
+
+                      ;; debug response
+                      ;; (with-current-buffer response (write-region (point-min) (point-max) "~/Downloads/temp"))
                       (cond
                        ((string-match "github.com" clipboard-url)
                         (setq title (replace-regexp-in-string (rx "GitHub - " (group (* anychar)) ": " (* anychar ) " · GitHub") "\\1" title)))
