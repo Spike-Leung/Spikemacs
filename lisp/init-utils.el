@@ -36,6 +36,7 @@
         (rename-buffer new-name)))))
 
 
+
 ;; Browse current HTML file
 
 (defun browse-current-file ()
@@ -46,6 +47,13 @@
              (tramp-tramp-file-p file-name))
         (error "Cannot open tramp file")
       (browse-url (concat "file://" file-name)))))
+
+
+
+(use-package plz
+  :commands (plz plz-get plz-post plz-put plz-delete))
+
+
 
 (provide 'init-utils)
 ;;; init-utils.el ends here

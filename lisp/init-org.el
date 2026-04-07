@@ -275,6 +275,7 @@
   "Like `org-insert-link' but with personal dwim preferences.
 With prefix, don't confirm text."
   (interactive "P")
+  (require 'plz)
   (let* ((point-in-link (org-in-regexp org-link-any-re 1))
          (clipboard-url (when (string-match-p "^http" (current-kill 0))
                           (current-kill 0)))
@@ -287,12 +288,19 @@ With prefix, don't confirm text."
           ((and clipboard-url (not point-in-link))
            (insert (org-link-make-string
                     clipboard-url
-                    (let ((title (with-current-buffer (url-retrieve-synchronously clipboard-url)
+                    (let ((title (with-current-buffer (plz 'get clipboard-url :timeout 15 :as 'buffer)
                                    (dom-text (car
                                               (dom-by-tag (libxml-parse-html-region
                                                            (point-min)
                                                            (point-max))
                                                           'title))))))
+                      (cond
+                       ((string-match "github.com" clipboard-url)
+                        (setq title (replace-regexp-in-string (rx "GitHub - " (group (* anychar)) ": " (* anychar ) " · GitHub") "\\1" title)))
+                       ((string-match "emacs-china.org" clipboard-url)
+                        (setq title (replace-regexp-in-string (rx (group (* anychar)) "- " (* anychar) " - Emacs China") "\\1" title)))
+                       ((string-match "bilibili.com" clipboard-url)
+                        (setq title (replace-regexp-in-string (rx (group (* anychar)) "_哔哩哔哩_bilibili") "\\1" title))))
                       (if prefix
                           title
                         (read-string "title: " title))))))
