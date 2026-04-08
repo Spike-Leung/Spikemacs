@@ -34,8 +34,6 @@
 
 (use-package gptel
   :ensure t
-  :custom
-  (gptel-proxy "http://localhost:20172")
   :config
   (setq gptel-model   openrouter-default-model
         gptel-default-mode 'org-mode
