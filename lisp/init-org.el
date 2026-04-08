@@ -269,7 +269,6 @@
 ;; https://www.youtube.com/watch?v=be8TC-i-NpE&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&index=40&t=111s
 ;; https://koenig-haunstetten.de/2019/01/06/changes-to-my-orgmode-system/
 ;; https://koenig-haunstetten.de/2018/02/17/improving-my-orgmode-workflow/
-
 ;; see: https://github.com/xenodium/dotsies/blob/af52e765d853b45096b33d26498dbecf08b843a1/emacs/features/fe-org.el#L234
 (defun ar/org-insert-link-dwim (prefix)
   "Like `org-insert-link' but with personal dwim preferences.
@@ -287,30 +286,46 @@ With prefix, don't confirm text."
            (insert (org-link-make-string clipboard-url region-content)))
           ((and clipboard-url (not point-in-link))
            (message "Fetching URL title...")
+           (setq clipboard-url (spike-leung/clean-param-from-url clipboard-url))
            (insert (org-link-make-string
                     clipboard-url
-                    (let* ((response (plz 'get clipboard-url :timeout 15 :as 'buffer))
-                           (title (with-current-buffer response
-                                    (dom-text (car
-                                               (dom-by-tag (libxml-parse-html-region
-                                                            (point-min)
-                                                            (point-max))
-                                                           'title))))))
-
-                      ;; debug response
-                      ;; (with-current-buffer response (write-region (point-min) (point-max) "~/Downloads/temp"))
-                      (cond
-                       ((string-match "github.com" clipboard-url)
-                        (setq title (replace-regexp-in-string (rx "GitHub - " (group (* anychar)) ": " (* anychar ) " · GitHub") "\\1" title)))
-                       ((string-match "emacs-china.org" clipboard-url)
-                        (setq title (replace-regexp-in-string (rx (group (* anychar)) "- " (* anychar) " - Emacs China") "\\1" title)))
-                       ((string-match "bilibili.com" clipboard-url)
-                        (setq title (replace-regexp-in-string (rx (group (* anychar)) "_哔哩哔哩_bilibili") "\\1" title))))
+                    (let ((title (spike-leung/parse-link-title-by-url clipboard-url)))
                       (if prefix
                           title
                         (read-string "title: " title))))))
           (t
            (call-interactively 'org-insert-link)))))
+
+(defun spike-leung/clean-param-from-url (url)
+  "Clean no used param from URL."
+  (cond
+   ((string-match "bilibili.com" url)
+    (replace-regexp-in-string
+     (rx (group (* anychar) "/video/" (* anychar) "/") (* anychar)) "\\1" url))
+   (t url)))
+
+(defun spike-leung/parse-link-title-by-url (url)
+  "Parse TITLE by URL."
+  (let* ((response (plz 'get url :timeout 15 :as 'buffer))
+         (title (with-current-buffer response
+                  (dom-text (car (dom-by-tag (libxml-parse-html-region
+                                              (point-min)
+                                              (point-max))
+                                             'title))))))
+    ;; debug response
+    ;; (with-current-buffer response (write-region (point-min) (point-max) "~/Downloads/temp"))
+    (cond
+     ((string-match "github.com" url)
+      (replace-regexp-in-string
+       (rx "GitHub - " (group (* anychar)) ": " (* anychar ) " · GitHub")
+       "\\1" title))
+     ((string-match "emacs-china.org" url)
+      (replace-regexp-in-string
+       (rx (group (* anychar)) "- " (* anychar) " - Emacs China") "\\1" title))
+     ((string-match "bilibili.com" url)
+      (replace-regexp-in-string
+       (rx (group (* anychar)) "_哔哩哔哩_bilibili") "\\1" title))
+     (t title))))
 
 
 
