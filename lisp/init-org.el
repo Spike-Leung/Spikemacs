@@ -302,6 +302,9 @@ With prefix, don't confirm text."
    ((string-match "bilibili.com" url)
     (replace-regexp-in-string
      (rx (group (* anychar) "/video/" (* anychar) "/") (* anychar)) "\\1" url))
+   ((string-match "xiaoyuzhoufm.com" url)
+    (replace-regexp-in-string
+     (rx (group (* anychar)) "?s=" (* anychar)) "\\1" url))
    (t url)))
 
 (defun spike-leung/parse-link-title-by-url (url)
@@ -325,6 +328,9 @@ With prefix, don't confirm text."
      ((string-match "bilibili.com" url)
       (replace-regexp-in-string
        (rx (group (* anychar)) "_哔哩哔哩_bilibili") "\\1" title))
+     ((string-match "xiaoyuzhoufm.com" url)
+      (replace-regexp-in-string
+       (rx (group (* anychar)) " - " (* anychar) " - " (* anychar)) "\\1" title))
      (t title))))
 
 
