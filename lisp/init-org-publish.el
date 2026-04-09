@@ -341,7 +341,7 @@ Return output file name."
            :publishing-directory ,spike-leung/org-publish-default-publishing-directory
            :publishing-function spike-leung/org-publish-org)
 
-          ("sitemap"
+          ("index"
            :base-directory "~/git/taxodium/posts"
            :base-extension "org"
            :include ("index.org")
@@ -360,7 +360,7 @@ Return output file name."
           ;; copy static fisrt
           ("posts" :components ("orgfiles" "origin-orgfiles"))
           ("white-hole" :components ("black-hole" "origin-orgfiles"))
-          ("all" :components ("orgfiles" "black-hole" "sitemap" "origin-orgfiles")))))
+          ("all" :components ("orgfiles" "black-hole" "index" "origin-orgfiles")))))
 
 (spike-leung/setup-org-publish-project-alist)
 
