@@ -320,7 +320,7 @@ With prefix, don't confirm text."
     (cond
      ((string-match "github.com" url)
       (replace-regexp-in-string
-       (rx "GitHub - " (group (* anychar)) ": " (* anychar ) " · GitHub")
+       (rx "GitHub - " (group (* anychar)) (? ": ") (* anychar ) " · GitHub")
        "\\1" title))
      ((string-match "emacs-china.org" url)
       (replace-regexp-in-string
