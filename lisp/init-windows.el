@@ -50,5 +50,12 @@
 
 
 
+;; s-n 绑定到了 make-frame，我很少用到 make-frame，解除绑定，避免误触
+
+(unbind-key "s-n" 'global-map)
+(unbind-key "s-n" 'help-quick-use-map)
+
+
+
 (provide 'init-windows)
 ;;; init-windows.el ends here
