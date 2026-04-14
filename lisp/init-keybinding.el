@@ -90,10 +90,10 @@
       ("h" "hide unmark" mc-hide-unmatched-lines-mode :transient t)]
      ["unmark"
       ("un" "unmark next" mc/unmark-next-like-this :transient t)
-      ("up" "unmark next" mc/unmark-previous-like-this :transient t)]
+      ("up" "unmark prev" mc/unmark-previous-like-this :transient t)]
      ["skip"
       ("sn" "skip next" mc/skip-to-next-like-this :transient t)
-      ("sp" "skip next" mc/skip-to-previous-like-this :transient t)]])
+      ("sp" "skip prev" mc/skip-to-previous-like-this :transient t)]])
 
   (transient-define-prefix spike-leung/transient ()
     "A transient to list all my frequently used command."
