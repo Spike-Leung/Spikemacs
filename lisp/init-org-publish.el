@@ -29,11 +29,10 @@
 <meta name=\"color-scheme\" content=\"light dark\" />
 <script src=\"/js/color-scheme.js\"></script>
 <link rel=\"preload\" href=\"/images/background/xv.png\" as=\"image\" type=\"image/png\" />
-<link rel=\"stylesheet\" href=\"/fonts/LXGWWenKai/LXGWWenKai-Regular/result.css\" />
-<link rel=\"stylesheet\" href=\"/fonts/LXGWWenKai/LXGWWenKai-Medium/result.css\" />
-<link rel=\"stylesheet\" href=\"/styles/style.css\" type=\"text/css\"/>
+<link rel=\"stylesheet\" href=\"/styles/main.css\" type=\"text/css\"/>
 <link rel=\"icon\" href=\"/favicon.ico\" type=\"image/x-icon\">
 <link rel=\"webmention\" href=\"https://webmention.io/taxodium.ink/webmention\" />
+<link href=\"https://github.com/Spike-Leung\" rel=\"me\">
 <link rel=\"alternate\" type=\"application/atom+xml\" href=\"rss.xml\" title=\"Feed for all blogs.\"/>
 <link rel=\"alternate\" type=\"application/atom+xml\" href=\"album.xml\" title=\"Feed for all album.\"/>
 <link rel=\"alternate\" type=\"application/atom+xml\" href=\"emacs.xml\" title=\"Feed for all Emacs.\"/>
@@ -45,8 +44,7 @@
 
 (defconst spike-leung/html-head-sitemap (concat
                                          spike-leung/html-head
-                                         "<link rel=\"stylesheet\" href=\"/styles/sitemap.css\" type=\"text/css\"/>"
-                                         "<link href=\"https://github.com/Spike-Leung\" rel=\"me\">")
+                                         "<link rel=\"stylesheet\" href=\"/styles/index.css\" type=\"text/css\"/>")
   "`:html-head' for `org-publish'.Customize for index.org.")
 
 
@@ -59,7 +57,6 @@
     <li><a href=\"/index.html\">主页</a></li>
     <li><a href=\"/subscribe.html\">订阅</a></li>
     <li><a href=\"/search.html\">搜索</a></li>
-    <!-- <li><a href=\"/inside-black-hole.html\">黑洞里</a></li> -->
   </ul>
   <!--
   <span class=\"snow-toggle-container\">
@@ -77,13 +74,9 @@
 "
   "`:html-preamble' for `org-publish'.")
 
-(defconst spike-leung/html-preamble-content (concat "
-  <ul class=\"a11y-nav\">
-    <li>
-      <a id=\"skip-content\" href=\"#content\">Skip to main content</a>
-    </li>
-  </ul>
-" spike-leung/html-preamble)
+(defconst spike-leung/html-preamble-content (concat
+                                             "<a id=\"skip-content\" href=\"#content\" class=\"a11y-nav\">Skip to main content</a>"
+                                             spike-leung/html-preamble)
   "`:html-preamble' for `org-publish'.Customize for content." )
 
 
@@ -91,9 +84,9 @@
 ;;; html-postamble
 
 (defconst spike-leung/html-postamble "
-<details class=\"webmention-container js-required\">
-<summary>Webmentions <span class=\"webmention-count\">(加载中...)</span></summary>
-<p class=\"webmention-tip\">
+<details class=\"webmention js-required\">
+<summary>Webmentions <span class=\"webmention__count\">(加载中...)</span></summary>
+<p class=\"webmention__tip\">
 如果你想回应这篇文章，可以在你的文章或社交媒体帖子中链接这篇文章，然后提交你的 URL，你的回应随后会显示在此页面上。
 (<a href=\"https://taxodium.ink/add-webmention-to-blog.html\">关于 Webmention</a>)
 </p>
@@ -104,7 +97,7 @@
 <input type=\"submit\" class=\"button\" value=\"提交\"/>
 </form>
 <hr></hr>
-<ul class=\"webmention-content-list\"></ul>
+<ul class=\"webmention__list\"></ul>
 </details>
 <footer>
 <p>感谢你的阅读！(´｡• ᵕ •｡`) ♡</p>
@@ -119,12 +112,11 @@
 <a href=\"https://taxodium.ink\" class=\"u-url p-name\">Spike Leung</a>
 <a href=\"mailto:l-yanlei@hotmail.com\" class=\"u-email\">Spike Leung</a>
 </div>
-<script src=\"/js/sidenote.js\" defer></script>
 <script src=\"/js/code-enhanced.js\" defer></script>
 <script src=\"/js/code-highlighted.js\" defer></script>
 <script src=\"/js/heading-enhanced.js\" defer></script>
-<script src=\"/js/toc.js\" defer></script>
 <script src=\"/js/backtop.js\" defer></script>
+<script src=\"/js/sidenote.js\" defer></script>
 <script src=\"/js/purify.min.js\" defer></script>
 <script src=\"/js/webmention.js\" defer></script>
 <!--
@@ -351,7 +343,7 @@ Return output file name."
           ;; copy static fisrt
           ("posts" :components ("orgfiles" "origin-orgfiles"))
           ("white-hole" :components ("black-hole" "origin-orgfiles"))
-          ("all" :components ("orgfiles" "black-hole" "index" "origin-orgfiles")))))
+          ("all" :components ("orgfiles" "black-hole" "draft" "index" "origin-orgfiles")))))
 
 (spike-leung/setup-org-publish-project-alist)
 
