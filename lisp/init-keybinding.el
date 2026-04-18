@@ -3,11 +3,12 @@
 ;;; Code:
 
 
+
 (defun spike-leung/gptel-rewrite-preset ()
   "Pick a preset from `gptel--known-presets' and execute `gptel--suffix-rewrite'."
   (interactive)
   ;; gptel--suffix-rewrite 依赖 gptel-rewrite 的加载
-  (require 'gptel-rewrite)
+  (require 'gptel)
   (unless (use-region-p) (user-error "Requires a selected region"))
   (let* ((preset-name
           ;; 选择 preset
