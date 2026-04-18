@@ -33,16 +33,51 @@
 (use-package webjump
   :defer nil
   :config
-  (setq webjump-sites '(("Kagi (enable quick search with '?')" . [simple-query "kagi.com" "kagi.com/search?q=" ""])
-                        ("Kagi Translate Text" . [simple-query "translate.kagi.com" "translate.kagi.com/?from=auto&to=zh_cn&text=" ""])
-                        ("Kagi Translate Page" . [simple-query "translate.kagi.com" "translate.kagi.com/zh_cn/" "?kt_view=both_vertical?kt_view=both_vertical"])
-                        ("Kagi LLM" . [simple-query "kagi.com" "kagi.com/assistant?q=" "&profile=kimi-k2.5-reasoning&internet=on"])
-                        ("Kagi Summary" . [simple-query "kagi.com" "kagi.com/summarizer?url=" "&target_language=ZH&summary=takeaway"])
-                        ("Wikipedia" . [simple-query "wikipedia.org" "wikipedia.org/wiki/" ""])
-                        ("Kagi(site:github.com)" . [simple-query "kagi.com" "kagi.com/search?q=site:github.com+" ""])
-                        ("Album" . [simple-query "kagi.com" "kagi.com/images?q=" "&size=large"])
-                        ("MDN" . [simple-query "developer.mozilla.org" "developer.mozilla.org/en-US/search?q=" ""])
-                        ("Haici" . [simple-query "dict.cn" "dict.cn/search?q=" ""])))
+  (setq webjump-sites `(("Kagi (enable quick search with '?')" . [simple-query
+                                                                  "kagi.com"
+                                                                  "kagi.com/search?q="
+                                                                  ""])
+                        ;; see: https://help.kagi.com/kagi/translate/url-parameters.html
+                        ("Kagi Translate Text" . [simple-query
+                                                  "translate.kagi.com"
+                                                  "translate.kagi.com/?text="
+                                                  "&from=auto&to=zh_cn&quality=best"])
+                        ("Kagi Translate Lyrics" . [simple-query
+                                                    "translate.kagi.com"
+                                                    "translate.kagi.com/?text="
+                                                    ,(concat "&from=auto&to=zh_cn&quality=best&context=" (webjump-url-encode "这是一首歌的歌词"))])
+                        ("Kagi Translate Page" . [simple-query
+                                                  "translate.kagi.com"
+                                                  "translate.kagi.com/zh_cn/"
+                                                  "?kt_view=both_vertical?kt_view=both_vertical"])
+                        ("Kagi LLM" . [simple-query
+                                       "kagi.com"
+                                       "kagi.com/assistant?q="
+                                       "&profile=kimi-k2.5-reasoning&internet=on"])
+                        ("Kagi Summary" . [simple-query
+                                           "kagi.com"
+                                           "kagi.com/summarizer?url="
+                                           "&target_language=ZH&summary=takeaway"])
+                        ("Wikipedia" . [simple-query
+                                        "wikipedia.org"
+                                        "wikipedia.org/wiki/"
+                                        ""])
+                        ("Kagi(site:github.com)" . [simple-query
+                                                    "kagi.com"
+                                                    "kagi.com/search?q=site:github.com+"
+                                                    ""])
+                        ("Album" . [simple-query
+                                    "kagi.com"
+                                    "kagi.com/images?q="
+                                    "&size=large"])
+                        ("MDN" . [simple-query
+                                  "developer.mozilla.org"
+                                  "developer.mozilla.org/en-US/search?q="
+                                  ""])
+                        ("Haici" . [simple-query
+                                    "dict.cn"
+                                    "dict.cn/search?q="
+                                    ""])))
 
   (defun spike-leung/webjump-symbol-at-point (target)
     "获取光标下的 symbol 并通过 webjump 搜索。TARGET 是 `embark-act' 的对象。"
