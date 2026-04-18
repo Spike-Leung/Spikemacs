@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: lyrics
+# key: l
+# --
+
+#+begin_details
+#+html: <summary>歌词</summary>
+
+#+begin_verse
+$0
+#+end_verse
+#+end_details
