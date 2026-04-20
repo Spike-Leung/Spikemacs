@@ -146,6 +146,7 @@
 
 (defconst spike-leung/html-postamble-sitemap "
 <script src=\"/js/backtop.js\" defer></script>
+<script src=\"/js/heading-enhanced.js\" defer></script>
 <!--
 <script src=\"/js/snow-fall.js\" defer type=\"module\"></script>
 <snow-fall></snow-fall>
