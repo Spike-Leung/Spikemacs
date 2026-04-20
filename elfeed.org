@@ -27,11 +27,12 @@ Checklist:
 :END:
 *** [[https://simonwillison.net/atom/everything/][Simon Willison]]
 *** [[https://www.sanityinc.com/feed.xml][Steve Purcell]]                                                     :emacs:
+*** [[https://leehenry.top/rss.xml][伏枥之间]]
 *** [[https://archive.casouri.cc/rock/day/atom.xml][余日摇滚]]                                                                    :music:
 *** [[https://www.geedea.pro/index.xml][极客死亡计划]]                                                                :weekly:
+*** [[https://blog.southfox.me/feed.xml][狐狸反走矣]]
 *** [[https://ameow.xyz/feed.xml][猫鱼周刊]]                                                                    :weekly:
 *** [[http://www.ruanyifeng.com/blog/atom.xml][阮一峰的网络日志]]                                                            :weekly:
-*** [[https://blog.southfox.me/feed.xml][狐狸反走矣]]
 ** Z2:Backyard                                                                  :z2:
 在后院里，我和那些我喜欢的博客待在一起。
 我喜欢他们的大多数帖子，但并不觉得有必要立刻把所有东西都读完。
@@ -42,40 +43,21 @@ Checklist:
 *** [[https://manateelazycat.github.io/feed.xml][Andy Stewart]]
 *** [[https://blogblog.club/blog/rss.xml][BlogBlog 同樂會]]
 *** [[https://cbvivi.today/feed.xml][cbvivi]]
-*** [[https://feedpress.me/cssweekly][CSS Weekly]]               :css:weekly:
-*** [[https://blog.cosine.ren/rss.xml][FE Bits 前端周周谈]]                                          :frontend:z1:
-*** [[https://cprss.s3.amazonaws.com/frontendfoc.us.xml][Frontend Focus]] :weekly:
-*** [[http://html5doctor.com/feed/][HTML5 doctor]]          :weekly:frontend:
-*** [[https://cprss.s3.amazonaws.com/javascriptweekly.com.xml][JavaScript Weekly]] :javascript:weekly:
 *** [[https://takeonrules.com/index.xml][Jeremy Friesen]]                                                              :emacs:writing:
 *** [[https://www.joshwcomeau.com/rss.xml][Josh Comeau]]                                                          :css:web:frontend:
-*** [[https://kill-the-newsletter.com/feeds/3hl5jx56nh55vdvwhoh1.xml][kill-the-newsletter@taxodium]]
-
-处理那些没有 feed 的网站。
-
-- email: 3hl5jx56nh55vdvwhoh1@kill-the-newsletter.com
-- rss url: https://kill-the-newsletter.com/feeds/3hl5jx56nh55vdvwhoh1.xml
-
-- https://bytes.dev/
-
-*** [[https://cprss.s3.amazonaws.com/nodeweekly.com.xml][Node Weekly]] :javascript:weekly:
 *** [[https://www.owenyoung.com/atom.xml][owenyoung]]
 *** [[https://polebug.github.io/atom.xml][Polebug]]
 *** [[https://www.pseudoyu.com/feed.xml][Pseudoyu]]
 *** [[https://sachachua.com/blog/feed/index.xml][Sacha Chua]]         :emacs:
 *** [[https://seths.blog/feed/][SETH'S BLOG]]
 *** [[https://blog.solazy.me/feed/][So!azy]]                                                                      :daily:
-*** [[https://www.stefanjudis.com/rss.xml][Stefan Judis]]   :frontend:weekly:
 *** [[https://johnrakestraw.com/index.xml][thinking out loud]]                                                           :writing:emacs:
-*** [[https://leehenry.top/rss.xml][伏枥之间]]
+*** [[https://blog.prayhand13013.top/rss.xml][Tomoe Mami]]            :emacs:
 *** [[https://chlo.is/feed.atom][园子里的日光]]
 *** [[https://blog.mfwt.top/index.php/feed/][枫林灯语]]              :无线电:
-*** [[https://lhasa.icu/rss.xml][游钓四方]]
-*** [[https://weekly.tw93.fun/rss.xml][潮流周刊]]
 *** [[https://www.linggandianbo.com/rss/][灵感电波]]                                                                    :weekly:newsletter:
 *** [[https://z.arlmy.me/atom.xml][素生]]                  :daily:book:quote:
 *** [[https://ro3or.com/index.xml][鹅玉]]
-*** [[https://blog.prayhand13013.top/rss.xml][Tomoe Mami]]            :emacs:
 ** Z3:Orchard                                                                   :z3:
 果园比后院更大，也生长得更加狂野。
 它包含我刚刚发现并种在这里的博客，因为我想了解它们。
@@ -220,6 +202,7 @@ Checklist:
 :PROPERTIES:
 :DESCRIPTION: 有不少关于音乐的文章，喜欢那篇 i want to eat the music
 :END:
+*** [[https://lhasa.icu/rss.xml][游钓四方]]
 ** Z4:Pasture                                                                   :z4:
 牧场比果园还要大，但密度较低。
 它包含那些我偶尔想略读的订阅源。
@@ -400,5 +383,23 @@ Checklist:
 *** [[https://ww0cj.radio/feed/][WW0CJ.radio]]
 *** [[https://blu30rion.wordpress.com/feed/][Your friendly neighborhood Blu]]
 ** Z6:Undefined                                                                 :z6:
+** Weekly                                                            :weekly:
+*** [[https://feedpress.me/cssweekly][CSS Weekly]]                                                   :css:weekly:
+*** [[https://blog.cosine.ren/rss.xml][FE Bits 前端周周谈]]                                          :frontend:z1:
+*** [[https://cprss.s3.amazonaws.com/frontendfoc.us.xml][Frontend Focus]]                                                   :weekly:
+*** [[http://html5doctor.com/feed/][HTML5 doctor]]                                            :weekly:frontend:
+*** [[https://cprss.s3.amazonaws.com/javascriptweekly.com.xml][JavaScript Weekly]]                                     :javascript:weekly:
+*** [[https://kill-the-newsletter.com/feeds/3hl5jx56nh55vdvwhoh1.xml][kill-the-newsletter@taxodium]]
+
+处理那些没有 feed 的网站。
+
+- email: 3hl5jx56nh55vdvwhoh1@kill-the-newsletter.com
+- rss url: https://kill-the-newsletter.com/feeds/3hl5jx56nh55vdvwhoh1.xml
+
+- https://bytes.dev/
+
+*** [[https://cprss.s3.amazonaws.com/nodeweekly.com.xml][Node Weekly]]                                           :javascript:weekly:
+*** [[https://weekly.tw93.fun/rss.xml][潮流周刊]]
+*** [[https://www.stefanjudis.com/rss.xml][Stefan Judis]]                                            :frontend:weekly:
 * 设计有趣的博客
 - [[https://licoricewhipit.tumblr.com/rss][Black Licorice]]
