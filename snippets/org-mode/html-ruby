@@ -3,4 +3,4 @@
 # key: ruby
 # --
 
-@@html:<ruby>${1:原文}<rp></rp><rt lang="${2:$$(yas-choose-value '("ja" "zh" "zh-Hant" "ko" "en"))}">${0:注音}</rt><rp></rp></ruby>@@
+@@html:<ruby>${1:原文}<rp>(</rp><rt lang="${2:$$(yas-choose-value '("ja" "zh" "zh-Hant" "ko" "en"))}">${0:注音}</rt><rp>)</rp></ruby>@@
