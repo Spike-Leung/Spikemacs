@@ -74,6 +74,17 @@
   (remove-hook 'find-file-hook #'vc-refresh-state))
 
 
+;;; ediff
+
+(use-package ediff
+  :ensure nil
+  :config
+  ;; Don't break out a separate frame for ediff
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain
+        ;; Horizontal splitting really ought to be the default, honestly.
+        ediff-split-window-function 'split-window-horizontally))
+
+
 
 (provide 'init-git)
 ;;; init-git.el ends here
