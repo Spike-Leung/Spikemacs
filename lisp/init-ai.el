@@ -10,24 +10,15 @@
 
 ;;; gptel
 
-(defconst openrouter-default-model 'google/gemini-3-flash-preview
+(defconst openrouter-default-model 'deepseek/deepseek-v4-flash
   "Default model for openrouter.")
 
 (defconst openrouter-models '(;; google
                               google/gemini-3-flash-preview
                               google/gemini-3.1-pro-preview
                               ;; deepseek
-                              deepseek/deepseek-v3.2
-                              deepseek/deepseek-v3.2-speciale
-                              deepseek/deepseek-r1-0528
-                              ;; anthropic
-                              anthropic/claude-haiku-4.5
-                              anthropic/claude-sonnet-4.5
-                              anthropic/claude-opus-4.5
-                              ;; openai
-                              openai/gpt-5.2
-                              openai/gpt-5-mini
-                              openai/gpt-5-nano
+                              deepseek/deepseek-v4-flash
+                              deepseek/deepseek-v4-pro
                               ;; kimi
                               moonshotai/kimi-k2.5)
   "Openrouter models.")
@@ -68,7 +59,7 @@
   (defmacro spike-leung/define-gptel-preset (name &rest args)
     `(gptel-make-preset ,name
        :backend "OpenRouter"
-       :model 'google/gemini-3-flash-preview
+       :model 'deepseek/deepseek-v4-flash
        ,@args))
 
   (spike-leung/define-gptel-preset 'quote-format
@@ -76,8 +67,8 @@
                                    :rewrite-message "按照以下要求，格式化内容:
 - 当存在英文和中文翻译，移除英文
 - 当存在中英文混合，中文和英文/数字之间需要保留一个空格
-- 当文本中包含破折号，例如 ——、--，需要将他们替换为 ⸺ ，注意，⸺  的前后需要保留一个空格
-- 文本中的引号替换为直角引号 「」、『』，如果引号里面还有引号，则采用 「『』」的嵌套形式
+- 当文本中包含破折号，例如——、--，需要将他们替换为⸺ ，注意，⸺的前后需要保留一个空格
+- 文本中的引号替换为直角引号「」、『』，如果引号里面还有引号，则采用「『』」的嵌套形式，符号前后不需要额外空格
 需要格式化内容：")
 
   (spike-leung/define-gptel-preset 'lyric-format
@@ -98,18 +89,6 @@
 
   (add-hook 'gptel-mode-hook 'auto-fill-mode)
   (add-hook 'gptel-mode-hook 'visual-line-mode))
-
-
-
-;; (customize-set-value 'gptel-magit-backend (gptel-make-openai "OpenRouter--no-reasoning"
-;;                                             :host "openrouter.ai"
-;;                                             :endpoint "/api/v1/chat/completions"
-;;                                             :stream t
-;;                                             :key (spike-leung/get-openrouter-api-key)
-;;                                             :request-params '(:reasoning (:effort "none"))
-;;                                             :models openrouter-models))
-;; (customize-set-value 'gptel-magit-model 'google/gemini-3-flash-preview)
-;; (add-hook 'magit-mode-hook #'gptel-magit-install)
 
 
 
