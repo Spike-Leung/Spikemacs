@@ -730,5 +730,16 @@ See `org-html-publish-to-html' for param PLIST,FILENAME,PUB-DIR."
 
 
 
+(defun spike-leung/preview-post ()
+  "Local Preview post, read `#+export_file_name' as URL."
+  (interactive)
+  (let ((path (save-excursion
+                (goto-char (point-min))
+                (when (re-search-forward "^#\\+export_file_name: \\(.*\\)$" nil t)
+                  (string-trim (match-string-no-properties 1))))))
+    (browse-url (concat "https://localhost:3000/" path ".html"))))
+
+
+
 (provide 'init-org-publish)
 ;;; init-org-publish.el ends here
