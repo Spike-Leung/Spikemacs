@@ -510,6 +510,8 @@ These elements's ID will be remove: figure,details,pre ..."
     (when (re-search-forward "^#\\+export_file_name:\\s-*\\(.+?\\)\\s-*$" nil t)
       (file-name-sans-extension (match-string 1)))))
 
+
+
 (defun spike-leung/determine-image-dir (base-dir export-name)
   "根据 EXPORT-NAME 决定图片目录。
 优先级：
@@ -552,7 +554,9 @@ images/album-1 → images/album/1 → images/album → images/"
          (image-file (read-file-name "Select image: " image-dir nil t))
          ;; 保持路径相对于 base-dir，确保子目录结构正确
          (relative-path (file-relative-name image-file base-dir)))
-    (insert (format "#+CAPTION: \n[[file:images/%s]]" relative-path))))
+    (insert (format "#+attr_html: :loading lazy \n#+CAPTION: \n[[file:images/%s]]" relative-path))))
+
+
 
 (defun spike-leung/insert-blog-video ()
   "从 blog 插入视频。
@@ -577,7 +581,7 @@ images/album-1 → images/album/1 → images/album → images/
     (insert (format "#+begin_export html
 <figure>
   <a href=\"%s\" target=\"_blank\">
-    <video autoplay loop muted playsinline>
+    <video autoplay loop muted playsinline loading=\"lazy\">
       <source src=\"%s\" type=\"%s\">
     </video>
   </a>
@@ -585,6 +589,8 @@ images/album-1 → images/album/1 → images/album → images/
 </figure>
 #+end_export"
                     web-path web-path mime-type))))
+
+
 
 (defun spike-leung/insert-album-href ()
   "Insert album wall href."
@@ -597,6 +603,8 @@ images/album-1 → images/album/1 → images/album → images/
           (goto-char (match-end 0))
           (insert (format "images/album/%s.webp" filename)))
       (message "No valid file link found on the next line."))))
+
+
 
 ;; thanks https://jiewawa.me/2024/03/blogging-with-denote-and-hugo/
 (defun spike-leung/sluggify-denote-title-as-export-file-name ()
@@ -618,6 +626,8 @@ Export File Name is returned by `denote-retrieve-title-value'."
 ;;           #'(lambda (backend)
 ;;               (insert "#+INCLUDE: \"./setup.org\"\n")))
 ;; (setq org-confirm-babel-evaluate nil) ; Don't ask permission for evaluating source blocks
+
+
 
 (defun spike-leung/process-next-html-src-block ()
   "Process the next HTML block from the current position, escape it, compress it.
@@ -659,6 +669,8 @@ Then generate a #+begin_export html block with an iframe, replacing any existing
 
             ;; Insert the new #+begin_export html block
             (insert (format "#+begin_export html\n<iframe style=\"width:100%%\" srcdoc=\"%s\"></iframe>\n#+end_export\n" srcdoc))))))))
+
+
 
 (defun spike-leung/denote-toggle-publish-draft ()
   "切换博客文章的状态，在 :published: 和 :draft:preview: 之间切换。
