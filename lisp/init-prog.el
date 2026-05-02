@@ -101,8 +101,8 @@
 ;; web-mode: https://web-mode.org/
 
 (use-package web-mode
-  :init (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-  :mode (("\\.html\\'" . web-mode)))
+  :init (add-to-list 'auto-mode-alist '("\\.html\\.jsx\\.tsx\\.vue\\'" . web-mode))
+  :mode (("\\.html\\.jsx\\.tsx\\.vue\\'" . web-mode)))
 
 
 
@@ -113,6 +113,8 @@
 ;;; JS / TS
 
 (use-package js2-mode)
+(use-package typescript-mode
+  :mode (("\\.ts\\'" . web-mode)))
 (use-package prettier-js)
 
 
