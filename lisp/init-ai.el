@@ -75,13 +75,18 @@
                                    :description "格式化歌词"
                                    :rewrite-message "格式化歌词，将原始歌词和中文翻译拆分成两部分。
 对于原文歌词，输出格式为：
+#+begin_details
+#+html: <summary>歌词</summary>
+
 #+begin_verse
 [原文歌词]
 #+end_verse
+#+end_details
 
 对于翻译，输出格式为：
 #+begin_details
 #+html: <summary>歌词大意</summary>
+
 #+begin_verse
 [翻译]
 #+end_verse
