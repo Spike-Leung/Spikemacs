@@ -114,7 +114,7 @@
 
 (use-package js2-mode)
 (use-package typescript-mode
-  :mode (("\\.ts\\'" . web-mode)))
+  :mode (("\\.ts\\'" . typescript-mode)))
 (use-package prettier-js)
 
 
