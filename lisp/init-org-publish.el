@@ -64,6 +64,12 @@
     <label for=\"snow-toggle\" class=\"snow-icon\"></label>
   </span>
   -->
+  <img src=\"/images/common/favicon/translate.kagi.com.ico\"
+id=\"kagi-translate\" class=\"js-required\"
+title=\"使用 Kagi Translate 翻译\"/ role=\"button\"
+tabindex=\"0\"
+alt=\"Translate with Kagi\"
+ >
   <select id=\"lightdark\" class=\"js-required\">
     <option value=\"auto\">Auto</option>
     <option value=\"light\">Light</option>
@@ -120,6 +126,7 @@
 <script src=\"/js/sidenote.js\" defer></script>
 <script src=\"/js/purify.min.js\" defer></script>
 <script src=\"/js/webmention.js\" defer></script>
+<script src=\"/js/translate.js\" defer></script>
 <!--
 <script src=\"/js/snow-fall.js\" defer type=\"module\"></script>
 <snow-fall></snow-fall>
@@ -147,8 +154,9 @@
 (defconst spike-leung/html-postamble-sitemap "
 <script src=\"/js/backtop.js\" defer></script>
 <script src=\"/js/heading-enhanced.js\" defer></script>
+<script src=\"/js/translate.js\" defer></script>
 <!--
-<script src=\"/js/snow-fall.js\" defer type=\"module\"></script>
+<script src=\"/js/snow-fall.js\" defer type=\"mopdule\"></script>
 <snow-fall></snow-fall>
 <div id=\"caravan\">
   <div style=\"animation-delay:-0.0s; left:0px;\" id=\"sleigh\"></div>
