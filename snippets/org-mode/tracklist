@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: track-list
+# key: tl
+# group: blog
+# --
+
+* TRACKLIST
+#+TOC: headlines 2 local
+
+TODO: Set ~toc:nil~ to ~#+options:~ .
