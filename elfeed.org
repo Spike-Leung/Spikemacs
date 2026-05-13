@@ -10,7 +10,7 @@ Checklist:
 - 内容是否正确
 
 *** [[https://taxodium.ink/rss.xml][taxodium]]
-*** [[https://webmention.io/api/mentions.html?token=qcwPCX61g9khbvZWp3U0qg][webmention.io]]                                                               :webmention:
+*** [[https://webmention.io/api/mentions.atom?token=qcwPCX61g9khbvZWp3U0qg][webmention.io]]                                                               :webmention:
 ** Z1:Porch                                                                     :z1:default:
 门廊是我邀请我最喜爱的作家的地方。
 我会阅读门廊群体的每一篇文章，即便起初标题看起来并不吸引人（他们几乎从不让我失望！）。
@@ -162,6 +162,7 @@ Checklist:
 *** [[https://1q43.blog/feed/][虹线]]
 *** [[https://ttio.cc/feed.xml][記緒漂流]]
 *** [[https://ioerr.github.io/index.xml][读写错误]]
+*** [[https://blog.giveanornot.com/index.xml][資工小廢物 - JN]]
 *** [[https://blog.ops-coffee.com/feed.xml][运维咖啡吧]]
 *** [[https://goldenriver.site/index.xml][金色河流]]
 *** [[https://blog.helenchong.omg.lol/zh/feed.xml][银河花园]]                                                                    :马来西亚:
@@ -299,6 +300,10 @@ Checklist:
 *** [[http://xahlee.info/emacs/emacs/blog.xml][Xah Emacs Blog]]                                                    :emacs:
 *** [[https://xenodium.com/rss.xml][xenodium]]                                                          :emacs:
 ** Weekly | News | Zine                                              :weekly:
+*** [[http://ozark.hendrix.edu/~yorgey/forest/005U/atom.xml][Brent A. Yorgey's Weeknotes]]
+:PROPERTIES:
+:DESCRIPTION: to my students
+:END:
 *** [[https://feedpress.me/cssweekly][CSS Weekly]]                                                   :css:weekly:
 *** [[https://www.densediscovery.com/feed/][Dense Discovery]]
 *** [[https://divergentrays.com/blog/blogfeed.xml][Divergent Rays]]                                                   :weekly:
