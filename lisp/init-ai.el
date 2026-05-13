@@ -63,6 +63,7 @@
        ,@args))
 
   (spike-leung/define-gptel-preset 'quote-format
+                                   :request-params '(:reasoning (:effort "none"))
                                    :description "格式化引用"
                                    :rewrite-message "按照以下要求，格式化内容:
 - 当存在英文和中文翻译，移除英文
@@ -72,6 +73,7 @@
 需要格式化内容：")
 
   (spike-leung/define-gptel-preset 'lyric-format
+                                   :request-params '(:reasoning (:effort "none"))
                                    :description "格式化歌词"
                                    :rewrite-message "格式化歌词，将原始歌词和中文翻译拆分成两部分。
 对于原文歌词，输出格式为：
