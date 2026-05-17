@@ -168,7 +168,6 @@ Checklist:
 *** [[https://blog.helenchong.omg.lol/zh/feed.xml][银河花园]]                                                                    :马来西亚:
 *** [[https://www.ctling.com/atom.xml][閒人筆記]]                                                                    :台湾:
 *** [[https://www.chenrui.com/feed.php][陈锐]]
-*** [[https://innei.in/feed][静かな森]]
 *** [[https://www.gaotianchi.com/feed.xml][高天驰]]
 ** Z4:Pasture                                                                   :z4:
 牧场比果园还要大，但密度较低。
