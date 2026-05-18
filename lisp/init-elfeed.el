@@ -12,6 +12,7 @@
 (use-package elfeed
   :custom
   (elfeed-search-filter "@3-months-ago +unread +default")
+  (elfeed-confirm-browse-url nil)
   :bind ((:map elfeed-search-mode-map
                ("t" . spike-leung/elfeed-toggle-unread)
                ("f" . spike-leung/consult-elfeed)
