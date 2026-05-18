@@ -138,7 +138,6 @@ Checklist:
 *** [[https://waitbutwhy.com/feed][Wait But Why]]
 *** [[https://weiwei.place/feed][Weiwei Xu]]
 *** [[https://blog.itswincer.com/atom.xml][Wincer's Blog]]
-*** [[https://yipai.me/feed][一派胡言]]
 *** [[https://keelii.com/][临池不辍]]
 *** [[https://jt26wzz.com/rss.xml][从不说安全词]]                                                                :code:
 *** [[https://luszy.com/home/feed/][冬天里的向日葵]]                                                              :life:
@@ -238,6 +237,7 @@ Checklist:
 *** [[https://jakelazaroff.com/rss.xml][jakelazaroff.com]]                                       :frontend:css:web:
 *** [[https://www.joshwcomeau.com/rss.xml][Josh Comeau]]                                            :css:web:frontend:
 *** [[https://lea.verou.me/feed.xml][Lea Verou]]                                                      :web:code:
+*** [[https://nik.digital/rss.xml][Niklas Gadermann]]
 *** [[https://overreacted.io/rss.xml][overreacted]]                                              :frontend:react:
 *** [[https://ryanmulligan.dev/feed.xml][Ryan Mulligan]]                                   :设计好看的博客:frontend:
 *** [[https://www.sarasoueidan.com/blog/index.xml][Sara Soueidan]]                                               :ui:frontend:
@@ -336,7 +336,6 @@ Checklist:
 *** [[https://www.ftium4.com/rss.xml][体验碎周报 - 龙爪槐守望者]]                                     :design:ux:
 *** [[https://echosoar.github.io/weekly/atom.xml][偷懒爱好者周刊]]                                                   :weekly:
 *** [[https://weekly.tw93.fun/rss.xml][潮流周刊]]
-*** [[https://blog.sakoamc.com/atom.xml][神仙鱼不吃鱼鱼]]
 *** [[https://caa-ins.org/feed][网络社会研究所]]
 * 设计有趣的博客
 - [[https://licoricewhipit.tumblr.com/rss][Black Licorice]]
