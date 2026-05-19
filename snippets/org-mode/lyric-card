@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: lyric card
+# key: lc
+# --
+
+#+attr_html: :class lyric-card
+#+begin_div
+#+attr_html: :alt ${2:alt-text}
+${1:cover}
+
+#+attr_html: :style color: oklch(.9 0 0 / .6); background: linear-gradient(to left, transparent, #494f7f);
+#+begin_verse
+${0:lyrics}
+#+end_verse
+#+end_div
