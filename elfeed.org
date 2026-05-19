@@ -168,6 +168,7 @@ Checklist:
 *** [[https://www.ctling.com/atom.xml][閒人筆記]]                                                                    :台湾:
 *** [[https://www.chenrui.com/feed.php][陈锐]]
 *** [[https://www.gaotianchi.com/feed.xml][高天驰]]
+*** [[https://wenshan.home.blog/feed/][文山随笔]]                                                     :emacschina:
 ** Z4:Pasture                                                                   :z4:
 牧场比果园还要大，但密度较低。
 它包含那些我偶尔想略读的订阅源。
