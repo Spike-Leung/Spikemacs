@@ -11,8 +11,9 @@
 
 (use-package elfeed
   :custom
-  (elfeed-search-filter "@1months +unread")
+  (elfeed-search-filter "@2months +unread")
   (elfeed-confirm-browse-url nil)
+  (elfeed-search-separator-date-format "%Y-%m-%d")
   :bind ((:map elfeed-search-mode-map
                ("t" . spike-leung/elfeed-toggle-unread)
                ("f" . spike-leung/consult-elfeed)
