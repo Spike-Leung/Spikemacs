@@ -131,7 +131,7 @@ See `consult--with-preview' about STATE and CANDIDATE."
 
 (defun spike-leung/elfeed-search-browse-url-with-kagi-translate ()
   "Visit the current entry in your browser using `browse-url'.
-Prefix with 'translate.kagi.com' to browse with translated version. "
+Prefix with translate.kagi.com to browse with translated version. "
   (interactive)
   (let ((buffer (current-buffer))
         (entries (elfeed-search-selected)))
