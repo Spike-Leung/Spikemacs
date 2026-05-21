@@ -17,7 +17,8 @@
   :bind ((:map elfeed-search-mode-map
                ("t" . spike-leung/elfeed-toggle-unread)
                ("f" . spike-leung/consult-elfeed)
-               ("B" . spike-leung/elfeed-search-browse-url-with-kagi-translate))))
+               ("B" . spike-leung/elfeed-search-browse-url-with-kagi-translate)
+               ("Z" . spike-leung/elfeed-reading-list))))
 
 (use-package elfeed-org
   :hook ((after-init . elfeed-org))
@@ -147,6 +148,31 @@ Prefix with translate.kagi.com to browse with translated version. "
       (unless (or elfeed-search-remain-on-entry (use-region-p))
         (forward-line)))))
 
+
+
+(defun spike-leung/elfeed-reading-list ()
+  "Generate Elfeed as news."
+  (interactive nil elfeed-search-mode)
+  (let* ((entries (elfeed-search-selected))
+         (links (mapcar (lambda (entry)
+                          (let ((link (elfeed-entry-link entry))
+                                (title (elfeed-entry-title entry))
+                                (feed-name (elfeed-feed-title (elfeed-entry-feed entry))))
+                            (format "%s (%s)" (org-link-make-string link title) feed-name)))
+                        entries)))
+    (if (null links)
+        (user-error "No entries selected.")
+      (with-temp-buffer
+        (goto-char (point-min))
+        (insert (format "#+title: Reading list\n"))
+        (insert "#+html_head_extra: <link rel=\"stylesheet\" href=\"./main.css\" />\n")
+        (dolist (link links)
+          (insert (format "- %s\n" link)))
+        (insert "\n")
+        (org-mode)
+        (let ((org-html-postamble nil))
+          (org-export-to-file 'html "~/git/reading-list/index.html")))
+      (message "Add %d entries." (length links)))))
 
 
 (provide 'init-elfeed)
