@@ -68,9 +68,7 @@ Checklist:
 *** [[https://pathos.page/feed.xml][2750 words]]
 *** [[https://61.life/feed.xml][61's life]]
 *** [[https://1900.live/rss/][@1900]]
-*** [[https://feeds.feedblitz.com/alearningaday&x=1][A Learning Day Feed]]
 *** [[https://www.achilletoupin.com/feed.xml][Achille Toupin]]                                                :法语:裁缝:
-*** [[https://amf.didiermary.fr/feed/][African Music Forum]]                                               :music:
 *** [[https://anniemueller.com/posts_feed][annie]]
 *** [[https://antfu.me/feed.xml][Anthony Fu]]
 *** [[https://atpx.com/feed.xml][atpX]]
@@ -121,7 +119,6 @@ Checklist:
 :PROPERTIES:
 :DESCRIPTION: 有不少关于音乐的文章，喜欢那篇 i want to eat the music
 :END:
-*** [[https://seths.blog/feed/][SETH'S BLOG]]
 *** [[https://song.al/feed.xml][Simon]]                                :日本:
 *** [[https://ayu.land/revlog#feed][Sweetfish Ayu]]                                                               :kawai:
 *** [[https://syls.blog/feed/][Syl's Blog]]
@@ -338,6 +335,10 @@ Checklist:
 *** [[https://echosoar.github.io/weekly/atom.xml][偷懒爱好者周刊]]                                                   :weekly:
 *** [[https://weekly.tw93.fun/rss.xml][潮流周刊]]
 *** [[https://caa-ins.org/feed][网络社会研究所]]
+* 暂時不感兴趣了
+** [[https://feeds.feedblitz.com/alearningaday&x=1][A Learning Day Feed]]
+** [[https://seths.blog/feed/][SETH'S BLOG]]
+** [[https://amf.didiermary.fr/feed/][African Music Forum]]                                                :music:
 * 设计有趣的博客
 - [[https://licoricewhipit.tumblr.com/rss][Black Licorice]]
 - [[https://ribo.zone/feed.xml][ribo.zone]]
