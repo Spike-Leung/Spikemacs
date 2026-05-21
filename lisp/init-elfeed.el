@@ -151,9 +151,10 @@ Prefix with translate.kagi.com to browse with translated version. "
 
 
 (defun spike-leung/elfeed-reading-list ()
-  "Generate Elfeed as news."
+  "Generate selected Elfeed entries as reading list. Auto push to git."
   (interactive nil elfeed-search-mode)
-  (let* ((entries (elfeed-search-selected))
+  (let* ((repo-dir (expand-file-name "~/git/reading-list"))
+         (entries (elfeed-search-selected))
          (links (mapcar (lambda (entry)
                           (let ((link (elfeed-entry-link entry))
                                 (title (elfeed-entry-title entry))
@@ -172,7 +173,22 @@ Prefix with translate.kagi.com to browse with translated version. "
         (org-mode)
         (let ((org-html-postamble nil))
           (org-export-to-file 'html "~/git/reading-list/index.html")))
-      (message "Add %d entries." (length links)))))
+      (message "Add %d entries to index.html." (length links)))
+    (let ((default-directory repo-dir))
+      (unless (file-directory-p (expand-file-name ".git" repo-dir))
+        (user-error "Not a git repository: %s" repo-dir))
+      (shell-command "git add index.html")
+      (let ((status (shell-command-to-string "git status --porcelain index.html")))
+        (if (string-empty-p status)
+            (message "No changes to commit.")
+          (let ((commit-msg ":memo: update reading list"))
+            (shell-command (format "git commit -m \"%s\"" commit-msg))
+            (message "Pushing to origin...")
+            (if (= 0 (shell-command "git push" nil nil))
+                (message "Add %d entries and pushed to origin." (length links))
+              (message "Add %d entries but push failed." (length links)))))))
+    (message "Add %d entries and exported to index.html." (length links))))
+
 
 
 (provide 'init-elfeed)
