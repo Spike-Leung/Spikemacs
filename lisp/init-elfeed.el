@@ -160,7 +160,7 @@ Prefix with translate.kagi.com to browse with translated version. "
                                  (title (elfeed-entry-title entry))
                                  (feed-name (elfeed-feed-title (elfeed-entry-feed entry)))
                                  (kagi-translate-link (format "[[https://translate.kagi.com/%s?to=zh_cn][🌐]]" link))
-                                 (like-button (format "@@html:<span class=\"like-button\" data-id=\"%s\">♥</span>@@" link)))
+                                 (like-button (format "@@html:<span class=\"like-button\" data-id=\"%s\"></span>@@" link)))
                             (format "%s (%s) %s %s" (org-link-make-string link title) feed-name kagi-translate-link like-button)))
                         entries)))
     (if (null links)
