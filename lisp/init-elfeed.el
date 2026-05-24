@@ -11,7 +11,7 @@
 
 (use-package elfeed
   :custom
-  (elfeed-search-filter "@2months +unread")
+  (elfeed-search-filter "@1weeks +unread")
   (elfeed-confirm-browse-url nil)
   (elfeed-search-separator-date-format "%Y-%m-%d")
   :bind ((:map elfeed-search-mode-map
