@@ -1,4 +1,4 @@
-* feed                                                                   :elfeed:
+* feed                                                               :elfeed:
 按照 [[https://kedara.eu/organising-feeds-permaculture][Organising my feeds using Permaculture principles]] 进行组织。
 ** Z0:Home                                                                      :z0:default:
 家园区用于检查我自己的订阅是否正常运行，以及关注我个人认识并深切关心的人：家人或亲密朋友。
@@ -85,6 +85,7 @@ Checklist:
 *** [[https://diygod.cc/feed][DIYgod]]
 *** [[https://notes.druchan.com/feed.xml][druchan]]
 *** [[https://elizen.me/index.xml][Elizen]]
+*** [[https://elizen.me/index.xml][Elizen]]
 *** [[https://forkingmad.blog/feed/][Forking Mad]]
 *** [[https://yovey.me/feed/][Fragments]]
 *** [[https://blog.gentlelucky.com/zh/index.xml][GentleLucky]]                                                                 :weekly:
@@ -111,6 +112,7 @@ Checklist:
 *** [[https://notes.jeddacp.com/feed/][Notes by JCProbably]]
 *** [[https://onevcat.com/feed.xml][OneV's Den]]
 *** [[https://blog.pursuitus.com/feed][Ouroboros]]                                                                   :life:
+*** [[https://enocc.com/feed.xml][Pablo Enoc]]
 *** [[https://www.parkerchang.life/feed.xml][Parker Chang's Web]]                                                           :台湾:
 *** [[https://www.yuqiqin.me/feed.xml][Psychic Paper]]                                                   :english:
 *** [[https://lutaonan.com/rss.xml][Randy's Blog]]
@@ -143,6 +145,7 @@ Checklist:
 *** [[https://www.hecaitou.com/feeds/posts/default][和菜头]]
 *** [[https://jesor.me/feed.xml][大破进击]]
 *** [[https://wangquan.cc/feed/][小王日记]]
+*** [[https://wenshan.home.blog/feed/][文山随笔]]                                                     :emacschina:
 *** [[https://www.laomuzhu.cn/feed/][木竹]]
 *** [[https://oxxx.cn/feed/][森木志]]
 *** [[https://blog.douchi.space/index.xml][椒盐豆豉]]
@@ -151,6 +154,7 @@ Checklist:
 *** [[https://lhasa.icu/rss.xml][游钓四方]]
 *** [[https://2cat.net/feed/][猫鱼]]                                                                        :life:
 *** [[https://imgradeone.com/blog.xml][真正的自言者一么]]
+*** [[https://www.suiyan.cc/feed.xml][碎言]]
 *** [[https://thirdshire.com/index.xml][第三夏尔]]
 *** [[https://www.wikimoe.com/rss][维基萌]]
 *** [[https://lawtee.com/index.xml][老 T 博客]]
@@ -165,7 +169,6 @@ Checklist:
 *** [[https://www.ctling.com/atom.xml][閒人筆記]]                                                                    :台湾:
 *** [[https://www.chenrui.com/feed.php][陈锐]]
 *** [[https://www.gaotianchi.com/feed.xml][高天驰]]
-*** [[https://wenshan.home.blog/feed/][文山随笔]]                                                     :emacschina:
 ** Z4:Pasture                                                                   :z4:
 牧场比果园还要大，但密度较低。
 它包含那些我偶尔想略读的订阅源。
@@ -294,7 +297,6 @@ Checklist:
 *** [[https://blog.prayhand13013.top/rss.xml][Tomoe Mami]]                                                        :emacs:
 *** [[https://tusharhero.codeberg.page/rss.xml][tusharhero]]                                                        :emacs:
 *** [[https://emacsninja.com/emacs.atom][Vasilij Schneidermann]]                                             :emacs:
-*** [[http://xahlee.info/emacs/emacs/blog.xml][Xah Emacs Blog]]                                                    :emacs:
 *** [[https://xenodium.com/rss.xml][xenodium]]                                                          :emacs:
 ** Weekly | News | Zine                                              :weekly:
 *** [[http://ozark.hendrix.edu/~yorgey/forest/005U/atom.xml][Brent A. Yorgey's Weeknotes]]
@@ -339,6 +341,7 @@ Checklist:
 ** [[https://feeds.feedblitz.com/alearningaday&x=1][A Learning Day Feed]]
 ** [[https://seths.blog/feed/][SETH'S BLOG]]
 ** [[https://amf.didiermary.fr/feed/][African Music Forum]]                                                :music:
+** [[http://xahlee.info/emacs/emacs/blog.xml][Xah Emacs Blog]]                                                     :emacs:
 * 设计有趣的博客
 - [[https://licoricewhipit.tumblr.com/rss][Black Licorice]]
 - [[https://ribo.zone/feed.xml][ribo.zone]]
