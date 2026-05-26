@@ -229,7 +229,6 @@
 *** [[https://markentier.tech/feed.rss.xml][markentier.tech]]                                               :code:rust:
 *** [[https://matklad.github.io/feed.xml][matklad]]
 *** [[http://www.aaronsw.com/2002/feeds/pgessays.rss][Paul Graham]]
-*** [[https://www.philschmid.de/rss][philschmid.de]]
 *** [[https://plainvanillaweb.com/blog/feed.xml][Plain Vanilla Blog]]
 *** [[https://randomascii.wordpress.com/feed/][Random ASCII – tech blog of Bruce Dawson]]                           :code:
 *** [[https://robbowen.digital/feed.xml][Robb Owen Digital]]                                        :设计好看的博客:
