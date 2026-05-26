@@ -171,6 +171,8 @@ Prefix with translate.kagi.com to browse with translated version. "
                (like-button (format "@@html:<span class=\"like-button\" data-id=\"%s\"></span>@@" link)))
           (insert (format "- %s %s" (org-link-make-string link title) like-button)))
         (insert "\n"))
+      (insert "這是从 [[https://github.com/emacs-elfeed/elfeed][elfeed]] 导出的个人訂閱数据，仅方便个人使用。\n\n
+具体見： [[https://taxodium.ink/export-elfeed-selected-entries-to-github-page-as-reading-list.html][导出 Elfeed 选中条目到 GitHub Page 作为 Reading List]]。\n\n")
       (org-mode)
       (let ((org-html-postamble nil))
         (org-export-to-file 'html "~/git/reading-list/index.html")))
