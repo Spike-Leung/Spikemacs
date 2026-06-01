@@ -33,6 +33,7 @@
 :PROPERTIES:
 :DESCRIPTION: 代码高亮应该较少色彩的文章作者
 :END:
+** [[https://blast-o-rama.com/rss][blast-o-rama. | Marty Day]]
 ** [[https://blogblog.club/blog/rss.xml][BlogBlog 同樂會]]
 ** [[https://bluepika.life/rss.xml][Bluepikachu]]                                                         :life:
 ** [[https://garden.bradwoods.io/rss.xml][Brad Woods Digital Garden]]                                 :设计有趣的博客:
@@ -296,11 +297,12 @@
 ** [[https://www.chenrui.com/feed.php][陈锐]]
 ** [[https://www.gaotianchi.com/feed.xml][高天驰]]
 ** [[https://ro3or.com/index.xml][鹅玉]]
-* 暂時不感兴趣了
+* 暂時不感兴趣了 / 更新太頻繁
 ** [[https://feeds.feedblitz.com/alearningaday&x=1][A Learning Day Feed]]
 ** [[https://seths.blog/feed/][SETH'S BLOG]]
 ** [[https://amf.didiermary.fr/feed/][African Music Forum]]                                                :music:
 ** [[http://xahlee.info/emacs/emacs/blog.xml][Xah Emacs Blog]]                                                     :emacs:
+** [[https://jamesg.blog/feeds/posts.xml][James' Coffee Blog]]
 * 设计有趣的博客
 - [[https://licoricewhipit.tumblr.com/rss][Black Licorice]]
 - [[https://ribo.zone/feed.xml][ribo.zone]]
