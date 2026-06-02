@@ -190,11 +190,12 @@ Prefix with translate.kagi.com to browse with translated version. "
             (message "No changes to commit.")
           (let ((commit-msg ":memo: update reading list"))
             (shell-command (format "git commit -m \"%s\"" commit-msg))
+            (message "Sync with origin...")
+            (shell-command "git pull" nil nil)
             (message "Pushing to origin...")
             (if (= 0 (shell-command "git push" nil nil))
                 (message "Add entries and pushed to origin.")
-              (message "Add entries but push failed."))))))
-    (message "Add entries and exported to index.html.")))
+              (message "Add entries but push failed."))))))))
 
 
 
