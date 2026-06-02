@@ -44,7 +44,7 @@
 ** [[https://bryn.codes/feed.xml][Bryn Newell]]
 ** [[https://cbvivi.today/feed.xml][cbvivi]]
 ** [[https://yuanchaofa.com/][Chaofa Yuan]]
-** [[https://chise.hachiroku.com/zh/feed/atom/][Chise Hachiroku]]                                                     :life:
+** [[https://chise.hachiroku.com/zh/feed/atom][Chise Hachiroku]]                                                     :life:
 ** [[https://clandestini.org/feed/][clandestini.org]]                                  :葡萄牙语:设计好看的博客:
 ** [[https://conge.livingwithfcs.org/feed.xml][Conge]]                                                            :running:
 ** [[https://css-irl.info/rss.xml][CSS In Real Life]]                                        :css:web:frontend:
