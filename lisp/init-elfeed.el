@@ -66,7 +66,7 @@ If LEVEL exist, filter heading which level is greater or equal LEVEL."
              (org-element-map (org-element-parse-buffer 'headline) 'headline
                (lambda (hl)
                  ;; property 的值可以在这里找： https://orgmode.org/worg/dev/org-element-api.html
-                 (when (or (null level) (>= (org-element-property :level hl) level))
+                 (when (or (null level) (<= (org-element-property :level hl) level))
                    (let* ((raw-title (org-element-property :raw-value hl))
                           (title (org-link-display-format raw-title))
                           (annotation (org-entry-get hl "description"))
@@ -77,8 +77,8 @@ If LEVEL exist, filter heading which level is greater or equal LEVEL."
    rmh-elfeed-org-files))
 
 (defun spike-leung/elfeed-preview-state (state candidate)
-  "Return consult state function for live `elfeed' preview.
-See `consult--with-preview' about STATE and CANDIDATE."
+  "return consult state function for live `elfeed' preview.
+see `consult--with-preview' about state and candidate."
   (let* ((cand (car candidate))
          (metadata (cdr candidate))
          (feed-url (plist-get metadata :feed-url)))
@@ -101,21 +101,25 @@ See `consult--with-preview' about STATE and CANDIDATE."
          (elfeed-update-feed feed-url))))))
 
 (defun spike-leung/consult-elfeed ()
-  "Select feed from `rmh-elfeed-org-files' with live preview in `elfeed'."
+  "select feed from `rmh-elfeed-org-files' with live preview in `elfeed'."
   (interactive)
   (let* ((candidates (spike-leung/get-feed-candidates 3)))
-    (consult--multi candidates
-                    :prompt "Feed: "
-                    :state #'spike-leung/elfeed-preview-state
-                    :history 'spike-leung/consult-elfeed-history
-                    :annotate (lambda (cand)
-                                (let* ((match-cand (seq-find
-                                                    (lambda (v)
-                                                      (string-match-p (car (plist-get v :items)) cand))
-                                                    candidates))
-                                       (annotation (and match-cand (plist-get match-cand :annotation))))
-                                  (when annotation
-                                    (concat (make-string 25 ?\s) annotation)))))
+    (if (null candidates)
+        (message "No Elfeed Candidates.")
+      (consult--multi candidates
+                      :prompt "Feed: "
+                      :state #'spike-leung/elfeed-preview-state
+                      :history 'spike-leung/consult-elfeed-history
+                      :annotate (lambda (cand)
+                                  (let* ((match-cand
+                                          (seq-find
+                                           (lambda (v)
+                                             (string-match-p (car (plist-get v :items)) cand))
+                                           candidates))
+                                         (annotation (and match-cand (plist-get match-cand :annotation))))
+                                    (when annotation
+                                      (concat (make-string 25 ?\s) annotation))))))
+
     (when (get-buffer "*elfeed-search*")
       (pop-to-buffer "*elfeed-search*"))))
 
