@@ -8,11 +8,6 @@
 
 
 
-;; <link rel=\"preload\" href=\"/fonts/Atkinson-Hyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>
-;; <link rel=\"preload\" href=\"/fonts/Atkinson-Hyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>
-;; <link rel=\"preload\" href=\"/fonts/Atkinson-Hyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>
-;; <link rel=\"preload\" href=\"/fonts/Atkinson-Hyperlegible/Atkinson-Hyperlegible-BoldItalic-102a.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>
-
 (defconst spike-leung/org-publish-draft-publishing-directory
   "~/git/taxodium/publish/draft"
   "`:publishing-directory' for draft.")
@@ -48,6 +43,7 @@
   "`:html-head' for `org-publish'.Customize for index.org.")
 
 
+
 ;;; html-preamble
 
 (defconst spike-leung/html-preamble
@@ -181,6 +177,60 @@ alt=\"Translate with Kagi\"
   "sitemap `:html-postamble' for `org-publish'.")
 
 
+
+;;; sitemap
+
+(defun spike-leung/sitemap-function (title list)
+  "Generate sitemap as a string.
+TITLE is the sitemap title and LIST contains files to include."
+  (concat
+   "#+INCLUDE: ./index-preamble.org"
+   "\n\n"
+   (org-list-to-org list '(:backend org :raw t))))
+
+(defun spike-leung/sitemap-format-entry (entry style project)
+  "Custom format for site map ENTRY, as a string.
+ENTRY is a file name.  STYLE is the style of the sitemap.
+PROJECT is the current project."
+  (let* ((export-file-name (spike-leung/org-publish-get-org-keyword entry project "export_file_name"))
+         (subtitle (spike-leung/org-publish-get-org-keyword entry project "subtitle")))
+    (cond ((not (directory-name-p entry))
+           (concat (format "[[file:%s][%s]]"
+                           (or (if export-file-name
+                                   (format "%s.org" (url-encode-url export-file-name))
+                                 nil)
+                               entry)
+                           (org-publish-find-title entry project))
+                   "\n"
+                   (or (if subtitle
+                           (format "@@html: <span class=\"sitemap-subtitle\">%s</span>@@" subtitle)
+                         nil)
+                       "")))
+          ((eq style 'tree)
+           ;; Return only last subdir.
+           (file-name-nondirectory (directory-file-name entry)))
+          (t entry))))
+
+(defun spike-leung/org-html-publish-sitemap (plist filename pub-dir)
+  "`org-publish' `:publishing-function' for sitemap.
+Add subtitle to links which has subtitle.
+See `org-html-publish-to-html' for param PLIST,FILENAME,PUB-DIR."
+  (let ((output-filename (org-html-publish-to-html plist filename pub-dir)))
+    ;; 这里应该用 `with-temp-buffer' 而不要用 `with-current-buffer' 和 '`find-file-noselect'
+    ;; see: https://emacs.stackexchange.com/questions/2868/whats-wrong-with-find-file-noselect
+    (with-temp-buffer
+      (insert-file-contents output-filename)
+      (goto-char (point-min))
+      (while (re-search-forward
+              (rx (group "<a" (*? anychar) ">" (*? anychar)) " - " (group (*? anychar)) (group "</a>"))
+              nil t)
+        (let ((subtitle (match-string 2)))
+          (replace-match (format "\\1\\3<span class=\"sitemap-subtitle\">%s</span>" subtitle))))
+      (write-region (point-min) (point-max) output-filename))
+    output-filename))
+
+
+
 ;;; helper utils
 
 (defun spike-leung/org-publish-get-org-keyword (entry project keyword &optional filename)
@@ -212,43 +262,6 @@ TAG is string."
 
 
 
-;;; sitemap
-
-(defun spike-leung/sitemap-function (title list)
-  "Generate sitemap as a string.
-TITLE is the sitemap title and LIST contains files to include."
-  (concat
-   "#+INCLUDE: ./index-preamble.org"
-   "\n\n"
-   (org-list-to-org list '(:backend org :raw t))))
-
-(defun spike-leung/sitemap-format-entry (entry style project)
-  "Custom format for site map ENTRY, as a string.
-ENTRY is a file name.  STYLE is the style of the sitemap.
-PROJECT is the current project."
-  (let* ((export-file-name (spike-leung/org-publish-get-org-keyword entry project "export_file_name"))
-         (subtitle (spike-leung/org-publish-get-org-keyword entry project "subtitle")))
-    (cond ((not (directory-name-p entry))
-           (concat (format "[[file:%s][%s]]"
-                           (or
-                            (if export-file-name
-                                (format "%s.org" (url-encode-url export-file-name))
-                              nil)
-                            entry)
-                           (org-publish-find-title entry project))
-                   "\n"
-                   (or
-                    (if subtitle
-                        (format "@@html: <span class=\"sitemap-subtitle\">%s</span>@@" subtitle)
-                      nil)
-                    "")))
-          ((eq style 'tree)
-           ;; Return only last subdir.
-           (file-name-nondirectory (directory-file-name entry)))
-          (t entry))))
-
-
-
 (defun spike-leung/org-publish-org (_plist filename pub-dir)
   "Publish a org file and use export_file_name as filename.
 
@@ -259,13 +272,165 @@ publishing directory.
 Return output file name."
   (unless (file-directory-p pub-dir)
     (make-directory pub-dir t))
-  (let* ((export-file-name (or
-                            (spike-leung/org-publish-get-org-keyword nil nil "export_file_name" filename)
-                            filename))
+  (let* ((export-file-name
+          (or (spike-leung/org-publish-get-org-keyword nil nil "export_file_name" filename) filename))
          (output (file-name-with-extension (expand-file-name (file-name-nondirectory export-file-name) pub-dir) "org")))
     (copy-file filename output t)
     ;; Return file name.
     output))
+
+
+
+;;; ox-html, setting and overrides
+
+(use-package ox-html
+  :ensure nil
+  :config
+  (setq org-html-head-include-default-style nil
+        org-html-content-class "content e-content")
+
+  ;; overrides
+  ;; - apply "#+attr_html" to verse
+  (defun org-html-verse-block (_verse-block contents info)
+    "Transcode a VERSE-BLOCK element from Org to HTML.
+CONTENTS is verse block contents.  INFO is a plist holding
+contextual information."
+    (let ((attributes (org-export-read-attribute :attr_html _verse-block)))
+      (if-let ((class-val (plist-get attributes :class)))
+          (setq attributes (plist-put attributes :class (concat "verse " class-val)))
+        (setq attributes (plist-put attributes :class "verse")))
+      (format "<p%s>\n%s</p>"
+              (concat " " (org-html--make-attribute-string attributes))
+              ;; Replace leading white spaces with non-breaking spaces.
+              (replace-regexp-in-string
+               "^[ \t]+" (lambda (m) (org-html--make-string (length m) "&#xa0;"))
+               ;; Replace each newline character with line break.  Also
+               ;; remove any trailing "br" close-tag so as to avoid
+               ;; duplicates.
+               (let* ((br (org-html-close-tag "br" nil info))
+                      (re (format "\\(?:%s\\)?[ \t]*\n" (regexp-quote br))))
+                 (replace-regexp-in-string re (concat br "\n") contents))))))
+
+  (defun org-html-section (section contents info)
+    "Transcode a SECTION element from Org to HTML.
+CONTENTS holds the contents of the section.  INFO is a plist
+holding contextual information."
+    (let ((parent (org-element-lineage section 'headline)))
+      ;; Before first headline: no container, just return CONTENTS.
+      (if (not parent) contents
+        ;; Get div's class and id references.
+        (let* ((class-num (+ (org-export-get-relative-level parent info)
+                             (1- (plist-get info :html-toplevel-hlevel))))
+               (section-number
+                (and (org-export-numbered-headline-p parent info)
+                     (mapconcat
+                      #'number-to-string
+                      (org-export-get-headline-number parent info) "-"))))
+          ;; Build return value.
+          (format "<div class=\"outline-text-%d\" id=\"text-%s\">%s</div>\n"
+                  class-num
+                  (or (org-element-property :CUSTOM_ID parent)
+                      section-number
+                      (org-export-get-reference parent info))
+                  (or contents ""))))))
+
+  (defun spike-leung/org-html-wrap-image-with-link (orig-fn source attributes info)
+    "Wrap the <img> tag in an <a> tag linking to the image source."
+    (let ((href (or (plist-get attributes :data-href)
+                    (plist-get attributes :href)))
+          (img-tag (funcall orig-fn source attributes info)))
+      (if (string-match-p (concat "^" org-preview-latex-image-directory) source)
+          img-tag
+        (format "<a href=\"%s\">%s</a>"
+                (or href source)
+                img-tag))))
+
+  (advice-add 'org-html--format-image :around #'spike-leung/org-html-wrap-image-with-link)
+
+  ;; `lambda-list' 是参数列表，`:around' 的第一个参数是原始函数，剩下的参数是原始函数原来的参数
+  ;; 下面这个函数的意思是：
+  ;; 给 `org-html-paragraph' 添加一个执行时机是 `:around' 的 advice，
+  ;; advice 名字是 `org-html-paragraph-advice'
+  ;; body 中执行的代码是将 contents 中，中文之间的换行符移除，然后将移除后的内容交给 org-html-paragraph 渲染段落
+  (define-advice org-html-paragraph (:around (orig-fn paragraph contents info) org-html-paragraph-advice)
+    "Join consecutive Chinese lines into a single long line
+     without unwanted space when exporting `org-mode' to html."
+    (let ((fixed-content (replace-regexp-in-string
+                          (rx
+                           (group (or (category chinese) "<" ">"))
+                           (regexp "\n")
+                           (group (or (category chinese) "<" ">")))
+                          "\\1\\2"
+                          contents)))
+      (funcall orig-fn paragraph fixed-content info))))
+
+
+
+;;; ox filter
+(use-package ox
+  :ensure nil
+  :config
+  (dolist (filter '(spike-leung/remove-unnessary-id-from-html
+                    spike-leung/add-extra-class-to-body
+                    spike-leung/add-extra-class-to-title))
+    (add-to-list 'org-export-filter-final-output-functions filter))
+  (add-to-list 'org-export-filter-table-functions 'spike-leung/org-html-wrap-table)
+
+
+  (defun spike-leung/remove-unnessary-id-from-html (text backend info)
+    "Remove unnecessarily id attibute.
+These elements's ID will be remove: figure,details,pre ..."
+    (when (org-export-derived-backend-p backend 'html)
+      (replace-regexp-in-string (rx (seq "<"
+                                         (group (or "figure" "details" "pre"))
+                                         (group (zero-or-more (not ">")))
+                                         (group (seq whitespace "id=" (syntax string-quote) "org" (zero-or-more hex) (syntax string-quote)))
+                                         (group (zero-or-more (not ">")))
+                                         ">"))
+                                (lambda (match)
+                                  (format "<%s%s%s%s>"
+                                          (match-string 1 match) ;; tag
+                                          (match-string 2 match) ;; keep other attrs
+                                          "" ;; remove id
+                                          (match-string 4 match) ;; keep other attrs
+                                          ))
+                                text)))
+
+  ;; add class to match microformat, see: https://microformats.org/
+  (defun spike-leung/add-extra-class-to-body (text backend info)
+    "Remove unnecessarily id attibute.
+These elements's ID will be remove: figure,details,pre ..."
+    (when (org-export-derived-backend-p backend 'html)
+      (replace-regexp-in-string "<body>" "<body class=\"h-entry\">" text)))
+
+  (defun spike-leung/add-extra-class-to-title (text backend info)
+    "Remove unnecessarily id attibute.
+These elements's ID will be remove: figure,details,pre ..."
+    (when (org-export-derived-backend-p backend 'html)
+      (replace-regexp-in-string "<h1 class=\"title\">" "<h1 class=\"title p-name\">" text)))
+
+  (defun spike-leung/org-html-wrap-table (table backend info)
+    "Wrap tables in a div when exporting to HTML."
+    (when (org-export-derived-backend-p backend 'html)
+      (concat "<div class=\"table-wrapper\"> " table " </div>"))))
+
+
+
+;;; auto add id to headings
+(defun spike-leung/org-add-custom-id-to-headings-in-blog-files ()
+  "Add a CUSTOM_ID property to all headings in the current buffer.
+If heading does not already exist."
+  (interactive)
+  (org-map-entries (lambda () (unless (org-entry-get nil "CUSTOM_ID")
+                                (let ((custom-id (org-id-new)))
+                                  (org-set-property "CUSTOM_ID" custom-id))))))
+
+(add-hook 'org-mode-hook (lambda ()
+                           (when (and buffer-file-name
+                                      (string-match "taxodium" buffer-file-name))
+                             (add-hook
+                              'before-save-hook
+                              'spike-leung/org-add-custom-id-to-headings-in-blog-files nil 'local))))
 
 
 
@@ -369,485 +534,6 @@ Return output file name."
 (advice-add 'org-publish :after #'spike-leung/org-publish-after-callback)
 
 
-
-;;; ox-html, setting and overrides
-
-(use-package ox-html
-  :ensure nil
-  :config
-  (setq org-html-head-include-default-style nil
-        org-html-content-class "content e-content")
-  ;; overrides
-
-  ;; - apply "#+attr_html" to verse
-  (defun org-html-verse-block (_verse-block contents info)
-    "Transcode a VERSE-BLOCK element from Org to HTML.
-CONTENTS is verse block contents.  INFO is a plist holding
-contextual information."
-    (let ((attributes (org-export-read-attribute :attr_html _verse-block)))
-      (if-let ((class-val (plist-get attributes :class)))
-          (setq attributes (plist-put attributes :class (concat "verse " class-val)))
-        (setq attributes (plist-put attributes :class "verse")))
-      (format "<p%s>\n%s</p>"
-              (concat " " (org-html--make-attribute-string attributes))
-              ;; Replace leading white spaces with non-breaking spaces.
-              (replace-regexp-in-string
-               "^[ \t]+" (lambda (m) (org-html--make-string (length m) "&#xa0;"))
-               ;; Replace each newline character with line break.  Also
-               ;; remove any trailing "br" close-tag so as to avoid
-               ;; duplicates.
-               (let* ((br (org-html-close-tag "br" nil info))
-                      (re (format "\\(?:%s\\)?[ \t]*\n" (regexp-quote br))))
-                 (replace-regexp-in-string re (concat br "\n") contents))))))
-
-  (defun org-html-section (section contents info)
-    "Transcode a SECTION element from Org to HTML.
-CONTENTS holds the contents of the section.  INFO is a plist
-holding contextual information."
-    (let ((parent (org-element-lineage section 'headline)))
-      ;; Before first headline: no container, just return CONTENTS.
-      (if (not parent) contents
-        ;; Get div's class and id references.
-        (let* ((class-num (+ (org-export-get-relative-level parent info)
-                             (1- (plist-get info :html-toplevel-hlevel))))
-               (section-number
-                (and (org-export-numbered-headline-p parent info)
-                     (mapconcat
-                      #'number-to-string
-                      (org-export-get-headline-number parent info) "-"))))
-          ;; Build return value.
-          (format "<div class=\"outline-text-%d\" id=\"text-%s\">%s</div>\n"
-                  class-num
-                  (or (org-element-property :CUSTOM_ID parent)
-                      section-number
-                      (org-export-get-reference parent info))
-                  (or contents ""))))))
-
-  (defun spike-leung/org-html-wrap-image-with-link (orig-fn source attributes info)
-    "Wrap the <img> tag in an <a> tag linking to the image source."
-    (let ((href (or (plist-get attributes :data-href)
-                    (plist-get attributes :href)))
-          (img-tag (funcall orig-fn source attributes info)))
-      (if (string-match-p (concat "^" org-preview-latex-image-directory) source)
-          img-tag
-        (format "<a href=\"%s\">%s</a>"
-                (or href source)
-                img-tag))))
-
-  (advice-add 'org-html--format-image :around #'spike-leung/org-html-wrap-image-with-link)
-
-  ;; `lambda-list' 是参数列表，`:around' 的第一个参数是原始函数，剩下的参数是原始函数原来的参数
-  ;; 下面这个函数的意思是：
-  ;; 给 `org-html-paragraph' 添加一个执行时机是 `:around' 的 advice，
-  ;; advice 名字是 `org-html-paragraph-advice'
-  ;; body 中执行的代码是将 contents 中，中文之间的换行符移除，然后将移除后的内容交给 org-html-paragraph 渲染段落
-  (define-advice org-html-paragraph (:around (orig-fn paragraph contents info) org-html-paragraph-advice)
-    "Join consecutive Chinese lines into a single long line
-     without unwanted space when exporting `org-mode' to html."
-    (let ((fixed-content (replace-regexp-in-string
-                          (rx
-                           (group (or (category chinese) "<" ">"))
-                           (regexp "\n")
-                           (group (or (category chinese) "<" ">")))
-                          "\\1\\2"
-                          contents)))
-      (funcall orig-fn paragraph fixed-content info))))
-
-
-
-;;; ox filter
-
-(use-package ox
-  :ensure nil
-  :config
-  (dolist (filter '(spike-leung/remove-unnessary-id-from-html
-                    spike-leung/add-extra-class-to-body
-                    spike-leung/add-extra-class-to-title))
-    (add-to-list 'org-export-filter-final-output-functions filter))
-  (add-to-list 'org-export-filter-table-functions 'spike-leung/org-html-wrap-table)
-
-
-  (defun spike-leung/remove-unnessary-id-from-html (text backend info)
-    "Remove unnecessarily id attibute.
-These elements's ID will be remove: figure,details,pre ..."
-    (when (org-export-derived-backend-p backend 'html)
-      (replace-regexp-in-string (rx (seq "<"
-                                         (group (or "figure" "details" "pre"))
-                                         (group (zero-or-more (not ">")))
-                                         (group (seq whitespace "id=" (syntax string-quote) "org" (zero-or-more hex) (syntax string-quote)))
-                                         (group (zero-or-more (not ">")))
-                                         ">"))
-                                (lambda (match)
-                                  (format "<%s%s%s%s>"
-                                          (match-string 1 match) ;; tag
-                                          (match-string 2 match) ;; keep other attrs
-                                          "" ;; remove id
-                                          (match-string 4 match) ;; keep other attrs
-                                          ))
-                                text)))
-
-  ;; add class to match microformat, see: https://microformats.org/
-  (defun spike-leung/add-extra-class-to-body (text backend info)
-    "Remove unnecessarily id attibute.
-These elements's ID will be remove: figure,details,pre ..."
-    (when (org-export-derived-backend-p backend 'html)
-      (replace-regexp-in-string "<body>"
-                                "<body class=\"h-entry\">"
-                                text)))
-
-  (defun spike-leung/add-extra-class-to-title (text backend info)
-    "Remove unnecessarily id attibute.
-These elements's ID will be remove: figure,details,pre ..."
-    (when (org-export-derived-backend-p backend 'html)
-      (replace-regexp-in-string "<h1 class=\"title\">"
-                                "<h1 class=\"title p-name\">"
-                                text)))
-
-  (defun spike-leung/org-html-wrap-table (table backend info)
-    "Wrap tables in a div when exporting to HTML."
-    (when (org-export-derived-backend-p backend 'html)
-      (concat "<div class=\"table-wrapper\"> " table " </div>"))))
-
-
-
-;;; utils
-
-(defun spike-leung/get-export-file-name ()
-  "提取当前 buffer 的 #+export_file_name 值（不含扩展名）。"
-  (save-excursion
-    (goto-char (point-min))
-    (when (re-search-forward "^#\\+export_file_name:\\s-*\\(.+?\\)\\s-*$" nil t)
-      (file-name-sans-extension (match-string 1)))))
-
-
-
-(defun spike-leung/determine-image-dir (base-dir export-name)
-  "根据 EXPORT-NAME 决定图片目录。
-优先级：
-1. BASE-DIR/EXPORT-NAME
-2. 如果是 album-1 格式，尝试 BASE-DIR/album/1
-3. 如果是 album-1 格式，尝试 BASE-DIR/album
-4. BASE-DIR"
-  (if (or (not export-name) (string-empty-p export-name))
-      base-dir
-    (let* ((full-path (expand-file-name export-name base-dir))
-           (split-pos (string-match "-\\([0-9]+\\)$" export-name))
-           candidates)
-
-      ;; 构建候选目录列表（按优先级）
-      ;; 1. BASE-DIR/EXPORT-NAME
-      (setq candidates (list full-path))
-
-      (when split-pos
-        (let* ((parent (substring export-name 0 split-pos))
-               (child (match-string 1 export-name))
-               ;; 3. 如果是 album-1 格式，尝试 BASE-DIR/album
-               (parent-path (expand-file-name parent base-dir))
-               ;; 2. 如果是 album-1 格式，尝试 BASE-DIR/album/1
-               (nested-path (expand-file-name child parent-path)))
-          (setq candidates (append candidates
-                                   (list nested-path parent-path)))))
-
-      ;; 返回第一个存在的目录，否则返回 base-dir
-      (cl-find-if #'file-directory-p (append candidates (list base-dir))))))
-
-(defun spike-leung/insert-blog-images ()
-  "从 blog 插入图片。
-智能识别 #+export_file_name，如 album-1 会依次尝试：
-images/album-1 → images/album/1 → images/album → images/"
-  (interactive)
-  (let* ((base-dir (expand-file-name "~/git/taxodium/publish/images/"))
-         (export-name (spike-leung/get-export-file-name))
-         (image-dir (file-name-as-directory
-                     (spike-leung/determine-image-dir base-dir export-name)))
-         (image-file (read-file-name "Select image: " image-dir nil t))
-         ;; 保持路径相对于 base-dir，确保子目录结构正确
-         (relative-path (file-relative-name image-file base-dir)))
-    (insert (format "#+attr_html: :loading lazy \n#+CAPTION: \n[[file:images/%s]]" relative-path))))
-
-
-
-(defun spike-leung/insert-blog-video ()
-  "从 blog 插入视频。
-智能识别 #+export_file_name，如 album-1 会依次尝试：
-images/album-1 → images/album/1 → images/album → images/
-生成 HTML export 块，包含自动播放、静音、循环的视频标签。"
-  (interactive)
-  (let* ((base-dir (expand-file-name "~/git/taxodium/publish/images/"))
-         (export-name (spike-leung/get-export-file-name))
-         (video-dir (file-name-as-directory
-                     (spike-leung/determine-image-dir base-dir export-name)))
-         (video-file (read-file-name "Select video: " video-dir nil t))
-         (relative-path (file-relative-name video-file base-dir))
-         (web-path (concat "/images/"
-                           (replace-regexp-in-string "\\\\" "/" relative-path)))
-         (ext (downcase (file-name-extension video-file)))
-         (mime-type (pcase ext
-                      ("webm" "video/webm")
-                      ("mp4"  "video/mp4")
-                      ("mov"  "video/quicktime")
-                      (_      (concat "video/" ext)))))
-    (insert (format "#+begin_export html
-<figure>
-  <a href=\"%s\" target=\"_blank\">
-    <video autoplay loop muted playsinline loading=\"lazy\">
-      <source src=\"%s\" type=\"%s\">
-    </video>
-  </a>
-  <figcaption></figcaption>
-</figure>
-#+end_export"
-                    web-path web-path mime-type))))
-
-
-
-(defun spike-leung/insert-album-href ()
-  "Insert album wall href."
-  (interactive)
-  (save-excursion
-    (forward-line 1)
-    (if (re-search-forward (rx (* anychar) "/" (group (*  anychar)) ".avif") (line-end-position) t)
-        (let ((filename (match-string 1)))
-          (re-search-backward ":data-href " (line-beginning-position -1) t)
-          (goto-char (match-end 0))
-          (insert (format "images/album/%s.webp" filename)))
-      (message "No valid file link found on the next line."))))
-
-
-
-;; thanks https://jiewawa.me/2024/03/blogging-with-denote-and-hugo/
-(defun spike-leung/sluggify-denote-title-as-export-file-name ()
-  "Add metadata to current `org-mode' file containing export file name.
-Export File Name is returned by `denote-retrieve-title-value'."
-  (interactive)
-  (save-excursion
-    (goto-char 0)
-    (search-forward "title")
-    (end-of-line)
-    (insert (format
-             "\n#+export_file_name: %s"
-             (denote-sluggify-title
-              (denote-retrieve-title-value buffer-file-name 'org))))))
-
-
-;; see: https://tusharhero.codeberg.page/creating_a_blog.html
-;; (add-hook 'org-export-before-processing-hook
-;;           #'(lambda (backend)
-;;               (insert "#+INCLUDE: \"./setup.org\"\n")))
-;; (setq org-confirm-babel-evaluate nil) ; Don't ask permission for evaluating source blocks
-
-
-
-(defun spike-leung/process-next-html-src-block ()
-  "Process the next HTML block from the current position, escape it, compress it.
-Then generate a #+begin_export html block with an iframe, replacing any existing export block."
-  (interactive)
-  (let (html-content escaped-html srcdoc start end export-start export-end)
-    ;; Search for the next #+begin_src html block from the current position
-    (save-excursion
-      (when (re-search-forward "^#\\+begin_src html :exports none" nil t)
-        (setq start (match-end 0))
-        (when (re-search-forward "^#\\+end_src" nil t)
-          (setq end (match-beginning 0))
-          (setq html-content (buffer-substring-no-properties start end))
-          ;; Process the HTML content
-          (when html-content
-            ;; Escape HTML characters using sgml-quote in a temporary buffer
-            (setq escaped-html
-                  (with-temp-buffer
-                    (insert html-content)
-                    (sgml-mode) ;; Switch to sgml-mode to enable sgml-quote
-                    (sgml-quote (point-min) (point-max))
-                    (buffer-string)))
-
-            ;; Compress into a single line and remove extra spaces
-            (setq srcdoc (replace-regexp-in-string "[\n\r]+" " " escaped-html))
-            (setq srcdoc (replace-regexp-in-string "[ \t]+" " " srcdoc))
-
-            ;; Move to the end of the block and check for existing export block
-            (goto-char end)
-            (forward-line 1) ;; Move to the line after #+end_src
-
-            ;; Check if there's an existing #+begin_export html block
-            (when (looking-at "^#\\+begin_export html")
-              (setq export-start (point))
-              (when (re-search-forward "^#\\+end_export" nil t)
-                (setq export-end (point))
-                ;; Delete the existing export block
-                (delete-region export-start export-end)))
-
-            ;; Insert the new #+begin_export html block
-            (insert (format "#+begin_export html\n<iframe style=\"width:100%%\" srcdoc=\"%s\"></iframe>\n#+end_export\n" srcdoc))))))))
-
-
-
-(defun spike-leung/denote-toggle-publish-draft ()
-  "切换博客文章的状态，在 :published: 和 :draft:preview: 之间切换。
-因为 :published: 的文章比较多，org-publish 构建比较慢，
-切换到 :draft:preview: 构建更快，方便预览。"
-  (interactive)
-  (unless (buffer-file-name)
-    (user-error "当前缓冲区没有关联文件"))
-  (let* ((file (buffer-file-name))
-         (type (denote-filetype-heuristics file))
-         (keywords (denote-retrieve-front-matter-keywords-value file type))
-         (denote-rename-confirmations nil)
-         (base-keywords (seq-remove (lambda (k)
-                                      (member k '("published" "draft" "preview")))
-                                    keywords))
-         (new-keywords (if (member "published" keywords)
-                           (append '("draft" "preview") base-keywords)
-                         (cons "published" base-keywords))))
-    (when (buffer-modified-p)
-      (save-buffer))
-    (denote-rewrite-keywords file new-keywords type)
-    (denote-rename-file-using-front-matter file)
-    (when (buffer-modified-p)
-      (save-buffer))
-    (message "状态已切换至: %s"
-             (if (member "published" new-keywords)
-                 "published"
-               "draft-preview"))))
-
-
-
-;;; auto add id to headings
-
-(defun spike-leung/org-add-custom-id-to-headings-in-blog-files ()
-  "Add a CUSTOM_ID property to all headings in the current buffer, if it does not already exist."
-  (interactive)
-  (org-map-entries
-   (lambda ()
-     (unless (org-entry-get nil "CUSTOM_ID")
-       (let ((custom-id (org-id-new)))
-         (org-set-property "CUSTOM_ID" custom-id))))))
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (when (and buffer-file-name
-                       (string-match "taxodium" buffer-file-name))
-              (add-hook 'before-save-hook 'spike-leung/org-add-custom-id-to-headings-in-blog-files nil 'local))))
-
-
-
-
-(defun spike-leung/org-html-publish-sitemap (plist filename pub-dir)
-  "`org-publish' `:publishing-function' for sitemap.
-Add subtitle to links which has subtitle.
-See `org-html-publish-to-html' for param PLIST,FILENAME,PUB-DIR."
-  (let ((output-filename (org-html-publish-to-html plist filename pub-dir)))
-    ;; 这里应该用 `with-temp-buffer' 而不要用 `with-current-buffer' 和 '`find-file-noselect'
-    ;; see: https://emacs.stackexchange.com/questions/2868/whats-wrong-with-find-file-noselect
-    (with-temp-buffer
-      (insert-file-contents output-filename)
-      (goto-char (point-min))
-      (while (re-search-forward
-              (rx (group "<a" (*? anychar) ">" (*? anychar)) " - " (group (*? anychar)) (group "</a>"))
-              nil t)
-        (let ((subtitle (match-string 2)))
-          (replace-match (format "\\1\\3<span class=\"sitemap-subtitle\">%s</span>" subtitle))))
-      (write-region (point-min) (point-max) output-filename))
-    output-filename))
-
-
-
-(defun spike-leung/preview-post ()
-  "Local Preview post, read `#+export_file_name' as URL."
-  (interactive)
-  (let ((path (save-excursion
-                (goto-char (point-min))
-                (when (re-search-forward "^#\\+export_file_name: \\(.*\\)$" nil t)
-                  (string-trim (match-string-no-properties 1))))))
-    (browse-url (concat "https://localhost:3000/" path ".html"))))
-
-
-
-(defun spike-leung/handle-album-cover ()
-  "Handle Album cover.
-- select image in dired
-- rename file to denote format
-- use imageMagick convert image format to webp
-- move webp to ~/git/taxodium/publish/images/album/
-- use imageMagick convert webp to avif and copy to ~/git/taxodium/publish/images/album-wall/"
-  (declare (interactive-only t))
-  (interactive)
-  (require 'denote)
-  (let* ((files (dired-get-marked-files))
-         (root (expand-file-name "taxodium/publish/images" "~/git"))
-         (album-dir (expand-file-name "album/" root))
-         (wall-dir (expand-file-name "album-wall/" root)))
-    (make-directory album-dir t)
-    (make-directory wall-dir t)
-    (dolist (file files)
-      (let* ((base (file-name-base file))
-             (split (string-match "__" base))
-             (id (funcall denote-get-identifier-function nil nil))
-             (title (if split (substring base 0 split) base))
-             (keywords (if split (substring base (+ split 2)) ""))
-             (denote-name (file-name-nondirectory
-                           (denote-format-file-name
-                            album-dir id (split-string keywords "_" t) title nil nil)))
-             (webp (expand-file-name (concat denote-name ".webp") album-dir))
-             (avif (expand-file-name (concat denote-name ".avif") wall-dir)))
-        (call-process "magick" nil nil nil file "-quality" "75" webp)
-        (call-process "magick" nil nil nil
-                      webp "-resize" "50%" "-kuwahara" "4" "-paint" "0.5"
-                      "+noise" "Gaussian" "-resize" "300%"
-                      "-quality" "25" avif)
-        (message "Done: %s" (file-name-nondirectory file)))
-      (sleep-for 0.5))))
-
-
-;;;###autoload
-(defun spike-leung/format-album-block (title year artist webp-base)
-  "Format a single album-wall Org block."
-  (concat
-   (format "#+caption: @@html:<b>%s</b>@@ @@html:<br>@@ %s @@html:<br>@@\n" title artist)
-   "#+attr_html: loading=\"lazy\"\n"
-   (format "#+attr_html: :alt %s by %s (%s)\n" title artist year)
-   (format "#+attr_html: :title %s by %s (%s)\n" title artist year)
-   (format "#+attr_html: :data-href images/album/%s.webp\n" webp-base)
-   (format "[[file:images/album-wall/%s.avif]]" webp-base)))
-
-(defun spike-leung/insert-album-wall (&optional arg)
-  "Select album-wall .avif files and insert formatted Org blocks at point.
-With prefix ARG (\\[universal-argument]), first prompt for a file name
-regexp to filter candidates (like `denote-dired')."
-  (interactive "P")
-  (require 'denote)
-  (let* ((denote-directory
-          (expand-file-name "~/git/taxodium/publish/images/album-wall"))
-         (regexp (when arg
-                   (denote-files-matching-regexp-prompt
-                    "Insert album(s) matching REGEXP")))
-         (all-files (denote-directory-files regexp))
-         (avif-files (seq-filter (lambda (f) (string-match "\\.avif\\'" f))
-                                 all-files))
-         (choices
-          (mapcar (lambda (f)
-                    (let* ((base (file-name-base f))
-                           (parsed (spike-leung/parse-album-filename base)))
-                      (cons (format "%s  %s :: %s (%s)"
-                                    base
-                                    (nth 0 parsed)
-                                    (nth 2 parsed)
-                                    (nth 1 parsed))
-                            parsed)))
-                  avif-files)))
-    (unless choices
-      (user-error "No album-wall .avif files found"))
-    (let ((selected (completing-read-multiple "Album(s): " choices)))
-      (dolist (disp selected)
-        (let* ((parsed (cdr (assoc disp choices #'string=)))
-               (title (nth 0 parsed))
-               (year (nth 1 parsed))
-               (artist (nth 2 parsed))
-               (base (nth 3 parsed)))
-          (insert (spike-leung/format-album-block title year artist base))
-          (insert "\n\n"))))))
-
-
-
 
 (provide 'init-org-publish)
 ;;; init-org-publish.el ends here

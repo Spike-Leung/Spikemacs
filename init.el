@@ -27,6 +27,7 @@
 (require 'init-lisp)
 (require 'init-minibuffer)
 (require 'init-misc)
+(require 'init-blog-helper)
 (require 'init-org-publish)
 (require 'init-org)
 (require 'init-prog)
