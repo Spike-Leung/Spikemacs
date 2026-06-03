@@ -12,7 +12,8 @@
 	      :map ctl-x-4-map
 	      ("C-j" . dired-jump-other-window)
 	      :map dired-mode-map
-	      ("C-c C-q" . wdired-change-to-wdired-mode))
+	      ("C-c C-q" . wdired-change-to-wdired-mode)
+              ("A" . spike-leung/handle-album-cover))
   :config
   (setq-default dired-dwim-target t)
   (setq dired-recursive-deletes 'top)

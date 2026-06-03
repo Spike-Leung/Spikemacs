@@ -71,6 +71,7 @@
   (transient-define-prefix spike-leung/transient-blog ()
     ["Blog related"
      ("i" "insert-image" spike-leung/insert-blog-images)
+     ("a" "insert-album-wall" spike-leung/insert-album-wall)
      ("v" "insert-video" spike-leung/insert-blog-video)
      ("p" "preview-current-post" spike-leung/preview-post)
      ("t" "toggle-publish-draft" spike-leung/denote-toggle-publish-draft)])
