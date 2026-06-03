@@ -762,5 +762,92 @@ See `org-html-publish-to-html' for param PLIST,FILENAME,PUB-DIR."
 
 
 
+(defun spike-leung/handle-album-cover ()
+  "Handle Album cover.
+- select image in dired
+- rename file to denote format
+- use imageMagick convert image format to webp
+- move webp to ~/git/taxodium/publish/images/album/
+- use imageMagick convert webp to avif and copy to ~/git/taxodium/publish/images/album-wall/"
+  (declare (interactive-only t))
+  (interactive)
+  (require 'denote)
+  (let* ((files (dired-get-marked-files))
+         (root (expand-file-name "taxodium/publish/images" "~/git"))
+         (album-dir (expand-file-name "album/" root))
+         (wall-dir (expand-file-name "album-wall/" root)))
+    (make-directory album-dir t)
+    (make-directory wall-dir t)
+    (dolist (file files)
+      (let* ((base (file-name-base file))
+             (split (string-match "__" base))
+             (id (funcall denote-get-identifier-function nil nil))
+             (title (if split (substring base 0 split) base))
+             (keywords (if split (substring base (+ split 2)) ""))
+             (denote-name (file-name-nondirectory
+                           (denote-format-file-name
+                            album-dir id (split-string keywords "_" t) title nil nil)))
+             (webp (expand-file-name (concat denote-name ".webp") album-dir))
+             (avif (expand-file-name (concat denote-name ".avif") wall-dir)))
+        (call-process "magick" nil nil nil file "-quality" "75" webp)
+        (call-process "magick" nil nil nil
+                      webp "-resize" "50%" "-kuwahara" "4" "-paint" "0.5"
+                      "+noise" "Gaussian" "-resize" "300%"
+                      "-quality" "25" avif)
+        (message "Done: %s" (file-name-nondirectory file)))
+      (sleep-for 0.5))))
+
+
+;;;###autoload
+(defun spike-leung/format-album-block (title year artist webp-base)
+  "Format a single album-wall Org block."
+  (concat
+   (format "#+caption: @@html:<b>%s</b>@@ @@html:<br>@@ %s @@html:<br>@@\n" title artist)
+   "#+attr_html: loading=\"lazy\"\n"
+   (format "#+attr_html: :alt %s by %s (%s)\n" title artist year)
+   (format "#+attr_html: :title %s by %s (%s)\n" title artist year)
+   (format "#+attr_html: :data-href images/album/%s.webp\n" webp-base)
+   (format "[[file:images/album-wall/%s.avif]]" webp-base)))
+
+(defun spike-leung/insert-album-wall (&optional arg)
+  "Select album-wall .avif files and insert formatted Org blocks at point.
+With prefix ARG (\\[universal-argument]), first prompt for a file name
+regexp to filter candidates (like `denote-dired')."
+  (interactive "P")
+  (require 'denote)
+  (let* ((denote-directory
+          (expand-file-name "~/git/taxodium/publish/images/album-wall"))
+         (regexp (when arg
+                   (denote-files-matching-regexp-prompt
+                    "Insert album(s) matching REGEXP")))
+         (all-files (denote-directory-files regexp))
+         (avif-files (seq-filter (lambda (f) (string-match "\\.avif\\'" f))
+                                 all-files))
+         (choices
+          (mapcar (lambda (f)
+                    (let* ((base (file-name-base f))
+                           (parsed (spike-leung/parse-album-filename base)))
+                      (cons (format "%s  %s :: %s (%s)"
+                                    base
+                                    (nth 0 parsed)
+                                    (nth 2 parsed)
+                                    (nth 1 parsed))
+                            parsed)))
+                  avif-files)))
+    (unless choices
+      (user-error "No album-wall .avif files found"))
+    (let ((selected (completing-read-multiple "Album(s): " choices)))
+      (dolist (disp selected)
+        (let* ((parsed (cdr (assoc disp choices #'string=)))
+               (title (nth 0 parsed))
+               (year (nth 1 parsed))
+               (artist (nth 2 parsed))
+               (base (nth 3 parsed)))
+          (insert (spike-leung/format-album-block title year artist base))
+          (insert "\n\n"))))))
+
+
+
+
 (provide 'init-org-publish)
 ;;; init-org-publish.el ends here
