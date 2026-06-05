@@ -278,7 +278,6 @@
 ** [[https://chengpeiquan.com/feed.xml][程沛权]]                                                     :code:frontend:
 ** [[https://thirdshire.com/index.xml][第三夏尔]]
 ** [[https://z.arlmy.me/atom.xml][素生]]                                                    :daily:book:quote:
-** [[https://www.wikimoe.com/rss][维基萌]]
 ** [[https://elliot00.com/rss][编码与禅]]                                                      :emacs:tech:
 ** [[https://caa-ins.org/feed][网络社会研究所]]                                                    :weekly:
 ** [[https://lawtee.com/index.xml][老 T 博客]]
@@ -303,6 +302,7 @@
 ** [[http://xahlee.info/emacs/emacs/blog.xml][Xah Emacs Blog]]                                                     :emacs:
 ** [[https://jamesg.blog/feeds/posts.xml][James' Coffee Blog]]
 ** [[https://blast-o-rama.com/rss][blast-o-rama. | Marty Day]]
+** [[https://www.wikimoe.com/rss][维基萌]]                                                     :圣地巡礼:動漫:
 * 设计有趣的博客
 - [[https://licoricewhipit.tumblr.com/rss][Black Licorice]]
 - [[https://ribo.zone/feed.xml][ribo.zone]]
