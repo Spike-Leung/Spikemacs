@@ -91,6 +91,43 @@
    (format "#+attr_html: :data-href images/album/%s.webp\n" webp-base)
    (format "[[file:images/album-wall/%s.avif]]" webp-base)))
 
+(defun spike-leung/parse-album-filename (base)
+  "Parse album filename BASE (e.g. \"ID--TITLE__KEYWORDS\").
+Returns list (title year artist webp-base)."
+  (let* ((dash (string-match "--" base))
+         (title-full (if dash (substring base (+ dash 2)) base))
+         (uscore (string-match "__" title-full))
+         (title (if uscore (substring title-full 0 uscore) title-full))
+         (kw-str (if uscore (substring title-full (+ uscore 2)) ""))
+         (kw-list (split-string kw-str "_" t))
+         (year-token (seq-find (lambda (s) (and (= (length s) 8)
+                                                (string-match-p "[0-9]\\{8\\}" s)))
+                               kw-list))
+         (year (if year-token (substring year-token 0 4) "????"))
+         (removed '("albumwall" "image"))
+         (artist-tokens (seq-remove
+                         (lambda (s) (or (member s removed)
+                                         (and (= (length s) 8)
+                                              (string-match-p "[0-9]\\{8\\}" s))))
+                         kw-list))
+         (artist (mapconcat #'identity artist-tokens " "))
+         (title-cap (if (string-match "[a-zA-Z]" title)
+                        (concat (upcase (substring title 0 1))
+                                (substring title 1))
+                      title)))
+    (list title-cap year artist base)))
+
+(defun spike-leung/insert-album-block (name)
+  "Insert a formatted album-wall block for file NAME."
+  (let* ((parsed (spike-leung/parse-album-filename
+                  (file-name-base name)))
+         (title (nth 0 parsed))
+         (year (nth 1 parsed))
+         (artist (nth 2 parsed))
+         (base (nth 3 parsed)))
+    (insert (spike-leung/format-album-block title year artist base))
+    (insert "\n\n")))
+
 (defun spike-leung/insert-album-wall (&optional arg)
   "Select album-wall .avif files and insert formatted Org blocks at point.
 With one \\[universal-argument], first prompt for a regexp to filter
@@ -113,13 +150,13 @@ regexp and insert ALL matching files without picking."
       (user-error "No album-wall .avif files found"))
     (if (equal arg '(16))
         (dolist (name names)
-          (spike-leung--insert-block name))
+          (spike-leung/insert-album-block name))
       (let* ((table (apply #'denote-get-completion-table
                            names
                            denote-file-prompt-extra-metadata))
              (selected (completing-read-multiple "Album(s): " table)))
         (dolist (name selected)
-          (spike-leung--insert-block name))))))
+          (spike-leung/insert-album-block name))))))
 
 
 
