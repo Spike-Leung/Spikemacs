@@ -5,6 +5,8 @@
 ;; concept: these are the panels within an Emacs frame which contain
 ;; buffers.
 
+;; Recommend reading: https://karthinks.com/software/emacs-window-management-almanac/
+
 ;;; Code:
 
 
@@ -41,7 +43,7 @@
    switch-window-timeout nil
    switch-window-minibuffer-shortcut ?z)
   :bind
-  (("C-x o" . switch-window)))
+  (("C-x o" . switch-window))) ;; builtin `windmove' is also useful
 
 
 
