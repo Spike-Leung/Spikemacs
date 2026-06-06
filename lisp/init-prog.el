@@ -17,11 +17,12 @@
          ("C-c ! c" . flymake-start)))
 
 ;; Add spell-checking in comments for all programming language modes
-(use-package flyspell
-  :diminish
-  :ensure nil
-  :hook ((prog-mode . flyspell-prog-mode)))
-(use-package consult-flyspell)
+;; (use-package flyspell
+;;   :diminish
+;;   :ensure nil
+;;   :hook ((prog-mode . flyspell-prog-mode)))
+
+;; (use-package consult-flyspell)
 
 
 
