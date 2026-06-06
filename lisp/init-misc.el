@@ -77,7 +77,12 @@
                         ("Haici" . [simple-query
                                     "dict.cn"
                                     "dict.cn/search?q="
-                                    ""])))
+                                    ""])
+                        ("漢典" . [simple-query
+                                    "zdic.net"
+                                    "zdic.net/hans/"
+                                    ""])
+                        ))
 
   (defun spike-leung/webjump-symbol-at-point (target)
     "获取光标下的 symbol 并通过 webjump 搜索。TARGET 是 `embark-act' 的对象。"
