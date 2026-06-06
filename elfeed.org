@@ -272,7 +272,6 @@
 ** [[https://weekly.tw93.fun/rss.xml][潮流周刊]]                                                          :weekly:
 ** [[https://www.linggandianbo.com/rss/][灵感电波]]                                               :weekly:newsletter:
 ** [[https://blog.southfox.me/feed.xml][狐狸反走矣]]
-** [[https://2cat.net/feed/][猫鱼]]                                                                :life:
 ** [[https://ameow.xyz/feed.xml][猫鱼周刊]]                                                          :weekly:
 ** [[https://imgradeone.com/blog.xml][真正的自言者一么]]
 ** [[https://chengpeiquan.com/feed.xml][程沛权]]                                                     :code:frontend:
@@ -295,7 +294,13 @@
 ** [[https://www.chenrui.com/feed.php][陈锐]]
 ** [[https://www.gaotianchi.com/feed.xml][高天驰]]
 ** [[https://ro3or.com/index.xml][鹅玉]]
-* 暂時不感兴趣了 / 更新太頻繁
+** [[https://trashposts.com/rss.xml][廢文小天地]]                                                          :台湾:
+** [[https://yangbear.bearblog.dev/feed/][YangBear]]                                                            :台湾:
+** [[https://shuyulin1127.com/feed/][Shuyu Pixelart]]                                                      :台湾:
+** [[https://shuojen.com/blog/rss.xml][Shuo-jen Huang]]                                                      :台湾:
+** [[https://www.yozblog.com/index.xml][DrummerYoZ 鼓手柚子]]                                                 :台湾:
+** [[https://karthinks.com/index.xml][Karthinks]]                                                          :emacs:
+* no-update
 ** [[https://feeds.feedblitz.com/alearningaday&x=1][A Learning Day Feed]]
 ** [[https://seths.blog/feed/][SETH'S BLOG]]
 ** [[https://amf.didiermary.fr/feed/][African Music Forum]]                                                :music:
@@ -303,6 +308,7 @@
 ** [[https://jamesg.blog/feeds/posts.xml][James' Coffee Blog]]
 ** [[https://blast-o-rama.com/rss][blast-o-rama. | Marty Day]]
 ** [[https://www.wikimoe.com/rss][维基萌]]                                                     :圣地巡礼:動漫:
+** [[https://2cat.net/feed/][猫鱼]]                                                                :life:
 * 设计有趣的博客
 - [[https://licoricewhipit.tumblr.com/rss][Black Licorice]]
 - [[https://ribo.zone/feed.xml][ribo.zone]]
