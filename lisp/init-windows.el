@@ -81,6 +81,57 @@
 (unbind-key "s-n" 'help-quick-use-map)
 
 
+;; Steal from https://karthinks.com/software/emacs-window-management-almanac/#switch-buffers-in-the-next-window-dot
+
+(defun spike-leung/next-buffer (&optional arg)
+  "Switch to the next ARGth buffer.
+
+With a universal prefix arg, run in the next window."
+  (interactive "P")
+  (if-let (((equal arg '(4)))
+           (win (other-window-for-scrolling)))
+      (with-selected-window win
+        (next-buffer)
+        (setq prefix-arg current-prefix-arg))
+    (next-buffer arg)))
+
+(defun spike-leung/previous-buffer (&optional arg)
+  "Switch to the previous ARGth buffer.
+
+With a universal prefix arg, run in the next window."
+  (interactive "P")
+  (if-let (((equal arg '(4)))
+           (win (other-window-for-scrolling)))
+      (with-selected-window win
+        (previous-buffer)
+        (setq prefix-arg current-prefix-arg))
+    (previous-buffer arg)))
+
+(defun spike-leung/switch-buffer (&optional arg)
+  (interactive "P")
+  (run-at-time
+   0 nil
+   (lambda (&optional arg)
+     (if-let (((equal arg '(4)))
+              (win (other-window-for-scrolling)))
+         (with-selected-window win
+           (switch-to-buffer
+            (read-buffer-to-switch
+             (format "Switch to buffer (%S)" win))))
+       (call-interactively #'switch-to-buffer)))
+   arg))
+
+(defvar-keymap buffer-cycle-map
+  :doc "Keymap for cycling through buffers, intended for `repeat-mode'."
+  :repeat t
+  "n" 'spike-leung/next-buffer
+  "p" 'spike-leung/previous-buffer
+  "b" 'spike-leung/switch-buffer)
+
+(keymap-global-set "C-x C-p" 'spike-leung/previous-buffer)
+(keymap-global-set "C-x C-n" 'spike-leung/next-buffer)
+
+
 
 (provide 'init-windows)
 ;;; init-windows.el ends here
