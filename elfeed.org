@@ -56,6 +56,7 @@
 ** [[https://divergentrays.com/blog/blogfeed.xml][Divergent Rays]]                                               :weekly:宝石:
 ** [[https://diygod.cc/feed][DIYgod]]
 ** [[https://notes.druchan.com/feed.xml][druchan]]
+** [[https://www.yozblog.com/index.xml][DrummerYoZ 鼓手柚子]]                                                 :台湾:
 ** [[https://dylanbeattie.net/rss][dylanbeattie.net]]
 ** [[https://ege.celikci.me/feed.atom][ege.celikci.me]]
 ** [[https://elizen.me/index.xml][Elizen]]
@@ -104,6 +105,7 @@
 ** [[https://www.joshwcomeau.com/rss.xml][Josh Comeau]]                                             :css:web:frontend:
 ** [[https://hamatti.org/feed/feed.xml][Juhis]]
 ** [[https://jvns.ca/atom.xml][Julia Evans]]                                                         :tech:
+** [[https://karthinks.com/index.xml][Karthinks]]                                                          :emacs:
 ** [[https://kayleerowena.com/rss.xml][Kaylee Rowena]]                                      :weekly:设计好看的博客:
 ** [[https://kedara.eu/blog/index.xml][Kedara.eu]]
 ** [[https://kill-the-newsletter.com/feeds/3hl5jx56nh55vdvwhoh1.xml][kill-the-newsletter@taxodium]]                                      :weekly:
@@ -178,6 +180,8 @@
 ** [[https://www.sarasoueidan.com/blog/index.xml][Sara Soueidan]]                                                :ui:frontend:
 ** [[https://scyy.fi/index.xml][Sarabet Chang Yuye]]
 ** [[https://sebastiano.tronto.net/blog/feed.xml][Sebastiano Tronto's blog]]                                            :tech:
+** [[https://shuojen.com/blog/rss.xml][Shuo-jen Huang]]                                                      :台湾:
+** [[https://shuyulin1127.com/feed/][Shuyu Pixelart]]                                                      :台湾:
 ** [[https://sightlessscribbles.com/feed.xml][Sightless Scribbles]]
 :PROPERTIES:
 :DESCRIPTION: 盲人作家
@@ -187,7 +191,6 @@
 ** [[https://simonwillison.net/atom/everything/][Simon Willison]]
 ** [[https://sindresorhus.com/rss.xml][Sindre Sorhus]]                                                   :frontend:
 ** [[https://hollie.eilloh.net/rss.xml][Small Good Things]]
-** [[https://blog.solazy.me/feed/][So!azy]]                                                             :daily:
 ** [[https://www.stefanjudis.com/rss.xml][Stefan Judis]]                                             :frontend:weekly:
 ** [[https://www.sanityinc.com/feed.xml][Steve Purcell]]                                                      :emacs:
 ** [[https://susam.net/feed.xml][Susam Pal]]
@@ -238,6 +241,7 @@
 ** [[https://xeonzilla.top/feed.xml][x7aNote]]
 ** [[https://xenodium.com/rss.xml][xenodium]]                                                           :emacs:
 ** [[https://xuanwo.io/index.xml][Xuanwo's Blog]]                                                  :code:tech:
+** [[https://yangbear.bearblog.dev/feed/][YangBear]]                                                            :台湾:
 ** [[https://your-local-grubdog.neocities.org/feed.xml][Your Local Grubdog]]
 ** [[https://zine.milliesquilly.com/rss.xml][zine of millie]]                                            :cool:ux:weekly:
 ** [[https://keelii.com/][临池不辍]]
@@ -252,12 +256,12 @@
 ** [[https://www.kawabangga.com/feed][卡瓦邦噶！]]                                                     :code:tech:
 ** [[https://www.changhai.org/feed.xml][卢昌海个人主页]]
 ** [[https://yinji.org/feed][印记]]
-** [[https://www.hecaitou.com/feeds/posts/default][和菜头]]
 ** [[https://chlo.is/feed.atom][园子里的日光]]
 ** [[https://jesor.me/feed.xml][大破进击]]
 ** [[https://spacexcode.com/blog/rss.xml][太空编程 Blog]]                                              :frontend:tech:
 ** [[https://wangyurui.com/feed.xml][太隐]]
 ** [[https://wangquan.cc/feed/][小王日记]]
+** [[https://trashposts.com/rss.xml][廢文小天地]]                                                          :台湾:
 ** [[https://wenshan.home.blog/feed/][文山随笔]]                                                      :emacschina:
 ** [[https://blog.verdant.ee/atom.xml][映屿]]                                                              :weekly:
 ** [[https://www.laomuzhu.cn/feed/][木竹]]
@@ -294,12 +298,7 @@
 ** [[https://www.chenrui.com/feed.php][陈锐]]
 ** [[https://www.gaotianchi.com/feed.xml][高天驰]]
 ** [[https://ro3or.com/index.xml][鹅玉]]
-** [[https://trashposts.com/rss.xml][廢文小天地]]                                                          :台湾:
-** [[https://yangbear.bearblog.dev/feed/][YangBear]]                                                            :台湾:
-** [[https://shuyulin1127.com/feed/][Shuyu Pixelart]]                                                      :台湾:
-** [[https://shuojen.com/blog/rss.xml][Shuo-jen Huang]]                                                      :台湾:
-** [[https://www.yozblog.com/index.xml][DrummerYoZ 鼓手柚子]]                                                 :台湾:
-** [[https://karthinks.com/index.xml][Karthinks]]                                                          :emacs:
+** [[https://gkeenan.co/avgb/feed.xml][A Very Good Blog by Keenan]]
 * no-update
 ** [[https://feeds.feedblitz.com/alearningaday&x=1][A Learning Day Feed]]
 ** [[https://seths.blog/feed/][SETH'S BLOG]]
@@ -309,6 +308,8 @@
 ** [[https://blast-o-rama.com/rss][blast-o-rama. | Marty Day]]
 ** [[https://www.wikimoe.com/rss][维基萌]]                                                     :圣地巡礼:動漫:
 ** [[https://2cat.net/feed/][猫鱼]]                                                                :life:
+** [[https://blog.solazy.me/feed/][So!azy]]                                                             :daily:
+** [[https://www.hecaitou.com/feeds/posts/default][和菜头]]
 * 设计有趣的博客
 - [[https://licoricewhipit.tumblr.com/rss][Black Licorice]]
 - [[https://ribo.zone/feed.xml][ribo.zone]]
