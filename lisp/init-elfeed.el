@@ -162,6 +162,7 @@ Prefix with translate.kagi.com to browse with translated version. "
     (with-temp-buffer
       (goto-char (point-min))
       (insert (format "#+title: Reading list\n"))
+      (insert "#+options: html-postamble:nil\n")
       (insert "#+html_head_extra: <link rel=\"stylesheet\" href=\"./main.css\" />\n")
       (insert "#+html_head_extra: <script defer src=\"./main.js\"></script>\n")
       (insert "@@html:<div class=\"action\">@@")
@@ -178,8 +179,7 @@ Prefix with translate.kagi.com to browse with translated version. "
       (insert "這是从 [[https://github.com/emacs-elfeed/elfeed][elfeed]] 导出的个人訂閱数据，仅方便个人使用。\n\n
 具体見： [[https://taxodium.ink/export-elfeed-selected-entries-to-github-page-as-reading-list.html][导出 Elfeed 选中条目到 GitHub Page 作为 Reading List]]。\n\n")
       (org-mode)
-      (let ((org-html-postamble nil))
-        (org-export-to-file 'html "~/git/reading-list/index.html")))
+      (org-export-to-file 'html "~/git/reading-list/index.html"))
     (message "Entries export to index.html")
     (let ((default-directory repo-dir))
       (unless (file-directory-p (expand-file-name ".git" repo-dir))
