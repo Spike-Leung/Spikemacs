@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+
+
 ;; Stop C-z from minimizing windows under OS X
 (defun sanityinc/maybe-suspend-frame ()
   (interactive)
@@ -20,6 +22,10 @@
   (set-scroll-bar-mode nil))
 
 (menu-bar-mode -1)
+
+;; hide titlebar
+;; see: https://github.com/d12frosted/homebrew-emacs-plus#emacs-29-1
+(add-to-list 'default-frame-alist '(undecorated-round . t))
 
 
 
