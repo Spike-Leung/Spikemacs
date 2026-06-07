@@ -106,9 +106,7 @@
       ("p" "publish" org-publish)
       ("e" "elfeed" spike-leung/consult-elfeed)
       ("w" "webjump" webjump)]
-     ["(・・?)"
-      ("aa" "avy" avy-goto-char-timer)
-      ("ar" "avy-resume" avy-resume)]
+     ;; ["(・・?)"]
      ["ヾ(･|"
       ("B" "bookmark" spike-leung/transient-bookmark)
       ("r" "register" spike-leung/transient-register)]
