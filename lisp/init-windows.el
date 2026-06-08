@@ -44,15 +44,25 @@
 
 
 ;; Make "C-x o" prompt for a target window when there are more than 2
-(use-package switch-window
-  :ensure t
-  :init
-  (setq
-   switch-window-shortcut-style 'qwerty
-   switch-window-timeout nil
-   switch-window-minibuffer-shortcut ?z)
-  :bind
-  (("C-x o" . switch-window))) ;; builtin `windmove' is also useful
+;; (use-package switch-window
+;;   :ensure t
+;;   :init
+;;   (setq
+;;    switch-window-shortcut-style 'qwerty
+;;    switch-window-timeout nil
+;;    switch-window-minibuffer-shortcut ?z)
+;;   :bind
+;;   (("C-x o" . switch-window))) ;; builtin `windmove' is also useful
+
+;; https://karthinks.com/software/emacs-window-management-almanac/#the-back-and-forth-method
+(defun spike-leung/other-window-mru ()
+  "Select the most recently used window on this frame."
+  (interactive)
+  (when-let ((mru-window
+              (get-mru-window
+               nil nil 'not-this-one-dummy)))
+    (select-window mru-window)))
+(keymap-global-set "C-x o" 'spike-leung/other-window-mru)
 
 (use-package winum
   :hook (after-init . winum-mode)
