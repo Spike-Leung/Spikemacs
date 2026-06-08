@@ -52,7 +52,9 @@
 ;;    switch-window-timeout nil
 ;;    switch-window-minibuffer-shortcut ?z)
 ;;   :bind
-;;   (("C-x o" . switch-window))) ;; builtin `windmove' is also useful
+;;   (("C-x o" . switch-window)))
+
+;; builtin `windmove' is also useful
 
 ;; https://karthinks.com/software/emacs-window-management-almanac/#the-back-and-forth-method
 (defun spike-leung/other-window-mru ()
@@ -63,6 +65,15 @@
                nil nil 'not-this-one-dummy)))
     (select-window mru-window)))
 (keymap-global-set "C-x o" 'spike-leung/other-window-mru)
+
+;; You can swap windows by calling ace-window with a prefix argument C-u.
+;; You can delete the selected window by calling ace-window with a double prefix argument,
+;; i.e. C-u C-u.
+(use-package ace-window
+  :bind ("C-x O" . ace-window)
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (ace-window-display-mode))
 
 (use-package winum
   :hook (after-init . winum-mode)
