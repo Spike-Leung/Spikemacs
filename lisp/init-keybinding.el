@@ -78,7 +78,6 @@
 
   (transient-define-prefix spike-leung/transient-commands ()
     ["Frequently used commands"
-     ("g" "gitmoji" gitmoji-insert)
      ("o" "olivetti" olivetti-mode)])
 
   (transient-define-prefix spike-leung/transient-multi-cursors ()
@@ -102,17 +101,18 @@
     "A transient to list all my frequently used command."
     [["(｡•̀ᴗ-)✧"
       ("b" "blog" spike-leung/transient-blog)
-      ("g" "gptel" spike-leung/transient-gptel)
-      ("p" "publish" org-publish)
       ("e" "elfeed" spike-leung/consult-elfeed)
+      ("p" "publish" org-publish)]
+     ["(・・?)"
+      ("G" "gptel" spike-leung/transient-gptel)
+      ("g" "gitmoji" gitmoji-insert)
+      ("t" "translate" spike-leung/transient-translate)
+      ("u" "utils" spike-leung/transient-commands)
       ("w" "webjump" webjump)]
-     ;; ["(・・?)"]
      ["ヾ(･|"
       ("B" "bookmark" spike-leung/transient-bookmark)
-      ("r" "register" spike-leung/transient-register)]
+      ("R" "register" spike-leung/transient-register)]
      ["(＠_＠)"
-      ("u" "utils" spike-leung/transient-commands)
-      ("t" "translate" spike-leung/transient-translate)
       ("mc" "multi cursor" spike-leung/transient-multi-cursors)
       ("md" "markdown-preview" spike-leung/transient-markdown)
       ("ol" "consult-outline" consult-outline)]]))
