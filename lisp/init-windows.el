@@ -11,6 +11,15 @@
 
 
 
+;; https://karthinks.com/software/emacs-window-management-almanac/#scroll-other-window--built-in
+(setq other-window-scroll-default
+      (lambda ()
+        (or (get-mru-window nil nil 'not-this-one-dummy)
+            (next-window)               ;fall back to next window
+            (next-window nil nil 'visible))))
+
+
+
 ;; Navigate window layouts with "C-c <left>" and "C-c <right>"
 (use-package winner
   :hook (after-init . winner-mode)
