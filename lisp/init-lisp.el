@@ -98,12 +98,12 @@
       (eval-region (min (point) (mark)) (max (point) (mark)))
     (pp-eval-last-sexp prefix)))
 
-(global-set-key [remap eval-expression] 'pp-eval-expression)
+(keymap-global-set "<remap> <eval-expression>" 'pp-eval-expression)
 
 (defun sanityinc/load-this-file ()
   "Load the current file or buffer.
-The current directory is temporarily added to `load-path'.  When
-there is no current file, eval the current buffer."
+  The current directory is temporarily added to `load-path'.  When
+  there is no current file, eval the current buffer."
   (interactive)
   (let ((load-path (cons default-directory load-path))
         (file (buffer-file-name)))
@@ -140,8 +140,8 @@ there is no current file, eval the current buffer."
     (save-excursion
       (goto-char (point-min))
       (insert ";;; " fname " --- Insert description here -*- lexical-binding: t -*-\n"
-              ";;; Commentary:\n"
-              ";;; Code:\n\n")
+  ";;; Commentary:\n"
+  ";;; Code:\n\n")
       (goto-char (point-max))
       (insert "(provide '" (file-name-sans-extension fname) ")\n")
       (insert ";;; " fname " ends here\n"))))

@@ -39,7 +39,7 @@
         (winner-undo)
       (delete-other-windows)))
 
-  (global-set-key (kbd "C-x 1") #'sanityinc/toggle-delete-other-windows))
+  (keymap-global-set "C-x 1" #'sanityinc/toggle-delete-other-windows))
 
 
 

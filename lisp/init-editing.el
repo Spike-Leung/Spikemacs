@@ -4,10 +4,10 @@
 
 
 
-(global-set-key (kbd "M-j") 'join-line)
+(keymap-global-set "M-j" 'join-line)
 ;; Zap *up* to char is a handy pair for zap-to-char
 ;; see also: https://github.com/cute-jumper/avy-zap
-(global-set-key (kbd "M-Z") 'zap-up-to-char)
+(keymap-global-set "M-Z" 'zap-up-to-char)
 
 ;; remap to dwim version
 (define-key (current-global-map) [remap capitalize-word] 'capitalize-dwim)
@@ -51,7 +51,7 @@
   :hook (after-init . global-whitespace-cleanup-mode))
 
 ;; use M-SPC
-(global-set-key [remap just-one-space] 'cycle-spacing)
+(keymap-global-set "<remap> <just-one-space>" 'cycle-spacing)
 
 
 
