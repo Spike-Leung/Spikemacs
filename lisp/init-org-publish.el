@@ -117,7 +117,6 @@ viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" width=\
 </div>
 <script src=\"/js/code-enhanced.js\" defer></script>
 <script src=\"/js/code-highlighted.js\" defer></script>
-<script src=\"/js/heading-enhanced.js\" defer></script>
 <script src=\"/js/backtop.js\" defer></script>
 <script src=\"/js/sidenote.js\" defer></script>
 <script src=\"/js/purify.min.js\" defer></script>
@@ -145,11 +144,10 @@ viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" width=\
   </style>
 </noscript>
 "
-"`:html-postamble' for `org-publish'.")
+  "`:html-postamble' for `org-publish'.")
 
 (defconst spike-leung/html-postamble-sitemap "
 <script src=\"/js/backtop.js\" defer></script>
-<script src=\"/js/heading-enhanced.js\" defer></script>
 <script src=\"/js/translate.js\" defer></script>
 <!--
 <script src=\"/js/snow-fall.js\" defer type=\"mopdule\"></script>
