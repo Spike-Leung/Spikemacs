@@ -23,7 +23,7 @@
   ;; (put 'dired-find-alternate-file 'disabled nil)
 
   (setq dired-listing-switches
-        "-l --almost-all --human-readable --group-directories-first --no-group"))
+        "-l --human-readable --group-directories-first --no-group"))
 
 
 
