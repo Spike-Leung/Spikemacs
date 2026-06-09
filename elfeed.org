@@ -299,6 +299,8 @@
 ** [[https://www.gaotianchi.com/feed.xml][高天驰]]
 ** [[https://ro3or.com/index.xml][鹅玉]]
 ** [[https://gkeenan.co/avgb/feed.xml][A Very Good Blog by Keenan]]
+** [[https://smallcypress.bearblog.dev/feed][Small Cypress]]
+** [[https://openpath.quest/feed.xml][Chad Whitacre]]
 * no-update
 ** [[https://feeds.feedblitz.com/alearningaday&x=1][A Learning Day Feed]]
 ** [[https://seths.blog/feed/][SETH'S BLOG]]
