@@ -61,7 +61,19 @@
         modus-themes-bold-constructs t
         modus-themes-disable-other-themes t)
   (setq modus-themes-common-palette-overrides
-        '((bg-prose-block-contents unspecified))))
+        '((bg-prose-block-contents unspecified)
+          (bg-prose-block-delimiter unspeficied)
+          (fg-prose-block-delimiter fg-dim)))
+
+  (defun spike-leung/modus-themes-margin-override (&rest _)
+    "Make margin background the same as `defaults'.
+     Margin will act as padding in `olivetti-mode'.
+     Add this to the `modus-themes-post-load-hook'."
+    (let ((bg (face-background 'default)))
+      (custom-set-faces
+       `(margin ((t :background ,bg :foreground ,bg))))))
+
+  (add-hook 'modus-themes-post-load-hook #'spike-leung/modus-themes-margin-override))
 
 (use-package ef-themes)
 (use-package doric-themes)
