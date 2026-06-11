@@ -101,7 +101,6 @@
     "A transient to list all my frequently used command."
     [["(｡•̀ᴗ-)✧"
       ("b" "blog" spike-leung/transient-blog)
-      ("e" "elfeed" spike-leung/consult-elfeed)
       ("p" "publish" org-publish)]
      ["(・・?)"
       ("G" "gptel" spike-leung/transient-gptel)
