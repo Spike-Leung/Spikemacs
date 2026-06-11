@@ -13,7 +13,9 @@
   (elfeed-curl-timeout 60)
   (elfeed-db-directory "~/.elfeed/")
   :bind ((:map elfeed-search-mode-map
+               ("f" . elfeed-update-feed)
                ("t" . spike-leung/elfeed-toggle-unread)
+               ("T" . elfeed-tree)
                ("Z" . spike-leung/elfeed-reading-list)))
   :config
   (setq elfeed-feeds
@@ -210,7 +212,6 @@
           ("https://simonwillison.net/atom/everything/" :title "Simon Willison")
           ("https://sindresorhus.com/rss.xml" :title "Sindre Sorhus" frontend)
           ("https://smallcypress.bearblog.dev/feed" :title "Small Cypress")
-
           ("https://susam.net/feed.xml" :title "Susam Pal")
           ("https://ayu.land/revlog#feed" :title "Sweetfish Ayu" kawai)
           ("https://syls.blog/feed/" :title "Syl's Blog")
