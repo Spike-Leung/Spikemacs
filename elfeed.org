@@ -7,6 +7,7 @@
 ** [[https://1900.live/rss/][@1900]]
 ** [[https://anerdyfujocries.wordpress.com/feed/][A Nerdy Fujo Cries]]
 ** [[https://scripter.co/index.xml][A Scripter's Notes]]                                       :emacs:code:tech:
+** [[https://gkeenan.co/avgb/feed.xml][A Very Good Blog by Keenan]]
 ** [[https://www.achilletoupin.com/feed.xml][Achille Toupin]]                                                 :法语:裁缝:
 ** [[https://blog.ursb.me/feed.xml][Airing 的博客]]
 ** [[https://alexwlchan.net/atom.xml][Alex Chan]]                                                           :tech:
@@ -24,6 +25,7 @@
 ** [[https://expensive.toys/rss.xml][Artur Bień]]                                            :emacs:css:frontend:
 ** [[https://atpx.com/feed.xml][atpX]]
 ** [[https://jeddacp.me/feed/][august morning]]                                                     :photo:
+** [[https://blog.august.hk/rss.xml][August's Blog]]
 ** [[https://axxuy.xyz/blog/feed.xml][Axxuy.xyz]]
 ** [[https://baxy.typlog.io/feed.xml][BAXY]]
 ** [[https://whimsies.bearblog.dev/feed/][Before 30]]
@@ -42,6 +44,7 @@
 :END:
 ** [[https://bryn.codes/feed.xml][Bryn Newell]]
 ** [[https://cbvivi.today/feed.xml][cbvivi]]
+** [[https://openpath.quest/feed.xml][Chad Whitacre]]
 ** [[https://yuanchaofa.com/][Chaofa Yuan]]
 ** [[https://chise.hachiroku.com/zh/feed/atom][Chise Hachiroku]]                                                     :life:
 ** [[https://clandestini.org/feed/][clandestini.org]]                                  :葡萄牙语:设计好看的博客:
@@ -117,6 +120,7 @@
 
 - https://bytes.dev/
 
+** [[https://marisabel.nl/feeds/blog.php][Konfetti Explorations (Blog only)]]
 ** [[https://kristofferbalintona.me/index.xml][Kristoffer Balintona]]                                          :emacs:code:
 ** [[https://l1uyun.one/atom.xml][l1uyun's Blog]]
 ** [[https://laike9m.com/blog/rss/][laike9m's blog]]
@@ -190,6 +194,7 @@
 ** [[https://hojberg.xyz/rss.xml][Simon Højberg]]                                    :设计好看的博客:frontend:
 ** [[https://simonwillison.net/atom/everything/][Simon Willison]]
 ** [[https://sindresorhus.com/rss.xml][Sindre Sorhus]]                                                   :frontend:
+** [[https://smallcypress.bearblog.dev/feed][Small Cypress]]
 ** [[https://hollie.eilloh.net/rss.xml][Small Good Things]]
 ** [[https://www.stefanjudis.com/rss.xml][Stefan Judis]]                                             :frontend:weekly:
 ** [[https://www.sanityinc.com/feed.xml][Steve Purcell]]                                                      :emacs:
@@ -298,9 +303,6 @@
 ** [[https://www.chenrui.com/feed.php][陈锐]]
 ** [[https://www.gaotianchi.com/feed.xml][高天驰]]
 ** [[https://ro3or.com/index.xml][鹅玉]]
-** [[https://gkeenan.co/avgb/feed.xml][A Very Good Blog by Keenan]]
-** [[https://smallcypress.bearblog.dev/feed][Small Cypress]]
-** [[https://openpath.quest/feed.xml][Chad Whitacre]]
 * no-update
 ** [[https://feeds.feedblitz.com/alearningaday&x=1][A Learning Day Feed]]
 ** [[https://seths.blog/feed/][SETH'S BLOG]]
