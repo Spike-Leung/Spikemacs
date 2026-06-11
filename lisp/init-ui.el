@@ -79,10 +79,10 @@
 (use-package doric-themes)
 
 (defun spike-leung/load-theme-by-time (light-fn dark-fn)
-  "Call LIGHT-FN  to load light themes from 8:00a.m to 6:00p.m.
+  "Call LIGHT-FN  to load light themes from 7:00a.m to 6:00p.m.
 otherwise, call DARK-FN to load dark themes."
   (let ((hour (string-to-number (format-time-string "%H"))))
-    (funcall (if (and (>= hour 8) (< hour 18)) light-fn dark-fn))))
+    (funcall (if (and (>= hour 7) (< hour 18)) light-fn dark-fn))))
 
 (defun spike-leung/themes-load-random (&optional background-mode)
   "Random load themes.
