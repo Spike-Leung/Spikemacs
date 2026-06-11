@@ -19,8 +19,7 @@
                ("Z" . spike-leung/elfeed-reading-list)))
   :config
   (setq elfeed-feeds
-        '(
-          ("https://taxodium.ink/rss.xml" :title "Taxodium")
+        '(("https://taxodium.ink/rss.xml" :title "Taxodium")
           ("https://protesilaos.com/master.xml" :title "Protesilaos" emacs)
           ("https://hollie.eilloh.net/rss.xml" :title "Small Good Things")
           ("https://leehenry.top/rss.xml" :title "伏枥之间")
@@ -188,7 +187,7 @@
           ("http://www.aaronsw.com/2002/feeds/pgessays.rss" :title "Paul Graham" tech)
           ("https://manuelmoreale.com/feed/peopleandblogs" :title "Piri")
           ("https://plainvanillaweb.com/blog/feed.xml" :title "Plain Vanilla Blog" tech)
-          ("https://planet.emacslife.com/atom.xml" :title "Planet Emacslife" emacs)
+          ("https://planet.emacslife.com/atom.xml" :title "Planet Emacslife" emacs feeds)
           ("https://www.yuqiqin.me/feed.xml" :title "Psychic Paper" english)
           ("https://www.quantamagazine.org/feed/" :title "Quanta Magazine" zine weekly)
           ("https://randomascii.wordpress.com/feed/" :title "Random ASCII – tech blog of Bruce Dawson" code tech)
@@ -294,6 +293,7 @@
           ("https://www.ctling.com/atom.xml" :title "閒人筆記" 台湾)
           ("https://www.chenrui.com/feed.php" :title "陈锐")
           ("https://www.gaotianchi.com/feed.xml" :title "高天驰")
+          ;; no-update
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day Feed" :no-update t)
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
           ("https://amf.didiermary.fr/feed/" :title "African Music Forum" :no-update t music)
@@ -303,7 +303,10 @@
           ("https://www.wikimoe.com/rss" :title "维基萌" :no-update t 圣地巡礼 動漫)
           ("https://2cat.net/feed/" :title "猫鱼" :no-update t life)
           ("https://blog.solazy.me/feed/" :title "So!azy" :no-update t daily)
-          ("https://www.hecaitou.com/feeds/posts/default" :title "和菜头" :no-update t)))
+          ("https://www.hecaitou.com/feeds/posts/default" :title "和菜头" :no-update t)
+          ("https://bf.zzxworld.com/feed.xml" :title "BlogFinder" :no-update t 聚合 feeds)
+          ;; end
+          ))
 
   (add-hook 'elfeed-new-entry-hook
             (elfeed-make-tagger :before "1 months ago"
