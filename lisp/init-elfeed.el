@@ -15,6 +15,7 @@
   (elfeed-confirm-browse-url nil)
   (elfeed-search-separator-date-format "%Y-%m-%d")
   (elfeed-curl-timeout 60)
+  (elfeed-db-directory "~/.elfeed/")
   :bind ((:map elfeed-search-mode-map
                ("t" . spike-leung/elfeed-toggle-unread)
                ("f" . spike-leung/consult-elfeed)
