@@ -16,10 +16,7 @@
               ("A" . spike-leung/handle-album-cover))
   :config
   (setq-default dired-dwim-target t)
-  (setq dired-recursive-deletes 'top)
-
-  (setq dired-listing-switches
-        "-l --human-readable --group-directories-first --no-group"))
+  (setq dired-recursive-deletes 'top))
 
 
 
