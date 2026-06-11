@@ -160,7 +160,6 @@
           ("https://lea.verou.me/feed.xml" :title "Lea Verou" web code frontend)
           ("https://www.less-bug.com//index.xml" :title "Less Bug" code tech)
           ("https://www.lukew.com/ff/rss" :title "LukeW" design tech)
-          ("https://lynan.cn/feed.xml" :title "Lynan's Page")
           ("https://lynn.sh/rss.xml" :title "Lynn" emacs)
           ("https://markentier.tech/feed.rss.xml" :title "markentier.tech" code rust tech)
           ("https://matklad.github.io/feed.xml" :title "matklad" tech)
