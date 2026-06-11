@@ -304,7 +304,7 @@
           ("https://2cat.net/feed/" :title "猫鱼" :no-update t life)
           ("https://blog.solazy.me/feed/" :title "So!azy" :no-update t daily)
           ("https://www.hecaitou.com/feeds/posts/default" :title "和菜头" :no-update t)
-          ("https://bf.zzxworld.com/feed.xml" :title "BlogFinder" :no-update t 聚合 feeds)
+          ("https://bf.zzxworld.com/feed.xml" :title "BlogFinder" :no-update t :fetch-link t 聚合 feeds)
           ;; end
           ))
 
