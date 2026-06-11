@@ -9,6 +9,13 @@
 (require 'init-elpa)
 ;; use-package should after init-elpa
 
+;;; environment
+(when (memq window-system '(mac ns x pgtk))
+  (use-package exec-path-from-shell
+    :demand t
+    :config
+    (exec-path-from-shell-initialize)))
+
 (require 'init-ai)
 (require 'init-base)
 (require 'init-beancount)

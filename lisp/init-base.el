@@ -142,11 +142,6 @@ e.g. en_US.UTF-8 -> utf-8."
 
 
 
-;;; environment
-
-(when (memq window-system '(mac ns x))
-  (use-package exec-path-from-shell
-    :hook (after-init . exec-path-from-shell-initialize)))
 
 
 
