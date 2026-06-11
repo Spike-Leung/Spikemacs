@@ -310,7 +310,9 @@
 
   (add-hook 'elfeed-new-entry-hook
             (elfeed-make-tagger :before "1 months ago"
-                                :remove 'unread)))
+                                :remove 'unread))
+
+  (add-hook 'elfeed-show-mode-hook #'olivetti-mode))
 
 
 
