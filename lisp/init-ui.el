@@ -59,7 +59,9 @@
   :config
   (setq modus-themes-italic-constructs t
         modus-themes-bold-constructs t
-        modus-themes-disable-other-themes t))
+        modus-themes-disable-other-themes t)
+  (setq modus-themes-common-palette-overrides
+        '((bg-prose-block-contents unspecified))))
 
 (use-package ef-themes)
 (use-package doric-themes)
