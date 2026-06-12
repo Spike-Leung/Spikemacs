@@ -61,9 +61,7 @@
         modus-themes-bold-constructs t
         modus-themes-disable-other-themes t)
   (setq modus-themes-common-palette-overrides
-        '((bg-prose-block-contents unspecified)
-          (bg-prose-block-delimiter unspeficied)
-          (fg-prose-block-delimiter fg-dim)))
+        '((bg-prose-block-contents unspecified)))
 
   (defun spike-leung/modus-themes-margin-override (&rest _)
     "Make margin background the same as `defaults'.
