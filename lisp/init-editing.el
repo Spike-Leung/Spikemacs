@@ -112,7 +112,18 @@
   :custom
   (olivetti-style 'fancy)
   (olivetti-body-width 100)
-  (olivetti-margin-width 5))
+  (olivetti-margin-width 5)
+  :hook (olivetti-mode-on . spike-leung/set-olivetti-fringe-face)
+  :config
+  (defun spike-leung/set-olivetti-fringe-face (&rest _)
+    "Set `olivetti-fringe' to `fringe''s background, fallback to `org-block''s background."
+    (let ((bg-margin (face-attribute 'default :background nil))
+          (bg-olivetti-fringe (face-attribute 'org-block-begin-line :background nil)))
+      (custom-set-faces
+       `(margin ((t :background ,bg-margin :foreground ,bg-margin)))
+       `(olivetti-fringe ((t :background ,bg-olivetti-fringe :foreground ,bg-olivetti-fringe))))))
+  (advice-remove 'spike-leung/themes-load-random #'spike-leung/set-olivetti-fringe-face)
+  (advice-add 'spike-leung/themes-load-random :after #'spike-leung/set-olivetti-fringe-face))
 
 
 
