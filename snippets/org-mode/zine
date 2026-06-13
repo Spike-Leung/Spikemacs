@@ -5,76 +5,21 @@
 # --
 * News | Article
 
-#+begin_details
-#+html: <summary>目录</summary>
-
-#+TOC: headlines 2 local
-#+end_details
-
-** Others
 * Cool Bit
-
-#+begin_details
-#+html: <summary>目录</summary>
-
-#+TOC: headlines 2 local
-#+end_details
 
 * Tutorial | Resource
 
-#+begin_details
-#+html: <summary>目录</summary>
-
-#+TOC: headlines 2 local
-#+end_details
-
 * Code Related
-
-#+begin_details
-#+html: <summary>目录</summary>
-
-#+TOC: headlines 2 local
-#+end_details
 
 * AI Related
 
-#+begin_details
-#+html: <summary>目录</summary>
-
-#+TOC: headlines 2 local
-#+end_details
-
 * Tool | Library
-
-#+begin_details
-#+html: <summary>目录</summary>
-
-#+TOC: headlines 2 local
-#+end_details
 
 * Emacs
 
-#+begin_details
-#+html: <summary>目录</summary>
-
-#+TOC: headlines 2 local
-#+end_details
-
 * 一些话 | 摘抄
 
-#+begin_details
-#+html: <summary>目录</summary>
-
-#+TOC: headlines 2 local
-#+end_details
-
 * 多媒体
-
-#+begin_details
-#+html: <summary>目录</summary>
-
-#+TOC: headlines 3 local
-#+end_details
 
 ** 书
 ** 影视
