@@ -3,12 +3,25 @@
 # key: lc
 # --
 
+# style for lyric card
+#+begin_export html
+<style>
+.lyric-card p {
+  color: oklch(.9 0 0 / .8);
+  background: linear-gradient(to left, transparent, oklch(from #6889b9 l c h / 1));
+
+  & b {
+    color: oklch(from #e5e096 l c h / .8);
+  }
+}
+</style>
+#+end_export
+
 #+attr_html: :class lyric-card
 #+begin_div
 #+attr_html: :alt ${2:alt-text}
 ${1:cover}
 
-#+attr_html: :style color: oklch(.9 0 0 / .6); background: linear-gradient(to left, transparent, #494f7f);
 #+begin_verse
 ${0:lyrics}
 #+end_verse
