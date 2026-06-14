@@ -87,12 +87,12 @@ set of themes to either dark or light variants."
   (require 'doric-themes)
   (let ((week (string-to-number (format-time-string "%u"))))
     (cond
-     ((<= week 3)
+     ((member week '(1 3 7))
       (cond
        ((eq background-mode 'light) (ef-themes-load-random-light))
        ((eq background-mode 'dark) (ef-themes-load-random-dark))
        (t (spike-leung/load-theme-by-time #'ef-themes-load-random-light #'ef-themes-load-random-dark))))
-     ((<= week 5)
+     ((= week 5)
       (if background-mode
           (modus-themes-load-random background-mode)
         (spike-leung/load-theme-by-time
