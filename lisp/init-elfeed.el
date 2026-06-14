@@ -315,7 +315,11 @@
             (elfeed-make-tagger :before "1 months ago"
                                 :remove 'unread))
 
-  (add-hook 'elfeed-show-mode-hook #'olivetti-mode))
+  (defun spike-leung/preview-elfeed-with-olivetti ()
+    "Preview elfeed with `olivetti-mode'."
+    (olivetti-mode)
+    (olivetti-set-width 80))
+  (add-hook 'elfeed-show-mode-hook #'spike-leung/preview-elfeed-with-olivetti))
 
 
 
