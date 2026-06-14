@@ -38,15 +38,6 @@
 
 
 
-(use-package gitmoji
-  :vc (:url "https://github.com/Spike-Leung/gitmoji" :rev "master")
-  ;; 创建一个 autoloads，暴露 gitmoji-insert 方法，从而可以通过 "M-x gitmoji-insert" 调用
-  :commands (gitmoji-insert)
-  :config (setq gitmoji-selection-backend '(consult)
-                gitmoji--display-utf8-emoji t))
-
-
-
 (use-package diff-hl
   :diminish
   :defer nil

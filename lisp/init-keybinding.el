@@ -104,7 +104,6 @@
       ("p" "publish" org-publish)]
      ["(・・?)"
       ("G" "gptel" spike-leung/transient-gptel)
-      ("g" "gitmoji" gitmoji-insert)
       ("t" "translate" spike-leung/transient-translate)
       ("u" "utils" spike-leung/transient-commands)
       ("w" "webjump" webjump)]
