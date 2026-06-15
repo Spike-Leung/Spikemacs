@@ -103,7 +103,7 @@
       ("b" "blog" spike-leung/transient-blog)
       ("p" "publish" org-publish)]
      ["(・・?)"
-      ("G" "gptel" spike-leung/transient-gptel)
+      ("g" "gptel" spike-leung/transient-gptel)
       ("t" "translate" spike-leung/transient-translate)
       ("u" "utils" spike-leung/transient-commands)
       ("w" "webjump" webjump)]
