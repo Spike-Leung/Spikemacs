@@ -22,8 +22,9 @@
 
 (defconst spike-leung/html-head "
 <meta name=\"color-scheme\" content=\"light dark\" />
-<script src=\"/js/color-scheme.js\"></script>
+<link rel=\"preload\" href=\"/styles/main.css\" as=\"style\" />
 <link rel=\"preload\" href=\"/images/background/xv.png\" as=\"image\" type=\"image/png\" />
+<link rel=\"preload\" href=\"/js/color-scheme.js\" as=\"script\"/>
 <link rel=\"stylesheet\" href=\"/styles/main.css\" type=\"text/css\"/>
 <link rel=\"icon\" href=\"/favicon.ico\" type=\"image/x-icon\">
 <link rel=\"webmention\" href=\"https://webmention.io/taxodium.ink/webmention\" />
@@ -34,8 +35,9 @@
 <link rel=\"alternate\" type=\"application/atom+xml\" href=\"nichijou.xml\" title=\"Feed for 日常.\"/>
 <link rel=\"alternate\" type=\"application/atom+xml\" href=\"snippet.xml\" title=\"Feed for Snippet.\"/>
 <link rel=\"alternate\" type=\"application/atom+xml\" href=\"zine.xml\" title=\"Feed for Zine.\"/>
+<script src=\"/js/color-scheme.js\"></script>
 "
-  "`:html-head' for `org-publish'.")
+"`:html-head' for `org-publish'.")
 
 (defconst spike-leung/html-head-sitemap (concat
                                          spike-leung/html-head
