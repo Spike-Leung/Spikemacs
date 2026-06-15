@@ -1,6 +1,6 @@
 My Emacs Config.
 
-- Emacs Version >= 30.1
+- Emacs Version >= 31
 - Only tested on MacOS
 
 -----
