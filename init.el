@@ -25,7 +25,6 @@
 (require 'init-editing)
 (require 'init-elfeed)
 (require 'init-git)
-(require 'init-gptel-magit)
 (require 'init-help)
 (require 'init-ibuffer)
 (require 'init-isearch)
