@@ -229,7 +229,6 @@
           ("https://tianheg.co/index.xml" :title "Tianhe Gao")
           ("https://mazzzystar.github.io/atom.xml" :title "TL;DR")
           ("https://owlswims.com/feed/" :title "To the Lighthouse")
-          ("https://feeds.feedburner.com/TroyHunt" :title "Troy Hunt's Blog" weekly)
           ("https://tusharhero.codeberg.page/rss.xml" :title "tusharhero" emacs)
           ("https://www.paddysun.top/feed" :title "Under the Sun with Paddy")
           ("https://emacsninja.com/emacs.atom" :title "Vasilij Schneidermann" emacs)
@@ -310,8 +309,9 @@
           ("https://kagi.com/api/v1/smallweb/feed/" :title "Kagi Small Web" :no-update t :fetch-link t feeds blog)
           ("https://news.kagi.com/world.xml" :title "Kagi News (World)" :no-update feeds news)
           ("https://news.kagi.com/china_zh-Hans.xml" :title "Kagi News (China)" :no-update feeds news)
-          ("https://feeds.feedburner.com/brainpickings/rss" :title "The Marginalian" :no-update t book)
           ("https://planet.emacslife.com/atom.xml" :title "Planet Emacslife" :no-update t feeds emacs)
+          ("https://feeds.feedburner.com/brainpickings/rss" :title "The Marginalian" :no-update t book)
+          ("https://feeds.feedburner.com/TroyHunt" :title "Troy Hunt's Blog" :no-update t weekly)
           ;; end
           ))
 
