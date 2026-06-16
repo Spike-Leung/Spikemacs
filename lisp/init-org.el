@@ -201,7 +201,8 @@
                          "~/org/mywork.org"
                          "~/org/anniversary.org"
                          "~/org/goals.org"
-                         "~/org/dead.org"))
+                         "~/org/dead.org"
+                         "~/org/world-cup-2026.org"))
 
 (setq org-agenda-compact-blocks t
       ;; org-agenda-sticky t
