@@ -312,6 +312,8 @@
           ("https://planet.emacslife.com/atom.xml" :title "Planet Emacslife" :no-update t feeds emacs)
           ("https://feeds.feedburner.com/brainpickings/rss" :title "The Marginalian" :no-update t book)
           ("https://feeds.feedburner.com/TroyHunt" :title "Troy Hunt's Blog" :no-update t weekly)
+          ("https://www.cloudberryrecords.com/blog/?feed=rss2" :title "Cloudberry Cake Proselytism" :no-update t music)
+          ("https://www.fullmoonfiberart.com/feed" :title "Full Moon Fiber Art" :no-update t)
           ;; end
           ))
 
