@@ -189,8 +189,8 @@ set of themes to either dark or light variants."
 (use-package dimmer
   :diminish
   :custom
-  (dimmer-adjustment-mode :both)
-  (dimmer-fraction 0.15)
+  (dimmer-adjustment-mode :desaturate)
+  (dimmer-fraction 0.25)
   :hook (after-init . dimmer-mode))
 
 
