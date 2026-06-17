@@ -11,6 +11,8 @@
   (elfeed-confirm-browse-url nil)
   (elfeed-search-separator-date-format "%Y-%m-%d")
   (elfeed-curl-timeout 60)
+  (elfeed-search-title-max-width 100)
+  (elfeed-curl-max-connections 32)
   (elfeed-db-directory "~/.elfeed/")
   :bind ((:map elfeed-search-mode-map
                ("f" . elfeed-update-feed)
