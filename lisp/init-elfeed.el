@@ -293,6 +293,7 @@
           ("https://travlog.wei-lee.me/feeds/all.atom.xml" :title "李唯/那些沒人在乎的事" 台湾 anime)
           ("https://blog.wei-lee.me/feeds/all.atom.xml" :title "李唯/不寫下來的東西都會被遺忘" 台湾 tech)
           ("https://scrubbyinabox.substack.com/feed" :title "刷比小廢報" weekly)
+          ("https://マリウス.com/index.xml" :title "マリウス")
           ;; no-update
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day Feed" :no-update t)
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
