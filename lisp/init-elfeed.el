@@ -317,6 +317,7 @@
           ("https://feeds.feedburner.com/TroyHunt" :title "Troy Hunt's Blog" :no-update t weekly)
           ("https://www.cloudberryrecords.com/blog/?feed=rss2" :title "Cloudberry Cake Proselytism" :no-update t music)
           ("https://www.fullmoonfiberart.com/feed" :title "Full Moon Fiber Art" :no-update t)
+          ("https://wiwi.blog/blog/rss.xml" :title "Wiwi" :no-update t 台湾 blogblogClub)
           ;; end
           ))
 
