@@ -384,5 +384,55 @@
 
 
 
+(defconst spike-leung/elfeed-translate-prompt "translate to chinese. only response translated content."
+  "System prompt for translating elfeed entry title via gptel.")
+
+(defun spike-leung/elfeed--display-side-by-side (buffer)
+  "Display BUFFER to the right of *elfeed-search* window."
+  (if-let ((win (get-buffer-window "*elfeed-search*")))
+      (display-buffer buffer
+                      '((display-buffer-in-side-window)
+                        (side . right)
+                        (window-width . 0.5)))
+    (pop-to-buffer buffer)))
+
+(defun spike-leung/elfeed--scroll-all-cleanup ()
+  "Disable `scroll-all-mode' when neither elfeed nor translate window remains."
+  (unless (and (get-buffer-window "*elfeed-search*" 'visible)
+               (get-buffer-window "*gptel-elfeed-translate*" 'visible))
+    (scroll-all-mode -1)
+    (remove-hook 'window-configuration-change-hook
+                 #'spike-leung/elfeed--scroll-all-cleanup)))
+
+(defun spike-leung/elfeed-translate-entries ()
+  "Translate selected elfeed entries with gptel."
+  (interactive nil elfeed-search-mode)
+  (let ((entries (elfeed-search-selected)))
+    (unless entries
+      (user-error "No entries selected"))
+    (let* ((titles (mapcar #'elfeed-entry-title entries))
+           (prompt (mapconcat #'identity titles "\n"))
+           (buf (get-buffer-create "*gptel-elfeed-translate*")))
+      (with-current-buffer buf
+        (erase-buffer)
+        (insert "Translating...")
+        (scroll-all-mode 1)
+        (add-hook 'window-configuration-change-hook
+                  #'spike-leung/elfeed--scroll-all-cleanup)
+        (setq-local gptel-include-reasoning nil)
+        (setq-local gptel--request-params '(:reasoning (:effort "none"))))
+      (spike-leung/elfeed--display-side-by-side buf)
+      (gptel-request prompt
+        :buffer buf
+        :position (with-current-buffer buf (point-max))
+        :system spike-leung/elfeed-translate-prompt
+        :callback (lambda (response _info)
+                    (when (stringp response)
+                      (with-current-buffer buf
+                        (erase-buffer)
+                        (insert response))))))))
+
+
+
 (provide 'init-elfeed)
 ;;; init-elfeed.el ends here
