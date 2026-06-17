@@ -408,6 +408,7 @@
 (defun spike-leung/elfeed-translate-entries ()
   "Translate selected elfeed entries with gptel."
   (interactive nil elfeed-search-mode)
+  (require 'gptel)
   (let ((entries (elfeed-search-selected)))
     (unless entries
       (user-error "No entries selected"))
@@ -420,7 +421,6 @@
         (scroll-all-mode 1)
         (add-hook 'window-configuration-change-hook
                   #'spike-leung/elfeed--scroll-all-cleanup)
-        (setq-local gptel-include-reasoning nil)
         (setq-local gptel--request-params '(:reasoning (:effort "none"))))
       (spike-leung/elfeed--display-side-by-side buf)
       (gptel-request prompt
@@ -431,7 +431,10 @@
                     (when (stringp response)
                       (with-current-buffer buf
                         (erase-buffer)
-                        (insert response))))))))
+                        (insert response)
+                        (whitespace-cleanup)
+                        (org-mode)
+                        (gptel-mode))))))))
 
 
 
