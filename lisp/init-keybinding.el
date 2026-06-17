@@ -60,6 +60,7 @@
      ("c" "clear" immersive-translate-clear)
      ("p" "paragraph" immersive-translate-paragraph)
      ("a" "abort" immersive-translate-abort)
+     ("e" "translate-elfeed-search" spike-leung/elfeed-translate-entries)
      ("f" "fanyi" fanyi-dwim)
      ("m" "auto-mode" immersive-translate-auto-mode)])
 
