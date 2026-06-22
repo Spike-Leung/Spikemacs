@@ -3,6 +3,7 @@
 ;;; Code:
 
 (require 'rx)
+(require 's)
 (require 'cl-lib)
 (require 'denote)
 
