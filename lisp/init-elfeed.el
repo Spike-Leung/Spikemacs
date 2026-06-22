@@ -324,9 +324,16 @@
           ;; end
           ))
 
+  (with-eval-after-load 'elfeed
+    (defun elfeed-tree--sort (nodes)
+      "Sort tree NODES by name."
+      (sort nodes (lambda (x y)
+                    (string< (car x) (car y))))))
+
   (add-hook 'elfeed-new-entry-hook
             (elfeed-make-tagger :before "1 months ago"
                                 :remove 'unread))
+
 
   (defun spike-leung/preview-elfeed-with-olivetti ()
     "Preview elfeed with `olivetti-mode'."
