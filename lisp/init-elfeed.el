@@ -297,6 +297,9 @@
           ("https://itsfridayimnotinlove.substack.com/feed" :title "It's Friday I'm (not) in love" newsletter)
           ("https://usefulfictions.substack.com/feed" :title "Useful Fictions" newsletter)
           ("https://staystaystay.substack.com/feed" :title "Stay Stay Stay" newsletter people)
+          ("https://jakearchibald.com/posts.rss" :title "Jake Archibald" frontend)
+          ("https://patrickbrosset.com/feed.xml" :title "Patrick Brosset" frontend)
+          ("https://www.kevinpowell.co/newsletter.xml" :title "Kevin Powell" frontend css)
           ;; no-update
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day Feed" :no-update t)
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
