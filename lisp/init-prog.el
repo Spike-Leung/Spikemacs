@@ -70,30 +70,28 @@
 
 
 
+;;; hideshow
+
+(use-package hideshow
+  :hook (prog-mode . hs-minor-mode)
+  :custom
+  (hs-allow-nesting t)
+  (hs-hide-comments-when-hiding-all nil)
+  :config
+  (defvar-keymap hs-repeat-map
+    :doc "Repeat map for hideshow commands."
+    :repeat t
+    "<TAB>" #'hs-cycle
+    "<backtab>" #'hs-toggle-all))
+
+
+
 ;;; is it works?
 
 (use-package dumb-jump
   :hook (xref-backend-functions . dumb-jump-xref-activate)
   :config
   (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
-
-
-
-;;; treesitter
-
-;; (use-package treesit-auto
-;;   :hook (after-init . global-treesit-auto-mode)
-;;   :custom
-;;   (treesit-auto-install 'prompt)
-;;   :config
-;;   (treesit-auto-add-to-auto-mode-alist 'all))
-
-(use-package treesit-fold
-  :diminish
-  :bind ((:map treesit-fold-mode-map
-               ("C-c t t" . treesit-fold-toggle)
-               ("C-c t o" . treesit-fold-open-all)
-               ("C-c t c" . treesit-fold-close-all))))
 
 
 
