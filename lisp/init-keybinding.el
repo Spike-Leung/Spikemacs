@@ -105,6 +105,7 @@
       ("p" "publish" org-publish)]
      ["(・・?)"
       ("g" "gptel" spike-leung/transient-gptel)
+      ("G" "ghostel" ghostel)
       ("t" "translate" spike-leung/transient-translate)
       ("u" "utils" spike-leung/transient-commands)
       ("w" "webjump" webjump)]
