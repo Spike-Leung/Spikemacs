@@ -16,8 +16,7 @@
 
 
 ;;; Terminal
-
-(use-package eat)
+(use-package ghostel)
 
 
 
