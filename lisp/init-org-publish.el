@@ -277,7 +277,7 @@ Return output file name."
 ;;; ox-html, setting and overrides
 
 (use-package ox-html
-  :ensure nil
+  :straight nil
   :config
   (setq org-html-head-include-default-style nil
         org-html-content-class "content e-content")
@@ -361,7 +361,7 @@ holding contextual information."
 
 ;;; ox filter
 (use-package ox
-  :ensure nil
+  :straight nil
   :config
   (dolist (filter '(spike-leung/remove-unnessary-id-from-html
                     spike-leung/add-extra-class-to-body

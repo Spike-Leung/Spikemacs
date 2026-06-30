@@ -63,7 +63,11 @@
 
 
 (use-package auto-save
-  :vc (:url https://github.com/manateelazycat/auto-save :rev master)
+  :straight (auto-save
+             :type git
+             :host github
+             :repo "manateelazycat/auto-save"
+             :branch "master")
   :hook (after-init . auto-save-enable)
   :config (setq auto-save-idle 10
                 auto-save-silent t
@@ -236,7 +240,7 @@
 ;;; regexp
 
 (use-package re-builder
-  :ensure nil
+  :straight nil
   :bind (;; Support a slightly more idiomatic quit binding in re-builder
          ("C-c C-k" . reb-quit)))
 
@@ -260,7 +264,7 @@
 
 
 (use-package init-kaomoji
-  :ensure nil
+  :straight nil
   :bind (("C-x 8 k" . spike-leung/kaomoji)))
 
 

@@ -16,7 +16,7 @@
       org-html-html5-fancy t
       org-html-doctype "html5")
 
-(use-package org-protocol :ensure nil :defer nil)
+(use-package org-protocol :straight nil :defer nil)
 
 
 
@@ -258,7 +258,7 @@
 
 ;; Re-align tags when window shape changes
 (use-package org-agenda
-  :ensure nil
+  :straight nil
   :config
   (add-hook 'org-agenda-mode-hook
             (lambda () (add-hook 'window-configuration-change-hook 'org-agenda-align-tags nil t))))

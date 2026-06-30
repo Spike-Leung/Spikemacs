@@ -5,7 +5,7 @@
 
 
 (use-package dired
-  :ensure nil
+  :straight nil
   :hook ((dired-mode . diff-hl-dired-mode))
   :bind (:map ctl-x-map
 	      ("C-j" . dired-jump)
@@ -22,7 +22,7 @@
 
 ;; 扩展 dired 功能
 (use-package dired-x
-  :ensure nil)
+  :straight nil)
 
 
 

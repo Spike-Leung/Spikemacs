@@ -5,7 +5,7 @@
 
 
 (use-package help
-  :ensure nil
+  :straight nil
   :bind (:map help-map
               ("A" . describe-face)
               ;; A quick way to jump to the definition of a function given its key binding

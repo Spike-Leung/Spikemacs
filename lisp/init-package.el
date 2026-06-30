@@ -4,35 +4,39 @@
 
 
 
-(require 'package)
+;;; straight.el
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
+
+(setq
+ ;; makes each use-package form invoke straight.el to install the package,
+ ;; unless otherwise specified.
+ straight-use-package-by-default t
+ straight-host-usernames "Spike-Leung")
+
+;; Prevent package.el loading packages prior to their init-file loading.
+(setq package-enable-at-startup nil)
 
 
 
-;;; Install into separate package dirs for each Emacs version, to prevent bytecode incompatibility
-;; (setq package-user-dir
-;;       (expand-file-name (format "elpa-%s.%s" emacs-major-version emacs-minor-version)
-;;                         user-emacs-directory))
-
-
-
-;;; Standard package repositories
-
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-unsigned-archives "melpa")
-;; Official MELPA Mirror, in case necessary.
-;;(add-to-list 'package-archives (cons "melpa-mirror" (concat proto "://www.mirrorservice.org/sites/melpa.org/packages/")) t)
-
-;; Allow built-in packages to be upgraded
-(setq package-install-upgrade-built-in t)
-
-;;; Fire up package.el
-
-(setq package-native-compile t)
-(package-initialize)
-
-;; 让 use-package 默认开启 :defer t
-(setq use-package-always-defer t
-      use-package-always-ensure t)
+;;; use-package
+(setq use-package-always-defer t)
 
 
 

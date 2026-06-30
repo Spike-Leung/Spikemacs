@@ -6,7 +6,7 @@
 
 ;; Nicer naming of buffers for files with identical names
 (use-package uniquify
-  :ensure nil
+  :straight nil
   :config
   (setq uniquify-buffer-name-style 'reverse
         uniquify-separator " • "

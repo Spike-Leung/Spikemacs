@@ -120,7 +120,7 @@
   (add-hook 'after-save-hook #'check-parens nil t))
 
 (use-package lisp-mode
-  :ensure nil
+  :straight nil
   :bind (:map emacs-lisp-mode-map
 	      ("C-x C-e" . sanityinc/eval-last-sexp-or-region)
 	      ("C-c C-e" . pp-eval-expression)

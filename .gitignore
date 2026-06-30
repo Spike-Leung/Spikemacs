@@ -67,3 +67,4 @@ snippets/**/.*.el
 ielm-history.eld
 dirvish/
 .DS_Store
+/straight

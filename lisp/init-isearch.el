@@ -14,7 +14,7 @@
 
 
 (use-package isearch
-  :ensure nil
+  :straight nil
   :bind (([remap isearch-delete-char] . isearch-del-char) ; 搜索中删除字符就是删除然后继续搜索，不要撤销 C-s 的跳转
          ("C-o" . sanityinc/isearch-occur)
          ("C-c C-o" . sanityinc/isearch-occur)
