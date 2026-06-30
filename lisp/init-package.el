@@ -28,7 +28,8 @@
  ;; makes each use-package form invoke straight.el to install the package,
  ;; unless otherwise specified.
  straight-use-package-by-default t
- straight-host-usernames "Spike-Leung")
+ straight-host-usernames
+ '((github . "Spike-Leung")))
 
 ;; Prevent package.el loading packages prior to their init-file loading.
 (setq package-enable-at-startup nil)
