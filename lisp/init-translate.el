@@ -5,7 +5,12 @@
 
 
 (use-package immersive-translate
-  :vc (:url https://github.com/Spike-Leung/emacs-immersive-translate :rev main)
+  :straight (immersive-translate
+             :type git
+             :host github
+             :repo "Elilif/emacs-immersive-translate"
+             :branch "main"
+             :fork t)
   :hook ((elfeed-show-mode . immersive-translate-setup))
   :config
   (setq immersive-translate-backend 'chatgpt
