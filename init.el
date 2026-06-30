@@ -6,7 +6,7 @@
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-(require 'init-elpa)
+(require 'init-package)
 ;; use-package should after init-elpa
 
 ;;; environment

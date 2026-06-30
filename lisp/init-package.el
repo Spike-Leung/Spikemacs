@@ -1,4 +1,4 @@
-;;; init-elpa.el --- Settings and helpers for package.el -*- lexical-binding: t -*-
+;;; init-package.el --- Settings and helpers for package.el -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -36,5 +36,5 @@
 
 
 
-(provide 'init-elpa)
+(provide 'init-package)
 ;;; init-elpa.el ends here
