@@ -66,21 +66,6 @@
 
 
 
-;; Jump to Emacs windows using keyboard spatial mapping
-;; (use-package spatial-window
-;;   :vc (:url https://github.com/lewang/spatial-window :rev main)
-;;   :bind ("C-x o" . spatial-window-select))
-
-
-
-;; winpulse-mode momentarily flashes the background of Emacs windows whenever they gain
-;; focus, providing a visual cue for the active window.
-;; (use-package winpulse
-;;   :vc (:url "https://github.com/xenodium/winpulse" :rev :newest)
-;;   :config (winpulse-mode +1))
-
-
-
 ;; s-n 绑定到了 make-frame，我很少用到 make-frame，解除绑定，避免误触
 
 (unbind-key "s-n" 'global-map)
