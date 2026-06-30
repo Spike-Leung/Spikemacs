@@ -3,7 +3,6 @@
 ;;; Code:
 
 (use-package beancount
-  :vc (:url https://github.com/beancount/beancount-mode :rev main)
   :bind (:map beancount-mode-map
               ("C-c C-n" . outline-next-visible-heading)
               ("C-c C-p" . outline-previous-visible-heading))
