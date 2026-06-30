@@ -6,19 +6,6 @@
 ;;; Code:
 
 
-(setq org-log-done t
-      org-hide-emphasis-markers t
-      org-fold-catch-invisible-edits 'show
-      org-export-coding-system 'utf-8
-      org-archive-location "%s_archive::* Archive"
-      ;; Save state changes in the LOGBOOK drawer
-      org-log-into-drawer t
-      org-html-html5-fancy t
-      org-html-doctype "html5")
-
-(use-package org-protocol :straight nil :defer nil)
-
-
 
 ;; Key binding
 (use-package org
@@ -50,6 +37,20 @@
   (define-key sanityinc/org-global-prefix-map (kbd "l") 'org-clock-in-last)
   (define-key sanityinc/org-global-prefix-map (kbd "i") 'org-clock-in)
   (define-key sanityinc/org-global-prefix-map (kbd "o") 'org-clock-out))
+
+
+
+(setq org-log-done t
+      org-hide-emphasis-markers t
+      org-fold-catch-invisible-edits 'show
+      org-export-coding-system 'utf-8
+      org-archive-location "%s_archive::* Archive"
+      ;; Save state changes in the LOGBOOK drawer
+      org-log-into-drawer t
+      org-html-html5-fancy t
+      org-html-doctype "html5")
+
+(use-package org-protocol :straight nil :defer nil)
 
 
 
