@@ -41,7 +41,7 @@
           ("https://www.linggandianbo.com/rss/" :title "灵感电波" weekly)
           ("https://z.arlmy.me/atom.xml" :title "素生")
           ("https://blog.giveanornot.com/index.xml" :title "資工小廢物 - JN")
-          ("https://ro3or.com/index.xml" :title "鹅玉")
+          ("https://ro3or.com/index.xml" :title "鹅玉") ;; new domain: https://eyu.at/
           ("https://anniemueller.com/posts_feed" :title "annie")
           ("https://polebug.github.io/atom.xml" :title "Polebug")
           ("https://www.pseudoyu.com/feed.xml" :title "Pseudoyu")
