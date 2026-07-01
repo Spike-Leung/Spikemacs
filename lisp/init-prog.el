@@ -14,7 +14,6 @@
 
 
 (use-package eglot
-  :ensure nil
   :config
   (setq-default eglot-extend-to-xref t)
   (add-to-list 'eglot-server-programs
@@ -23,7 +22,6 @@
 (use-package consult-eglot)
 
 (use-package eldoc
-  :ensure nil
   :diminish
   :hook (eval-expression-minibuffer-setup . eldoc-mode)
   :config
