@@ -34,9 +34,14 @@
 ;; Prevent package.el loading packages prior to their init-file loading.
 (setq package-enable-at-startup nil)
 
+
+;; make the package download by straight.el always load, avoid conflict with built-in
+;; see: https://github.com/radian-software/straight.el/issues/1146
+(straight-use-package 'project)
+
 
 
-;;; use-package
+;;; use-package related
 (setq use-package-always-defer t)
 
 
