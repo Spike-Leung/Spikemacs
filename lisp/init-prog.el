@@ -4,25 +4,12 @@
 
 
 
-;; (use-package flycheck
-;;   :hook (after-init . global-flycheck-mode)
-;;   :config
-;;   (setq flycheck-checker-error-threshold 1024))
-
 (use-package flymake
   :hook (prog-mode text-mode)
   :bind (("C-c ! l" . flymake-show-buffer-diagnostics)
          ("C-c ! p" . flymake-goto-prev-error)
          ("C-c ! n" . flymake-goto-next-error)
          ("C-c ! c" . flymake-start)))
-
-;; Add spell-checking in comments for all programming language modes
-;; (use-package flyspell
-;;   :diminish
-;;   :ensure nil
-;;   :hook ((prog-mode . flyspell-prog-mode)))
-
-;; (use-package consult-flyspell)
 
 
 
