@@ -34,6 +34,7 @@
   :custom
   (denote-link-description-format #'spike-leung/denote-link-description-with-signature-and-title-and-subtitle)
   (denote-excluded-files-regexp "hidden")
+  (denote-excluded-directories-regexp "journal")
   (denote-org-store-link-to-heading t)
   :config
   (setq denote-directory (expand-file-name spike-leung/denote-directory--note)
