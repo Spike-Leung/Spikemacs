@@ -71,13 +71,21 @@
   ;; use "M-B"(buffer)，"M-V"(vertical), "M-G"(grid) to rotate different views
   (vertico-multiform-mode))
 
+(use-package pinyinlib
+  :commands pinyinlib-build-regexp-string)
+
 (use-package orderless
   :defer nil
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles partial-completion))))
   (completion-category-defaults nil) ;; Disable defaults, use our settings
-  (completion-pcm-leading-wildcard t)) ;; Emacs 31: partial-completion behaves like substring
+  (completion-pcm-leading-wildcard t) ;; Emacs 31: partial-completion behaves like substring
+  :config
+  (defun completion--regex-pinyin (str)
+    (orderless-regexp (pinyinlib-build-regexp-string str)))
+
+  (add-to-list 'orderless-matching-styles 'completion--regex-pinyin))
 
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
