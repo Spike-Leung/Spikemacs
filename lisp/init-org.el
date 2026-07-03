@@ -337,5 +337,39 @@ With prefix, don't confirm text."
 
 
 
+;;; org-present
+
+(use-package org-present
+  :config
+
+  (defvar-local spike-leung/org-present--saved-mode-line nil
+    "Stores the original `mode-line-format` while `org-present` is active.")
+
+  (defun spike-leung/org-present-hide-mode-line ()
+    "Hide the mode-line during `org-present`."
+    (setq-local spike-leung/org-present--saved-mode-line mode-line-format)
+    (setq-local mode-line-format nil))
+
+  (defun spike-leung/org-present-restore-mode-line ()
+    "Restore the mode-line after `org-present`."
+    (setq-local mode-line-format spike-leung/org-present--saved-mode-line))
+
+  (add-hook 'org-present-mode-hook
+            (lambda ()
+              (org-present-big)
+              (org-display-inline-images)
+              (org-present-hide-cursor)
+              (org-present-read-only)
+              (spike-leung/org-present-hide-mode-line)))
+  (add-hook 'org-present-mode-quit-hook
+            (lambda ()
+              (org-present-small)
+              (org-remove-inline-images)
+              (org-present-show-cursor)
+              (org-present-read-write)
+              (spike-leung/org-present-restore-mode-line))))
+
+
+
 (provide 'init-org)
 ;;; init-org.el ends here
