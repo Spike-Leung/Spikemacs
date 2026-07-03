@@ -87,7 +87,7 @@
    (format "#+caption: @@html:<b>%s</b>@@ @@html:<br>@@ %s @@html:<br>@@\n" title artist)
    "#+attr_html: loading=\"lazy\"\n"
    (format "#+attr_html: :alt %s by %s (%s)\n" title artist year)
-   (format "#+attr_html: :title %s by %s (%s)\n" title artist year)
+   ;; (format "#+attr_html: :title %s by %s (%s)\n" title artist year)
    (format "#+attr_html: :data-href images/album/%s.webp\n" webp-base)
    (format "[[file:images/album-wall/%s.avif]]" webp-base)))
 
