@@ -99,7 +99,7 @@
           ("https://dbushell.com/rss.xml" :title "dbushell.com" frontend)
           ("https://www.densediscovery.com/feed/" :title "Dense Discovery" weekly)
           ("https://sive.rs/en.atom" :title "Derek Sivers")
-          ("https://soatok.blog/feed/" :title "Dhole Moments" tech)
+          ("https://soatok.blog/feed/" :title "Dhole Moments" tech security cryptography)
           ("https://divergentrays.com/blog/blogfeed.xml" :title "Divergent Rays" weekly 宝石)
           ("https://diygod.cc/feed" :title "DIYgod")
           ("https://notes.druchan.com/feed.xml" :title "druchan")
@@ -305,6 +305,8 @@
           ("https://planet.emacslife.com/atom.xml" :title "Planet Emacslife" feeds emacs)
           ("https://www.wikimoe.com/rss" :title "维基萌" anime 圣地巡礼)
           ("https://jamesg.blog/feeds/posts.xml" :title "James' Coffee Blog")
+          ("https://emacsair.me/feed.xml" :title "Emacsair" emacs)
+          ("https://tkdodo.eu/blog/rss.xml" :title "TkDodo" Frontend)
           ;; no-update
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day Feed" :no-update t)
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
