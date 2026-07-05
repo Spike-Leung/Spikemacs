@@ -162,12 +162,15 @@ backend."
 
 
 (use-package denote-journal
-  :commands ( denote-journal-new-entry
-              denote-journal-new-or-existing-entry
-              denote-journal-link-or-create-entry)
+  :commands (denote-journal-new-entry
+             denote-journal-new-or-existing-entry
+             denote-journal-link-or-create-entry)
+  :bind (("C-c n j" . denote-journal-new-or-existing-entry))
   :hook (calendar-mode . denote-journal-calendar-mode)
   :config
-  (setq denote-journal-title-format "%Y-%m-%d %a %X"))
+  (setq
+   denote-journal-directory "~/notes/journal"
+   denote-journal-title-format "%Y-%m-%d %a %X"))
 
 
 
