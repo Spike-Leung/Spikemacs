@@ -285,7 +285,6 @@
           ("https://www.gaotianchi.com/feed.xml" :title "高天驰")
           ("https://www.tortorse.com/atom.xml" :title "愆伏")
           ("https://perthirtysix.com/rss.xml" :title "PerThirtySix")
-          ("https://idle.news/feed.xml" :title "The Idle Gazette" weekly)
           ("https://shkspr.mobi/blog/feed/atom/" :title "Terence Eden" tech)
           ("https://warandpeas.com/feed/" :title "War and Peas" anime)
           ("https://blog.ikukaroom.com/feed/" :title "ikuka" newsletter 台湾 日文)
@@ -303,7 +302,6 @@
           ("https://explorationsofstyle.com/feed/" :title "Explorations of Style" writing academic)
           ("https://www.jonafato.com/feed.xml" :title "jonafato" tech python)
           ("https://planet.emacslife.com/atom.xml" :title "Planet Emacslife" feeds emacs)
-          ("https://www.wikimoe.com/rss" :title "维基萌" anime 圣地巡礼)
           ("https://jamesg.blog/feeds/posts.xml" :title "James' Coffee Blog")
           ("https://emacsair.me/feed.xml" :title "Emacsair" emacs)
           ("https://tkdodo.eu/blog/rss.xml" :title "TkDodo" Frontend)
@@ -328,6 +326,8 @@
           ("https://www.fullmoonfiberart.com/feed" :title "Full Moon Fiber Art" :no-update t)
           ("https://lawtee.com/index.xml" :title "老 T 博客" :no-update t)
           ("https://www.quantamagazine.org/feed/" :title "Quanta Magazine" :no-update t zine weekly)
+          ("https://idle.news/feed.xml" :title "The Idle Gazette" :no-update t weekly)
+          ("https://www.wikimoe.com/rss" :title "维基萌" :update t anime 圣地巡礼)
           ;; end
           ))
 
