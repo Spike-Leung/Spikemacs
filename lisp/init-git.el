@@ -65,7 +65,9 @@
   (remove-hook 'find-file-hook #'vc-refresh-state))
 
 
+
 ;;; ediff
+;;; when solve conflic, you can try out `smerge-mode'
 
 (use-package ediff
   :ensure nil
