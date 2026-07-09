@@ -53,9 +53,10 @@
   "
 <nav>
   <ul>
-    <li><a href=\"/index.html\">主页</a></li>
-    <li><a href=\"/subscribe.html\">订阅</a></li>
+    <li><a href=\"/index.html\">主頁</a></li>
+    <li><a href=\"/subscribe.html\">訂閱</a></li>
     <li><a href=\"/search.html\">搜索</a></li>
+    <li><a href=\"/shuffle.html\">隨機</a></li>
   </ul>
   <!--
   <span class=\"snow-toggle-container\">
