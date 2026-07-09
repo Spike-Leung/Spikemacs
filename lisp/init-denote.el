@@ -149,7 +149,9 @@ backend."
 		   (format "<a href=\"%s.html\">%s</a>" (url-encode-url anchor) desc)))
 	  ('latex (format "\\href{%s}{%s}" (replace-regexp-in-string "[\\{}$%&_#~^]" "\\\\\\&" path) desc))
 	  ('texinfo (format "@uref{%s,%s}" path desc))
-	  ('ascii (format "[%s] <denote:%s>" desc path))
+	  ('ascii (if file-search
+		      (format "[%s] <https://taxodium.ink/%s.html%s>" desc (url-encode-url anchor) file-search )
+		    (format "[%s] <https://taxodium.ink/%s.html>"  desc (url-encode-url anchor))))
 	  ('md (format "[%s](%s)" desc path))
 	  (_ path))
       (format-message "[[Denote query for `%s']]" query))))
