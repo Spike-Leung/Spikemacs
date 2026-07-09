@@ -82,8 +82,22 @@
 
 ;;; html-postamble
 
-(defconst spike-leung/html-postamble "
-<details class=\"webmention js-required\">
+(defun spike-leung/html-postamble (info)
+  "Return a string for html-postamble.
+INFO is a plist holding contextual information."
+  (let* ((timestamp-format (plist-get info :html-metadata-timestamp-format))
+         (input-file (plist-get info :input-file))
+         (output-file (plist-get info :output-file))
+         (title (org-export-data (plist-get info :title) info))
+         (subtitle (org-export-data (plist-get info :subtitle) info))
+         (create-date (org-export-data (org-export-get-date info timestamp-format) info))
+         (modified-date (format-time-string timestamp-format
+                                            (and input-file (file-attribute-modification-time
+                                                             (file-attributes input-file)))))
+         (output-filename (file-name-base output-file)))
+    (concat
+     ;; webmention
+     "<details class=\"webmention js-required\">
 <summary>Webmentions <span class=\"webmention__count\">(加载中...)</span></summary>
 <p class=\"webmention__tip\">
 如果你想回应这篇文章，可以在你的文章或社交媒体帖子中链接这篇文章，然后提交你的 URL，你的回应随后会显示在此页面上。
@@ -97,23 +111,32 @@
 </form>
 <hr></hr>
 <ul class=\"webmention__list\"></ul>
-</details>
-<footer>
-<p>感谢你的阅读！(´｡• ᵕ •｡`) ♡</p>
-<p>文章创建于 <time class=\"dt-published\" datetime=\"%d\">%d</time>，更新于 <time class=\"dt-updated\" datetime=\"%C\">%C</time>，</p>
-<p>所有原创內容均遵循 <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans\">署名、非商业性使用、相同方式共享</a>，</p>
-<p>所有源代码以及任何内联文档遵循 <a href=\"https://www.gnu.org/licenses/agpl-3.0.en.html\">AGPL v3</a>。</p>
-<p>如果你有什么想说的，尽管给 <a href=\"mailto:l-yanlei@hotmail.com?subject=回復: %t %s&body=Hi Spike,\">Spike Leung</a> 发一封 <a href=\"https://useplaintext.email\">纯文本</a> 邮件 :)</p>
-<p>如果你偏好纯文本阅读，请将当前 URL 的 <code>.html</code> 替换为 <code>.org</code>。</p>
-<p>如果文章对你有帮助，请考虑 <a href=\"https://taxodium.ink/support-me.html\">用你喜欢的方式</a> 支持我。</p>
-</footer>
-<div class=\"h-card p-author\" aria-hidden=\"true\">
+</details>"
+     ;; microformat
+     "<div class=\"h-card p-author\" aria-hidden=\"true\">
 <img src=\"https://taxodium.ink/favicon.ico\" class=\"u-logo\"/>
 <img src=\"https://taxodium.ink/images/common/avatar.png\" class=\"u-photo\"/>
 <a href=\"https://taxodium.ink\" class=\"u-url p-name\">Spike Leung</a>
 <a href=\"mailto:l-yanlei@hotmail.com\" class=\"u-email\">Spike Leung</a>
-</div>
-<script src=\"/js/code-enhanced.js\" defer></script>
+</div>"
+     ;; footer
+     (format-spec "
+<footer>
+<p>感谢你的阅读！(´｡• ᵕ •｡`) ♡</p>
+<p>文章创建於 <time class=\"dt-published\" datetime=\"%d\">%d</time>，更新於 <time class=\"dt-updated\" datetime=\"%C\">%C</time>，</p>
+<p>所有原创內容均遵循 <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans\">署名、非商业性使用、相同方式共享</a>，</p>
+<p>所有源代碼以及内联文檔遵循 <a href=\"https://www.gnu.org/licenses/agpl-3.0.en.html\">AGPL v3</a>。</p>
+<p>如果你有什么想说的，尽管给 <a href=\"mailto:l-yanlei@hotmail.com?subject=回復: %t %s&body=Hi Spike,\">Spike Leung</a> 发一封 <a href=\"https://useplaintext.email\">純文本</a> 邮件 :)</p>
+<p>如果你偏好純文本閱讀，可以查看 <a href=\"/%u.txt\">純文本版本</a> 或 <a href=\"/%u.org\">原始 org 文件</a>。</p>
+<p>如果文章对你有帮助，请考虑 <a href=\"https://taxodium.ink/support-me.html\">用你喜欢的方式</a> 支持我。</p>
+</footer>"
+                  `((?d . ,create-date)
+                    (?C . ,modified-date)
+                    (?t . ,title)
+                    (?s . ,subtitle)
+                    (?u . ,output-filename)))
+     ;; scripts
+     "<script src=\"/js/code-enhanced.js\" defer></script>
 <script src=\"/js/code-highlighted.js\" defer></script>
 <script src=\"/js/backtop.js\" defer></script>
 <script src=\"/js/sidenote.js\" defer></script>
@@ -139,9 +162,7 @@
        display: none;
      }
   </style>
-</noscript>
-"
-  "`:html-postamble' for `org-publish'.")
+</noscript>")))
 
 (defconst spike-leung/html-postamble-sitemap "
 <script src=\"/js/backtop.js\" defer></script>
@@ -255,7 +276,7 @@ TAG is string."
 
 
 
-(defun spike-leung/org-publish-org (_plist filename pub-dir)
+(defun spike-leung/org-publish-plain-text (_plist filename pub-dir)
   "Publish a org file and use export_file_name as filename.
 
 FILENAME is the filename of the Org file to be published.  PLIST
@@ -267,10 +288,13 @@ Return output file name."
     (make-directory pub-dir t))
   (let* ((export-file-name
           (or (spike-leung/org-publish-get-org-keyword nil nil "export_file_name" filename) filename))
-         (output (file-name-with-extension (expand-file-name (file-name-nondirectory export-file-name) pub-dir) "org")))
-    (copy-file filename output t)
+         (base-filename (expand-file-name (file-name-nondirectory export-file-name) pub-dir))
+         (org-file (file-name-with-extension base-filename "org"))
+         (text-file (file-name-with-extension base-filename "txt")))
+    (org-publish-org-to 'ascii filename ".txt" _plist pub-dir)
+    (copy-file filename org-file t)
     ;; Return file name.
-    output))
+    org-file))
 
 
 
@@ -446,7 +470,7 @@ If heading does not already exist."
            :time-stamp-file nil
            :html-head ,spike-leung/html-head
            :html-preamble ,spike-leung/html-preamble-content
-           :html-postamble ,spike-leung/html-postamble
+           :html-postamble spike-leung/html-postamble
            :html-self-link-headlines t
            :auto-sitemap nil
            :author "Spike Leung"
@@ -464,7 +488,7 @@ If heading does not already exist."
            :time-stamp-file nil
            :auto-sitemap nil
            :html-head ,spike-leung/html-head
-           :html-postamble ,spike-leung/html-postamble
+           :html-postamble spike-leung/html-postamble
            :html-preamble ,spike-leung/html-preamble-content
            :html-self-link-headlines t
            :author "Spike Leung"
@@ -483,18 +507,18 @@ If heading does not already exist."
            :auto-sitemap nil
            :html-head ,spike-leung/html-head
            :html-preamble ,spike-leung/html-preamble-content
-           :html-postamble ,spike-leung/html-postamble
+           :html-postamble spike-leung/html-postamble
            :html-self-link-headlines t
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
-          ("origin-orgfiles"
+          ("plain-text"
            :base-directory "~/git/taxodium/posts"
            :base-extension "org"
            :exclude ".*"
            :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" (rx (or "_blackhole" "_published")))
            :publishing-directory ,spike-leung/org-publish-default-publishing-directory
-           :publishing-function spike-leung/org-publish-org)
+           :publishing-function spike-leung/org-publish-plain-text)
 
           ("index"
            :base-directory "~/git/taxodium/posts"
@@ -514,9 +538,9 @@ If heading does not already exist."
            :email "l-yanlei@hotmail.com")
 
           ;; copy static fisrt
-          ("posts" :components ("orgfiles" "origin-orgfiles"))
-          ("white-hole" :components ("black-hole" "origin-orgfiles"))
-          ("all" :components ("orgfiles" "black-hole" "draft" "index" "origin-orgfiles")))))
+          ("posts" :components ("orgfiles" "plain-text"))
+          ("white-hole" :components ("black-hole" "plain-text"))
+          ("all" :components ("orgfiles" "black-hole" "draft" "index" "plain-text")))))
 
 (spike-leung/setup-org-publish-project-alist)
 
