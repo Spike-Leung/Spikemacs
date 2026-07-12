@@ -37,7 +37,8 @@
   :init
   (default-text-scale-mode))
 
-(set-face-attribute 'default nil :height 220 :font "Iosevka")
+;; About Aporetic: https://github.com/protesilaos/aporetic
+(set-face-attribute 'default nil :height 220 :font "Aporetic Serif Mono")
 (dolist (fontset '(han kana hangul cjk-misc))
   (set-fontset-font "fontset-default" fontset
                     (font-spec :family "I.Ming")))
