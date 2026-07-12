@@ -397,7 +397,90 @@ holding contextual information."
   (defun org-ascii-bold (_bold contents _info) contents)
   (defun org-ascii-italic (_italic contents _info) contents)
   (defun org-ascii-underline (_underline contents _info) contents)
-  (defun org-ascii-strike-through (_strike-through contents _info) contents))
+  (defun org-ascii-strike-through (_strike-through contents _info) contents)
+  ;; override `org-ascii-template--document-title', change center align to left align
+  (defun org-ascii-template--document-title (info)
+    "Return document title, as a string.
+INFO is a plist used as a communication channel."
+    (let* ((text-width (plist-get info :ascii-text-width))
+           ;; Links in the title will not be resolved later, so we make
+           ;; sure their path is located right after them.
+           (info (org-combine-plists info '(:ascii-links-to-notes nil)))
+           (with-title (plist-get info :with-title))
+           (title (org-export-data
+                   (when with-title (plist-get info :title)) info))
+           (subtitle (org-export-data
+                      (when with-title (plist-get info :subtitle)) info))
+           (author (and (plist-get info :with-author)
+                        (let ((auth (plist-get info :author)))
+                          (and auth (org-export-data auth info)))))
+           (email (and (plist-get info :with-email)
+                       (org-export-data (plist-get info :email) info)))
+           (date (and (plist-get info :with-date)
+                      (org-export-data (org-export-get-date info) info))))
+      ;; There are two types of title blocks depending on the presence
+      ;; of a title to display.
+      (if (string= title "")
+          ;; Title block without a title.  DATE is positioned at the top
+          ;; right of the document, AUTHOR to the top left and EMAIL
+          ;; just below.
+          (cond
+           ((and (org-string-nw-p date) (org-string-nw-p author))
+            (concat
+             author
+             (make-string (- text-width (string-width date) (string-width author))
+                          ?\s)
+             date
+             (when (org-string-nw-p email) (concat "\n" email))
+             "\n\n\n"))
+           ((and (org-string-nw-p date) (org-string-nw-p email))
+            (concat
+             email
+             (make-string (- text-width (string-width date) (string-width email))
+                          ?\s)
+             date "\n\n\n"))
+           ((org-string-nw-p date)
+            (concat
+             (org-ascii--justify-lines date text-width 'right)
+             "\n\n\n"))
+           ((and (org-string-nw-p author) (org-string-nw-p email))
+            (concat author "\n" email "\n\n\n"))
+           ((org-string-nw-p author) (concat author "\n\n\n"))
+           ((org-string-nw-p email) (concat email "\n\n\n")))
+        ;; Title block with a title.  Document's TITLE, along with the
+        ;; AUTHOR and its EMAIL are both overlined and an underlined,
+        ;; centered.  Date is just below, also centered.
+        (let* ((utf8p (eq (plist-get info :ascii-charset) 'utf-8))
+               ;; Format TITLE.  It may be filled if it is too wide,
+               ;; that is wider than the two thirds of the total width.
+               (title-len (min (apply #'max
+                                      (mapcar #'string-width
+                                              (org-split-string
+                                               (concat title "\n" subtitle) "\n")))
+                               (/ (* 2 text-width) 3)))
+               (formatted-title (org-ascii--fill-string title title-len info))
+               (formatted-subtitle (when (org-string-nw-p subtitle)
+                                     (org-ascii--fill-string subtitle title-len info)))
+               (line
+                (make-string
+                 (min (+ (max title-len
+                              (string-width (or author ""))
+                              (string-width (or email "")))
+                         2)
+                      text-width) (if utf8p ?━ ?_))))
+          (org-ascii--justify-lines
+           (concat line "\n"
+                   (unless utf8p "\n")
+                   (upcase formatted-title)
+                   (and formatted-subtitle (concat "\n" formatted-subtitle))
+                   (cond
+                    ((and (org-string-nw-p author) (org-string-nw-p email))
+                     (concat "\n\n" author "\n" email))
+                    ((org-string-nw-p author) (concat "\n\n" author))
+                    ((org-string-nw-p email) (concat "\n\n" email)))
+                   "\n" line
+                   (when (org-string-nw-p date) (concat "\n\n\n" date))
+                   "\n\n\n") text-width 'left))))))
 
 
 
