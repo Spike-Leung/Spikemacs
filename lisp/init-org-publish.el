@@ -391,7 +391,13 @@ holding contextual information."
   :custom
   (org-ascii-text-width 88)
   (org-ascii-quote-margin 2)
-  (org-ascii-charset 'ascii))
+  (org-ascii-charset 'ascii)
+  :config
+  ;; do not interpret *word*, /word/, _word_ and +word+
+  (defun org-ascii-bold (_bold contents _info) contents)
+  (defun org-ascii-italic (_italic contents _info) contents)
+  (defun org-ascii-underline (_underline contents _info) contents)
+  (defun org-ascii-strike-through (_strike-through contents _info) contents))
 
 
 
