@@ -218,7 +218,6 @@
           ("https://chrismaiorana.com/feed/" :title "The Daily Macro" emacs)
           ("https://listeningroomsmusic.com/feed/?type=rss" :title "The Listening Rooms")
           ("https://feedpress.me/thetechnium" :title "The Technium")
-          ("https://blog.plover.com/index.atom" :title "The Universe of Discourse" tech)
           ("https://thewanderingallison.vercel.app/rss.xml/" :title "The Wandering Allison")
           ("https://theworksofegan.net/feed.xml" :title "The Works of Egan")
           ("https://themkat.net/feed.xml" :title "TheMKat’s blog" emacs)
@@ -311,6 +310,7 @@
           ("http://winnielim.org/feed/?cat=2%2C4%2C8" :title "Winnie Lim")
           ("https://vhbelvadi.com/rss" :title "V.H. Belvadi")
           ("https://webcurios.co.uk/feed/" :title "Web Curios" zine)
+          ("https://www.jackcheng.com/sunday/rss/" :title "Jack Cheng" zine)
           ;; no-update
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day Feed" :no-update t)
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
