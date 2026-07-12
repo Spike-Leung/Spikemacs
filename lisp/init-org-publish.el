@@ -384,6 +384,17 @@ holding contextual information."
 
 
 
+;;; ox-ascii
+
+(use-package ox-ascii
+  :straight nil
+  :custom
+  (org-ascii-text-width 88)
+  (org-ascii-quote-margin 2)
+  (org-ascii-charset 'ascii))
+
+
+
 ;;; ox filter
 (use-package ox
   :straight nil
