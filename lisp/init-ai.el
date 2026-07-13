@@ -90,6 +90,12 @@
 #+end_verse
 #+end_details")
 
+  (spike-leung/define-gptel-preset
+   'translate-title-to-url
+   :request-params '(:reasoning (:effort "none"))
+   :description "將 title 轉成 URL"
+   :rewrite-message "Transform text as readable URL, replace invalid char to -, all lowercase")
+
   (add-hook 'gptel-mode-hook 'auto-fill-mode)
   (add-hook 'gptel-mode-hook 'visual-line-mode))
 
