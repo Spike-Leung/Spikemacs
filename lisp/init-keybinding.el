@@ -72,7 +72,7 @@
   (transient-define-prefix spike-leung/transient-blog ()
     ["Blog related"
      ("i" "insert-image" spike-leung/insert-blog-images)
-     ("a" "insert-album-wall" spike-leung/insert-album-wall)
+     ("a" "insert-album-wall (C-u: REGEXP, C-u C-u: ALL & REGEXP)" spike-leung/insert-album-wall)
      ("v" "insert-video" spike-leung/insert-blog-video)
      ("p" "preview-current-post" spike-leung/preview-post)
      ("t" "toggle-publish-draft" spike-leung/denote-toggle-publish-draft)])
@@ -102,7 +102,7 @@
     "A transient to list all my frequently used command."
     [["(｡•̀ᴗ-)✧"
       ("b" "blog" spike-leung/transient-blog)
-      ("p" "publish" org-publish)
+      ("p" "publish (C-u: force publishing)" org-publish)
       ("j" "journal" denote-journal-new-or-existing-entry)]
      ["(・・?)"
       ("g" "gptel" spike-leung/transient-gptel)
