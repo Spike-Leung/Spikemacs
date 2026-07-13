@@ -311,6 +311,7 @@
           ("https://vhbelvadi.com/rss" :title "V.H. Belvadi")
           ("https://webcurios.co.uk/feed/" :title "Web Curios" zine)
           ("https://www.jackcheng.com/sunday/rss/" :title "Jack Cheng" zine)
+          ("https://whitep4nth3r.com/feed.xml" :title "Salma Alam-Naylor" tech)
           ;; no-update
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day Feed" :no-update t)
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
