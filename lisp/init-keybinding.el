@@ -106,7 +106,7 @@
       ("j" "journal" denote-journal-new-or-existing-entry)]
      ["(・・?)"
       ("g" "gptel" spike-leung/transient-gptel)
-      ("G" "ghostel" ghostel)
+      ("G" "ghostel (C-u: new session)" ghostel)
       ("t" "translate" spike-leung/transient-translate)
       ("u" "utils" spike-leung/transient-commands)
       ("w" "webjump" webjump)]
