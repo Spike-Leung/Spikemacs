@@ -392,6 +392,7 @@ holding contextual information."
   (org-ascii-text-width 88)
   (org-ascii-quote-margin 2)
   (org-ascii-charset 'ascii)
+  (org-ascii-links-to-notes nil)
   :config
   ;; do not interpret *word*, /word/, _word_ and +word+
   (defun org-ascii-bold (_bold contents _info) contents)
