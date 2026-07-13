@@ -239,15 +239,13 @@ images/album-1 → images/album/1 → images/album → images/
                       (_      (concat "video/" ext)))))
     (insert (format "#+begin_export html
 <figure>
-  <a href=\"%s\" target=\"_blank\">
-    <video autoplay loop muted playsinline loading=\"lazy\">
-      <source src=\"%s\" type=\"%s\">
-    </video>
-  </a>
+  <video autoplay loop muted playsinline loading=\"lazy\">
+    <source src=\"%s\" type=\"%s\">
+  </video>
   <figcaption></figcaption>
 </figure>
 #+end_export"
-                    web-path web-path mime-type))))
+                    web-path mime-type))))
 
 
 
