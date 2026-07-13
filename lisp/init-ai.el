@@ -94,7 +94,7 @@
    'translate-title-to-url
    :request-params '(:reasoning (:effort "none"))
    :description "將 title 轉成 URL"
-   :rewrite-message "Transform text as readable URL, replace invalid char to -, all lowercase")
+   :rewrite-message "Transform text as readable URL (english, lowercase), replace invalid char to -")
 
   (add-hook 'gptel-mode-hook 'auto-fill-mode)
   (add-hook 'gptel-mode-hook 'visual-line-mode))
