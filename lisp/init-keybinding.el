@@ -118,6 +118,21 @@
       ("md" "markdown-preview" spike-leung/transient-markdown)
       ("ol" "consult-outline" consult-outline)]]))
 
+
+;; make keybinding has high priority
+;; see: https://protesilaos.com/codelog/2026-07-08-emacs-global-keybinding-overrides/
+(defvar spike-leung/overrides-mode-map (make-sparse-keymap)
+  "Keymap for the `spike-leung/overrides-mode'.")
+
+(define-minor-mode spike-leung/overrides-mode
+  "Activate the `spike-leung/overrides-mode-map"
+  :global t
+  :init-value nil
+  :keymap spike-leung/overrides-mode-map)
+
+(define-key spike-leung/overrides-mode-map (kbd "M-o") 'spike-leung/transient)
+(spike-leung/overrides-mode 1)
+
 
 
 (provide 'init-keybinding)
