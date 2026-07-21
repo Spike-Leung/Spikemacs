@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: beancount transation
+# key: bb
+# --
+
+2026-$1-$2 * "景順長城稳健回报灵活配置混合 C"
+  Assets:Investment:Alipay:F001407
+  Assets:Bank:CMB:Checking-5243              -$3.00 CNY
+
+$0
