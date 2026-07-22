@@ -9,7 +9,9 @@
   :bind (("C-c ! l" . flymake-show-buffer-diagnostics)
          ("C-c ! p" . flymake-goto-prev-error)
          ("C-c ! n" . flymake-goto-next-error)
-         ("C-c ! c" . flymake-start)))
+         ("C-c ! c" . flymake-start))
+  :config
+  (setq flymake-show-diagnostics-at-end-of-line t))
 
 
 
