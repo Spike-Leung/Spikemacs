@@ -4,8 +4,8 @@
 
 
 
-;; Stop C-z from minimizing windows under OS X
 (defun sanityinc/maybe-suspend-frame ()
+  "Stop `C-z' from minimizing windows under OS X."
   (interactive)
   (unless (and *is-a-mac* window-system)
     (suspend-frame)))
@@ -240,6 +240,21 @@ BUFFER and ALIST are as for `display-buffer-full-frame'."
 
 (dolist (mode '(package-menu-mode magit-status-mode ibuffer-mode))
   (sanityinc/fullframe-mode mode))
+
+
+
+(use-package pulsar
+  :bind
+  ( :map global-map
+    ("C-x l" . pulsar-pulse-line)
+    ("C-x L" . pulsar-highlight-temporarily))
+  :init
+  (pulsar-global-mode 1)
+  :config
+  (setq pulsar-delay 0.05)
+  (setq pulsar-iterations 10)
+  (add-to-list 'pulsar-pulse-functions #'pop-to-mark-command)
+  (add-hook 'next-error-hook #'pulsar-pulse-line))
 
 
 
