@@ -64,6 +64,7 @@
   :custom
   (hs-allow-nesting t)
   (hs-hide-comments-when-hiding-all nil)
+  (hs-display-lines-hidden t)
   :config
   (defvar-keymap hs-repeat-map
     :doc "Repeat map for hideshow commands."
