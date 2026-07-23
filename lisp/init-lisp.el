@@ -92,7 +92,8 @@
 
 ;; Make C-x C-e run 'eval-region if the region is active
 (defun sanityinc/eval-last-sexp-or-region (prefix)
-  "Eval region from BEG to END if active, otherwise the last sexp."
+  "Eval region from BEG to END if active, otherwise the last sexp.
+PREFIX is pass to `pp-eval-last-sexp'."
   (interactive "P")
   (if (and (mark) (use-region-p))
       (eval-region (min (point) (mark)) (max (point) (mark)))
@@ -102,7 +103,7 @@
 
 (defun sanityinc/load-this-file ()
   "Load the current file or buffer.
-  The current directory is temporarily added to `load-path'.  When
+The current directory is temporarily added to `load-path'.  When
   there is no current file, eval the current buffer."
   (interactive)
   (let ((load-path (cons default-directory load-path))
@@ -149,7 +150,8 @@
 
 
 (defun sanityinc/make-read-only (_expression out-buffer-name &rest _)
-  "Enable `view-mode' in the output buffer - if any - so it can be closed with `\"q\"."
+  "Enable `view-mode' in the output buffer - if any - so it can be closed with `\"q\".
+OUT-BUFFER-NAME is the buffer name."
   (when (get-buffer out-buffer-name)
     (with-current-buffer out-buffer-name
       (view-mode 1))))
