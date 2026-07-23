@@ -12,7 +12,12 @@
          ("C-c ! c" . flymake-start))
   :config
   (setq flymake-show-diagnostics-at-end-of-line t
-        flymake-no-changes-timeout 1.5))
+        flymake-no-changes-timeout 1.5)
+  (defvar-keymap flymake-repeat-map
+    :doc "Repeat map for flymake commands."
+    :repeat t
+    "p" #'flymake-goto-prev-error
+    "n" #'flymake-goto-next-error))
 
 
 
