@@ -11,7 +11,6 @@
 
 
 (use-package consult
-  :ensure t
   :defer t
   :bind (([remap switch-to-buffer]              . consult-buffer)
          ([remap imenu]                         . consult-imenu)
@@ -49,12 +48,12 @@
   (("C-." . embark-act)
    ("M-." . embark-dwim)
    ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-  :init
-  ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command)
+  :hook (after-init . embark-auto-prefix-help-mode)
   :config
   (keymap-set embark-general-map "W" #'spike-leung/webjump-symbol-at-point)
-  (keymap-set embark-region-map "W" #'spike-leung/webjump-symbol-at-point))
+  (keymap-set embark-region-map "W" #'spike-leung/webjump-symbol-at-point)
+  (setq prefix-help-command #'embark-prefix-help-command
+        embark-auto-prefix-help-delay 1.5))
 
 (use-package embark-consult)
 
@@ -82,6 +81,7 @@
   (completion-category-defaults nil) ;; Disable defaults, use our settings
   (completion-pcm-leading-wildcard t) ;; Emacs 31: partial-completion behaves like substring
   :config
+  ;; add pinyin match to orderless
   (defun completion--regex-pinyin (str)
     (orderless-regexp (pinyinlib-build-regexp-string str)))
 
