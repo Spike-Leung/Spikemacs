@@ -253,7 +253,21 @@ BUFFER and ALIST are as for `display-buffer-full-frame'."
   :config
   (setq pulsar-delay 0.05)
   (setq pulsar-iterations 10)
-  (add-to-list 'pulsar-pulse-functions #'pop-to-mark-command)
+  (let ((pulsar-pulse-functions-list '(pop-to-mark-command
+                                       winum-select-window-1
+                                       winum-select-window-2
+                                       winum-select-window-3
+                                       winum-select-window-4
+                                       winum-select-window-5
+                                       winum-select-window-6
+                                       winum-select-window-7
+                                       winum-select-window-8
+                                       winum-select-window-9
+                                       winum-select-window-0-or-10
+                                       flymake-goto-prev-error
+                                       flymake-goto-next-error)))
+    (dolist (f pulsar-pulse-functions-list)
+      (add-to-list 'pulsar-pulse-functions f)))
   (add-hook 'next-error-hook #'pulsar-pulse-line))
 
 
