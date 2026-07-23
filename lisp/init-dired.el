@@ -13,10 +13,39 @@
 	      ("C-j" . dired-jump-other-window)
 	      :map dired-mode-map
 	      ("C-c C-q" . wdired-change-to-wdired-mode)
-              ("A" . spike-leung/handle-album-cover))
+              ("A" . spike-leung/handle-album-cover)
+              ("1" . spike-leung/dired-sort-by-size)
+              ("2" . spike-leung/dired-sort-by-date)
+              ("3" . spike-leung/dired-sort-by-name)
+              ("4" . spike-leung/dired-sort-by-extension))
   :config
   (setq-default dired-dwim-target t)
-  (setq dired-recursive-deletes 'top))
+  (setq dired-recursive-deletes 'top)
+
+  ;; borrow from: https://emacs.dyerdwelling.family/emacs/20260721093224-emacs--borrowing-from-jasspa-microemacs-dired-sort-keybindings/
+  (defun spike-leung/dired-sort-by-size ()
+    "Sort Dired buffer by file size."
+    (interactive)
+    (dired-sort-other "-alGghS")
+    (message "dired sort by SIZE."))
+
+  (defun spike-leung/dired-sort-by-date ()
+    "Sort Dired buffer by last modification date."
+    (interactive)
+    (dired-sort-other "-alGght")
+    (message "dired sort by DATE."))
+
+  (defun spike-leung/dired-sort-by-name ()
+    "Sort Dired buffer alphabetically by name."
+    (interactive)
+    (dired-sort-other "-alGgh")
+    (message "dired sort by NAME."))
+
+  (defun spike-leung/dired-sort-by-extension ()
+    "Sort Dired buffer by file extension."
+    (interactive)
+    (dired-sort-other "-alGghX")
+    (message "dired sort by EXTENSION.")))
 
 
 
