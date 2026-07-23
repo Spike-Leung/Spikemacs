@@ -131,6 +131,7 @@
   :keymap spike-leung/overrides-mode-map)
 
 (define-key spike-leung/overrides-mode-map (kbd "M-o") 'spike-leung/transient)
+(define-key spike-leung/overrides-mode-map (kbd "M-?") 'sanityinc/consult-ripgrep-at-point)
 (spike-leung/overrides-mode 1)
 
 
