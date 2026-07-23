@@ -143,7 +143,6 @@
           ("https://jeffbradberry.com/feeds/all.atom.xml" :title "Jeff Bradberry" emacs)
           ("https://jetgirl.art/rss/" :title "JetGirlArt")
           ("https://blog.jim-nielsen.com/feed.xml" :title "Jim Nielsen" tech)
-          ("https://joelchrono.xyz/feed.xml" :title "Joelchrono's Blog" game)
           ("https://www.joshwcomeau.com/rss.xml" :title "Josh Comeau" frontend css web)
           ("https://hamatti.org/feed/feed.xml" :title "Juhis")
           ("https://jvns.ca/atom.xml" :title "Julia Evans" tech)
@@ -337,6 +336,7 @@
           ("https://www.nicksimson.com/feed.xml" :title "NickSimson.com" :no-update t)
           ("https://jamesg.blog/feeds/posts.xml" :title "James' Coffee Blog" :no-update t)
           ("https://francescrossley.com/feed/?type=rss" :title "What the Fran" :no-update t)
+          ("https://joelchrono.xyz/feed.xml" :title "Joelchrono's Blog" :no-update t game)
           ;; end
           ))
 
@@ -370,7 +370,7 @@
 
 
 (defun spike-leung/elfeed-reading-list ()
-  "Generate selected Elfeed entries as reading list. Auto push to git."
+  "Generate selected Elfeed entries as reading list.  Auto push to git."
   (interactive nil elfeed-search-mode)
   (let ((repo-dir (expand-file-name "~/git/reading-list"))
         (entries (elfeed-search-selected)))
