@@ -30,11 +30,17 @@
    (eshell-mode . (lambda () (setq-local corfu-auto nil))))
   :custom
   (corfu-auto-delay 0.55)
+  (corfu-popupinfo-delay '(1.25 . 0.5))
+  (corfu-preview-current nil)
   :config
   (setq-default corfu-auto t
 	        corfu-quit-no-match t)
   (corfu-popupinfo-mode)
-  (corfu-history-mode))
+
+  ;; Sort by input history (no need to modify `corfu-sort-function').
+  (with-eval-after-load 'savehist
+    (corfu-history-mode 1)
+    (add-to-list 'savehist-additional-variables 'corfu-history)))
 
 ;; Make Corfu also work in terminals, without disturbing usual behaviour in GUI
 (use-package corfu-terminal
