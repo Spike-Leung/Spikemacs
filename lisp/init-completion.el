@@ -14,6 +14,7 @@
         try-complete-file-name
         try-expand-all-abbrevs
         try-expand-dabbrev
+        try-expand-dabbrev-visible
         try-expand-dabbrev-all-buffers
         try-expand-dabbrev-from-kill
         try-complete-lisp-symbol-partially
@@ -23,16 +24,17 @@
 
 
 (use-package corfu
+  :defer nil
+  :hook
+  ((after-init . global-corfu-mode)
+   (eshell-mode . (lambda () (setq-local corfu-auto nil))))
   :custom
   (corfu-auto-delay 0.55)
   :config
   (setq-default corfu-auto t
 	        corfu-quit-no-match t)
   (corfu-popupinfo-mode)
-  (corfu-history-mode)
-  :defer nil
-  :hook ((after-init . global-corfu-mode)
-	 (eshell-mode . (lambda () (setq-local corfu-auto nil)))))
+  (corfu-history-mode))
 
 ;; Make Corfu also work in terminals, without disturbing usual behaviour in GUI
 (use-package corfu-terminal
@@ -42,23 +44,23 @@
   :config (corfu-terminal-mode))
 
 
+
 ;;; cape.el - Completion At Point Extensions
 ;; https://github.com/minad/cape
 
 (use-package cape
-  :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
+  :bind ("M-p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
   :init
   ;; Add to the global default value of `completion-at-point-functions' which is
   ;; used by `completion-at-point'.  The order of the functions matters, the
   ;; first function returning a result wins.  Note that the list of buffer-local
   ;; completion functions takes precedence over the global list.
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
-  (add-hook 'completion-at-point-functions #'cape-abbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
   (add-hook 'completion-at-point-functions #'cape-keyword)
   (add-hook 'completion-at-point-functions #'cape-elisp-symbol)
   (add-hook 'completion-at-point-functions #'cape-elisp-block)
-  (add-hook 'completion-at-point-functions #'cape-line)
+  (add-hook 'completion-at-point-functions #'cape-abbrev)
   (add-hook 'completion-at-point-functions #'cape-history))
 
 
