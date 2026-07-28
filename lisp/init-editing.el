@@ -269,9 +269,19 @@
 
 
 
+(use-package substitute
+  :config
+  ;; If you want a message reporting the matches that changed in the
+  ;; given context.  We don't do it by default.
+  (add-hook 'substitute-post-replace-functions #'substitute-report-operation)
+
+  ;; Use C-c s as a prefix for all Substitute commands.
+  (define-key global-map (kbd "C-c s") #'substitute-prefix-map))
+
+
+
 ;;; Something may try:
 ;; https://github.com/alezost/mwim.el  Move to the beginning/end of line, code or comment
-
 
 
 
