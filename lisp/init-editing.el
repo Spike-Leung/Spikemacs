@@ -268,6 +268,7 @@
 
 
 (use-package substitute
+  :defer nil
   :config
   ;; If you want a message reporting the matches that changed in the
   ;; given context.  We don't do it by default.
