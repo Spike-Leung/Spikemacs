@@ -66,6 +66,7 @@
 ;;; hideshow
 
 (use-package hideshow
+  :diminish hs-minor-mode
   :hook (prog-mode . hs-minor-mode)
   :custom
   (hs-allow-nesting t)

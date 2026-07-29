@@ -44,11 +44,12 @@
 
 
 (use-package embark
+  :hook (after-init . embark-auto-prefix-help-mode)
+  :diminish embark-auto-prefix-help-mode
   :bind
   (("C-." . embark-act)
    ("M-." . embark-dwim)
    ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-  :hook (after-init . embark-auto-prefix-help-mode)
   :config
   (keymap-set embark-general-map "W" #'spike-leung/webjump-symbol-at-point)
   (keymap-set embark-region-map "W" #'spike-leung/webjump-symbol-at-point)
