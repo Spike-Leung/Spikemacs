@@ -163,7 +163,9 @@
 ;; 也许有帮助的文章： https://sachachua.com/blog/2026/03/emacs-lisp-defvar-keymap-hints-for-which-key/
 (use-package which-key
   :diminish
-  :hook (after-init . which-key-mode))
+  :hook (after-init . which-key-mode)
+  :custom
+  (which-key-max-description-length nil))
 
 
 
