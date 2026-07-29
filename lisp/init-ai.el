@@ -24,7 +24,6 @@
   "Openrouter models.")
 
 (use-package gptel
-  :ensure t
   :custom
   (gptel-proxy "localhost:7890")
   :config
@@ -58,9 +57,9 @@
   ;; preset
   (defmacro spike-leung/define-gptel-preset (name &rest args)
     `(gptel-make-preset ,name
-       :backend "OpenRouter"
-       :model 'deepseek/deepseek-v4-flash
-       ,@args))
+                        :backend "OpenRouter"
+                        :model 'deepseek/deepseek-v4-flash
+                        ,@args))
 
   (spike-leung/define-gptel-preset 'quote-format
                                    :request-params '(:reasoning (:effort "none"))

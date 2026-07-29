@@ -60,7 +60,6 @@
 ;; 如果后续有 patch 可以移除
 ;; 依然需要小心检查 .git/config
 (use-package vc
-  :ensure nil
   :config
   (remove-hook 'find-file-hook #'vc-refresh-state))
 
@@ -70,7 +69,6 @@
 ;;; when solve conflic, you can try out `smerge-mode'
 
 (use-package ediff
-  :ensure nil
   :config
   ;; Don't break out a separate frame for ediff
   (setq ediff-window-setup-function 'ediff-setup-windows-plain

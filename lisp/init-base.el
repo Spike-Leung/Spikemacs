@@ -12,7 +12,7 @@
 
 
 
-(use-package diminish :ensure t)
+(use-package diminish)
 
 
 

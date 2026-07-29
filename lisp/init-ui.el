@@ -33,7 +33,6 @@
 
 ;; Change global font size easily
 (use-package default-text-scale
-  :ensure
   :init
   (default-text-scale-mode))
 
@@ -197,7 +196,6 @@ set of themes to either dark or light variants."
 
 
 (use-package spacious-padding
-  :ensure t
   :defer nil
   :config
   (spacious-padding-mode 1))

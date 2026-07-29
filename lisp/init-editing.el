@@ -57,7 +57,6 @@
 
 ;; better undo
 (use-package vundo
-  :ensure t
   :bind (("C-x u" . vundo)))
 
 
@@ -76,7 +75,6 @@
 
 
 (use-package whole-line-or-region
-  :ensure t
   :defer nil
   :diminish whole-line-or-region-local-mode
   :config
