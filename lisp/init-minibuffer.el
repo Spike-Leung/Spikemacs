@@ -64,9 +64,10 @@
   :defer nil
   :init
   (vertico-mode)
-  :bind (:map vertico-map
-              ("C-c C-o" . embark-export)
-              ("C-c C-c" . embark-act))
+  :bind
+  (:map vertico-map
+        ("C-c C-o" . embark-export)
+        ("C-c C-c" . embark-act))
   :config
   ;; use "M-B"(buffer)，"M-V"(vertical), "M-G"(grid) to rotate different views
   (vertico-multiform-mode))
