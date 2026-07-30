@@ -53,8 +53,13 @@
   :config
   (keymap-set embark-general-map "W" #'spike-leung/webjump-symbol-at-point)
   (keymap-set embark-region-map "W" #'spike-leung/webjump-symbol-at-point)
+  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
   (setq prefix-help-command #'embark-prefix-help-command
-        embark-auto-prefix-help-delay 1.5))
+        embark-auto-prefix-help-delay 1.5
+        ;; 默認不彈出 Embark Actions 菜單，可以過過 C-h 喚醒
+        embark-indicators '(embark-minimal-indicator
+                            embark-highlight-indicator
+                            embark-isearch-highlight-indicator)))
 
 (use-package embark-consult)
 
