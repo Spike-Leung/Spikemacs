@@ -7,7 +7,7 @@
 
 (use-package elfeed
   :custom
-  (elfeed-search-filter "@1weeks +unread")
+  (elfeed-search-filter "@8days +unread")
   (elfeed-confirm-browse-url nil)
   (elfeed-search-separator-date-format "%Y-%m-%d")
   (elfeed-curl-timeout 60)
