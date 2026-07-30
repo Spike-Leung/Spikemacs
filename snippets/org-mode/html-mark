@@ -3,4 +3,4 @@
 # key: m
 # --
 
-@@html:<mark>$0</mark>@@
+@@html:<mark>@@$0@@html:</mark>@@
