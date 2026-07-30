@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: html <small>
-# key: s
+# key: sm
 # --
 
-@@html:<small>$0</small>@@
+@@html:<small>($0)</small>@@
