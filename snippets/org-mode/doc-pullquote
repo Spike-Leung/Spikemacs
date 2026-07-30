@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: doc pullquote
+# key: dp
+# --
+
+#+attr_html: :role doc-pullquote :aria-hidden true
+#+begin_aside
+$0
+#+end_aside
