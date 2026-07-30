@@ -55,7 +55,9 @@
 ;; https://github.com/minad/cape
 
 (use-package cape
-  :bind ("M-p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
+  :bind
+  ((:map corfu-map
+         ("M-p" . cape-prefix-map)))
   :init
   ;; Add to the global default value of `completion-at-point-functions' which is
   ;; used by `completion-at-point'.  The order of the functions matters, the
