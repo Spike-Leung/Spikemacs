@@ -313,6 +313,7 @@
           ("https://whitep4nth3r.com/feed.xml" :title "Salma Alam-Naylor" tech)
           ("https://hexedhearth.net/feed/rss/" :title "Hexed Hearth")
           ("https://localghost.dev/feed.xml" :title "Localghost")
+          ("https://e89295.com/blog/atom.xml" :titie "我的部落格" 台灣)
           ;; no-update
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day Feed" :no-update t)
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
