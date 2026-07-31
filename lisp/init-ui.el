@@ -85,20 +85,21 @@ set of themes to either dark or light variants."
   (require 'modus-themes)
   (require 'ef-themes)
   (require 'doric-themes)
-  (let ((week (string-to-number (format-time-string "%u"))))
+  (let* ((prefixes '(modus ef doric))
+         (prefix (nth (random (length prefixes)) prefixes)))
     (cond
-     ((member week '(1 3 7))
-      (cond
-       ((eq background-mode 'light) (ef-themes-load-random-light))
-       ((eq background-mode 'dark) (ef-themes-load-random-dark))
-       (t (spike-leung/load-theme-by-time #'ef-themes-load-random-light #'ef-themes-load-random-dark))))
-     ((= week 5)
+     ((eq 'modus prefix)
       (if background-mode
           (modus-themes-load-random background-mode)
         (spike-leung/load-theme-by-time
          (lambda () (modus-themes-load-random 'light))
          (lambda () (modus-themes-load-random 'dark)))))
-     (t
+     ((eq 'ef prefix)
+      (cond
+       ((eq background-mode 'light) (ef-themes-load-random-light))
+       ((eq background-mode 'dark) (ef-themes-load-random-dark))
+       (t (spike-leung/load-theme-by-time #'ef-themes-load-random-light #'ef-themes-load-random-dark))))
+     ((eq 'doric prefix)
       (if background-mode
           (doric-themes-load-random background-mode)
         (spike-leung/load-theme-by-time
