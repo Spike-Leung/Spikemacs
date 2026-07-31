@@ -38,6 +38,7 @@
 ;; make the package download by straight.el always load, avoid conflict with built-in
 ;; see: https://github.com/radian-software/straight.el/issues/1146
 (straight-use-package 'project)
+(straight-use-package 'org)
 
 
 
