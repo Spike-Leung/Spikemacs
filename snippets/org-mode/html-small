@@ -3,4 +3,4 @@
 # key: sm
 # --
 
-@@html:@@<small>($0)@@html:</small>@@
+@@html:<small>@@($0)@@html:</small>@@
