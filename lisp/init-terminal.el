@@ -7,7 +7,7 @@
   :bind (:map project-prefix-map
               ("m" . ghostel-project)
               ("M" . ghostel-project-list-buffers))
-  :config
+  :init
   ;; 1. `project-switch-project' (C-x p p)
   ;; and then press m to open a Ghostel buffer in this project.
   ;; 2. In a project press C-x p M to get a list of Ghostel buffers
