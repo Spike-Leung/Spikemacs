@@ -15,11 +15,6 @@
 
 
 
-;;; Terminal
-(use-package ghostel)
-
-
-
 ;;; Proxy
 
 ;; (setq url-using-proxy "http://127.0.0.1:20172")
@@ -78,9 +73,9 @@
                                     "dict.cn/search?q="
                                     ""])
                         ("漢典" . [simple-query
-                                    "zdic.net"
-                                    "zdic.net/hans/"
-                                    ""])
+                                   "zdic.net"
+                                   "zdic.net/hans/"
+                                   ""])
                         ))
 
   (defun spike-leung/webjump-symbol-at-point (target)

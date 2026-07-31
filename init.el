@@ -39,6 +39,7 @@
 (require 'init-prog)
 (require 'init-sessions)
 (require 'init-translate)
+(require 'init-terminal)
 (require 'init-ui)
 (require 'init-utils)
 (require 'init-windows)
