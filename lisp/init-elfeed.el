@@ -315,6 +315,9 @@
           ("https://localghost.dev/feed.xml" :title "Localghost")
           ("https://e89295.com/blog/atom.xml" :titie "我的部落格" 台湾)
           ("https://paddletonightside.blogspot.com/feeds/posts/default" :title "夜裡擺渡的幽靈船" 台湾)
+          ("https://theprivacydad.com/blog/" :title "Privacy Dad" privacy)
+          ("https://moonwriting.blog/feed.xml" :title "moonwriting")
+          ("https://jamesg.blog/feeds/posts.xml" :title "James' Coffee Blog" :no-update t)
           ;; no-update
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day Feed" :no-update t)
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
@@ -335,7 +338,6 @@
           ("https://www.quantamagazine.org/feed/" :title "Quanta Magazine" :no-update t zine weekly)
           ("https://idle.news/feed.xml" :title "The Idle Gazette" :no-update t weekly)
           ("https://www.wikimoe.com/rss" :title "维基萌" :no-update t anime 圣地巡礼)
-          ("https://jamesg.blog/feeds/posts.xml" :title "James' Coffee Blog" :no-update t)
           ("https://francescrossley.com/feed/?type=rss" :title "What the Fran" :no-update t)
           ("https://joelchrono.xyz/feed.xml" :title "Joelchrono's Blog" :no-update t game)
           ;; end
