@@ -46,6 +46,7 @@
 (use-package embark
   :hook (after-init . embark-auto-prefix-help-mode)
   :diminish embark-auto-prefix-help-mode
+  :after (vertico)
   :bind
   (("C-." . embark-act)
    ("M-." . embark-dwim)
