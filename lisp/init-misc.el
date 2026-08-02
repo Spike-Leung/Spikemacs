@@ -35,43 +35,11 @@
                         ("Kagi Translate Text" . [simple-query
                                                   "translate.kagi.com"
                                                   "translate.kagi.com/?text="
-                                                  "&from=auto&to=zh_cn&quality=best"])
-                        ("Kagi Translate Lyrics" . [simple-query
-                                                    "translate.kagi.com"
-                                                    "translate.kagi.com/?text="
-                                                    ,(concat "&from=auto&to=zh_cn&quality=best&context=" (webjump-url-encode "这是一首歌的歌词"))])
-                        ("Kagi Translate Page" . [simple-query
-                                                  "translate.kagi.com"
-                                                  "translate.kagi.com/zh_cn/"
-                                                  "?kt_view=both_vertical?kt_view=both_vertical"])
-                        ("Kagi LLM" . [simple-query
-                                       "kagi.com"
-                                       "kagi.com/assistant?q="
-                                       "&profile=kimi-k2.5-reasoning&internet=on"])
-                        ("Kagi Summary" . [simple-query
-                                           "kagi.com"
-                                           "kagi.com/summarizer?url="
-                                           "&target_language=ZH&summary=takeaway"])
-                        ("Wikipedia" . [simple-query
-                                        "wikipedia.org"
-                                        "wikipedia.org/wiki/"
-                                        ""])
-                        ("Kagi(site:github.com)" . [simple-query
-                                                    "kagi.com"
-                                                    "kagi.com/search?q=site:github.com+"
-                                                    ""])
-                        ("Album" . [simple-query
-                                    "kagi.com"
-                                    "kagi.com/images?q="
-                                    "&size=large"])
+                                                  "&from=auto&to=zh_tw&quality=best"])
                         ("MDN" . [simple-query
                                   "developer.mozilla.org"
                                   "developer.mozilla.org/en-US/search?q="
                                   ""])
-                        ("Haici" . [simple-query
-                                    "dict.cn"
-                                    "dict.cn/search?q="
-                                    ""])
                         ("漢典" . [simple-query
                                    "zdic.net"
                                    "zdic.net/hans/"
