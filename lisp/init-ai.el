@@ -10,14 +10,14 @@
 
 ;;; gptel
 
-(defconst openrouter-default-model 'deepseek/deepseek-v4-flash
+(defconst openrouter-default-model '~deepseek/deepseek-v4-flash-latest
   "Default model for openrouter.")
 
 (defconst openrouter-models '(;; google
                               google/gemini-3-flash-preview
                               google/gemini-3.1-pro-preview
                               ;; deepseek
-                              deepseek/deepseek-v4-flash
+                              ~deepseek/deepseek-v4-flash-latest
                               deepseek/deepseek-v4-pro
                               ;; kimi
                               moonshotai/kimi-k2.5)
@@ -57,9 +57,9 @@
   ;; preset
   (defmacro spike-leung/define-gptel-preset (name &rest args)
     `(gptel-make-preset ,name
-                        :backend "OpenRouter"
-                        :model 'deepseek/deepseek-v4-flash
-                        ,@args))
+       :backend "OpenRouter"
+       :model '~deepseek/deepseek-v4-flash-latest
+       ,@args))
 
   (spike-leung/define-gptel-preset 'quote-format
                                    :request-params '(:reasoning (:effort "none"))
