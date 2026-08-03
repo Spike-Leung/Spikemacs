@@ -1,4 +1,4 @@
-;;; init-blaugust.el --- Insert description here -*- lexical-binding: t -*-
+;;; init-blaugust.el --- Fetch Blaugust Participant -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -44,16 +44,22 @@ Call CALLBACK with a list of feeds."
        (funcall callback feeds)))
    ;; ignore error
    (lambda (_err)
+     (message "Request failed: %S" _err)
      (funcall callback nil))))
 
-(defun spike-leung/blaugust--display-blogroll (blogroll start-time)
-  "Display BLOGROLL to buffer.Calc duration with START-TIME."
-  (let ((elapsed (float-time (time-subtract (current-time) start-time))))
-    (message "Collect finish (%.1fs). Write result to buffer..." elapsed)
-    (with-current-buffer (get-buffer-create "*blaugust-blogroll*")
-      (erase-buffer)
-      (insert (pp-to-string blogroll))
-      (display-buffer (current-buffer)))))
+(defun spike-leung/blaugust--save-blogroll (blogroll output-file start-time)
+  "Save BLOGROLL to OUTPUT-FILE.
+Calc duration with START-TIME."
+  (let ((elapsed (float-time (time-subtract (current-time) start-time)))
+        (sorted-blogroll (sort (copy-sequence blogroll)
+                               (lambda (a b)
+                                 (string< (downcase (plist-get a :title))
+                                          (downcase (plist-get b :title)))))))
+    (message "Collect finish (%.1fs). Write result to %s..." elapsed output-file)
+    (make-directory (file-name-directory output-file) t)
+    (with-temp-file output-file
+      (insert (pp-to-string sorted-blogroll)))
+    (message "Wrote blogroll to %s (%.1fs)" output-file elapsed)))
 
 (defun spike-leung/blaugust--collect-feed-for-participant (participant callback)
   "Collect feeds for PARTICIPANT.
@@ -69,7 +75,12 @@ Call CALLBACK with a list of plists (:title :link)."
   (spike-leung/blaugust--fetch-parse-dom
    participant-list-url
    (lambda (dom)
-     (let ((participant-a-tags (and dom (dom-by-tag (cdr (dom-by-class dom "wp-block-list")) 'a))))
+     (let ((participant-a-tags
+            (and dom
+                 (mapcan (lambda (wp-block-list)
+                           (dom-by-tag wp-block-list 'a)
+                           )
+                         (cdr (dom-by-class dom "wp-block-list"))))))
        (funcall callback
                 (mapcar
                  (lambda (atag)
@@ -80,9 +91,10 @@ Call CALLBACK with a list of plists (:title :link)."
    (lambda (_err)
      (funcall callback nil))))
 
-(defun spike-leung/blaugust--collect-blaugust-feeds (participant-list-url)
-  "Collect feeds from PARTICIPANT-LIST-URL."
-  (interactive "sParticipant List URL: ")
+(defun spike-leung/blaugust--collect-blaugust-feeds (participant-list-url output-file)
+  "Collect feeds from PARTICIPANT-LIST-URL.
+Save data to OUTPUT-FILE."
+  (interactive "sParticipant List URL: \nFOutput File:")
   (let ((start-time (current-time)))
     (message "Start collecting Blaugust feeds...")
     (condition-case err
@@ -103,10 +115,18 @@ Call CALLBACK with a list of plists (:title :link)."
                     (cl-incf completed)
                     (message "Collected %d/%d: %s" completed total (plist-get participant :title))
                     (when (= completed total)
-                      (spike-leung/blaugust--display-blogroll blogroll start-time)))))))))
+                      (spike-leung/blaugust--save-blogroll blogroll output-file start-time)))))))))
       (error
        (message "Failed to fetch participant page: %s" participant-list-url)
        nil))))
+
+(defun spike-leung/blaugust--read-blogroll (input-file)
+  "Read INPUT-FILE as blogroll data."
+  (seq-filter (lambda (feed)
+                (not (null (plist-get feed :feeds))))
+              (with-temp-buffer
+                (insert-file-contents input-file)
+                (read (current-buffer)))))
 
 (defun spike-leung/blaugust--export-opml (title input-file output-file)
   "Export feeds from INPUT-FILE plist to OPML-formatted OUTPUT-FILE.
@@ -114,9 +134,7 @@ TITLE is the title in opml file.
 Use `spike-leung/blaugust--collect-blaugust-feeds' to generate INPUT-FILE."
   (declare (completion elfeed--mode-p))
   (interactive "sTitle in OPML file: \nFInput file: \nFOutput OPML file: ")
-  (let* ((feeds (with-temp-buffer
-                  (insert-file-contents input-file)
-                  (read (current-buffer)))))
+  (let* ((feeds (spike-leung/blaugust--read-blogroll input-file)))
     (with-temp-file output-file
       (let ((standard-output (current-buffer)))
         (princ "<?xml version=\"1.0\"?>\n")
@@ -139,9 +157,7 @@ Use `spike-leung/blaugust--collect-blaugust-feeds' to generate INPUT-FILE."
 INPUT-FILE is the blaugust feeds generated
 by `spike-leung/blaugust--collect-blaugust-feeds'."
   (interactive "FInput file:")
-  (let* ((feeds (with-temp-buffer
-                  (insert-file-contents input-file)
-                  (read (current-buffer))))
+  (let* ((feeds (spike-leung/blaugust--read-blogroll input-file))
          (existing-feed-urls
           (mapcar (lambda (feed)
                     (cond
@@ -158,8 +174,8 @@ by `spike-leung/blaugust--collect-blaugust-feeds'."
                       :title
                       ,(plist-get feed :title)
                       ;; set no-update t as default
-                      :no-update t
-                      ;; add tags
+                      ;; :no-update t
+                      ;; tags
                       blaugust2026)
                     )
                   feeds))
@@ -168,10 +184,12 @@ by `spike-leung/blaugust--collect-blaugust-feeds'."
                         (member (car feed) existing-feed-urls))
                       blaugust-elfeed-feeds))
          (new-feeds
-          (seq-filter (lambda (feed)
-                        (not (member (car feed) existing-feed-urls)))
-                      blaugust-elfeed-feeds))
-         )
+          (mapcar (lambda (feed)
+                    ;; add tag for new feeds
+                    (append feed '(new-feeds)))
+                  (seq-filter (lambda (feed)
+                                (not (member (car feed) existing-feed-urls)))
+                              blaugust-elfeed-feeds))))
     (with-current-buffer (get-buffer-create "*blaugust-elfeed-feeds*")
       (erase-buffer)
       (insert ";; Already exist\n")
