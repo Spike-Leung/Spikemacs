@@ -321,6 +321,9 @@
           ("https://matling.fit/atom.xml" :title "物灵")
           ("https://writings.hongminhee.org/feed.en.xml" :title "Hong Minhee on Things")
           ("https://alexhsu.com/rss.xml" :title "Alex Hsu" 台湾)
+          ("https://bkyd.kill.jp/N/feed/" :title "新裏庭" 日語)
+          ("https://litter.leaflet.pub/atom" :title "leaf litter" zine)
+          ("https://danq.me/feed/" :title "Dan Q" tech)
           ;; no-update
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day Feed" :no-update t)
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
