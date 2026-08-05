@@ -47,19 +47,49 @@ Call CALLBACK with a list of feeds."
      (message "Request failed: %S" _err)
      (funcall callback nil))))
 
-(defun spike-leung/blaugust--save-blogroll (blogroll output-file start-time)
+(defun spike-leung/blaugust--save-blogroll (blogroll output-file start-time &optional old-blogroll)
   "Save BLOGROLL to OUTPUT-FILE.
-Calc duration with START-TIME."
-  (let ((elapsed (float-time (time-subtract (current-time) start-time)))
-        (sorted-blogroll (sort (copy-sequence blogroll)
-                               (lambda (a b)
-                                 (string< (downcase (plist-get a :title))
-                                          (downcase (plist-get b :title)))))))
+Calc duration with START-TIME.
+If OLD-BLOGROLL not nil, merge BLOGROLL with EXSITING-BLOGROLL."
+  (let* ((elapsed (float-time (time-subtract (current-time) start-time)))
+         (merged-blogroll
+          (if old-blogroll
+              (spike-leung/blaugust--merge-blogroll blogroll old-blogroll)
+            blogroll))
+         (sorted-blogroll (sort (copy-sequence merged-blogroll)
+                                (lambda (a b)
+                                  (string< (downcase (plist-get a :title))
+                                           (downcase (plist-get b :title)))))))
     (message "Collect finish (%.1fs). Write result to %s..." elapsed output-file)
     (make-directory (file-name-directory output-file) t)
     (with-temp-file output-file
       (insert (pp-to-string sorted-blogroll)))
     (message "Wrote blogroll to %s (%.1fs)" output-file elapsed)))
+
+(defun spike-leung/blaugust--merge-blogroll (new old)
+  "Merge curated OLD blogroll into NEW by :domain.
+If a NEW entry has no :feeds but OLD has :feeds for the same domain,
+reuse OLD's :feeds.  Also keep OLD entries not present in NEW."
+  (let ((old-table (make-hash-table :test #'equal))
+        result)
+    ;; init table
+    (dolist (o old)
+      (puthash (plist-get o :domain) o old-table))
+    (dolist (n new)
+      ;; if n's feeds is nil while o's feeds not, merge
+      (let* ((key (plist-get n :domain))
+             (old-entry (gethash key old-table))
+             (old-feeds (and old-entry (plist-get old-entry :feeds)))
+             (new-feeds (plist-get n :feeds)))
+        (when (and old-feeds (null new-feeds))
+          (message "Reusing curated feeds for %s" key)
+          (setq n (plist-put (copy-sequence n) :feeds old-feeds)))
+        (push n result)
+        (remhash key old-table)))
+    ;; Any old entries whose domain did not appear in new are pushed into result too.
+    (maphash (lambda (_key o) (push o result)) old-table)
+    ;; Reverse result because push builds it backwards.
+    (nreverse result)))
 
 (defun spike-leung/blaugust--collect-feed-for-participant (participant callback)
   "Collect feeds for PARTICIPANT.
@@ -91,11 +121,14 @@ Call CALLBACK with a list of plists (:title :link)."
    (lambda (_err)
      (funcall callback nil))))
 
-(defun spike-leung/blaugust--collect-blaugust-feeds (participant-list-url output-file)
+(defun spike-leung/blaugust--collect-feeds (participant-list-url output-file)
   "Collect feeds from PARTICIPANT-LIST-URL.
 Save data to OUTPUT-FILE."
   (interactive "sParticipant List URL: \nFOutput File:")
-  (let ((start-time (current-time)))
+  (let ((start-time (current-time))
+        (existing-blogroll (and (file-exists-p output-file)
+                                (ignore-errors
+                                  (spike-leung/blaugust--read-blogroll output-file)))))
     (message "Start collecting Blaugust feeds...")
     (condition-case err
         (spike-leung/blaugust--collect-participant-links
@@ -115,7 +148,7 @@ Save data to OUTPUT-FILE."
                     (cl-incf completed)
                     (message "Collected %d/%d: %s" completed total (plist-get participant :title))
                     (when (= completed total)
-                      (spike-leung/blaugust--save-blogroll blogroll output-file start-time)))))))))
+                      (spike-leung/blaugust--save-blogroll blogroll output-file start-time existing-blogroll)))))))))
       (error
        (message "Failed to fetch participant page: %s" participant-list-url)
        nil))))
@@ -131,7 +164,7 @@ Save data to OUTPUT-FILE."
 (defun spike-leung/blaugust--export-opml (title input-file output-file)
   "Export feeds from INPUT-FILE plist to OPML-formatted OUTPUT-FILE.
 TITLE is the title in opml file.
-Use `spike-leung/blaugust--collect-blaugust-feeds' to generate INPUT-FILE."
+Use `spike-leung/blaugust--collect-feeds' to generate INPUT-FILE."
   (declare (completion elfeed--mode-p))
   (interactive "sTitle in OPML file: \nFInput file: \nFOutput OPML file: ")
   (let* ((feeds (spike-leung/blaugust--read-blogroll input-file)))
@@ -152,10 +185,10 @@ Use `spike-leung/blaugust--collect-blaugust-feeds' to generate INPUT-FILE."
                                                      (title . ,title)
                                                      (text . ,title))))))))))))
 
-(defun spike-leung/blaugust--generate-blaugust-elfeed-feeds (input-file)
+(defun spike-leung/blaugust--generate-elfeed-feeds (input-file)
   "Generate elfeed feeds from blaugust feeds.
 INPUT-FILE is the blaugust feeds generated
-by `spike-leung/blaugust--collect-blaugust-feeds'."
+by `spike-leung/blaugust--collect-feeds'."
   (interactive "FInput file:")
   (let* ((feeds (spike-leung/blaugust--read-blogroll input-file))
          (existing-feed-urls
