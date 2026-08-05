@@ -77,6 +77,16 @@
      ("p" "preview-current-post" spike-leung/preview-post)
      ("t" "toggle-publish-draft" spike-leung/denote-toggle-publish-draft)])
 
+  (transient-define-prefix spike-leung/transient-consult ()
+    ["Consult"
+     ("i" "line" consult-info)
+     ("f" "fd" consult-fd)
+     ("l" "line" consult-line)
+     ("t" "theme" consult-theme)
+     ("y" "flymake" consult-flymake)
+     ("oh" "org-heading" consult-org-heading)
+     ("ol" "outline" consult-outline)])
+
   (transient-define-prefix spike-leung/transient-commands ()
     ["Frequently used commands"
      ("o" "olivetti" olivetti-mode)])
@@ -116,7 +126,7 @@
      ["(＠_＠)"
       ("mc" "multi cursor" spike-leung/transient-multi-cursors)
       ("md" "markdown-preview" spike-leung/transient-markdown)
-      ("ol" "consult-outline" consult-outline)]]))
+      ("c" "consult" spike-leung/transient-consult)]]))
 
 
 ;; make keybinding has high priority
