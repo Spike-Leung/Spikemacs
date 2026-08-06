@@ -58,12 +58,6 @@
     <li><a href=\"/search.html\">搜索</a></li>
     <li><a href=\"/shuffle.html\" class=\"js-required\">隨機</a></li>
   </ul>
-  <!--
-  <span class=\"snow-toggle-container\">
-    <input type=\"checkbox\" id=\"snow-toggle\" aria-label=\"切换雪花效果\" checked>
-    <label for=\"snow-toggle\" class=\"snow-icon\"></label>
-  </span>
-  -->
   <select id=\"lightdark\" class=\"js-required\" aria-label=\"切換明暗主題\">
     <option value=\"auto\">Auto</option>
     <option value=\"light\">Light</option>
@@ -144,20 +138,6 @@ INFO is a plist holding contextual information."
 <script src=\"/js/sidenote.js\" defer></script>
 <script src=\"/js/purify.min.js\" defer></script>
 <script src=\"/js/webmention.js\" defer></script>
-<!--
-<script src=\"/js/snow-fall.js\" defer type=\"module\"></script>
-<snow-fall></snow-fall>
-<div id=\"caravan\">
-  <div style=\"animation-delay:-0.0s; left:0px;\" id=\"sleigh\"></div>
-  <div style=\"animation-delay:-0.5s; left:20px;\"></div>
-  <div style=\"animation-delay:-1.0s; left:40px;\"></div>
-  <div style=\"animation-delay:-1.5s; left:60px;\"></div>
-  <div style=\"animation-delay:-2.0s; left:80px;\"></div>
-  <div style=\"animation-delay:-2.5s; left:100px;\"></div>
-  <div style=\"animation-delay:-3.0s; left:120px;\"></div>
-  <div style=\"animation-delay:-3.5s; left:140px;\" id=\"rudolph\"></div>
-</div>
--->
 <noscript>
   <style>
     .js-required {
@@ -168,20 +148,6 @@ INFO is a plist holding contextual information."
 
 (defconst spike-leung/html-postamble-sitemap "
 <script src=\"/js/backtop.js\" defer></script>
-<!--
-<script src=\"/js/snow-fall.js\" defer type=\"mopdule\"></script>
-<snow-fall></snow-fall>
-<div id=\"caravan\">
-  <div style=\"animation-delay:-0.0s; left:0px;\" id=\"sleigh\"></div>
-  <div style=\"animation-delay:-0.5s; left:20px;\"></div>
-  <div style=\"animation-delay:-1.0s; left:40px;\"></div>
-  <div style=\"animation-delay:-1.5s; left:60px;\"></div>
-  <div style=\"animation-delay:-2.0s; left:80px;\"></div>
-  <div style=\"animation-delay:-2.5s; left:100px;\"></div>
-  <div style=\"animation-delay:-3.0s; left:120px;\"></div>
-  <div style=\"animation-delay:-3.5s; left:140px;\" id=\"rudolph\"></div>
-</div>
--->
 <noscript>
   <style>
     .js-required {
