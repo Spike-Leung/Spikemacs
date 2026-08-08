@@ -29,7 +29,7 @@
   ((after-init . global-corfu-mode)
    (eshell-mode . (lambda () (setq-local corfu-auto nil))))
   :custom
-  (corfu-auto-delay 0.55)
+  (corfu-auto-delay 0.85)
   (corfu-popupinfo-delay '(1.25 . 0.5))
   (corfu-preview-current nil)
   :config
