@@ -416,7 +416,7 @@
           ("https://whyigame.wordpress.com/feed/" :title "Why I Game" blaugust2026 new-feeds)
           ("https://quinndaedal.com/feed.xml" :title "Quinn Daedal – Blog" blaugust2026 new-feeds)
           ("https://themakerdad.com/rss/" :title "The Maker Dad" blaugust2026 new-feeds)
-          ("https://axxuy.com/blog/feed.xml" :title "Axxuy’s Internet Notebook" blaugust2026 new-feeds)
+          ("https://axxuy.com/blog/feed.xml" :title "Axxuy’s Internet Notebook" :no-update t blaugust2026 new-feeds) ; duplicate with Axxuy.xyz
           ("https://www.bytevortex.tech/rss/" :title "Byte Vortex" blaugust2026 new-feeds game)
           ("https://tallywinkle.bearblog.dev/feed/?type=rss" :title "coffee spills" blaugust2026 new-feeds)
           ("https://academicaesthetic.com/feed/" :title "Academic Aesthetic" :no-update t blaugust2026 new-feeds)
