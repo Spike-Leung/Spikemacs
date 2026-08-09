@@ -120,6 +120,11 @@ e.g. en_US.UTF-8 -> utf-8."
 
 
 
+;; on macos, i use scrim to make org-protocol works,
+;; scrim requires tcp server.
+;; scrim: http://yummymelon.com/scrim/
+(when *is-a-mac* (setq server-use-tcp t))
+
 ;; Allow access from emacsclient
 (add-hook 'after-init-hook
           (lambda ()

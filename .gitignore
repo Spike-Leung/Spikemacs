@@ -69,3 +69,4 @@ dirvish/
 .DS_Store
 /straight/*
 !/straight/versions
+server/
