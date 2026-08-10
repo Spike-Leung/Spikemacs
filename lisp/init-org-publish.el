@@ -80,7 +80,8 @@
 (defun spike-leung/html-postamble (info)
   "Return a string for html-postamble.
 INFO is a plist holding contextual information."
-  (let* ((timestamp-format (plist-get info :html-metadata-timestamp-format))
+  (let* ((timestamp-format "%Y-%m-%d %a %H:%M")
+         (display-timestamp-format "%Y-%m-%d")
          (input-file (plist-get info :input-file))
          (output-file (plist-get info :output-file))
          (title (org-export-data (plist-get info :title) info))
@@ -89,6 +90,10 @@ INFO is a plist holding contextual information."
          (modified-date (format-time-string timestamp-format
                                             (and input-file (file-attribute-modification-time
                                                              (file-attributes input-file)))))
+         (create-date-display (org-export-data (org-export-get-date info display-timestamp-format) info))
+         (modified-date-display (format-time-string display-timestamp-format
+                                                    (and input-file (file-attribute-modification-time
+                                                                     (file-attributes input-file)))))
          (output-filename (file-name-base output-file)))
     (concat
      ;; webmention
@@ -119,15 +124,17 @@ INFO is a plist holding contextual information."
      (format-spec "
 <footer>
 <p>感谢你的阅读！(´｡• ᵕ •｡`) ♡</p>
-<p>文章创建於 <time class=\"dt-published\" datetime=\"%d\">%d</time>，更新於 <time class=\"dt-updated\" datetime=\"%C\">%C</time>，</p>
+<p>文章创建於 <time class=\"dt-published\" datetime=\"%c\">%C</time>，更新於 <time class=\"dt-updated\" datetime=\"%m\">%M</time>，</p>
 <p>所有原创內容均遵循 <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans\">署名、非商业性使用、相同方式共享</a>，</p>
 <p>所有源代碼以及内联文檔遵循 <a href=\"https://www.gnu.org/licenses/agpl-3.0.en.html\">AGPL v3</a>。</p>
 <p>如果你有什么想说的，尽管给 <a href=\"mailto:l-yanlei@hotmail.com?subject=回復: %t %s&body=Hi Spike,\">Spike Leung</a> 发一封 <a href=\"https://useplaintext.email\">純文本</a> 邮件 :)</p>
 <p>如果文章对你有帮助，请考虑 <a href=\"https://taxodium.ink/support-me.html\">用你喜欢的方式</a> 支持我。</p>
 <a href=\"/%u.txt\">純文本版本</a> <a href=\"/%u.org\">原始 org 文件</a>
 </footer>"
-                  `((?d . ,create-date)
-                    (?C . ,modified-date)
+                  `((?c . ,create-date)
+                    (?C . ,create-date-display)
+                    (?m . ,modified-date)
+                    (?M . ,modified-date-display)
                     (?t . ,title)
                     (?s . ,subtitle)
                     (?u . ,output-filename)))
