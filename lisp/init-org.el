@@ -311,7 +311,9 @@ With prefix, don't confirm text."
 
 (defun spike-leung/parse-link-title-by-url (url)
   "Parse TITLE by URL."
-  (let* ((response (plz 'get url :timeout 15 :as 'buffer))
+  (let* ((response (let ((plz-curl-default-args
+                          (append plz-curl-default-args '("--http1.1"))))
+                     (plz 'get url :timeout 15 :as 'buffer)))
          (title (with-current-buffer response
                   (dom-text (car (dom-by-tag (libxml-parse-html-region
                                               (point-min)
