@@ -79,7 +79,7 @@
 
   (transient-define-prefix spike-leung/transient-consult ()
     ["Consult"
-     ("i" "line" consult-info)
+     ("i" "info" consult-info)
      ("f" "fd" consult-fd)
      ("l" "line" consult-line)
      ("t" "theme" consult-theme)
