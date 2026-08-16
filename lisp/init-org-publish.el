@@ -638,7 +638,7 @@ If heading does not already exist."
 (spike-leung/setup-org-publish-project-alist)
 
 (defun spike-leung/org-publish-after-callback (&rest _)
-  "Stuff to do after `org-publish'"
+  "Stuff to do after `org-publish'."
   (setq org-html-htmlize-output-type 'inline-css))
 
 (advice-remove 'org-publish #'spike-leung/setup-org-publish-project-alist)
