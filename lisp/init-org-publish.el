@@ -601,6 +601,7 @@ If heading does not already exist."
            :base-directory "~/git/taxodium/posts"
            :base-extension "org"
            :exclude ".*"
+           :with-toc nil
            :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" (rx (or "_blackhole")))
            :publishing-directory ,spike-leung/org-publish-default-publishing-directory
            :publishing-function spike-leung/org-publish-plain-text)
@@ -609,6 +610,7 @@ If heading does not already exist."
            :base-directory "~/git/taxodium/posts"
            :base-extension "org"
            :exclude ".*"
+           :with-toc nil
            :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" (rx (or "_blackhole" "_published")))
            :publishing-directory ,spike-leung/org-publish-default-publishing-directory
            :publishing-function spike-leung/org-publish-plain-text)
