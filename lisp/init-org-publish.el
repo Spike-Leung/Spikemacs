@@ -444,18 +444,11 @@ INFO is a plist used as a communication channel."
                          2)
                       text-width) (if utf8p ?━ ?_))))
           (org-ascii--justify-lines
-           (concat line "\n"
-                   (unless utf8p "\n")
-                   (upcase formatted-title)
-                   (and formatted-subtitle (concat "\n" formatted-subtitle))
-                   (cond
-                    ((and (org-string-nw-p author) (org-string-nw-p email))
-                     (concat "\n\n" author "\n" email))
-                    ((org-string-nw-p author) (concat "\n\n" author))
-                    ((org-string-nw-p email) (concat "\n\n" email)))
-                   "\n" line
-                   (when (org-string-nw-p date) (concat "\n\n\n" date))
-                   "\n\n\n") text-width 'left))))))
+           (concat (upcase formatted-title)
+                   (and formatted-subtitle (concat " - " formatted-subtitle))
+                   (when (org-string-nw-p date) (concat "\n\n" date))
+                   "\n" line "\n\n")
+           text-width 'left))))))
 
 
 
