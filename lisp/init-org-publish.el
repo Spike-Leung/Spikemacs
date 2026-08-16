@@ -588,7 +588,24 @@ If heading does not already exist."
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
-          ("plain-text"
+          ("plain-text-post"
+           :base-directory "~/git/taxodium/posts"
+           :base-extension "org"
+           :exclude ".*"
+           :with-toc nil
+           :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" (rx (or "_published")))
+           :publishing-directory ,spike-leung/org-publish-default-publishing-directory
+           :publishing-function spike-leung/org-publish-plain-text)
+
+          ("plain-text-blackhole"
+           :base-directory "~/git/taxodium/posts"
+           :base-extension "org"
+           :exclude ".*"
+           :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" (rx (or "_blackhole")))
+           :publishing-directory ,spike-leung/org-publish-default-publishing-directory
+           :publishing-function spike-leung/org-publish-plain-text)
+
+          ("plain-text-all"
            :base-directory "~/git/taxodium/posts"
            :base-extension "org"
            :exclude ".*"
@@ -614,9 +631,9 @@ If heading does not already exist."
            :email "l-yanlei@hotmail.com")
 
           ;; copy static fisrt
-          ("posts" :components ("orgfiles" "plain-text"))
-          ("white-hole" :components ("black-hole" "plain-text"))
-          ("all" :components ("orgfiles" "black-hole" "draft" "index" "plain-text")))))
+          ("posts" :components ("orgfiles" "plain-text-post"))
+          ("white-hole" :components ("black-hole" "plain-text-blackhole"))
+          ("all" :components ("orgfiles" "black-hole" "draft" "index" "plain-text-all")))))
 
 (spike-leung/setup-org-publish-project-alist)
 
