@@ -141,12 +141,13 @@ backend."
 	       (desc (cond
 		      (description)
 		      (file-search (format "denote:%s::%s" query file-search))
-		      (t (concat "denote:" query)))))
+		      (t (concat "denote:" query))))
+               (ext org-html-extension))
     (if path
-	(pcase format
+        (pcase format
 	  ('html (if file-search
-		     (format "<a href=\"%s.html%s\">%s</a>" (url-encode-url anchor) file-search desc)
-		   (format "<a href=\"%s.html\">%s</a>" (url-encode-url anchor) desc)))
+		     (format "<a href=\"%s.%s%s\">%s</a>" (url-encode-url anchor) ext file-search desc)
+		   (format "<a href=\"%s.%s\">%s</a>" (url-encode-url anchor) ext desc)))
 	  ('latex (format "\\href{%s}{%s}" (replace-regexp-in-string "[\\{}$%&_#~^]" "\\\\\\&" path) desc))
 	  ('texinfo (format "@uref{%s,%s}" path desc))
 	  ('ascii (if file-search
