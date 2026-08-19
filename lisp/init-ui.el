@@ -85,7 +85,7 @@ set of themes to either dark or light variants."
   (require 'modus-themes)
   (require 'ef-themes)
   (require 'doric-themes)
-  (let* ((prefixes '(modus ef doric))
+  (let* ((prefixes '(modus ef doric ef doric ef doric))
          (prefix (nth (random (length prefixes)) prefixes)))
     (cond
      ((eq 'modus prefix)
