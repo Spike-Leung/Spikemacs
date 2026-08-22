@@ -43,6 +43,8 @@
 (require 'init-ui)
 (require 'init-utils)
 (require 'init-windows)
+;; extra tools
+(require 'init-handian)
 
 ;; Variables configured via the interactive 'customize' interface
 (when (file-exists-p custom-file)
