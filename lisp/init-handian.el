@@ -16,6 +16,12 @@
   "漢典 URL，拼接上要查詢的 CHAR."
   (concat spike-leung/handian--url (url-hexify-string char)))
 
+(defun spike-leung/handian--img-with-bg (img)
+  "把 IMG 包進一個淺色背景的 span，避免暗色主題看不清黑字."
+  (when img
+    `(span ((style . "background-color: #fff;"))
+           ,img)))
+
 (defun spike-leung/handian--variants-p (dom)
   "判斷是否在「繁体」或「简体」.
 DOM 是頁面文檔的 DOM 樹."
@@ -53,12 +59,12 @@ DOM 是頁面文檔的 DOM 樹.
          (swjz-img (unless is-variant (spike-leung/handian--swjz-img dom)))
          (variants (unless is-variant (spike-leung/handian--variants dom))))
     (append (list 'base (list (cons 'href url))
-                  glyph-img
+                  (spike-leung/handian--img-with-bg glyph-img)
                   '(span nil "拼音：") pinyin
                   '(span nil "倉頡碼：") cangjie
                   '(hr nil))
             (and variants (list variants))
-            swjz-img)))
+            `(,(spike-leung/handian--img-with-bg swjz-img)))))
 
 (defun spike-leung/handian--query-char (char &optional is-variant)
   "向漢典發起請求，得到返回的 HTML，解析成 DOM，并構建用於顯示的 DOM.
