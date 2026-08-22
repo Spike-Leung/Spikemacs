@@ -4,18 +4,21 @@
 (require 'plz)
 (require 'dom)
 (require 'cl-lib)
+(require 'eww)
+(require 'url-util)
+(require 'subr-x)
 
-(defun spike-lueng/handian--glyph-compare-nodes (dom)
-  "Map each .glyph-compare__item to a (span label img) node.
-DOM is the document DOM tree."
-  (let (result)
-    (cl-loop for item in (dom-by-class dom "glyph-compare__item")
-             for label = (dom-text (car (dom-by-tag item 'span)))
-             for img   = (car (dom-by-tag item 'img))
-             collect (list 'span nil label img))))
+(defcustom spike-leung/handian--url "https://zdic.net/hans/"
+  "漢典  URL."
+  :type 'string)
 
-(defun spike-lueng/handian--variants-p (dom)
-  "Test if has variants from DOM."
+(defun spike-leung/handian--char-url (char)
+  "漢典 URL，拼接上要查詢的 CHAR."
+  (concat spike-leung/handian--url (url-hexify-string char)))
+
+(defun spike-leung/handian--variants-p (dom)
+  "判斷是否在「繁体」或「简体」.
+DOM 是頁面文檔的 DOM 樹."
   (let ((variants (dom-by-class dom "char-card__variants")))
     (and variants
          (let ((text (dom-texts variants)))
@@ -23,61 +26,70 @@ DOM is the document DOM tree."
                (string-match-p "简体" text))))))
 
 (defun spike-leung/handian--variants (dom)
-  "Return variants from DOM."
-  (when (spike-lueng/handian--variants-p dom)
+  "获取字的「繁体」或「简体」，查詢其倉頡碼，返回對應的 DOM.
+DOM 是頁面文檔的 DOM 樹."
+  (when (spike-leung/handian--variants-p dom)
     (let* ((variants (dom-by-class dom "char-card__variants"))
            (link (dom-by-class (car (dom-by-tag variants 'ul)) "variant-link"))
            (variant-char (dom-attr link 'title)))
       (spike-leung/handian--query-char variant-char t))))
 
 (defun spike-leung/handian--swjz-img (dom)
-  "Return 說文解字 img from DOM."
+  "荻取「說文解字」部分的圖片.
+DOM 是頁面文檔的 DOM 樹."
   (let* ((swjz (dom-by-id dom "swjz")))
     (list (car (dom-by-tag swjz 'img)))))
 
-(defun spike-lueng/handian--build-document (dom url)
-  "Build info documtent with DOM.
-URL is the query url."
+(defun spike-leung/handian--build-document (dom url &optional is-variant)
+  "構建顯示的結果.
+URL 是漢典的 URL，字作為查詢參數.
+DOM 是頁面文檔的 DOM 樹.
+如果 IS-VARIANT 是 nil，則額外查詢一次這個字對應的「繁体」或「简体」."
   (let* ((glyph-img (dom-by-id dom "glyph-img"))
          (pinyin (dom-text (dom-by-class dom "meta-pinyin")))
          (info-extra (dom-by-class dom "char-card__info-extra"))
          (cangjie (nth 3 (dom-by-tag info-extra 'span)))
-         (swjz-img (spike-leung/handian--swjz-img dom))
-         (variants (spike-leung/handian--variants dom)))
+         ;; 查詢原字時，額外查詢其變體；如果是查詢的是變體則不需要額外查詢其變體，否則就循環了。
+         (swjz-img (unless is-variant (spike-leung/handian--swjz-img dom)))
+         (variants (unless is-variant (spike-leung/handian--variants dom))))
     (append (list 'base (list (cons 'href url))
                   glyph-img
                   '(span nil "拼音：") pinyin
                   '(span nil "倉頡碼：") cangjie
                   '(hr nil))
-            `(,variants)
+            (and variants (list variants))
             swjz-img)))
 
-(defun spike-lueng/handian--build-document-variant (dom url)
-  "Build info documtent variant with DOM.
-URL is the query url."
-  (let* ((glyph-img (dom-by-id dom "glyph-img"))
-         (pinyin (dom-text (dom-by-class dom "meta-pinyin")))
-         (info-extra (dom-by-class dom "char-card__info-extra"))
-         (cangjie (nth 3 (dom-by-tag info-extra 'span))))
-    (append (list 'base (list (cons 'href url))
-                  glyph-img
-                  '(span nil "拼音：") pinyin
-                  '(span nil "倉頡碼：") cangjie
-                  '(hr nil)))))
-
 (defun spike-leung/handian--query-char (char &optional is-variant)
-  "Query CHAR with 漢典, return formated dom.
-If IS-VARIANT is t, only return variant dom."
+  "向漢典發起請求，得到返回的 HTML，解析成 DOM，并構建用於顯示的 DOM.
+CHAR 是要查詢的漢字.
+如果 IS-VARIANT 是 nil，則額外查詢一次這個字對應的「繁体」或「简体」."
   (let* ((url (concat "https://zdic.net/hans/" (url-hexify-string char)))
          (dom (plz 'get url
                 :as (lambda () (libxml-parse-html-region (point-min) (point-max)))
                 :then 'sync)))
-    (if is-variant
-        (spike-lueng/handian--build-document-variant dom url)
-      (spike-lueng/handian--build-document dom url))))
+    (spike-leung/handian--build-document dom url is-variant)))
+
+(defun spike-leung/handian--display (char document)
+  "用 EWW 展示查詢結果.
+CHAR 是要查詢的漢字.
+DOCUMENT 構建好的用於展示的 DOM，格式要合 EWW 要求的格式."
+  (let* ((url (spike-leung/handian--char-url char))
+         (buf-name (format "*[Han]漢典:「%s」*" char))
+         (buf (get-buffer-create buf-name)))
+    (with-current-buffer buf
+      (eww-mode)
+      (plist-put eww-data :url url)
+      (plist-put eww-data :title buf-name))
+    (pop-to-buffer buf)
+    (eww-display-document document nil buf)
+    (eww--after-page-change)))
 
 (defun spike-leung/handian--query (char)
-  "Query CHAR with 漢典; render only the selected DOM nodes, images incl."
+  "用「漢典」(`spike-leung/handian--url') 查詢漢字 CHAR.
+顯示漢字的簡體和繁體，它們的拼音和倉頡碼等信息。
+結果使用 `eww-mode'，
+可以在結果 buffer 中用 `eww-browse-with-external-browser' 打開原網站查閱更多信息."
   (interactive
    (list
     (let ((s (if (use-region-p)
@@ -87,16 +99,8 @@ If IS-VARIANT is t, only return variant dom."
       (if (> (length s) 1)
           (user-error "「%s」含多個字，僅接受單一漢字" s)
         s))))
-  (let ((url (concat "https://zdic.net/hans/" (url-hexify-string char)))
-        (buf (get-buffer-create (format "*漢典:「%s」*" char)))
-        (document (spike-leung/handian--query-char char)))
-    (with-current-buffer buf
-      (eww-mode)
-      (plist-put eww-data :url url)
-      (plist-put eww-data :title (format "漢典: %s" char)))
-    (pop-to-buffer buf)
-    (eww-display-document document nil buf)
-    (eww--after-page-change)))
+  (let ((document (spike-leung/handian--query-char char)))
+    (spike-leung/handian--display char document)))
 
 (provide 'init-handian)
 ;;; init-handian.el ends here
