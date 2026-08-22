@@ -89,7 +89,8 @@
 
   (transient-define-prefix spike-leung/transient-commands ()
     ["Frequently used commands"
-     ("o" "olivetti" olivetti-mode)])
+     ("o" "olivetti" olivetti-mode)
+     ("h" "handian" spike-leung/handian--query)])
 
   (transient-define-prefix spike-leung/transient-multi-cursors ()
     [:description
