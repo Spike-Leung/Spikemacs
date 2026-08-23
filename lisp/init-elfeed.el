@@ -9,6 +9,7 @@
   :custom
   (elfeed-search-filter "@8days +unread")
   (elfeed-confirm-browse-url nil)
+  (elfeed-search-confirm-tag nil)
   (elfeed-search-separator-date-format "%Y-%m-%d")
   (elfeed-curl-timeout 60)
   (elfeed-search-title-max-width 100)
