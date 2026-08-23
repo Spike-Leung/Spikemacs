@@ -1,4 +1,4 @@
-;;; init-handian.el --- Insert description here -*- lexical-binding: t -*-
+;;; init-handian.el --- 用漢典查詢漢字的倉頡碼 -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 (require 'plz)
@@ -105,6 +105,7 @@ DOCUMENT 構建好的用於展示的 DOM，格式要合 EWW 要求的格式."
       (if (> (length s) 1)
           (user-error "「%s」含多個字，僅接受單一漢字" s)
         s))))
+  (setq deactivate-mark t)
   (let ((document (spike-leung/handian--query-char char)))
     (spike-leung/handian--display char document)))
 
