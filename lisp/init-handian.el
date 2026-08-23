@@ -12,6 +12,25 @@
   "漢典  URL."
   :type 'string)
 
+(defvar spike-leung/handian--cangjie-char-table
+  (let ((tbl (make-char-table nil)))
+    (pcase-dolist (`(,key . ,val)
+                   '((?a . "日") (?b . "月") (?c . "金") (?d . "木") (?e . "水") (?f . "火") (?g . "土")
+                     (?h . "竹") (?i . "戈") (?j . "十") (?k . "大") (?l . "中") (?m . "一") (?n . "弓")
+                     (?o . "人") (?p . "心") (?q . "手") (?r . "口")
+                     (?s . "尸") (?t . "廿") (?u . "山") (?v . "女") (?w . "田") (?y . "卜")
+                     (?x . "難") (?z . "重")))
+      (aset tbl key val))
+    tbl))
+
+(defun spike-leung/handian--convert-to-cangjie-char (cangjie-code)
+  "將倉頡碼轉成倉頡字母 abc -> 日月金.
+CANGJIE-CODE 是倉頡碼."
+  (mapconcat (lambda (code)
+               (or (aref spike-leung/handian--cangjie-char-table code)
+                   (char-to-string code)))
+             (string-to-list cangjie-code)))
+
 (defun spike-leung/handian--char-url (char)
   "漢典 URL，拼接上要查詢的 CHAR."
   (concat spike-leung/handian--url (url-hexify-string char)))
@@ -61,7 +80,8 @@ DOM 是頁面文檔的 DOM 樹.
     (append (list 'base (list (cons 'href url))
                   (spike-leung/handian--img-with-bg glyph-img)
                   '(span nil "拼音：") pinyin
-                  '(span nil "倉頡碼：") cangjie
+                  '(span nil "倉頡碼：")
+                  `(span nil ,(concat (spike-leung/handian--convert-to-cangjie-char (dom-texts cangjie)) " / " )) cangjie
                   '(hr nil))
             (and variants (list variants))
             `(,(spike-leung/handian--img-with-bg swjz-img)))))
@@ -81,7 +101,7 @@ CHAR 是要查詢的漢字.
 CHAR 是要查詢的漢字.
 DOCUMENT 構建好的用於展示的 DOM，格式要合 EWW 要求的格式."
   (let* ((url (spike-leung/handian--char-url char))
-         (buf-name (format "*[Han]漢典:「%s」*" char))
+         (buf-name (format "* [H] 漢典:「%s」*" char))
          (buf (get-buffer-create buf-name)))
     (with-current-buffer buf
       (eww-mode)
