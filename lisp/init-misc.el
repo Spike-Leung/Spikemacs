@@ -32,7 +32,7 @@
                                                                   "kagi.com/search?q="
                                                                   ""])
                         ;; see: https://help.kagi.com/kagi/translate/url-parameters.html
-                        ("Kagi Translate Text" . [simple-query
+                        ("Translate" . [simple-query
                                                   "translate.kagi.com"
                                                   "translate.kagi.com/?text="
                                                   "&from=auto&to=zh_tw&quality=best"])
@@ -40,10 +40,6 @@
                                   "developer.mozilla.org"
                                   "developer.mozilla.org/en-US/search?q="
                                   ""])
-                        ("漢典" . [simple-query
-                                   "zdic.net"
-                                   "zdic.net/hans/"
-                                   ""])
                         ))
 
   (defun spike-leung/webjump-symbol-at-point (target)
