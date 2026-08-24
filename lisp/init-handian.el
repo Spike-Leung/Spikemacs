@@ -55,9 +55,13 @@ DOM 是頁面文檔的 DOM 樹."
 DOM 是頁面文檔的 DOM 樹."
   (when (spike-leung/handian--variants-p dom)
     (let* ((variants (dom-by-class dom "char-card__variants"))
+           (variants-type (car (dom-by-class variants "meta-badge")))
            (link (dom-by-class (car (dom-by-tag variants 'ul)) "variant-link"))
            (variant-char (dom-attr link 'title)))
-      (spike-leung/handian--query-char variant-char t))))
+      (append
+       ;; 使用块級的 <p>，讓 `variants-type' 在單獨一行
+       `((p nil (,variants-type)))
+       `(,(spike-leung/handian--query-char variant-char t))))))
 
 (defun spike-leung/handian--swjz-img (dom)
   "荻取「說文解字」部分的圖片.
@@ -83,7 +87,7 @@ DOM 是頁面文檔的 DOM 樹.
                   '(span nil "倉頡碼：")
                   `(span nil ,(concat (spike-leung/handian--convert-to-cangjie-char (dom-texts cangjie)) " / " )) cangjie
                   '(hr nil))
-            (and variants (list variants))
+            variants
             `(,(spike-leung/handian--img-with-bg swjz-img)))))
 
 (defun spike-leung/handian--query-char (char &optional is-variant)
