@@ -266,7 +266,9 @@ Return output file name."
          (base-filename (expand-file-name (file-name-nondirectory export-file-name) pub-dir))
          (org-file (file-name-with-extension base-filename "org"))
          (text-file (file-name-with-extension base-filename "txt")))
+    ;; generate .txt file
     (org-publish-org-to 'ascii filename ".txt" _plist pub-dir)
+    ;; copy original org file to pub-dir
     (copy-file filename org-file t)
     ;; Return file name.
     org-file))
