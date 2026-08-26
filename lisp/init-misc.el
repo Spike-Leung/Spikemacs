@@ -33,13 +33,17 @@
                                                                   ""])
                         ;; see: https://help.kagi.com/kagi/translate/url-parameters.html
                         ("Translate" . [simple-query
-                                                  "translate.kagi.com"
-                                                  "translate.kagi.com/?text="
-                                                  "&from=auto&to=zh_tw&quality=best"])
+                                        "translate.kagi.com"
+                                        "translate.kagi.com/?text="
+                                        "&from=auto&to=zh_tw&quality=best"])
                         ("MDN" . [simple-query
                                   "developer.mozilla.org"
                                   "developer.mozilla.org/en-US/search?q="
                                   ""])
+                        ("漢典" . [simple-query
+                                   "https://zdic.net"
+                                   "https://zdic.net/search/?q="
+                                   ""])
                         ))
 
   (defun spike-leung/webjump-symbol-at-point (target)
