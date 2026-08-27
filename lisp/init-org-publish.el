@@ -21,8 +21,11 @@
 
 ;;; html-head
 
-(defconst spike-leung/html-head "
-<meta name=\"color-scheme\" content=\"light dark\" />
+(defun spike-leung/html-head (info)
+  "Return `org-html-head' as string with INFO."
+  (let* ((output-file (plist-get info :output-file)))
+    (format-spec   "<meta name=\"color-scheme\" content=\"light dark\" />
+<meta property=\"og:url\" content=\"%o\">
 <link rel=\"preload\" href=\"/styles/main.css\" as=\"style\" />
 <link rel=\"preload\" href=\"/images/background/xv.png\" as=\"image\" type=\"image/png\" />
 <link rel=\"preload\" href=\"/js/color-scheme.js\" as=\"script\"/>
@@ -30,6 +33,7 @@
 <link rel=\"icon\" href=\"/favicon.ico\" type=\"image/x-icon\">
 <link rel=\"webmention\" href=\"https://webmention.io/taxodium.ink/webmention\" />
 <link href=\"https://github.com/Spike-Leung\" rel=\"me\">
+<link rel=\"canonical\" href=\"%o\">
 <link rel=\"alternate\" type=\"application/atom+xml\" href=\"rss.xml\" title=\"Feed for all blogs.\"/>
 <link rel=\"alternate\" type=\"application/atom+xml\" href=\"album.xml\" title=\"Feed for all album.\"/>
 <link rel=\"alternate\" type=\"application/atom+xml\" href=\"emacs.xml\" title=\"Feed for all Emacs.\"/>
@@ -38,12 +42,14 @@
 <link rel=\"alternate\" type=\"application/atom+xml\" href=\"zine.xml\" title=\"Feed for Zine.\"/>
 <script src=\"/js/color-scheme.js\"></script>
 "
-"`:html-head' for `org-publish'.")
+                   `((?o . ,output-file)))))
 
-(defconst spike-leung/html-head-sitemap (concat
-                                         spike-leung/html-head
-                                         "<link rel=\"stylesheet\" href=\"/styles/index.css\" type=\"text/css\"/>")
-  "`:html-head' for `org-publish'.Customize for index.org.")
+
+(defun spike-leung/html-head-sitemap (info)
+  "Return `org-html-head' for sitemap from INFO."
+  (concat
+   (spike-leung/html-head info)
+   "<link rel=\"stylesheet\" href=\"/styles/index.css\" type=\"text/css\"/>"))
 
 
 
@@ -539,7 +545,7 @@ If heading does not already exist."
            :with-toc t
            :with-tags t
            :time-stamp-file nil
-           :html-head ,spike-leung/html-head
+           :html-head spike-leung/html-head
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble spike-leung/html-postamble
            :html-self-link-headlines t
@@ -558,7 +564,7 @@ If heading does not already exist."
            :with-tags t
            :time-stamp-file nil
            :auto-sitemap nil
-           :html-head ,spike-leung/html-head
+           :html-head spike-leung/html-head
            :html-postamble spike-leung/html-postamble
            :html-preamble ,spike-leung/html-preamble-content
            :html-self-link-headlines t
@@ -576,7 +582,7 @@ If heading does not already exist."
            :with-tags t
            :time-stamp-file nil
            :auto-sitemap nil
-           :html-head ,spike-leung/html-head
+           :html-head spike-leung/html-head
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble spike-leung/html-postamble
            :html-self-link-headlines t
@@ -618,7 +624,7 @@ If heading does not already exist."
            :publishing-directory ,spike-leung/org-publish-default-publishing-directory
            :time-stamp-file nil
            :section-numbers nil
-           :html-head ,spike-leung/html-head-sitemap
+           :html-head spike-leung/html-head-sitemap
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble ,spike-leung/html-postamble-sitemap
            :publishing-function spike-leung/org-html-publish-sitemap
