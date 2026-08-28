@@ -119,6 +119,41 @@ e.g. en_US.UTF-8 -> utf-8."
 (setq jit-lock-defer-time 0)
 
 
+;;; Scroll behavior
+;; 更多見: https://www.jamescherti.com/emacs-scrolling-better-performance-usability/
+
+(setq
+ ;; 點認是 0，當 point 超出窗口時，會將 point 重新居中在窗口中間。
+ ;; 如果不想變化這麼大，可以設置一個較小值，减少需要移動的行數，這會讓滾動看起來更自然。
+ ;; 有時在底部出現 transient menu 時，也會造成 point 移出而需要滾動，默認行為會滾動太多
+ scroll-conservatively 15
+ ;; 滾動時上下預留的行數，也可以理解為還剩多少行時触發滾動，
+ ;; 這會影响 `recenter-top-bottom' 等滾動相關的方法。
+ scroll-margin 0
+ ;; 在输入期间延迟字体化处理，让 Emacs 优先处理用户输入，而不是立即进行语法高亮
+ redisplay-skip-fontification-on-input t
+ ;; 修复在文件中向上或向下翻页（使用 C-v 或 M-v）时常见的视觉困扰。
+ ;; 如果光标位于屏幕中间，按下 Page Down 后，光标会正好保持在显示器中间。
+ scroll-preserve-screen-position t
+ ;; 当 Emacs 遇到尚未进行字体渲染的文本时，快速滚动可能会变得迟缓。
+ ;; 将 fast-but-imprecise-scrolling 设置为 t 可以防止在快速浏览大型缓冲区时 Emacs 失去响应
+ fast-but-imprecise-scrolling t
+ ;; 默认情况下，在激活的 isearch 会话中（使用 C-s 或 C-r）尝试滚动窗口会取消搜索。
+ ;; 這可以允许滚动而不丢失搜索上下文。
+ isearch-allow-scroll 'unlimited)
+
+;; 在交互式 Shell 或 REPL（comint-mode）中执行长时间运行的进程时，
+;; 缓冲区底部新输出的内容会频繁地将视图向下滚动。
+;; 将 comint-scroll-to-bottom-on-input 设置为 t，并
+;; 将 comint-scroll-to-bottom-on-output 设置为 nil，
+;; 这样 Emacs 只会在你输入键盘指令时将光标对齐到缓冲区底部。
+;; 这使你可以向上滚动浏览编译日志或终端历史记录来阅读错误信息，
+;; 而不会因为每打印一行新内容屏幕就强制跳到底部。
+(setq-default comint-scroll-to-bottom-on-input t
+              comint-scroll-to-bottom-on-output nil)
+
+
+
 
 ;; on macos, i use scrim to make org-protocol works,
 ;; scrim requires tcp server.
@@ -144,9 +179,6 @@ e.g. en_US.UTF-8 -> utf-8."
 ;;; Making deleted files go to the trash can
 ;;; https://www.masteringemacs.org/article/making-deleted-files-trash-can
 (setq delete-by-moving-to-trash t)
-
-
-
 
 
 
