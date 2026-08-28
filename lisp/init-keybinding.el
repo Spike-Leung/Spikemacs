@@ -84,8 +84,8 @@
      ("l" "line" consult-line)
      ("t" "theme" consult-theme)
      ("y" "flymake" consult-flymake)
-     ("oh" "org-heading" consult-org-heading)
-     ("ol" "outline" consult-outline)])
+     ("h" "org-heading" consult-org-heading)
+     ("o" "outline" consult-outline)])
 
   (transient-define-prefix spike-leung/transient-commands ()
     ["Frequently used commands"
