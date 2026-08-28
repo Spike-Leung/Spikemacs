@@ -89,8 +89,11 @@
 
   (transient-define-prefix spike-leung/transient-commands ()
     ["Frequently used commands"
+     ("h" "漢典查單字" spike-leung/handian--query)
+     ("m" "markdown-preview" spike-leung/transient-markdown)
      ("o" "olivetti" olivetti-mode)
-     ("h" "handian" spike-leung/handian--query)])
+     ("t" "translate" spike-leung/transient-translate)
+     ("w" "webjump" webjump)])
 
   (transient-define-prefix spike-leung/transient-multi-cursors ()
     [:description
@@ -111,24 +114,32 @@
 
   (transient-define-prefix spike-leung/transient ()
     "A transient to list all my frequently used command."
-    [["(｡•̀ᴗ-)✧"
+    [["_​_φ(．．)"
       ("b" "blog" spike-leung/transient-blog)
-      ("p" "publish (C-u: force publishing)" org-publish)
-      ("j" "journal" denote-journal-new-or-existing-entry)]
+      ("j" "journal" denote-journal-new-or-existing-entry)
+      ("p" "publish (C-u: force)" org-publish)]
      ["(・・?)"
+      ("a" "avy" avy-goto-char-timer)
+      ("c" "consult" spike-leung/transient-consult)
       ("g" "gptel" spike-leung/transient-gptel)
-      ("G" "ghostel (C-u: new session)" ghostel)
-      ("t" "translate" spike-leung/transient-translate)
-      ("u" "utils" spike-leung/transient-commands)
-      ("w" "webjump" webjump)]
-     ["ヾ(･|"
-      ("B" "bookmark" spike-leung/transient-bookmark)
-      ("R" "register" spike-leung/transient-register)]
-     ["(＠_＠)"
-      ("mc" "multi cursor" spike-leung/transient-multi-cursors)
-      ("md" "markdown-preview" spike-leung/transient-markdown)
-      ("c" "consult" spike-leung/transient-consult)]]))
+      ("G" "ghostel (C-u: new)" ghostel)
+      ("m" "multi cursor" spike-leung/transient-multi-cursors)
+      ("r" "register" spike-leung/transient-register)
+      ("u" "utils" spike-leung/transient-commands)]]))
 
+(defun spike-leung/transient--no-menu (orig &rest args)
+  "讓 transient 默認不出現菜單，避免导致 point 超出熒幕，進而造成滾動.
+滾動可能會影响如 `avy-goto-char-timer' 等的使用。
+\\<transient-map>\
+可以用 \\[transient-show] 讓菜單展開。
+ORIG 是原始的 `transient-define-prefix' 產生的 prefix.
+ARGS 是其它相關參數."
+  (let ((transient-show-menu nil))
+    (apply orig args)))
+
+(advice-add 'spike-leung/transient :around #'spike-leung/transient--no-menu)
+
+
 
 ;; make keybinding has high priority
 ;; see: https://protesilaos.com/codelog/2026-07-08-emacs-global-keybinding-overrides/
