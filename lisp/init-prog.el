@@ -25,7 +25,27 @@
   :config
   (setq-default eglot-extend-to-xref t)
   (add-to-list 'eglot-server-programs
-               '(web-mode . ("vscode-html-language-server" "--stdio"))))
+               '(web-mode . ("vscode-html-language-server" "--stdio")))
+
+  ;; see: https://www.jamescherti.com/emacs-eglot-performance/
+  (setq
+   ;; 在切換多個專案時減少資源使用。
+   ;; eglot-autoshutdown 變數會在最後一個受管理的緩衝區被關閉後關閉 LSP 伺服器。
+   eglot-autoshutdown t
+   ;; 防止 Eglot 在連線時阻塞 Emacs UI
+   eglot-sync-connect nil
+   ;; Eglot 會維持一個事件緩衝區，記錄 JSON-RPC 活動。
+   ;; 大量的事件日誌會佔用記憶體並增加字串分配成本，
+   ;; 特別是當在正常編輯過程中不需要保留完整的 JSON 負載時。
+   ;; 將 :size 0 設為關閉事件緩衝區。
+   eglot-events-buffer-config '(:size 0 :format short)
+   ;; 允許語言伺服器監控大型儲存庫的廣泛區域
+   ;; 會消耗作業系統的檔案描述符、增加記憶體使用，並導致啟動延遲。
+   ;; 為了降低這些資源成本，限制 Eglot 監控的檔案數量：
+   eglot-max-file-watches 5000
+   ;; 每當伺服器回報進度（例如索引或建置時），都可能觸發 mode-line 重新顯示。
+   ;; 以下可抑制 mode-line 進度報告
+   eglot-report-progress nil))
 
 (use-package consult-eglot)
 
