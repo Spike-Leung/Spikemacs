@@ -69,7 +69,6 @@
           ("https://alex.party/rss.xml" :title "Alex.Party" frontend)
           ("https://anarchaeopteryx.bearblog.dev/feed/" :title "An Archaeopteryx" blaugust2026)
           ("https://andrewkelley.me/rss.xml" :title "Andrew Kelley" code zig)
-          ("https://manateelazycat.github.io/feed.xml" :title "Andy Stewart" emacs)
           ("https://www.galactanet.com/feed.xml" :title "Andy Weir's Writing" writing)
           ("https://anotherdayu.com/feed/" :title "Another Dayu")
           ("https://antfu.me/feed.xml" :title "Anthony Fu" frontend)
@@ -228,7 +227,6 @@
           ("https://mazzzystar.github.io/atom.xml" :title "TL;DR")
           ("https://owlswims.com/feed/" :title "To the Lighthouse")
           ("https://tusharhero.codeberg.page/rss.xml" :title "tusharhero" emacs)
-          ("https://www.paddysun.top/feed" :title "Under the Sun with Paddy")
           ("https://emacsninja.com/emacs.atom" :title "Vasilij Schneidermann" emacs)
           ("https://blog.videah.net/atom.xml" :title "videah's blog")
           ("https://waitbutwhy.com/feed" :title "Wait But Why")
@@ -329,6 +327,9 @@
           ("https://wmyskxz.cn/atom" :title "我没有三颗心脏" weekly tech)
           ("https://joshblais.com/index.xml" :title "The Universe of Joshua Blais" emacs)
           ("https://www.carmenansio.com/rss.xml" :title "Carmen Ansio" design css tech)
+          ("https://fenx.work/rss/" :title "Design Scenes" zine design)
+          ("https://pluralistic.net/feed/" :title "Pluralistic" zine)
+          ("https://www.seangoedecke.com/rss.xml" :title "Sean Goedecke")
           ;; no-update
           ("https://scrubbyinabox.substack.com/feed" :title "刷比小廢報" :no-update t newsletter)
           ("https://jamesg.blog/feeds/posts.xml" :title "James' Coffee Blog" :no-update t)
@@ -358,6 +359,7 @@
           ("https://dfarq.homeip.net/" :title "The Silicon Underground" :no-update t old-computer)
           ("https://unstory.eu/feed.json" :title "unstory" :no-update t)
           ("https://wakanatrium.site/?mode=rss" :title "もうすぐ33歳" :no-update t blaugust2026 new-feeds)
+          ("https://manateelazycat.github.io/feed.xml" :title "Andy Stewart" :no-update t emacs)
           ;; blaugust 2026
           ("http://fyr.io/feed" :title "fyr.io" blaugust2026 new-feeds)
           ("https://granary.io/url?input=html&output=rss&url=https://asteriisms.com/blog" :title "Aster's Asterisms" blaugust2026 new-feeds)
