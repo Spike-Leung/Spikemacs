@@ -311,31 +311,32 @@ With prefix, don't confirm text."
 
 (defun spike-leung/parse-link-title-by-url (url)
   "Parse TITLE by URL."
-  (let* ((response (let ((plz-curl-default-args
-                          (append plz-curl-default-args '("--http1.1"))))
-                     (plz 'get url :timeout 15 :as 'buffer)))
-         (title (with-current-buffer response
-                  (dom-text (car (dom-by-tag (libxml-parse-html-region
-                                              (point-min)
-                                              (point-max))
-                                             'title))))))
-    ;; debug response
-    ;; (with-current-buffer response (write-region (point-min) (point-max) "~/Downloads/temp"))
-    (cond
-     ((string-match "github.com" url)
-      (replace-regexp-in-string
-       (rx "GitHub - " (group (* anychar)) ": " (* anychar ) " · GitHub")
-       "\\1" title))
-     ((string-match "emacs-china.org" url)
-      (replace-regexp-in-string
-       (rx (group (* anychar)) "- " (* anychar) " - Emacs China") "\\1" title))
-     ((string-match "bilibili.com" url)
-      (replace-regexp-in-string
-       (rx (group (* anychar)) "_哔哩哔哩_bilibili") "\\1" title))
-     ((string-match "xiaoyuzhoufm.com" url)
-      (replace-regexp-in-string
-       (rx (group (* anychar)) " - " (* anychar) " - " (* anychar)) "\\1" title))
-     (t title))))
+  (ignore-errors
+    (let* ((response (let ((plz-curl-default-args
+                            (append plz-curl-default-args '("--http1.1"))))
+                       (plz 'get url :timeout 15 :as 'buffer)))
+           (title (with-current-buffer response
+                    (dom-text (car (dom-by-tag (libxml-parse-html-region
+                                                (point-min)
+                                                (point-max))
+                                               'title))))))
+      ;; debug response
+      ;; (with-current-buffer response (write-region (point-min) (point-max) "~/Downloads/temp"))
+      (cond
+       ((string-match "github.com" url)
+        (replace-regexp-in-string
+         (rx "GitHub - " (group (* anychar)) ": " (* anychar ) " · GitHub")
+         "\\1" title))
+       ((string-match "emacs-china.org" url)
+        (replace-regexp-in-string
+         (rx (group (* anychar)) "- " (* anychar) " - Emacs China") "\\1" title))
+       ((string-match "bilibili.com" url)
+        (replace-regexp-in-string
+         (rx (group (* anychar)) "_哔哩哔哩_bilibili") "\\1" title))
+       ((string-match "xiaoyuzhoufm.com" url)
+        (replace-regexp-in-string
+         (rx (group (* anychar)) " - " (* anychar) " - " (* anychar)) "\\1" title))
+       (t title)))))
 
 
 
