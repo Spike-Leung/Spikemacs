@@ -69,13 +69,22 @@ DOM 是頁面文檔的 DOM 樹."
   (let* ((swjz (dom-by-id dom "swjz")))
     (list (car (dom-by-tag swjz 'img)))))
 
+(defun spike-leung/handian--pinyin (dom)
+  "获取拼音，可能是多音字.
+DOM 是頁面文檔的 DOM 樹.
+"
+  (mapconcat (lambda (meta-pinyin)
+               (dom-text meta-pinyin))
+             (dom-by-class dom "meta-pinyin")
+             " / "))
+
 (defun spike-leung/handian--build-document (dom url &optional is-variant)
   "構建顯示的結果.
 URL 是漢典的 URL，字作為查詢參數.
 DOM 是頁面文檔的 DOM 樹.
 如果 IS-VARIANT 是 nil，則額外查詢一次這個字對應的「繁体」或「简体」."
   (let* ((glyph-img (dom-by-id dom "glyph-img"))
-         (pinyin (dom-text (dom-by-class dom "meta-pinyin")))
+         (pinyin (spike-leung/handian--pinyin dom))
          (info-extra (dom-by-class dom "char-card__info-extra"))
          (cangjie (nth 3 (dom-by-tag info-extra 'span)))
          ;; 查詢原字時，額外查詢其變體；如果是查詢的是變體則不需要額外查詢其變體，否則就循環了。
