@@ -26,7 +26,7 @@
           ("https://protesilaos.com/master.xml" :title "Protesilaos" emacs)
           ("https://hollie.eilloh.net/rss.xml" :title "Small Good Things")
           ("https://leehenry.top/rss.xml" :title "伏枥之间" blaugust2026)
-          ("https://chlo.is/feed.atom" :title "园子里的日光")
+          ("https://chlo.is/feed.json" :title "园子里的日光")
           ("https://www.geedea.pro/index.xml" :title "极客死亡计划")
           ("https://blog.southfox.me/feed.xml" :title "狐狸反走矣")
           ("https://blog.cytrogen.icu/atom.xml" :title "Cytrogen")
