@@ -193,7 +193,9 @@
          :map isearch-mode-map
          ("C-'" . avy-isearch))
   :config
-  (setq avy-style 'words
+  ;; for how to use avy, see: https://karthinks.com/software/avy-can-do-anything/
+  ;; after filter, use ? to show dispatch to show all actions
+  (setq avy-style 'at
         ;; 移除所有的高亮，avy 标记会更突出
         avy-background t))
 
