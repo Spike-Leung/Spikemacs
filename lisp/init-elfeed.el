@@ -325,10 +325,10 @@
           ("https://joshblais.com/index.xml" :title "The Universe of Joshua Blais" emacs)
           ("https://www.carmenansio.com/rss.xml" :title "Carmen Ansio" design css tech)
           ("https://fenx.work/rss/" :title "Design Scenes" zine design)
-          ("https://pluralistic.net/feed/" :title "Pluralistic" zine)
           ("https://www.seangoedecke.com/rss.xml" :title "Sean Goedecke")
           ("https://マリウス.com/index.xml" :title "マリウス") ; マリウス.com
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day")
+          ("https://yui.dev/rss.xml" :title "yui" frontend)
           ;; no-update
           ("https://jamesg.blog/feeds/posts.xml" :title "James' Coffee Blog" :no-update t) ; 更新太頻䌓
           ("https://amf.didiermary.fr/feed/" :title "African Music Forum" :no-update t music)
@@ -348,6 +348,7 @@
           ("https://unstory.eu/feed.json" :title "unstory" :no-update t)
           ("https://wakanatrium.site/?mode=rss" :title "もうすぐ33歳" :no-update t blaugust2026 new-feeds)
           ("https://manateelazycat.github.io/feed.xml" :title "Andy Stewart" :no-update t emacs)
+          ("https://pluralistic.net/feed/" :title "Pluralistic" :no-update t zine)
           ;; blaugust 2026
           ("http://fyr.io/feed" :title "fyr.io" blaugust2026 new-feeds)
           ("https://granary.io/url?input=html&output=rss&url=https://asteriisms.com/blog" :title "Aster's Asterisms" blaugust2026 new-feeds)
