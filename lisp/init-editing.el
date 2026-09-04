@@ -195,7 +195,7 @@
   :config
   ;; for how to use avy, see: https://karthinks.com/software/avy-can-do-anything/
   ;; after filter, use ? to show dispatch to show all actions
-  (setq avy-style 'at
+  (setq avy-style 'at-full
         ;; 移除所有的高亮，avy 标记会更突出
         avy-background t))
 
