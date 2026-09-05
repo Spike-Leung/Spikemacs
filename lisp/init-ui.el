@@ -92,8 +92,8 @@ set of themes to either dark or light variants."
       (if background-mode
           (modus-themes-load-random background-mode)
         (spike-leung/load-theme-by-time
-         (lambda () (modus-themes-load-random 'light))
-         (lambda () (modus-themes-load-random 'dark)))))
+         #'modus-themes-load-random-light
+         #'modus-themes-load-random-dark)))
      ((eq 'ef prefix)
       (cond
        ((eq background-mode 'light) (ef-themes-load-random-light))
@@ -103,8 +103,8 @@ set of themes to either dark or light variants."
       (if background-mode
           (doric-themes-load-random background-mode)
         (spike-leung/load-theme-by-time
-         (lambda () (doric-themes-load-random 'light))
-         (lambda () (doric-themes-load-random 'dark))))))))
+         #'doric-themes-load-random-light
+         #'doric-themes-load-random-dark))))))
 
 (defvar spike-leung/current-theme-background-mode 'light
   "Current theme's background-mode value，can be 'light or 'dark, default to 'light.")
