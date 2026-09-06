@@ -69,7 +69,9 @@
   (add-hook 'completion-at-point-functions #'cape-elisp-symbol)
   (add-hook 'completion-at-point-functions #'cape-elisp-block)
   (add-hook 'completion-at-point-functions #'cape-abbrev)
-  (add-hook 'completion-at-point-functions #'cape-history))
+  (add-hook 'completion-at-point-functions #'cape-history)
+  :custom
+  (cape-dabbrev-buffer-function 'cape-text-buffers))
 
 
 
