@@ -56,6 +56,11 @@
 
 ;; theme
 (use-package modus-themes
+  :straight (modus-themes
+             :type git
+             :host github
+             :repo "protesilaos/modus-themes"
+             :branch "main")
   :config
   (setq modus-themes-italic-constructs t
         modus-themes-bold-constructs t
@@ -63,8 +68,19 @@
   (setq modus-themes-common-palette-overrides
         '((bg-prose-block-contents unspecified))))
 
-(use-package ef-themes)
-(use-package doric-themes)
+(use-package ef-themes
+  :straight (ef-themes
+             :type git
+             :host github
+             :repo "protesilaos/ef-themes"
+             :branch "main"))
+
+(use-package doric-themes
+  :straight (doric-themes
+             :type git
+             :host github
+             :repo "protesilaos/doric-themes"
+             :branch "main"))
 
 (defun spike-leung/load-theme-by-time (light-fn dark-fn)
   "Call LIGHT-FN  to load light themes from 7:00a.m to 6:00p.m.
