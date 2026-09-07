@@ -79,7 +79,6 @@
           ("https://jeddacp.me/feed/" :title "august morning" photo blaugust2026)
           ("https://blog.august.hk/rss.xml" :title "August's Blog")
           ("https://whimsies.bearblog.dev/feed/" :title "Before 30")
-          ("https://bens.love/feed" :title "Ben's Love")
           ("https://bitfieldconsulting.com/posts?format=rss" :title "Bitfield Consulting" tech go)
           ("https://blakewatson.com/feed.xml" :title "Blake Watson")
           ("https://blogblog.club/blog/rss.xml" :title "BlogBlog 同樂會")
@@ -213,7 +212,6 @@
           ("https://www.autodidacts.io/rss/" :title "The Autodidacts" weekly)
           ("https://chrismaiorana.com/feed/" :title "The Daily Macro" emacs)
           ("https://listeningroomsmusic.com/feed/?type=rss" :title "The Listening Rooms")
-          ("https://feedpress.me/thetechnium" :title "The Technium")
           ("https://thewanderingallison.vercel.app/rss.xml/" :title "The Wandering Allison")
           ("https://theworksofegan.net/feed.xml" :title "The Works of Egan")
           ("https://themkat.net/feed.xml" :title "TheMKat" emacs)
@@ -332,6 +330,7 @@
           ("https://joelchrono.xyz/feed.xml" :title "Joelchrono's Blog" game blaugust2026)
           ("https://www.quantamagazine.org/feed/" :title "Quanta Magazine" zine weekly)
           ("https://varzy.me/rss.xml" :title "贼歪")
+          ("https://www.javis.me/feed/" :title "查令十字街 84 号")
           ;; no-update
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day" :no-update t)
