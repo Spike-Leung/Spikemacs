@@ -197,7 +197,8 @@
   ;; after filter, use ? to show dispatch to show all actions
   (setq avy-style 'at-full
         ;; 移除所有的高亮，avy 标记会更突出
-        avy-background t))
+        avy-background t
+        avy-timeout-seconds 0.8))
 
 ;; "ace-pinyin" to support chinese
 ;; (use-package ace-pinyin
