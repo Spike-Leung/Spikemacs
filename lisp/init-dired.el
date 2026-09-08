@@ -83,5 +83,12 @@
 
 
 
+(use-package speedbar
+  :straight nil
+  :config
+  (setq speedbar-prefer-window t))
+
+
+
 (provide 'init-dired)
 ;;; init-dired.el ends here
