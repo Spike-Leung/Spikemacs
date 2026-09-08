@@ -186,9 +186,7 @@
 
 
 (use-package avy
-  :bind (("C-:" . avy-goto-char-timer)
-         ("s-/" . avy-goto-char-timer)
-         ("M-g l" . avy-goto-line)
+  :bind (("M-g l" . avy-goto-line)
          ("C-c C-j" . avy-resume)
          :map isearch-mode-map
          ("C-'" . avy-isearch))
