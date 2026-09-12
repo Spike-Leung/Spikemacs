@@ -226,7 +226,6 @@
           ("https://www.marginalia.nu/log/index.xml" :title "Weblog on marginalia.nu")
           ("https://webmention.io/api/mentions.atom?token=qcwPCX61g9khbvZWp3U0qg" :title "webmention.io" webmention)
           ("https://indieping.giveanornot.com/feed/taxodium.ink" :title "Indiepin")
-          ("https://labnotes.org/rss/" :title "Weekend Reading" weekly)
           ("https://weiwei.place/feed" :title "Weiwei Xu")
           ("https://what-if.xkcd.com/feed.atom" :title "what if?.xkcd" weekly)
           ("https://blog.itswincer.com/atom.xml" :title "Wincer's Blog")
@@ -352,7 +351,9 @@
           ("https://kaigulliksen.com/feed.xml" :title "Kai Gulliksen" blaugust2026)
           ("https://www.vanderwal.net/random/vanderwal.xml" :title "Off the Top" blaugust2026)
           ("https://www.omz13.com/feed.atom" :title "words, essays, and more" blaugust2026)
-          ("https://ivonblog.com/index.xml" :title " Ivon Huang")
+          ("https://ivonblog.com/index.xml" :title "Ivon Huang")
+          ("https://liangmouyin.com/index.xml" :title "梁某银")
+          ("https://yoe1.bearblog.dev/feed/" :title "右衣" poem)
           ;; no-update
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day" :no-update t)
