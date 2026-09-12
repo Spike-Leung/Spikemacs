@@ -50,7 +50,7 @@
 
   (transient-define-prefix spike-leung/transient-register ()
     ["Register"
-     ("c" "copy-to" copy-to-register)
+     ("c" "copy (to i)" copy-to-register)
      ("i" "insert" insert-register)
      ("l" "list" consult-register)])
 
