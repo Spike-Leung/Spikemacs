@@ -257,7 +257,7 @@ TAG is string."
 
 
 
-(defun spike-leung/org-publish-plain-text (_plist filename pub-dir)
+(defun spike-leung/org-publish (plist filename pub-dir)
   "Publish a org file and use export_file_name as filename.
 
 FILENAME is the filename of the Org file to be published.  PLIST
@@ -265,6 +265,8 @@ is the property list for the given project.  PUB-DIR is the
 publishing directory.
 
 Return output file name."
+  ;; generate .html file
+  (org-html-publish-to-html plist filename pub-dir)
   (unless (file-directory-p pub-dir)
     (make-directory pub-dir t))
   (let* ((export-file-name
@@ -273,7 +275,7 @@ Return output file name."
          (org-file (file-name-with-extension base-filename "org"))
          (text-file (file-name-with-extension base-filename "txt")))
     ;; generate .txt file
-    (org-publish-org-to 'ascii filename ".txt" _plist pub-dir)
+    (org-publish-org-to 'ascii filename ".txt" plist pub-dir)
     ;; copy original org file to pub-dir
     (copy-file filename org-file t)
     ;; Return file name.
@@ -535,12 +537,13 @@ If heading does not already exist."
   (message "setup org-publish-project-alist")
   (setq org-html-htmlize-output-type 'css)
   (setq org-publish-project-alist
-        `(("orgfiles"
+        `(("posts"
            :base-directory "~/git/taxodium/posts"
            :base-extension "org"
            :exclude ".*"
            :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" "_published")
            :publishing-directory ,spike-leung/org-publish-default-publishing-directory
+           :publishing-function spike-leung/org-publish
            :section-numbers nil
            :with-toc t
            :with-tags t
@@ -571,12 +574,13 @@ If heading does not already exist."
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
-          ("black-hole"
+          ("blackhole"
            :base-directory "~/git/taxodium/posts"
            :base-extension "org"
            :exclude ".*"
            :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" "_blackhole")
            :publishing-directory ,spike-leung/org-publish-default-publishing-directory
+           :publishing-function spike-leung/org-publish
            :section-numbers nil
            :with-toc t
            :with-tags t
@@ -588,33 +592,6 @@ If heading does not already exist."
            :html-self-link-headlines t
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
-
-          ("plain-text-post"
-           :base-directory "~/git/taxodium/posts"
-           :base-extension "org"
-           :exclude ".*"
-           :with-toc nil
-           :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" (rx (or "_published")))
-           :publishing-directory ,spike-leung/org-publish-default-publishing-directory
-           :publishing-function spike-leung/org-publish-plain-text)
-
-          ("plain-text-blackhole"
-           :base-directory "~/git/taxodium/posts"
-           :base-extension "org"
-           :exclude ".*"
-           :with-toc nil
-           :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" (rx (or "_blackhole")))
-           :publishing-directory ,spike-leung/org-publish-default-publishing-directory
-           :publishing-function spike-leung/org-publish-plain-text)
-
-          ("plain-text-all"
-           :base-directory "~/git/taxodium/posts"
-           :base-extension "org"
-           :exclude ".*"
-           :with-toc nil
-           :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" (rx (or "_blackhole" "_published")))
-           :publishing-directory ,spike-leung/org-publish-default-publishing-directory
-           :publishing-function spike-leung/org-publish-plain-text)
 
           ("index"
            :base-directory "~/git/taxodium/posts"
@@ -633,10 +610,7 @@ If heading does not already exist."
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
-          ;; copy static fisrt
-          ("posts" :components ("orgfiles" "plain-text-post"))
-          ("white-hole" :components ("black-hole" "plain-text-blackhole"))
-          ("all" :components ("orgfiles" "black-hole" "draft" "index" "plain-text-all")))))
+          ("all" :components ("posts" "blackhole" "index")))))
 
 (spike-leung/setup-org-publish-project-alist)
 
