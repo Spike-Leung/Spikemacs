@@ -458,7 +458,46 @@ INFO is a plist used as a communication channel."
                    (and formatted-subtitle (concat " - " formatted-subtitle))
                    (when (org-string-nw-p date) (concat "\n\n" date))
                    "\n" line "\n\n")
-           text-width 'left))))))
+           text-width 'left)))))
+  ;; override org-ascii--build-toc, remove toc if no heading
+  (defun org-ascii--build-toc (info &optional n keyword scope)
+    "Return a table of contents.
+
+INFO is a plist used as a communication channel.
+
+Optional argument N, when non-nil, is an integer specifying the
+depth of the table.
+
+Optional argument KEYWORD specifies the TOC keyword, if any, from
+which the table of contents generation has been initiated.
+
+When optional argument SCOPE is non-nil, build a table of
+contents according to the specified scope."
+    (unless (null (org-export-collect-headlines info n scope))
+      (concat
+       (unless scope
+         (let ((title (org-ascii--translate "Table of Contents" info)))
+           (concat title "\n"
+                   (make-string
+                    (string-width title)
+                    (if (eq (plist-get info :ascii-charset) 'utf-8) ?─ ?_))
+                   "\n\n")))
+       (let ((text-width
+              (if keyword (org-ascii--current-text-width keyword info)
+                (- (plist-get info :ascii-text-width)
+                   (plist-get info :ascii-global-margin)))))
+         (mapconcat
+          (lambda (headline)
+            (let* ((level (org-export-get-relative-level headline info))
+                   (indent (* (1- level) 3)))
+              (concat
+               (unless (zerop indent) (concat (make-string (1- indent) ?.) " "))
+               (org-ascii--build-title
+                headline info (- text-width indent) nil
+                (or (not (plist-get info :with-tags))
+                    (eq (plist-get info :with-tags) 'not-in-toc))
+                'toc))))
+          (org-export-collect-headlines info n scope) "\n"))))))
 
 
 
