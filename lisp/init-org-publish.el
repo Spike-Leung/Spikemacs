@@ -174,14 +174,55 @@ INFO is a plist holding contextual information."
 
 
 
-;;; sitemap
+(defun spike-leung/org-publish-copy-org-file-and-generate-txt-file (plist filename pub-dir)
+  "Publish a org file and txt file.
+Use export_file_name as filename.
+FILENAME is the filename of the Org file to be published.  PLIST
+is the property list for the given project.  PUB-DIR is the
+publishing directory.
+
+Return output file name."
+  (unless (file-directory-p pub-dir)
+    (make-directory pub-dir t))
+  (let* ((export-file-name
+          (or (spike-leung/org-publish-get-org-keyword nil nil "export_file_name" filename) filename))
+         (base-filename (expand-file-name (file-name-nondirectory export-file-name) pub-dir))
+         (org-file (file-name-with-extension base-filename "org"))
+         (text-file (file-name-with-extension base-filename "txt")))
+    ;; generate .txt file
+    (org-publish-org-to 'ascii filename ".txt" plist pub-dir)
+    ;; copy original org file to pub-dir
+    (copy-file filename org-file t)
+    ;; Return file name.
+    org-file))
+
+;;; post publish function
+
+(defun spike-leung/org-publish (plist filename pub-dir)
+  "Publish function for posts.
+
+FILENAME is the filename of the Org file to be published.
+PLIST is the property list for the given project.
+PUB-DIR is the publishing directory.
+
+Return output file name."
+  ;; generate .html file
+  (org-html-publish-to-html plist filename pub-dir)
+  (spike-leung/org-publish-copy-org-file-and-generate-txt-file plist filename pub-dir))
 
 
-(defun spike-leung/org-html-publish-sitemap (plist filename pub-dir)
-  "`org-publish' `:publishing-function' for sitemap.
-Add subtitle to links which has subtitle.
-See `org-html-publish-to-html' for param PLIST,FILENAME,PUB-DIR."
+;;; sitemap publish function
+
+(defun spike-leung/org-publish-index (plist filename pub-dir)
+  "Publish function for index.
+
+FILENAME is the filename of the Org file to be published.
+PLIST is the property list for the given project.
+PUB-DIR is the publishing directory.
+
+Return output file name."
   (let ((output-filename (org-html-publish-to-html plist filename pub-dir)))
+    ;; Add subtitle to links which has subtitle.
     ;; 这里应该用 `with-temp-buffer' 而不要用 `with-current-buffer' 和 '`find-file-noselect'
     ;; see: https://emacs.stackexchange.com/questions/2868/whats-wrong-with-find-file-noselect
     (with-temp-buffer
@@ -193,7 +234,8 @@ See `org-html-publish-to-html' for param PLIST,FILENAME,PUB-DIR."
         (let ((subtitle (match-string 2)))
           (replace-match (format "\\1\\3<span class=\"sitemap-subtitle\">%s</span>" subtitle))))
       (write-region (point-min) (point-max) output-filename))
-    output-filename))
+    output-filename)
+  (spike-leung/org-publish-copy-org-file-and-generate-txt-file plist filename pub-dir))
 
 
 
@@ -225,32 +267,6 @@ SILO is a file path from `denote-silo-directories'.
 TAG is string."
   (cl-letf ((denote-directory (expand-file-name silos)))
     (denote-directory-files tag)))
-
-
-
-(defun spike-leung/org-publish (plist filename pub-dir)
-  "Publish a org file and use export_file_name as filename.
-
-FILENAME is the filename of the Org file to be published.  PLIST
-is the property list for the given project.  PUB-DIR is the
-publishing directory.
-
-Return output file name."
-  ;; generate .html file
-  (org-html-publish-to-html plist filename pub-dir)
-  (unless (file-directory-p pub-dir)
-    (make-directory pub-dir t))
-  (let* ((export-file-name
-          (or (spike-leung/org-publish-get-org-keyword nil nil "export_file_name" filename) filename))
-         (base-filename (expand-file-name (file-name-nondirectory export-file-name) pub-dir))
-         (org-file (file-name-with-extension base-filename "org"))
-         (text-file (file-name-with-extension base-filename "txt")))
-    ;; generate .txt file
-    (org-publish-org-to 'ascii filename ".txt" plist pub-dir)
-    ;; copy original org file to pub-dir
-    (copy-file filename org-file t)
-    ;; Return file name.
-    org-file))
 
 
 
@@ -473,15 +489,15 @@ If heading does not already exist."
           ("index"
            :base-directory "~/git/taxodium/posts"
            :base-extension "org"
-           :include ("index.org")
            :exclude ".*"
+           :include  ,(spike-leung/get-file-list-from-denote-silo "~/git/taxodium/posts" "taxodium__index")
            :publishing-directory ,spike-leung/org-publish-default-publishing-directory
            :time-stamp-file nil
            :section-numbers nil
            :html-head spike-leung/html-head-sitemap
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble ,spike-leung/html-postamble-sitemap
-           :publishing-function spike-leung/org-html-publish-sitemap
+           :publishing-function spike-leung/org-publish-index
            :html-htmlize-output-type css
            :html-self-link-headlines t
            :author "Spike Leung"
