@@ -176,36 +176,6 @@ INFO is a plist holding contextual information."
 
 ;;; sitemap
 
-(defun spike-leung/sitemap-function (title list)
-  "Generate sitemap as a string.
-TITLE is the sitemap title and LIST contains files to include."
-  (concat
-   "#+INCLUDE: ./index-preamble.org"
-   "\n\n"
-   (org-list-to-org list '(:backend org :raw t))))
-
-(defun spike-leung/sitemap-format-entry (entry style project)
-  "Custom format for site map ENTRY, as a string.
-ENTRY is a file name.  STYLE is the style of the sitemap.
-PROJECT is the current project."
-  (let* ((export-file-name (spike-leung/org-publish-get-org-keyword entry project "export_file_name"))
-         (subtitle (spike-leung/org-publish-get-org-keyword entry project "subtitle")))
-    (cond ((not (directory-name-p entry))
-           (concat (format "[[file:%s][%s]]"
-                           (or (if export-file-name
-                                   (format "%s.org" (url-encode-url export-file-name))
-                                 nil)
-                               entry)
-                           (org-publish-find-title entry project))
-                   "\n"
-                   (or (if subtitle
-                           (format "@@html: <span class=\"sitemap-subtitle\">%s</span>@@" subtitle)
-                         nil)
-                       "")))
-          ((eq style 'tree)
-           ;; Return only last subdir.
-           (file-name-nondirectory (directory-file-name entry)))
-          (t entry))))
 
 (defun spike-leung/org-html-publish-sitemap (plist filename pub-dir)
   "`org-publish' `:publishing-function' for sitemap.
