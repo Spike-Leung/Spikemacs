@@ -150,7 +150,6 @@ INFO is a plist holding contextual information."
 <script src=\"/js/code-highlighted.js\" defer></script>
 <script src=\"/js/backtop.js\" defer></script>
 <script src=\"/js/sidenote.js\" defer></script>
-<script src=\"/js/purify.min.js\" defer></script>
 <script src=\"/js/webmention.js\" defer></script>
 <noscript>
   <style>
