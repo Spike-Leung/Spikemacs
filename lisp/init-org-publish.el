@@ -118,7 +118,7 @@ INFO is a plist holding contextual information."
 <input type=\"submit\" class=\"button\" value=\"提交\"/>
 </form>
 <hr></hr>
-<ul class=\"webmention__list js-required\"></ul>
+<div class=\"webmention__list js-required\"></div>
 </details>"
      ;; microformat
      "<div class=\"h-card p-author\" aria-hidden=\"true\">
