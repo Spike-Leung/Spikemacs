@@ -150,7 +150,7 @@ set of themes to either dark or light variants."
 ;; 要在 desktop 加载后再执行，避免被 desktop 记录的主题覆盖，导致混乱
 (add-hook 'desktop-after-read-hook #'spike-leung/themes-load-random)
 
-(keymap-global-set "<f5>" #'(lambda ()
+(keymap-global-set "<f6>" #'(lambda ()
                               (interactive)
                               (spike-leung/load-theme-by-time #'light #'dark)))
 
