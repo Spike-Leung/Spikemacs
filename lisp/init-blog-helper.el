@@ -239,7 +239,7 @@ images/album-1 → images/album/1 → images/album → images/
                       (_      (concat "video/" ext)))))
     (insert (format "#+begin_export html
 <figure>
-  <video autoplay loop muted playsinline loading=\"lazy\">
+  <video controls loop muted playsinline loading=\"lazy\">
     <source src=\"%s\" type=\"%s\">
   </video>
   <figcaption></figcaption>
