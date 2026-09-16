@@ -6,7 +6,7 @@
 (require 's)
 (require 'cl-lib)
 (require 'denote)
-(require 'init-ox-ascii-override)
+(require 'init-ox-override)
 
 
 
@@ -266,141 +266,6 @@ SILO is a file path from `denote-silo-directories'.
 TAG is string."
   (cl-letf ((denote-directory (expand-file-name silos)))
     (denote-directory-files tag)))
-
-
-
-;;; ox-html, setting and overrides
-
-(use-package ox-html
-  :straight nil
-  :config
-  (setq org-html-head-include-default-style nil
-        org-html-content-class "content e-content")
-
-  ;; overrides
-  ;; - apply "#+attr_html" to verse
-  (defun org-html-verse-block (_verse-block contents info)
-    "Transcode a VERSE-BLOCK element from Org to HTML.
-CONTENTS is verse block contents.  INFO is a plist holding
-contextual information."
-    (let ((attributes (org-export-read-attribute :attr_html _verse-block)))
-      (if-let ((class-val (plist-get attributes :class)))
-          (setq attributes (plist-put attributes :class (concat "verse " class-val)))
-        (setq attributes (plist-put attributes :class "verse")))
-      (format "<p%s>\n%s</p>"
-              (concat " " (org-html--make-attribute-string attributes))
-              ;; Replace leading white spaces with non-breaking spaces.
-              (replace-regexp-in-string
-               "^[ \t]+" (lambda (m) (org-html--make-string (length m) "&#xa0;"))
-               ;; Replace each newline character with line break.  Also
-               ;; remove any trailing "br" close-tag so as to avoid
-               ;; duplicates.
-               (let* ((br (org-html-close-tag "br" nil info))
-                      (re (format "\\(?:%s\\)?[ \t]*\n" (regexp-quote br))))
-                 (replace-regexp-in-string re (concat br "\n") contents))))))
-
-  (defun org-html-section (section contents info)
-    "Transcode a SECTION element from Org to HTML.
-CONTENTS holds the contents of the section.  INFO is a plist
-holding contextual information."
-    (let ((parent (org-element-lineage section 'headline)))
-      ;; Before first headline: no container, just return CONTENTS.
-      (if (not parent) contents
-        ;; Get div's class and id references.
-        (let* ((class-num (+ (org-export-get-relative-level parent info)
-                             (1- (plist-get info :html-toplevel-hlevel))))
-               (section-number
-                (and (org-export-numbered-headline-p parent info)
-                     (mapconcat
-                      #'number-to-string
-                      (org-export-get-headline-number parent info) "-"))))
-          ;; Build return value.
-          (format "<div class=\"outline-text-%d\" id=\"text-%s\">%s</div>\n"
-                  class-num
-                  (or (org-element-property :CUSTOM_ID parent)
-                      section-number
-                      (org-export-get-reference parent info))
-                  (or contents ""))))))
-
-  (defun spike-leung/org-html-wrap-image-with-link (orig-fn source attributes info)
-    "Wrap the <img> tag in an <a> tag linking to the image source."
-    (let ((href (or (plist-get attributes :data-href)
-                    (plist-get attributes :href)))
-          (img-tag (funcall orig-fn source attributes info)))
-      (if (string-match-p (concat "^" org-preview-latex-image-directory) source)
-          img-tag
-        (format "<a href=\"%s\">%s</a>"
-                (or href source)
-                img-tag))))
-
-  (advice-add 'org-html--format-image :around #'spike-leung/org-html-wrap-image-with-link)
-
-  ;; `lambda-list' 是参数列表，`:around' 的第一个参数是原始函数，剩下的参数是原始函数原来的参数
-  ;; 下面这个函数的意思是：
-  ;; 给 `org-html-paragraph' 添加一个执行时机是 `:around' 的 advice，
-  ;; advice 名字是 `org-html-paragraph-advice'
-  ;; body 中执行的代码是将 contents 中，中文之间的换行符移除，然后将移除后的内容交给 org-html-paragraph 渲染段落
-  (define-advice org-html-paragraph (:around (orig-fn paragraph contents info) org-html-paragraph-advice)
-    "Join consecutive Chinese lines into a single long line
-     without unwanted space when exporting `org-mode' to html."
-    (let ((fixed-content (replace-regexp-in-string
-                          (rx
-                           (group (or (category chinese) "<" ">"))
-                           (regexp "\n")
-                           (group (or (category chinese) "<" ">")))
-                          "\\1\\2"
-                          contents)))
-      (funcall orig-fn paragraph fixed-content info))))
-
-
-
-;;; ox filter
-(use-package ox
-  :straight nil
-  :config
-  (dolist (filter '(spike-leung/remove-unnessary-id-from-html
-                    spike-leung/add-extra-class-to-body
-                    spike-leung/add-extra-class-to-title))
-    (add-to-list 'org-export-filter-final-output-functions filter))
-  (add-to-list 'org-export-filter-table-functions 'spike-leung/org-html-wrap-table)
-
-
-  (defun spike-leung/remove-unnessary-id-from-html (text backend info)
-    "Remove unnecessarily id attibute.
-These elements's ID will be remove: figure,details,pre ..."
-    (when (org-export-derived-backend-p backend 'html)
-      (replace-regexp-in-string (rx (seq "<"
-                                         (group (or "figure" "details" "pre"))
-                                         (group (zero-or-more (not ">")))
-                                         (group (seq whitespace "id=" (syntax string-quote) "org" (zero-or-more hex) (syntax string-quote)))
-                                         (group (zero-or-more (not ">")))
-                                         ">"))
-                                (lambda (match)
-                                  (format "<%s%s%s%s>"
-                                          (match-string 1 match) ;; tag
-                                          (match-string 2 match) ;; keep other attrs
-                                          "" ;; remove id
-                                          (match-string 4 match) ;; keep other attrs
-                                          ))
-                                text)))
-
-  ;; add class to match microformat, see: https://microformats.org/
-  (defun spike-leung/add-extra-class-to-body (text backend info)
-    "Remove unnecessarily id attibute.
-These elements's ID will be remove: figure,details,pre ..."
-    (when (org-export-derived-backend-p backend 'html)
-      (replace-regexp-in-string "<body>" "<body class=\"h-entry\">" text)))
-
-  (defun spike-leung/add-extra-class-to-title (text backend info)
-    "Remove unnecessarily id attibute.
-These elements's ID will be remove: figure,details,pre ..."
-    (when (org-export-derived-backend-p backend 'html)
-      (replace-regexp-in-string "<h1 class=\"title\">" "<h1 class=\"title p-name\">" text)))
-
-  (defun spike-leung/org-html-wrap-table (table backend info)
-    "Wrap tables in a div when exporting to HTML."
-    (when (org-export-derived-backend-p backend 'html)
-      (concat "<div class=\"table-wrapper\"> " table " </div>"))))
 
 
 
