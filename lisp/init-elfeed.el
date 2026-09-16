@@ -348,16 +348,17 @@
           ("https://nerdgirlthoughts.game.blog/feed/" :title "Nerd Girl Thoughts" blaugust2026)
           ("https://lyonsinbeta.com/feed.xml" :title "Lyons in Beta" blaugust2026)
           ("https://heartsoulmachine.com/feed.xml" :title "Heart Soul Machine" blaugust2026)
-          ("https://kaigulliksen.com/feed.xml" :title "Kai Gulliksen" blaugust2026)
+          ("https://kaigulliksen.com/feed.xml" :title "Kai Gulliksen" blaugust2026 artist)
           ("https://www.vanderwal.net/random/vanderwal.xml" :title "Off the Top" blaugust2026)
           ("https://www.omz13.com/feed.atom" :title "words, essays, and more" blaugust2026)
           ("https://ivonblog.com/index.xml" :title "Ivon Huang")
           ("https://liangmouyin.com/index.xml" :title "梁某银")
           ("https://yoe1.bearblog.dev/feed/" :title "右衣" poem)
+          ("https://seths.blog/feed/" :title "SETH'S BLOG")
+          ("https://unstory.eu/feed.json" :title "unstory")
+          ("https://pluralistic.net/feed/" :title "Pluralistic")
           ;; no-update
-          ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day" :no-update t)
-          ("https://unstory.eu/feed.json" :title "unstory" :no-update t)
           ("https://jamesg.blog/feeds/posts.xml" :title "James' Coffee Blog" :no-update t) ; 更新太頻䌓
           ("https://www.fullmoonfiberart.com/feed" :title "Full Moon Fiber Art" :no-update t) ; 更新太頻䌓
           ("https://feeds.feedburner.com/brainpickings/rss" :title "The Marginalian" :no-update t book) ; 更新太頻䌓
