@@ -86,6 +86,11 @@
      ("h" "org-heading" consult-org-heading)
      ("o" "outline" consult-outline)])
 
+  (transient-define-prefix spike-leung/transient-quick-access-directory ()
+    ["Quick Access Directory"
+     ("i" "taxodium/images" (lambda () (interactive) (find-file "~/git/taxodium/publish/images")))
+     ("d" "downloads" (lambda () (interactive) (find-file "~/Downloads/")))])
+
   (transient-define-prefix spike-leung/transient-commands ()
     ["Frequently used commands"
      ("h" "漢典查單字" spike-leung/handian--query)
@@ -120,6 +125,7 @@
      ["(・・?)"
       ("a" "avy" avy-goto-char-timer)
       ("c" "consult" spike-leung/transient-consult)
+      ("d" "directory" spike-leung/transient-quick-access-directory)
       ("g" "gptel" spike-leung/transient-gptel)
       ("G" "ghostel (C-u: new)" ghostel)
       ("m" "multi cursor" spike-leung/transient-multi-cursors)
