@@ -357,6 +357,8 @@
           ("https://seths.blog/feed/" :title "SETH'S BLOG")
           ("https://unstory.eu/feed.json" :title "unstory")
           ("https://pluralistic.net/feed/" :title "Pluralistic")
+          ("https://ishadeed.com/feed.xml" :title "Ahmad Shadeed" frontend css)
+          ("https://lenciel.com/feed.xml" :title "Lenciel")
           ;; no-update
           ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day" :no-update t)
           ("https://jamesg.blog/feeds/posts.xml" :title "James' Coffee Blog" :no-update t) ; 更新太頻䌓
