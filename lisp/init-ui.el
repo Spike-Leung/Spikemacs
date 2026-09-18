@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'solar)
+
 
 
 (defun sanityinc/maybe-suspend-frame ()
@@ -83,10 +85,21 @@
              :branch "main"))
 
 (defun spike-leung/load-theme-by-time (light-fn dark-fn)
-  "Call LIGHT-FN  to load light themes from 7:00a.m to 6:00p.m.
-otherwise, call DARK-FN to load dark themes."
-  (let ((hour (string-to-number (format-time-string "%H"))))
-    (funcall (if (and (>= hour 7) (< hour 18)) light-fn dark-fn))))
+  "Call LIGHT-FN between sunrise and sunset, otherwise DARK-FN."
+
+  (let* ((calendar-longitude 114.158283) ;; Hong Kong
+         (calendar-latitude 22.281833)
+         (calendar-time-zone 480)
+         (l (solar-sunrise-sunset (calendar-current-date)))
+         (hour (lambda (x) (and x (if (consp x) (car x) x))))
+         (sunrise (funcall hour (car l)))
+         (sunset (funcall hour (cadr l)))
+         (t0 (decode-time))
+         (now (+ (nth 2 t0) (/ (nth 1 t0) 60.0))))
+    (funcall (if (and (car l) (cadr l)
+                      (>= now sunrise)
+                      (<  now sunset))
+                 light-fn dark-fn))))
 
 (defun spike-leung/themes-load-random (&optional background-mode)
   "Random load themes.
