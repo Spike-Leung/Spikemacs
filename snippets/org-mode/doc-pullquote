@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: doc pullquote
-# key: dp
+# key: pq
 # --
 
 #+attr_html: :role doc-pullquote :aria-hidden true
