@@ -355,7 +355,6 @@
           ("https://liangmouyin.com/index.xml" :title "梁某银")
           ("https://yoe1.bearblog.dev/feed/" :title "右衣" poem)
           ("https://seths.blog/feed/" :title "SETH'S BLOG")
-          ("https://unstory.eu/feed.json" :title "unstory")
           ("https://pluralistic.net/feed/" :title "Pluralistic")
           ("https://ishadeed.com/feed.xml" :title "Ahmad Shadeed" frontend css)
           ("https://lenciel.com/feed.xml" :title "Lenciel")
