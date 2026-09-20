@@ -285,5 +285,28 @@
 
 
 
+;; To make it work,
+;; you also need to add a shortcut to eval emacs-everywhere,
+;; add a shortcut to eval this: emacsclient --eval "(emacs-everywhere)"
+;; if you use raycast, you can create a Script Commands
+(use-package emacs-everywhere
+  :straight (emacs-everywhere
+             :type git
+             :host github
+             :repo "tecosaur/emacs-everywhere"
+             ;; @see: https://github.com/tecosaur/emacs-everywhere/issues/112
+             :branch "fix/macos-osascript-compile"
+             :fork "Bounga/emacs-everywhere")
+  :custom
+  (emacs-everywhere-frame-parameters
+   '((name . "emacs-everywhere") (fullscreen) (width . 90) (height . 15)))
+  :config
+  (defun spike-leung/emacs-everywhere-set-frame-position ()
+    "Set the size and position of the emacs-everywhere frame."
+    (set-frame-position (selected-frame) 550 550))
+  (advice-add 'emacs-everywhere-set-frame-position :override #'spike-leung/emacs-everywhere-set-frame-position))
+
+
+
 (provide 'init-editing)
 ;;; init-editing.el ends here
