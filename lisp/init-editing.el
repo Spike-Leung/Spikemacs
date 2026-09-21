@@ -300,6 +300,15 @@
   :custom
   (emacs-everywhere-frame-parameters
    '((name . "emacs-everywhere") (fullscreen) (width . 90) (height . 15)))
+  (emacs-everywhere-markdown-windows
+   '(
+     ;; Sites
+     "Reddit" "Stack Exchange" "Stack Overflow" "Emacs China"
+     ;; Web Apps
+     "Discord" "Element" "Slack" "HedgeDoc" "HackMD" "Zulip"
+     ;; Github
+     "Pull Request" "Issue" "Comparing .*\\.\\.\\."
+     ))
   :config
   (defun spike-leung/emacs-everywhere-set-frame-position ()
     "Set the size and position of the emacs-everywhere frame."
