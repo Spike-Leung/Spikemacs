@@ -95,7 +95,6 @@
           ("https://css-irl.info/rss.xml" :title "CSS In Real Life"  frontend css web)
           ("https://feedpress.me/cssweekly" :title "CSS Weekly" weekly frontend)
           ("https://dbushell.com/rss.xml" :title "dbushell.com" frontend)
-          ("https://www.densediscovery.com/feed/" :title "Dense Discovery" weekly)
           ("https://sive.rs/en.atom" :title "Derek Sivers")
           ("https://soatok.blog/feed/" :title "Dhole Moments" tech security cryptography)
           ("https://divergentrays.com/blog/blogfeed.xml" :title "Divergent Rays" weekly 宝石)
@@ -324,7 +323,6 @@
           ("https://www.wikimoe.com/rss" :title "维基萌" anime 圣地巡礼)
           ("https://manateelazycat.github.io/feed.xml" :title "Andy Stewart" emacs)
           ("https://joelchrono.xyz/feed.xml" :title "Joelchrono's Blog" game blaugust2026)
-          ("https://www.quantamagazine.org/feed/" :title "Quanta Magazine" zine weekly)
           ("https://varzy.me/rss.xml" :title "贼歪")
           ("https://www.javis.me/feed/" :title "查令十字街 84 号")
           ("https://nicetrypod.com/feed/audio.xml" :title "Nice Try" podcast)
@@ -358,17 +356,12 @@
           ("https://pluralistic.net/feed/" :title "Pluralistic")
           ("https://ishadeed.com/feed.xml" :title "Ahmad Shadeed" frontend css)
           ("https://lenciel.com/feed.xml" :title "Lenciel")
+          ("https://feeds.feedburner.com/brainpickings/rss" :title "The Marginalian" book) ; 更新太頻䌓
+          ("https://www.changhai.org/feed.xml" :title "卢昌海个人主页")
+          ("http://xahlee.info/emacs/emacs/blog.xml" :title "Xah Emacs Blog" t emacs)
+          ("https://amf.didiermary.fr/feed/" :title "African Music Forum" music)
+          ("https://www.newcommute.net/feed?format=rss" :title "New Commute" music album)
           ;; no-update
-          ("https://feeds.feedblitz.com/alearningaday&x=1" :title "A Learning Day" :no-update t)
-          ("https://jamesg.blog/feeds/posts.xml" :title "James' Coffee Blog" :no-update t) ; 更新太頻䌓
-          ("https://www.fullmoonfiberart.com/feed" :title "Full Moon Fiber Art" :no-update t) ; 更新太頻䌓
-          ("https://feeds.feedburner.com/brainpickings/rss" :title "The Marginalian" :no-update t book) ; 更新太頻䌓
-          ("https://amf.didiermary.fr/feed/" :title "African Music Forum" :no-update t music)
-          ("https://www.newcommute.net/feed?format=rss" :title "New Commute" :no-update t music album)
-          ("http://xahlee.info/emacs/emacs/blog.xml" :title "Xah Emacs Blog" :no-update t emacs)
-          ("https://www.changhai.org/feed.xml" :title "卢昌海个人主页" :no-update t)
-          ("https://dfarq.homeip.net/" :title "The Silicon Underground" :no-update t old-computer)
-          ("https://pluralistic.net/feed/" :title "Pluralistic" :no-update t zine)
           ;; end
           ))
 
