@@ -12,6 +12,10 @@
   "漢典  URL."
   :type 'string)
 
+(defcustom spike-leung/handian--referer "https://zdic.net/"
+  "請求漢典圖片時附帶的 Referer（img.zdic.net 有防盜鏈）."
+  :type 'string)
+
 (defvar spike-leung/handian--cangjie-char-table
   (let ((tbl (make-char-table nil)))
     (pcase-dolist (`(,key . ,val)
@@ -34,6 +38,38 @@ CANGJIE-CODE 是倉頡碼."
 (defun spike-leung/handian--char-url (char)
   "漢典 URL，拼接上要查詢的 CHAR."
   (concat spike-leung/handian--url (url-hexify-string char)))
+
+(defun spike-leung/handian--expand-img-url (src)
+  "將圖片 SRC 補全成絕對 URL."
+  (cond ((null src) nil)
+        ((string-match-p (rx bos "//") src) (concat "https:" src))
+        ((string-match-p (rx bos "http" (optional "s") "://") src) src)
+        (t (shr-expand-url src spike-leung/handian--url))))
+
+(defun spike-leung/handian--inline-img (img)
+  "將遠端 <img> IMG 的圖片以 plz 帶 Referer 下載，並改寫 src 為 data: URI。
+漢典圖片位於 img.zdic.net，EWW 自行抓圖時不帶 Referer，會回 403/404。
+IMG 是含 src 屬性的 <img> DOM；下載失敗則原樣返回."
+  (if (null img)
+      nil
+    (let ((url (spike-leung/handian--expand-img-url (dom-attr img 'src))))
+      (if (or (null url) (not (string-match-p (rx bos "http" (optional "s") "://") url)))
+          img
+        (condition-case err
+            (let* ((data (plz 'get url
+                           :headers `(("Referer" . ,spike-leung/handian--referer))
+                           :as 'binary
+                           :then 'sync))
+                   (mime (if (string-match-p (rx "." "svg" (optional "z") eos) url)
+                             "image/svg+xml"
+                           "image/png")))
+              (setf (dom-attr img 'src)
+                    (concat "data:" mime ";base64,"
+                            (base64-encode-string data t)))
+              img)
+          (error
+           (message "handian: 下載圖片失敗 %s: %s" url err)
+           img))))))
 
 (defun spike-leung/handian--img-with-bg (img)
   "把 IMG 包進一個淺色背景的 span，避免暗色主題看不清黑字."
@@ -64,15 +100,14 @@ DOM 是頁面文檔的 DOM 樹."
        `(,(spike-leung/handian--query-char variant-char t))))))
 
 (defun spike-leung/handian--swjz-img (dom)
-  "荻取「說文解字」部分的圖片.
+  "獲取「說文解字」部分的圖片.
 DOM 是頁面文檔的 DOM 樹."
   (let* ((swjz (dom-by-id dom "swjz")))
-    (list (car (dom-by-tag swjz 'img)))))
+    (list (spike-leung/handian--inline-img (car (dom-by-tag swjz 'img))))))
 
 (defun spike-leung/handian--pinyin (dom)
   "获取拼音，可能是多音字.
-DOM 是頁面文檔的 DOM 樹.
-"
+DOM 是頁面文檔的 DOM 樹."
   (mapconcat (lambda (meta-pinyin)
                (dom-text meta-pinyin))
              (dom-by-class dom "meta-pinyin")
@@ -83,7 +118,7 @@ DOM 是頁面文檔的 DOM 樹.
 URL 是漢典的 URL，字作為查詢參數.
 DOM 是頁面文檔的 DOM 樹.
 如果 IS-VARIANT 是 nil，則額外查詢一次這個字對應的「繁体」或「简体」."
-  (let* ((glyph-img (dom-by-id dom "glyph-img"))
+  (let* ((glyph-img (spike-leung/handian--inline-img (dom-by-id dom "glyph-img")))
          (pinyin (spike-leung/handian--pinyin dom))
          (info-extra (dom-by-class dom "char-card__info-extra"))
          (cangjie (nth 3 (dom-by-tag info-extra 'span)))
