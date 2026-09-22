@@ -159,6 +159,9 @@ ARGS 是其它相關參數."
 
 (define-key spike-leung/overrides-mode-map (kbd "M-o") 'spike-leung/transient)
 (define-key spike-leung/overrides-mode-map (kbd "M-?") 'sanityinc/consult-ripgrep-at-point)
+;; override `org-backward-element' and `org-forward-element'
+(define-key spike-leung/overrides-mode-map (kbd "M-{") 'backward-paragraph)
+(define-key spike-leung/overrides-mode-map (kbd "M-}") 'forward-paragraph)
 (spike-leung/overrides-mode 1)
 
 
