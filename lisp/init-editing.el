@@ -168,7 +168,13 @@
               ("M-i" . symbol-overlay-put)
               ("M-I" . symbol-overlay-remove-all)
               ("M-n" . symbol-overlay-jump-next)
-              ("M-p" . symbol-overlay-jump-prev)))
+              ("M-p" . symbol-overlay-jump-prev))
+  :config
+  (defvar-keymap spike-leung/symbol-overlay-repeat-map
+    :doc "Repeat map for `symbol-overlay' related commands."
+    :repeat t
+    "n" #'symbol-overlay-jump-next
+    "p" #'symbol-overlay-jump-prev))
 
 
 
