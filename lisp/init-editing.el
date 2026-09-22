@@ -83,7 +83,28 @@
 
 
 (use-package repeat
-  :hook (after-init . repeat-mode))
+  :hook (after-init . repeat-mode)
+  :config
+  (defvar-keymap spike-leung/char-repeat-map
+    :doc "Repeat map for char related commands."
+    :repeat t
+    "b" #'backward-char
+    "f" #'forward-char)
+  (defvar-keymap spike-leung/word-repeat-map
+    :doc "Repeat map for word related commands."
+    :repeat t
+    "b" #'backward-word
+    "f" #'forward-word)
+  (defvar-keymap spike-leung/paragraph-repeat-map
+    :doc "Repeat map for paragraph related commands."
+    :repeat t
+    "{" #'backward-paragraph
+    "}" #'forward-paragraph)
+  (defvar-keymap spike-leung/sexp-repeat-map
+    :doc "Repeat map for sexp related commands."
+    :repeat t
+    "b" #'backward-sexp
+    "f" #'forward-sexp))
 
 
 
