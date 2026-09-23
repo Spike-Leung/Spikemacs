@@ -361,6 +361,7 @@
           ("http://xahlee.info/emacs/emacs/blog.xml" :title "Xah Emacs Blog" t emacs)
           ("https://amf.didiermary.fr/feed/" :title "African Music Forum" music)
           ("https://www.newcommute.net/feed?format=rss" :title "New Commute" music album)
+          ("https://wuliang.netlify.app/index.xml" :title "無糧殿")
           ;; no-update
           ;; end
           ))
