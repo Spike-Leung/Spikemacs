@@ -24,7 +24,9 @@
 
 (defun spike-leung/html-head (info)
   "Return `org-html-head' as string with INFO."
-  (let* ((output-file (plist-get info :output-file)))
+  (let* ((output-file (plist-get info :output-file))
+         (base-url "https://taxodium.ink/")
+         (canonical-url (concat base-url (file-name-nondirectory output-file))))
     (format-spec   "<meta name=\"color-scheme\" content=\"light dark\" />
 <meta property=\"og:url\" content=\"%o\">
 <link rel=\"preload\" href=\"/styles/main.css\" as=\"style\" />
@@ -43,7 +45,7 @@
 <link rel=\"alternate\" type=\"application/atom+xml\" href=\"zine.xml\" title=\"Feed for Zine.\"/>
 <script src=\"/js/color-scheme.js\"></script>
 "
-                   `((?o . ,output-file)))))
+                   `((?o . ,canonical-url)))))
 
 
 (defun spike-leung/html-head-sitemap (info)
