@@ -321,9 +321,7 @@
              :type git
              :host github
              :repo "tecosaur/emacs-everywhere"
-             ;; @see: https://github.com/tecosaur/emacs-everywhere/issues/112
-             :branch "fix/macos-osascript-compile"
-             :fork "Bounga/emacs-everywhere")
+             :fork t)
   :custom
   (emacs-everywhere-frame-parameters
    '((name . "emacs-everywhere") (fullscreen) (width . 105) (height . 25)))
