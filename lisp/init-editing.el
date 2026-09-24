@@ -348,7 +348,12 @@
     "Set `fill-column' to 72 and enable the fill-column indicator."
     (setq-local fill-column 72)
     (display-fill-column-indicator-mode 1))
-  (add-hook 'emacs-everywhere-mode-hook #'spike-leung/emacs-everywhere-setup-fill))
+  (add-hook 'emacs-everywhere-mode-hook #'spike-leung/emacs-everywhere-setup-fill)
+
+  ;; Add this to your config to exclude tempf file from recent files
+  (with-eval-after-load 'recentf
+    (dolist (pattern emacs-everywhere-file-patterns)
+      (add-to-list 'recentf-exclude pattern))))
 
 
 
