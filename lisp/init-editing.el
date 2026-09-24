@@ -326,7 +326,7 @@
              :fork "Bounga/emacs-everywhere")
   :custom
   (emacs-everywhere-frame-parameters
-   '((name . "emacs-everywhere") (fullscreen) (width . 90) (height . 15)))
+   '((name . "emacs-everywhere") (fullscreen) (width . 105) (height . 25)))
   (emacs-everywhere-markdown-windows
    '(
      ;; Sites
@@ -340,7 +340,13 @@
   (defun spike-leung/emacs-everywhere-set-frame-position ()
     "Set the size and position of the emacs-everywhere frame."
     (set-frame-position (selected-frame) 550 550))
-  (advice-add 'emacs-everywhere-set-frame-position :override #'spike-leung/emacs-everywhere-set-frame-position))
+  (advice-add 'emacs-everywhere-set-frame-position :override #'spike-leung/emacs-everywhere-set-frame-position)
+
+  (defun spike-leung/emacs-everywhere-setup-fill ()
+    "Set `fill-column' to 72 and enable the fill-column indicator."
+    (setq-local fill-column 72)
+    (display-fill-column-indicator-mode 1))
+  (add-hook 'emacs-everywhere-mode-hook #'spike-leung/emacs-everywhere-setup-fill))
 
 
 
