@@ -336,6 +336,8 @@
      ;; Github
      "Pull Request" "Issue" "Comparing .*\\.\\.\\."
      ))
+  ;; 適當增加等待時間，對待 focus 完成再 paste
+  (emacs-everywhere-clipboard-sleep-delay 0.5)
   :config
   (defun spike-leung/emacs-everywhere-set-frame-position ()
     "Set the size and position of the emacs-everywhere frame."
