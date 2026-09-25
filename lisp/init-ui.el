@@ -310,27 +310,6 @@ BUFFER and ALIST are as for `display-buffer-full-frame'."
   (setq which-func-display 'mode)
   :hook ((after-init . which-function-mode)))
 
-(setq-default mode-line-format
-              '("%e"
-                mode-line-front-space
-                mode-line-mule-info
-                mode-line-client
-                mode-line-modified
-                mode-line-remote
-                mode-line-window-dedicated
-                mode-line-frame-identification
-                mode-line-buffer-identification
-                "   "
-                mode-line-position
-                (project-mode-line project-mode-line-format)
-                (vc-mode vc-mode)
-                "  "
-                mode-line-modes
-
-                ;; mode-line-end-spaces
-                mode-line-format-right-align
-                mode-line-misc-info))
-
 
 
 (provide 'init-ui)
