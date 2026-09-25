@@ -351,7 +351,14 @@
   ;; Add this to your config to exclude tempf file from recent files
   (with-eval-after-load 'recentf
     (dolist (pattern emacs-everywhere-file-patterns)
-      (add-to-list 'recentf-exclude pattern))))
+      (add-to-list 'recentf-exclude pattern)))
+
+  (defun spike-leung/emacs-everywhere-clean-temp-file-from-recentf ()
+    (interactive)
+    (setq recentf-list
+          (seq-remove (lambda (f) (string-match-p "emacs-everywhere" f))
+                      recentf-list))
+    (recentf-save-list)))
 
 
 
