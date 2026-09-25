@@ -362,6 +362,7 @@
           ("https://amf.didiermary.fr/feed/" :title "African Music Forum" music)
           ("https://www.newcommute.net/feed?format=rss" :title "New Commute" music album)
           ("https://wuliang.netlify.app/index.xml" :title "無糧殿")
+          ("https://www.bram.us/category/original-content/feed/" :title "Bramus" frontend)
           ;; no-update
           ;; end
           ))
