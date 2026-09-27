@@ -270,7 +270,6 @@
           ("https://www.gaotianchi.com/feed.xml" :title "高天驰")
           ("https://shkspr.mobi/blog/feed/atom/" :title "Terence Eden" tech)
           ("https://warandpeas.com/feed/" :title "War and Peas" anime)
-          ("https://blog.ikukaroom.com/feed/" :title "ikuka" newsletter 台湾 日文)
           ("https://wiwi.blog/blog/rss.xml" :title "Wiwi" 台湾 blogblogClub)
           ("https://itsfridayimnotinlove.substack.com/feed" :title "It's Friday I'm (not) in love" newsletter)
           ("https://usefulfictions.substack.com/feed" :title "Useful Fictions" newsletter)
@@ -363,6 +362,7 @@
           ("https://www.newcommute.net/feed?format=rss" :title "New Commute" music album)
           ("https://wuliang.netlify.app/index.xml" :title "無糧殿")
           ("https://www.bram.us/category/original-content/feed/" :title "Bramus" frontend)
+          ("https://matduggan.com/rss/" :title "Mat Duggan")
           ;; no-update
           ;; end
           ))
