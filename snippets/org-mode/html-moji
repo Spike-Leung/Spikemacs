@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: html for kaomoji / emoji
+# key: moji
+# --
+
+@@html:<span role="img" aria-label="$1">$0</span>@@

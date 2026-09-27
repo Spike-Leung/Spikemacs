@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: html for kaomoji / emoji, decoration
+# key: moji
+# --
+
+@@html:<span aria-hidden="true">$0</span>@@
