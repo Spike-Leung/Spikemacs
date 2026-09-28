@@ -231,8 +231,7 @@ Return output file name."
               nil t)
         (let ((subtitle (match-string 2)))
           (replace-match (format "\\1\\3<span class=\"sitemap-subtitle\">%s</span>" subtitle))))
-      (write-region (point-min) (point-max) output-filename))
-    output-filename)
+      (write-region (point-min) (point-max) output-filename)))
   (spike-leung/org-publish-copy-org-file-and-generate-txt-file plist filename pub-dir))
 
 
