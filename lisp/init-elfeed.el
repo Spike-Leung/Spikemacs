@@ -351,19 +351,21 @@
           ("https://ivonblog.com/index.xml" :title "Ivon Huang")
           ("https://liangmouyin.com/index.xml" :title "梁某银")
           ("https://yoe1.bearblog.dev/feed/" :title "右衣" poem)
-          ("https://seths.blog/feed/" :title "SETH'S BLOG")
-          ("https://pluralistic.net/feed/" :title "Pluralistic")
           ("https://ishadeed.com/feed.xml" :title "Ahmad Shadeed" frontend css)
           ("https://lenciel.com/feed.xml" :title "Lenciel")
-          ("https://feeds.feedburner.com/brainpickings/rss" :title "The Marginalian" book) ; 更新太頻䌓
           ("https://www.changhai.org/feed.xml" :title "卢昌海个人主页")
           ("http://xahlee.info/emacs/emacs/blog.xml" :title "Xah Emacs Blog" t emacs)
-          ("https://amf.didiermary.fr/feed/" :title "African Music Forum" music)
           ("https://www.newcommute.net/feed?format=rss" :title "New Commute" music album)
           ("https://wuliang.netlify.app/index.xml" :title "無糧殿")
           ("https://www.bram.us/category/original-content/feed/" :title "Bramus" frontend)
           ("https://matduggan.com/rss/" :title "Mat Duggan")
+          ("https://blog.hpcesia.com/feed.atom" :title "HPCesia")
+          ("https://domenic.me/feed.xml" :title "Domenic Denicola" frontend)
           ;; no-update
+          ("https://feeds.feedburner.com/brainpickings/rss" :title "The Marginalian"  :no-update t book) ; 更新太頻䌓
+          ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
+          ("https://pluralistic.net/feed/" :title "Pluralistic" :no-update t)
+          ("https://amf.didiermary.fr/feed/" :title "African Music Forum"  :no-update t music)
           ;; end
           ))
 
