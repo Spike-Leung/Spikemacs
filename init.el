@@ -9,6 +9,9 @@
 (require 'init-package)
 ;; use-package should after init-elpa
 
+;; i don't care this kind of warning
+(add-to-list 'warning-suppress-log-types '(files))
+
 ;;; environment
 (when (memq window-system '(mac ns x pgtk))
   (use-package exec-path-from-shell
