@@ -119,7 +119,6 @@
           ("https://cprss.s3.amazonaws.com/frontendfoc.us.xml" :title "Frontend Focus" weekly)
           ("https://blog.gentlelucky.com/zh/index.xml" :title "GentleLucky" weekly)
           ("https://ginoz.bearblog.dev/feed/" :title "GINOZ's Blog")
-          ("https://gobino.be/feed/" :title "gobino's bites" weekly)
           ("https://grantslatton.com/rss.xml" :title "Grant Slatton" writing tech)
           ("https://herman.bearblog.dev/feed/" :title "Herman's blog" blog)
           ("https://heydingus.net/feed.rss" :title "HeyDingus" weekly)
@@ -346,10 +345,8 @@
           ("https://lyonsinbeta.com/feed.xml" :title "Lyons in Beta" blaugust2026)
           ("https://heartsoulmachine.com/feed.xml" :title "Heart Soul Machine" blaugust2026)
           ("https://kaigulliksen.com/feed.xml" :title "Kai Gulliksen" blaugust2026 artist)
-          ("https://www.vanderwal.net/random/vanderwal.xml" :title "Off the Top" blaugust2026)
           ("https://www.omz13.com/feed.atom" :title "words, essays, and more" blaugust2026)
           ("https://ivonblog.com/index.xml" :title "Ivon Huang")
-          ("https://liangmouyin.com/index.xml" :title "梁某银")
           ("https://yoe1.bearblog.dev/feed/" :title "右衣" poem)
           ("https://ishadeed.com/feed.xml" :title "Ahmad Shadeed" frontend css)
           ("https://lenciel.com/feed.xml" :title "Lenciel")
@@ -366,6 +363,7 @@
           ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
           ("https://pluralistic.net/feed/" :title "Pluralistic" :no-update t)
           ("https://amf.didiermary.fr/feed/" :title "African Music Forum"  :no-update t music)
+          ("https://liangmouyin.com/index.xml" :title "梁某银" :no-update t)
           ;; end
           ))
 
