@@ -85,7 +85,6 @@
           ("https://blogblog.club/blog/rss.xml" :title "BlogBlog 同樂會")
           ("https://bluepika.life/rss.xml" :title "Bluepikachu")
           ("https://garden.bradwoods.io/rss.xml" :title "Brad Woods Digital Garden")
-          ("http://ozark.hendrix.edu/~yorgey/forest/005U/atom.xml" :title "Brent A. Yorgey" weekly)
           ("https://bryn.codes/feed.xml" :title "Bryn Newell")
           ("https://cbvivi.today/feed.xml" :title "cbvivi")
           ("https://openpath.quest/feed.xml" :title "Chad Whitacre")
@@ -318,7 +317,6 @@
           ("https://ohhelloana.blog/feed.xml" :title "Ana Rodrigues")
           ("https://lawtee.com/index.xml" :title "老 T 博客")
           ("https://2cat.net/feed/" :title "猫鱼")
-          ("https://www.wikimoe.com/rss" :title "维基萌" anime 圣地巡礼)
           ("https://manateelazycat.github.io/feed.xml" :title "Andy Stewart" emacs)
           ("https://joelchrono.xyz/feed.xml" :title "Joelchrono's Blog" game blaugust2026)
           ("https://varzy.me/rss.xml" :title "贼歪")
@@ -358,12 +356,8 @@
           ("https://matduggan.com/rss/" :title "Mat Duggan")
           ("https://blog.hpcesia.com/feed.atom" :title "HPCesia")
           ("https://domenic.me/feed.xml" :title "Domenic Denicola" frontend)
+          ("https://blog.sakoamc.com/atom.xml" :title "神仙鱼不吃鱼鱼")
           ;; no-update
-          ("https://feeds.feedburner.com/brainpickings/rss" :title "The Marginalian"  :no-update t book) ; 更新太頻䌓
-          ("https://seths.blog/feed/" :title "SETH'S BLOG" :no-update t)
-          ("https://pluralistic.net/feed/" :title "Pluralistic" :no-update t)
-          ("https://amf.didiermary.fr/feed/" :title "African Music Forum"  :no-update t music)
-          ("https://liangmouyin.com/index.xml" :title "梁某银" :no-update t)
           ;; end
           ))
 
