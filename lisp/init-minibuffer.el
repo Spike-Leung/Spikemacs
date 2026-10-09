@@ -4,6 +4,8 @@
 
 
 
+(setq enable-recursive-minibuffers t)
+
 (if (boundp 'use-short-answers)
     (setq use-short-answers t)
   (fset 'yes-or-no-p 'y-or-n-p))
