@@ -3,31 +3,88 @@
 # key: zine
 # group: blog
 # --
+
+# remember to set toc:nil.
+#+begin_details
+#+html: <summary>目錄</summary>
+
+#+TOC: headlines 1 local
+#+end_details
+
 * News | Article
+:PROPERTIES:
+:CUSTOM_ID: article
+:END:
 
 * Cool Bit
+:PROPERTIES:
+:CUSTOM_ID: cool-bit
+:END:
 
 * Blog Related
+:PROPERTIES:
+:CUSTOM_ID: blog
+:END:
 
 * Tutorial | Resource
+:PROPERTIES:
+:CUSTOM_ID: tutorial
+:END:
 
 * Code Related
+:PROPERTIES:
+:CUSTOM_ID: code
+:END:
 
 * AI Related
+:PROPERTIES:
+:CUSTOM_ID: ai
+:END:
 
 * Tool | Library
+:PROPERTIES:
+:CUSTOM_ID: tool
+:END:
 
 * Emacs
+:PROPERTIES:
+:CUSTOM_ID: emacs
+:END:
 
 * 一些话 | 摘抄
+:PROPERTIES:
+:CUSTOM_ID: quote
+:END:
 
 * 多媒体
+:PROPERTIES:
+:CUSTOM_ID: multimedia
+:END:
 
 ** 书
+:PROPERTIES:
+:CUSTOM_ID: book
+:END:
+
 ** 影视
+:PROPERTIES:
+:CUSTOM_ID: movie
+:END:
+
 ** 视频
+:PROPERTIES:
+:CUSTOM_ID: video
+:END:
+
 ** 播客
+:PROPERTIES:
+:CUSTOM_ID: podcast
+:END:
+
 ** 游戏
+:PROPERTIES:
+:CUSTOM_ID: game
+:END:
 
 # Local Variables:
 # org-cycle-include-plain-lists: integrate
