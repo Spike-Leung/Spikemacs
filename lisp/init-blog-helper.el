@@ -93,7 +93,8 @@
 
 (defun spike-leung/parse-album-filename (base)
   "Parse album filename BASE (e.g. \"ID--TITLE__KEYWORDS\").
-Returns list (title year artist webp-base)."
+Returns list (title year artist webp-base year-token), where
+YEAR-TOKEN is the full 8-digit _yyyymmdd keyword or nil."
   (let* ((dash (string-match "--" base))
          (title-full (if dash (substring base (+ dash 2)) base))
          (uscore (string-match "__" title-full))
@@ -115,7 +116,33 @@ Returns list (title year artist webp-base)."
                         (concat (upcase (substring title 0 1))
                                 (substring title 1))
                       title)))
-    (list title-cap year artist base)))
+    (list title-cap year artist base year-token)))
+
+(defun spike-leung/album-wall-sort-key (name)
+  "Return composite sort key for album-wall file NAME.
+The key sorts by artist (case-insensitively), then by the _yyyymmdd
+date token (oldest first), then by identifier as a stable tie-break.
+Files without an artist keyword are sorted last."
+  (let* ((base (file-name-base name))
+         (parsed (spike-leung/parse-album-filename base))
+         (artist (downcase (or (nth 2 parsed) "")))
+         (date (or (nth 4 parsed) ""))
+         (id (car (split-string base "--"))))
+    (concat (if (string-empty-p artist) "\1" "\0")
+            artist "\0" date "\0" id)))
+
+(defvar denote-files-matching-regexp-history)
+
+(defun spike-leung/album-wall-regexp-prompt (prompt-text)
+  "Prompt for a REGEXP that filters album-wall files.
+PROMPT-TEXT is the label shown in the minibuffer.  Default to
+today's date in YYYYMMDD form, so pressing RET selects the albums
+added today; the user can still edit or replace it."
+  (let ((default (format-time-string "%Y%m%d")))
+    (read-string (format-prompt prompt-text default)
+                 nil
+                 'denote-files-matching-regexp-history
+                 default)))
 
 (defun spike-leung/insert-album-block (name)
   "Insert a formatted album-wall block for file NAME."
@@ -131,21 +158,25 @@ Returns list (title year artist webp-base)."
 (defun spike-leung/insert-album-wall (&optional arg)
   "Select album-wall .avif files and insert formatted Org blocks at point.
 With one \\[universal-argument], first prompt for a regexp to filter
-candidates (like `denote-dired'), then pick from matches.
+candidates (like `denote-dired'), then pick from matches.  The regexp
+prompt defaults to today's date in YYYYMMDD form.
 With two \\[universal-argument]\\[universal-argument], prompt for a
 regexp and insert ALL matching files without picking."
   (interactive "P")
   (let* ((denote-directory
           (expand-file-name "~/git/taxodium/publish/images/album-wall"))
          (regexp (cond
-                  ((equal arg '(4))  (denote-files-matching-regexp-prompt
+                  ((equal arg '(4))  (spike-leung/album-wall-regexp-prompt
                                       "Insert album(s) matching REGEXP"))
-                  ((equal arg '(16)) (denote-files-matching-regexp-prompt
+                  ((equal arg '(16)) (spike-leung/album-wall-regexp-prompt
                                       "Insert ALL album(s) matching REGEXP"))
                   (t nil)))
          (files (seq-filter (lambda (f) (string-match "\\.avif\\'" f))
                             (denote-directory-files regexp)))
-         (names (mapcar #'file-name-nondirectory files)))
+         (names (sort (mapcar #'file-name-nondirectory files)
+                      (lambda (a b)
+                        (string< (spike-leung/album-wall-sort-key a)
+                                 (spike-leung/album-wall-sort-key b))))))
     (unless names
       (user-error "No album-wall .avif files found"))
     (if (equal arg '(16))
