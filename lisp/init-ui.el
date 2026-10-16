@@ -114,7 +114,12 @@ set of themes to either dark or light variants."
   (require 'modus-themes)
   (require 'ef-themes)
   (require 'doric-themes)
-  (let* ((prefixes '(modus ef doric ef doric ef doric))
+  ;; remove unlike doric dark themes
+  (setq doric-themes-dark-themes (seq-filter
+                                  (lambda (t)
+                                    (not (eq t 'doric-pine)))
+                                  doric-themes-dark-themes))
+  (let* ((prefixes '(modus doric ef doric ef doric ef))
          (prefix (nth (random (length prefixes)) prefixes)))
     (cond
      ((eq 'modus prefix)
