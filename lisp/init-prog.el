@@ -59,6 +59,21 @@
               (add-hook 'eldoc-documentation-functions 'flymake-eldoc-function nil t))))
 
 
+;;; Treesitter
+
+;;; Support remapping of additional libraries
+
+(defun sanityinc/remap-ts-mode (non-ts-mode ts-mode grammar)
+  "Explicitly remap NON-TS-MODE to TS-MODE if GRAMMAR is available."
+  (when (and (fboundp 'treesit-ready-p)
+             (treesit-ready-p grammar t)
+             (fboundp ts-mode))
+    (add-to-list 'major-mode-remap-alist (cons non-ts-mode ts-mode))))
+
+(sanityinc/remap-ts-mode 'js2-mode 'js-ts-mode 'javascript)
+(sanityinc/remap-ts-mode 'python-mode 'python-ts-mode 'python)
+
+
 
 (use-package display-line-numbers
   :hook (prog-mode . display-line-numbers-mode)
