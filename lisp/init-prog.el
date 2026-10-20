@@ -147,7 +147,8 @@
 (setq python-shell-interpreter "python3")
 
 ;; Use the python black package to reformat python buffers.
-(use-package blacken)
+(use-package blacken
+  :hook (python-ts-mode . blacken-mode))
 (use-package pip-requirements)
 
 
