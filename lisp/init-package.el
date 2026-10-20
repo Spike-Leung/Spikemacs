@@ -39,6 +39,7 @@
 ;; see: https://github.com/radian-software/straight.el/issues/1146
 (straight-use-package 'project)
 (straight-use-package 'org)
+(straight-use-package 'flymake)
 
 
 
