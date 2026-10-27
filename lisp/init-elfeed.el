@@ -246,6 +246,7 @@
           ("https://shuiba.co/feed" :title "水八口")
           ("https://lhasa.icu/rss.xml" :title "游钓四方")
           ("https://weekly.tw93.fun/rss.xml" :title "潮流周刊" weekly)
+          ("https://tw93.fun/feed.xml" :title "Tw93")
           ("https://ameow.xyz/feed.xml" :title "猫鱼周刊" weekly)
           ("https://imgradeone.com/blog.xml" :title "真正的自言者一么")
           ("https://chengpeiquan.com/feed.xml" :title "程沛权" tech frontend)
@@ -311,6 +312,7 @@
           ("https://varzy.me/rss.xml" :title "贼歪")
           ("https://www.javis.me/feed/" :title "查令十字街 84 号")
           ("https://nicetrypod.com/feed/audio.xml" :title "Nice Try" podcast)
+          ("https://pan.icu/feed" :title "内核恐慌" podcast)
           ("https://kciter.so/feed.xml" :title "Sunhyoup Lee" Frontend)
           ("http://fyr.io/feed" :title "fyr.io" blaugust2026)
           ("https://francescrossley.com/feed/" :title "What the Fran" blaugust2026)
@@ -348,15 +350,15 @@
           ("https://deadparrotbbs.com/feed/" :title "Dead Parrot BBS")
           ("https://karpathy.bearblog.dev/feed/" :title "Andrej Karpathy")
           ("https://foosoft.net/feeds/posts.xml" :title "Alex Yatskov")
-          ("https://shojiwax.com/feed/" :title "Ian Miller")
           ("https://www.craigabbott.co.uk/feed.xml" :title "Craig Abbott" accessibility)
           ("https://ploum.net/atom_en.xml" :title "Ploum")
-          ;; no-update
+          ;; no-update, but you can fetch them manually
           ("https://z.arlmy.me/atom.xml" :title "素生" :no-update t blaugust2026)
           ("https://manateelazycat.github.io/feed.xml" :title "Andy Stewart" :no-update t emacs)
           ("https://yangbear.bearblog.dev/feed/" :title "YangBear" :no-update t 台湾)
           ("https://wiwi.blog/blog/rss.xml" :title "Wiwi" :no-update t 台湾 blogblogClub)
           ("https://wmyskxz.cn/atom" :title "我没有三颗心脏" :no-update t weekly tech)
+          ("https://shojiwax.com/feed/" :title "Ian Miller" :no-update t photo)
           ;; end
           ))
 
