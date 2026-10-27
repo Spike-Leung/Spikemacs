@@ -211,19 +211,16 @@
   :config
   (defun spike-leung/imp-markdown-filter (buffer)
     "Define imp markdown filter.
-Wrap BUFFER with HTML, render with https://github.com/markedjs/marked and style with https://github.com/sindresorhus/github-markdown-css"
+Wrap BUFFER with HTML, render with https://github.com/markedjs/marked,
+sanitize with https://github.com/cure53/DOMPurify and style with
+https://github.com/sindresorhus/github-markdown-css."
     (princ (with-current-buffer buffer
              (format "<!DOCTYPE html>
 <html>
-  <title>Markdown Preview</title>
   <head>
-    <link
-      rel=\"stylesheet\"
-      href=\"https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.min.css\"
-      integrity=\"sha512-BrOPA520KmDMqieeM7XFe6a3u3Sb3F1JBaQnrIAmWg3EYrciJ+Qqe6ZcKCdfPv26rGcgTrJnZ/IdQEct8h3Zhw==\"
-      crossorigin=\"anonymous\"
-      referrerpolicy=\"no-referrer\"
-    />
+    <meta charset=\"utf-8\">
+    <title>Markdown Preview</title>
+    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.9.0/github-markdown.min.css\" integrity=\"sha512-Ouq1+UcR9ENXndFyd/YA9i+ETLJmX3WoaMBF/nDzdqJbipKGL/SAbkO+qjDoxfD/dhZs4ZqgR9vXkolrK77xmQ==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\">
     <style>
           .markdown-body {
                   box-sizing: border-box;
@@ -239,32 +236,57 @@ Wrap BUFFER with HTML, render with https://github.com/markedjs/marked and style 
                   }
           }
     </style>
-    <script src=\"https://cdn.jsdelivr.net/npm/marked/marked.min.js\"></script>
+    <script src=\"https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.4.17/purify.min.js\" integrity=\"sha512-2wT0W6vojz3cJuLoa/DxrPVQRinkfRjFWMWIDK4NghTqObEhpem1nEkeK0d9ZE+/hyvfMNuJZlfxM4LsRgeoSA==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"></script>
   </head>
   <body>
     <div id=\"markdown-body\" class=\"markdown-body\"></div>
     <script>
-      document.getElementById('markdown-body').innerHTML = marked.parse(%s);
+      // The markdown source is base64 encoded on the Emacs side, so it can
+      // contain any character (quotes, backslashes, newlines, raw HTML tags,
+      // ...) without breaking this script block.
+      const bytes = Uint8Array.from(atob(\"%s\"), c => c.charCodeAt(0));
+      const markdown = new TextDecoder('utf-8').decode(bytes);
+      const body = document.getElementById('markdown-body');
+      if (!window.marked || !window.DOMPurify) {
+        body.textContent = 'Markdown preview assets failed to load (offline or SRI mismatch).';
+      } else {
+        body.innerHTML = DOMPurify.sanitize(marked.parse(markdown));
+      }
     </script>
   </body>
 </html>"
-                     (json-encode (buffer-substring-no-properties (point-min) (point-max)))))
+                     (base64-encode-string
+                      (encode-coding-string
+                       (save-restriction
+                         (widen)
+                         (buffer-substring-no-properties (point-min) (point-max)))
+                       'utf-8)
+                      t)))
            (current-buffer)))
 
   (defun spike-leung/preview-markdown ()
     "Live Preview markdown."
     (interactive)
-    (impatient-mode)
-    (imp-visit-buffer)
-    (imp-set-user-filter 'spike-leung/imp-markdown-filter))
+    ;; Enabling `impatient-mode' resets the user filter, so install the
+    ;; filter afterwards.
+    (impatient-mode 1)
+    (imp-set-user-filter #'spike-leung/imp-markdown-filter)
+    (imp-visit-buffer))
 
   (defun spike-leung/disable-preview-markdown ()
     "Disable preview markdown."
     (interactive)
-    (progn
-      (httpd-stop)
-      (impatient-mode -1)
-      (imp-remove-user-filter))))
+    (when (bound-and-true-p impatient-mode)
+      (impatient-mode -1))
+    (imp-remove-user-filter)
+    ;; `httpd-stop' shuts down the server for every buffer, so only stop it
+    ;; when no other buffer is being previewed.
+    (unless (seq-some (lambda (buf)
+                        (with-current-buffer buf
+                          (bound-and-true-p impatient-mode)))
+                      (buffer-list))
+      (ignore-errors (httpd-stop)))))
 
 
 
