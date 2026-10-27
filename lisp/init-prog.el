@@ -139,6 +139,7 @@
 
 (use-package js2-mode)
 (use-package prettier-js)
+(add-to-list 'auto-mode-alist '("\\.mjs\\'" . js2-mode))
 
 
 
