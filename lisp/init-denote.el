@@ -58,7 +58,7 @@
     (denote-dired-mode 1))
 
   (defun spike-leung/denote-open-or-create--note ()
-    "use `denote-silo-open-or-create' to open blog dir."
+    "use `denote-silo-open-or-create' to open note dir."
     (interactive)
     (denote-silo-open-or-create spike-leung/denote-directory--note))
 
