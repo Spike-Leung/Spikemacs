@@ -244,7 +244,7 @@ images/album-1 → images/album/1 → images/album → images/"
          (image-file (read-file-name "Select image: " image-dir nil t))
          ;; 保持路径相对于 base-dir，确保子目录结构正确
          (relative-path (file-relative-name image-file base-dir)))
-    (insert (format "#+attr_html: :loading lazy \n#+CAPTION: \n[[file:images/%s]]" relative-path))))
+    (insert (format "#+attr_html: :loading lazy :alt ""\n#+CAPTION: \n[[file:images/%s]]" relative-path))))
 
 
 
