@@ -11,6 +11,14 @@
 - 年份：
 - 时长：
 
+#+attr_html: :class album-badges
+#+begin_div
+#+attr_html: :alt 到 Bandcamp 購買專輯
 #+attr_html: :data-href
-[[file:images/88x31/lucide.gif]]
+[[file:images/88x31/bandcamp.png]]
+
+#+attr_html: :alt 到 Lucida 下載專輯
+#+attr_html: :data-href
+[[file:images/88x31/lucida.gif]]
+#+end_div
 #+end_details
