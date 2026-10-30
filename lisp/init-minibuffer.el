@@ -94,13 +94,12 @@
   (add-to-list 'orderless-matching-styles 'completion--regex-pinyin)
 
   ;; Use Orderless as pattern compiler for consult-grep/ripgrep/find
+  ;; see: https://github.com/minad/consult/wiki#use-orderless-as-pattern-compiler-for-consult-grepripgrepfind
   (defun consult--orderless-regexp-compiler (input type &rest _config)
     (setq input (cdr (orderless-compile input)))
     (cons
      (mapcar (lambda (r) (consult--convert-regexp r type)) input)
      (lambda (str) (orderless--highlight input t str))))
-
-  ;; OPTION 1: Activate globally for all consult-grep/ripgrep/find/...
   (setq consult--regexp-compiler #'consult--orderless-regexp-compiler)
 
   ;; Ensure that the $ regexp works with consult-buffer
