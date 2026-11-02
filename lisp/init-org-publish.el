@@ -306,7 +306,6 @@ If heading does not already exist."
            :html-head spike-leung/html-head
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble spike-leung/html-postamble
-           :html-self-link-headlines t
            :auto-sitemap nil
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
@@ -325,7 +324,6 @@ If heading does not already exist."
            :html-head spike-leung/html-head
            :html-postamble spike-leung/html-postamble
            :html-preamble ,spike-leung/html-preamble-content
-           :html-self-link-headlines t
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
@@ -344,7 +342,6 @@ If heading does not already exist."
            :html-head spike-leung/html-head
            :html-preamble ,spike-leung/html-preamble-content
            :html-postamble spike-leung/html-postamble
-           :html-self-link-headlines t
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
@@ -361,7 +358,6 @@ If heading does not already exist."
            :html-postamble ,spike-leung/html-postamble-sitemap
            :publishing-function spike-leung/org-publish-index
            :html-htmlize-output-type css
-           :html-self-link-headlines t
            :author "Spike Leung"
            :email "l-yanlei@hotmail.com")
 
