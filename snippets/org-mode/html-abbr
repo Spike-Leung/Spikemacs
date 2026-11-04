@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: html <abbr>
+# key: abbr
+# --
+
+@@html:<abbr title="${1:全称}">@@${0:縮寫}@@html:</abbr>@@
