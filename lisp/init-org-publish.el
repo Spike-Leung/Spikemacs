@@ -117,7 +117,7 @@ INFO is a plist holding contextual information."
 </p>
 <noscript><p class=\"webmention__tip\">你可以發送 Webmention，但加載數據需要開啟 JS。</p></noscript>
 <hr></hr>
-<ol class=\"webmention__list js-required\" aria-live=\"polite\" aria-atomic=\"false\" aria-relevant=\"additions\"></ol>
+<ul class=\"webmention__list js-required\" aria-live=\"polite\" aria-atomic=\"false\" aria-relevant=\"additions\"></ul>
 </details>"
      ;; microformat
      "<div class=\"h-card p-author\" aria-hidden=\"true\">
