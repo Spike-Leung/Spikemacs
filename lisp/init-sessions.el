@@ -66,7 +66,6 @@
 
 
 ;; Restore histories and registers after saving
-
 (use-package session
   :init
   (setq session-save-file (locate-user-emacs-file ".session")
@@ -76,6 +75,9 @@
 
 
 
+;; This package maintains a list of recently opened files and makes it
+;; easy to visit them.  The recent files list is automatically saved
+;; across Emacs sessions.
 (use-package recentf
   :hook (after-init . recentf-mode)
   :init
@@ -84,6 +86,9 @@
 
 
 
+;; Automatically save place in files, so that visiting them later
+;; (even during a different Emacs session) automatically moves point
+;; to the saved position, when the file is first found.
 (use-package saveplace
   :hook (after-init . save-place-mode))
 
