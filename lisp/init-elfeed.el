@@ -295,7 +295,6 @@
           ("https://danq.me/feed/" :title "Dan Q" tech)
           ("https://duo3.ink/atom.xml" :title "123哆3")
           ("https://cleberg.net/feed.xml" :title "Christian Cleberg")
-          ("https://absurdpirate.bearblog.dev/feed/" :title "Absurd Pirate")
           ("https://sophiebits.com/atom.xml" :title "Sophie Alpert")
           ("https://thehtml.review/rss.xml" :title "HTML Review")
           ("https://blade520.com/rss.xml" :title "Blade/磯江")
@@ -356,6 +355,8 @@
           ("https://carrot.tw/index.xml" :title "Carrot")
           ("https://sweetfish.site/feed.xml" :title "Ayu's Webhouse")
           ("https://weiqiang.org/index.xml" :title "危墙")
+          ("https://blog.avas.space/feed/" :title "ava")
+          ("https://ikuka.blog/blog/atom.xml" :title "ikuka")
           ;; no-update, but you can fetch them manually
           ("https://z.arlmy.me/atom.xml" :title "素生" :no-update t blaugust2026)
           ("https://manateelazycat.github.io/feed.xml" :title "Andy Stewart" :no-update t emacs)
@@ -363,6 +364,7 @@
           ("https://wiwi.blog/blog/rss.xml" :title "Wiwi" :no-update t 台湾 blogblogClub)
           ("https://wmyskxz.cn/atom" :title "我没有三颗心脏" :no-update t weekly tech)
           ("https://shojiwax.com/feed/" :title "Ian Miller" :no-update t photo)
+          ("https://absurdpirate.bearblog.dev/feed/" :title "Absurd Pirate" :no-update t)
           ;; end
           ))
 
