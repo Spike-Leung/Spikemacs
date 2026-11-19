@@ -383,7 +383,7 @@
   (defun spike-leung/preview-elfeed-with-olivetti ()
     "Preview elfeed with `olivetti-mode'."
     (olivetti-mode)
-    (olivetti-set-width 120)
+    (olivetti-set-width 80)
     (visual-line-mode))
   (add-hook 'elfeed-show-mode-hook #'spike-leung/preview-elfeed-with-olivetti))
 
