@@ -402,7 +402,9 @@
   "Generate selected Elfeed entries as reading list.  Auto push to git."
   (interactive nil elfeed-search-mode)
   (let ((repo-dir (expand-file-name "~/git/reading-list"))
-        (entries (elfeed-search-selected)))
+        (entries (if (use-region-p)
+                     (elfeed-search-selected)
+                   (elfeed-search-entries elfeed-search-filter))))
     (with-temp-buffer
       (goto-char (point-min))
       (insert (format "#+title: Reading list\n"))
@@ -428,7 +430,7 @@
     (let ((default-directory repo-dir))
       (unless (file-directory-p (expand-file-name ".git" repo-dir))
         (user-error "Not a git repository: %s" repo-dir))
-      (message "Syncing with origin...")
+      (message "Syncing elfeed entries to reading list...")
       (if (= 0 (shell-command "git pull --ff-only --no-rebase"))
           (message "Synced with origin.")
         (user-error "Git pull failed; resolve manually in %s" repo-dir))
@@ -442,6 +444,14 @@
             (if (= 0 (shell-command "git push" nil nil))
                 (message "Add entries and pushed to origin.")
               (message "Add entries but push failed."))))))))
+
+(defun spike-leung/elfeed-reading-list-update (&rest _)
+  "Auto push elfeed-search entries to reading list.
+Call in `elfeed-update-hook', only push when `elfeed-queue-count-total' is empty."
+  (when (= (elfeed-queue-count-total) 0)
+    (spike-leung/elfeed-reading-list)))
+
+(add-hook 'elfeed-update-hooks #'spike-leung/elfeed-reading-list-update)
 
 
 
