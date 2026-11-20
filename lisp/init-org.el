@@ -127,7 +127,7 @@
         ("x" "Reading List"
          item
          (file+headline "~/notes/20241112T202642--reading-list__collection_read.org" "Refs")
-         "[[%:link][%:description]]\n%i\n\n"
+         "[[%:link][%:description]\n%i\n\n"
          :jump-to-captured t
          :immediate-finish t)
         ("m" "Music Rank"
