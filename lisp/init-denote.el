@@ -13,6 +13,11 @@
 
 
 (use-package denote
+   :straight (denote
+             :type git
+             :host github
+             :repo "protesilaos/denote"
+             :branch "main")
   :after (org)
   :hook (dired-mode . denote-dired-mode) ; Apply colours to Denote names in Dired.
   :bind (("C-c n n" . spike-leung/denote-open-or-create--note)
