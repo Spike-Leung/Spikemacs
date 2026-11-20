@@ -129,13 +129,6 @@
          (file+headline "~/notes/20241112T202642--reading-list__collection_read.org" "Refs")
          "[[%:link][%:description]\n%i\n\n"
          :jump-to-captured t
-         :immediate-finish t)
-        ("m" "Music Rank"
-         plain
-         (file+headline "~/git/taxodium/posts/20250928T170716--听歌排行__blackhole_music_rank.org" "网易云听歌排行")
-         "#+begin_details\n#+html: <summary>最近一周</summary>\n%i\n#+end_details"
-         :jump-to-captured t
-         :prepend t
          :immediate-finish t)))
 
 
