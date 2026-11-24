@@ -353,6 +353,7 @@
           ("https://weiqiang.org/index.xml" :title "危墙")
           ("https://blog.avas.space/feed/" :title "ava")
           ("https://ikuka.blog/blog/atom.xml" :title "ikuka")
+          ("https://olliewilliams.xyz/rss.xml" :title "Ollie Williams" frontend)
           ;; !!no-update, but you can fetch them manually
           ("https://z.arlmy.me/atom.xml" :title "素生" :no-update t blaugust2026)
           ("https://manateelazycat.github.io/feed.xml" :title "Andy Stewart" :no-update t emacs)
