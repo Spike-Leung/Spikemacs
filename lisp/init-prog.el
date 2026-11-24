@@ -5,13 +5,13 @@
 
 
 (use-package flymake
-  :hook (prog-mode text-mode)
+  ;; :hook (prog-mode text-mode)
   :bind (("C-c ! l" . flymake-show-buffer-diagnostics)
          ("C-c ! p" . flymake-goto-prev-error)
          ("C-c ! n" . flymake-goto-next-error)
          ("C-c ! c" . flymake-start))
   :config
-  (setq flymake-show-diagnostics-at-end-of-line t
+  (setq flymake-inline-diagnostics 'fancy
         flymake-no-changes-timeout 1.5)
   (defvar-keymap flymake-repeat-map
     :doc "Repeat map for flymake commands."
