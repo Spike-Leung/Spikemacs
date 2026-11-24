@@ -26,7 +26,7 @@
   :config
   (setq gptel-model   'deepseek-flash
         gptel-default-mode 'org-mode
-        gptel-backend (gptel-make-openai "DeepSeek"
+        gptel-backend (gptel-make-deepseek "DeepSeek"
                         :host "api.deepseek.com"
                         :endpoint "/chat/completions"
                         :stream t
@@ -37,7 +37,7 @@
 
 
   ;; define backend
-  (gptel-make-openai "DeepSeek"
+  (gptel-make-deepseek "DeepSeek"
     :host "api.deepseek.com"
     :endpoint "/chat/completions"
     :stream t
@@ -54,9 +54,9 @@
   ;; preset
   (defmacro spike-leung/define-gptel-preset (name &rest args)
     `(gptel-make-preset ,name
-                        :backend "DeepSeek"
-                        :model 'deepseek-flash
-                        ,@args))
+       :backend "DeepSeek"
+       :model 'deepseek-flash
+       ,@args))
 
   (spike-leung/define-gptel-preset 'quote-format
                                    :request-params '(:reasoning (:effort "none"))
