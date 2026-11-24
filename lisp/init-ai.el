@@ -10,9 +10,6 @@
 
 ;;; gptel
 
-(defconst openrouter-default-model '~deepseek/deepseek-v4-flash-latest
-  "Default model for openrouter.")
-
 (defconst openrouter-models '(;; google
                               google/gemini-3-flash-preview
                               google/gemini-3.1-pro-preview
@@ -27,14 +24,14 @@
   :custom
   (gptel-proxy "localhost:7890")
   :config
-  (setq gptel-model   openrouter-default-model
+  (setq gptel-model   'deepseek-flash
         gptel-default-mode 'org-mode
-        gptel-backend (gptel-make-openai "OpenRouter"
-                        :host "openrouter.ai"
-                        :endpoint "/api/v1/chat/completions"
+        gptel-backend (gptel-make-openai "DeepSeek"
+                        :host "api.deepseek.com"
+                        :endpoint "/chat/completions"
                         :stream t
-                        :key (spike-leung/get-openrouter-api-key)
-                        :models openrouter-models))
+                        :key (spike-leung/get-deepseek-api-key)
+                        :models '(deepseek-flash deepseek-v4-pro)))
   (setopt gptel--system-message "You are a helpful assistant. Respond concisely."
           gptel-highlight-methods '(fringe face margin))
 
@@ -45,8 +42,8 @@
     :endpoint "/chat/completions"
     :stream t
     :key (spike-leung/get-deepseek-api-key)
-    :models '(deepseek-chat deepseek-coder)
-    :request-params '(:reasoning (:enable t)))
+    :models '(deepseek-flash deepseek-v4-pro))
+
   (gptel-make-openai "OpenRouter"
     :host "openrouter.ai"
     :endpoint "/api/v1/chat/completions"
@@ -57,9 +54,9 @@
   ;; preset
   (defmacro spike-leung/define-gptel-preset (name &rest args)
     `(gptel-make-preset ,name
-       :backend "OpenRouter"
-       :model '~deepseek/deepseek-v4-flash-latest
-       ,@args))
+                        :backend "DeepSeek"
+                        :model 'deepseek-flash
+                        ,@args))
 
   (spike-leung/define-gptel-preset 'quote-format
                                    :request-params '(:reasoning (:effort "none"))
