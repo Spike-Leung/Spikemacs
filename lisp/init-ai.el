@@ -97,5 +97,14 @@
 
 
 
+(use-package gptel-annotate
+  :straight (:host github :repo "karthink/gptel-annotate")
+  :after gptel
+  ;; emacs verson >= 30
+  :config
+  (put 'gptel-annotate-flymake 'flymake-always-safe t))
+
+
+
 (provide 'init-ai)
 ;;; init-ai.el ends here
