@@ -86,6 +86,13 @@
      ("h" "org-heading" consult-org-heading)
      ("o" "outline" consult-outline)])
 
+  (transient-define-prefix spike-leung/transient-flymake ()
+    ["Flymake related"
+     ("l" "list" flymake-show-buffer-diagnostics)
+     ("n" "next" flymake-goto-next-error)
+     ("p" "prev" flymake-goto-prev-error)
+     ("c" "start" flymake-start)])
+
   (transient-define-prefix spike-leung/transient-quick-access-directory ()
     ["Quick Access Directory"
      ("i" "taxodium/images" (lambda () (interactive) (find-file "~/git/taxodium/publish/images")))
@@ -123,6 +130,7 @@
       ("j" "journal" denote-journal-new-or-existing-entry)
       ("p" "publish (C-u: force)" org-publish)]
      ["(・・?)"
+      ("!" "flymake" spike-leung/transient-flymake)
       ("a" "avy" avy-goto-char-timer)
       ("c" "consult" spike-leung/transient-consult)
       ("d" "directory" spike-leung/transient-quick-access-directory)
