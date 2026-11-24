@@ -1,0 +1,3 @@
+[submodule "infos/emacs-lisp-elements"]
+	path = infos/emacs-lisp-elements
+	url = https://github.com/protesilaos/emacs-lisp-elements

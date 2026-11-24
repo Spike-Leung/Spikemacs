@@ -27,5 +27,11 @@
   :hook (Info-selection . info-colors-fontify-node))
 
 
+
+(add-to-list 'Info-additional-directory-list
+             (file-name-as-directory (expand-file-name "infos/emacs-lisp-elements" user-emacs-directory)))
+
+
+
 (provide 'init-help)
 ;;; init-help.el ends here
