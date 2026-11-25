@@ -32,13 +32,14 @@
   (transient-define-prefix spike-leung/transient-gptel ()
     "transient for gptel."
     [["gptel"
+      ("a" "annotate" gptel-annotate)
       ("g" "gptel" gptel)
       ("m" "gptel-menu" gptel-menu :transient t)]
      ["rewrite"
       ("rr" "gptel-rewrite" gptel-rewrite)
       ("rp" "gptel-rewrite-preset" spike-leung/gptel-rewrite-preset)]
      ["Else"
-      ("a" "gptel-abort" gptel-abort)
+      ("A" "gptel-abort" gptel-abort)
       ("M" "gptel-mode" gptel-mode)]])
 
   (transient-define-prefix spike-leung/transient-bookmark ()
@@ -88,10 +89,11 @@
 
   (transient-define-prefix spike-leung/transient-flymake ()
     ["Flymake related"
+     ("c" "start" flymake-start)
      ("l" "list" flymake-show-buffer-diagnostics)
-     ("n" "next" flymake-goto-next-error)
      ("p" "prev" flymake-goto-prev-error)
-     ("c" "start" flymake-start)])
+     ("n" "next" flymake-goto-next-error)
+     ("m" "mode" flymake-mode)])
 
   (transient-define-prefix spike-leung/transient-quick-access-directory ()
     ["Quick Access Directory"
