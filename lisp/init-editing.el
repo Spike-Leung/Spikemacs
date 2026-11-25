@@ -347,5 +347,16 @@
 
 
 
+;; docs: https://github.com/tbanel/uniline
+(use-package uniline-transient
+  :straight (uniline
+             :type git
+             :host github
+             :repo "tbanel/uniline"
+             :branch "main"))
+(autoload 'uniline-mode "uniline-transient" nil t)
+
+
+
 (provide 'init-editing)
 ;;; init-editing.el ends here
