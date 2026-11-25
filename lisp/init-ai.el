@@ -51,6 +51,11 @@
     :key (spike-leung/get-openrouter-api-key)
     :models openrouter-models)
 
+  (gptel-make-ollama "Ollama"
+    :host "localhost:11434"
+    :stream t
+    :models '(qwen3.5:9b))
+
   ;; preset
   (defmacro spike-leung/define-gptel-preset (name &rest args)
     `(gptel-make-preset ,name
