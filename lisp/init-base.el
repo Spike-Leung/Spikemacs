@@ -32,6 +32,10 @@
               load-prefer-newer t
               fill-column 88)
 
+;; Allowng breaking after CJK characters
+;; and improves the word-wrapping for CJK text mixed with Latin text.
+(setopt word-wrap-by-category t)
+
 
 
 ;;; 从 https://emacsredux.com/blog/2026/04/07/stealing-from-the-best-emacs-configs/ 借鉴的配置
