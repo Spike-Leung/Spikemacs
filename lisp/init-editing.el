@@ -202,20 +202,33 @@
          ("C-c C-j" . avy-resume)
          :map isearch-mode-map
          ("C-'" . avy-isearch))
+  :commands (spike-leung/avy-goto-char-timer)
   :config
   ;; for how to use avy, see: https://karthinks.com/software/avy-can-do-anything/
   ;; after filter, use ? to show dispatch to show all actions
   (setq avy-style 'at-full
         ;; 移除所有的高亮，avy 标记会更突出
         avy-background t
-        avy-timeout-seconds 0.8))
+        avy-timeout-seconds 0.8)
+
+  ;; see: https://emacs-china.org/t/avy-avy-goto-char-timer/20900/2
+  ;; make avy-goto-char-timer work both for English and Chinese
+  (defun spike-leung/avy-goto-char-timer (&optional arg)
+    (interactive "P")
+    (let ((avy-all-windows (if arg
+                               (not avy-all-windows)
+                             avy-all-windows)))
+      (avy-with avy-goto-char-timer
+                (setq avy--old-cands (avy--read-candidates
+                                      'pinyinlib-build-regexp-string))
+                (avy-process avy--old-cands)))))
 
 ;; "ace-pinyin" to support chinese
-;; (use-package ace-pinyin
-;;   :bind (("C-M-:" . ace-pinyin-jump-char-2))
-;;   :config
-;;   ;; support traditional chinese
-;;   (setq ace-pinyin-simplified-chinese-only-p nil))
+(use-package ace-pinyin
+  :config
+  (ace-pinyin-global-mode +1)
+  ;; support traditional chinese
+  (setq ace-pinyin-simplified-chinese-only-p nil))
 
 
 

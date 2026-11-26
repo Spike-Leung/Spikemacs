@@ -133,7 +133,7 @@
       ("p" "publish (C-u: force)" org-publish)]
      ["(・・?)"
       ("!" "flymake" spike-leung/transient-flymake)
-      ("a" "avy" avy-goto-char-timer)
+      ("a" "avy" spike-leung/avy-goto-char-timer)
       ("c" "consult" spike-leung/transient-consult)
       ("d" "directory" spike-leung/transient-quick-access-directory)
       ("g" "gptel" spike-leung/transient-gptel)
