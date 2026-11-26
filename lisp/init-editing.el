@@ -262,7 +262,6 @@
 
 
 ;;; regexp
-
 (use-package re-builder
   :straight nil
   :bind (;; Support a slightly more idiomatic quit binding in re-builder
@@ -271,7 +270,6 @@
 
 
 ;;; puni - Structured editing that supports many major modes out of the box.
-
 (use-package puni
   :disabled
   :init
@@ -368,6 +366,12 @@
              :repo "tbanel/uniline"
              :branch "main"))
 (autoload 'uniline-mode "uniline-transient" nil t)
+
+
+
+;;; others useful
+;; - pangu-spacing: https://github.com/coldnew/pangu-spacing
+;;   Minor-mode to add space between Chinese and English characters.
 
 
 
