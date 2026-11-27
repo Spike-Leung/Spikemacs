@@ -58,11 +58,7 @@
 
 ;; theme
 (use-package modus-themes
-  :straight (modus-themes
-             :type git
-             :host github
-             :repo "protesilaos/modus-themes"
-             :branch "main")
+  :straight (modus-themes :host github :repo "protesilaos/modus-themes" :branch "main")
   :config
   (setq modus-themes-italic-constructs t
         modus-themes-bold-constructs t
@@ -71,106 +67,101 @@
         '((bg-prose-block-contents unspecified))))
 
 (use-package ef-themes
-  :straight (ef-themes
-             :type git
-             :host github
-             :repo "protesilaos/ef-themes"
-             :branch "main"))
+  :straight (ef-themes :host github :repo "protesilaos/ef-themes" :branch "main"))
 
 (use-package doric-themes
-  :straight (doric-themes
-             :type git
-             :host github
-             :repo "protesilaos/doric-themes"
-             :branch "main"))
+  :straight (doric-themes :host github :repo "protesilaos/doric-themes" :branch "main")
+  :config
+  ;; remove unlike doric dark themes
+  (setq doric-themes-dark-themes
+        (delq 'doric-pine doric-themes-dark-themes)))
 
 (use-package au-themes
-  :straight (au-themes
-             :type git
-             :host github
-             :repo "szymonwilczek/au-themes"
-             :branch "main"))
+  :straight (au-themes :host github :repo "szymonwilczek/au-themes" :branch "main"))
 
-(defun spike-leung/load-theme-by-time (light-fn dark-fn)
-  "Call LIGHT-FN between sunrise and sunset, otherwise DARK-FN."
-
+(defun spike-leung/get-day-phase-by-time ()
+  "Return day, dawn, night by locale time."
   (let* ((calendar-longitude 114.158283) ;; Hong Kong
          (calendar-latitude 22.281833)
          (calendar-time-zone 480)
          (l (solar-sunrise-sunset (calendar-current-date)))
          (hour (lambda (x) (and x (if (consp x) (car x) x))))
-         (sunrise (funcall hour (car l)))
-         (sunset (funcall hour (cadr l)))
-         (t0 (decode-time))
-         (now (+ (nth 2 t0) (/ (nth 1 t0) 60.0))))
-    (funcall (if (and (car l) (cadr l)
-                      (>= now sunrise)
-                      (<  now sunset))
-                 light-fn dark-fn))))
+         (sunrise-hour (funcall hour (car l)))
+         (sunset-hour (funcall hour (cadr l)))
+         (dusk-hour (- sunset-hour 1))
+         (dawn-hour (- sunrise-hour 1))
+         (t0 (decode-time nil "Asia/Hong_Kong"))
+         (now-hour (+ (nth 2 t0) (/ (nth 1 t0) 60.0))))
+    (cond
+     ((and (>= now-hour dawn-hour) (< now-hour sunrise-hour)) 'dawn)
+     ((and (>= now-hour sunrise-hour) (< now-hour dusk-hour)) 'day)
+     ((and (>= now-hour dusk-hour) (< now-hour sunset-hour)) 'dusk)
+     (t 'night))))
 
-(defun spike-leung/themes-load-random (&optional background-mode)
+(defun spike-leung/load-theme-by-time (light-fn dark-fn)
+  "Call LIGHT-FN between sunrise and sunset, otherwise DARK-FN."
+  (let ((time-phase (spike-leung/get-day-phase-by-time)))
+    (if (eq 'night time-phase)
+        (funcall dark-fn)
+      (funcall light-fn))))
+
+(defun spike-leung/themes-load-random--variant (variant prefix)
+  "Random load theme with VARIANT and PREFIX.
+VARIANT should be light or dark,
+PREFIX should be one of modus, ef, doric, au."
+  (cond
+   ((eq 'modus prefix) (modus-themes-load-random variant))
+   ((eq 'au prefix) (au-themes-load-random variant))
+   ((eq 'doric prefix) (doric-themes-load-random variant))
+   ((eq 'ef prefix)
+    (if (eq variant 'light)
+        (ef-themes-load-random-light)
+      (ef-themes-load-random-dark)))))
+
+(defun spike-leung/themes-load-random (&optional variant)
   "Random load themes.
 
-Use `ef-themes' for Monday,Tuesday,Wednesday.
-Use `modus-themes' on Thursday, Friday.
-Use `doric-themes' on Saturday, Sunday.
+Rotate from `modus-themes', `ef-themes', `doric-themes', `au-themes'.
 Use light themes at day, use dark themes at night.
 
-With optional BACKGROUND-MODE as a prefix argument, prompt to limit the
-set of themes to either dark or light variants."
+If pass VARIANT as argument, random by VARIANT, may be light or dark."
+  (interactive)
   (require 'modus-themes)
   (require 'ef-themes)
   (require 'doric-themes)
   (require 'au-themes)
-  ;; remove unlike doric dark themes
-  (setq doric-themes-dark-themes (seq-filter
-                                  (lambda (t)
-                                    (not (eq t 'doric-pine)))
-                                  doric-themes-dark-themes))
-  (let ((prefix (seq-random-elt
+  (let ((time-phase (spike-leung/get-day-phase-by-time))
+        (prefix (seq-random-elt
                  (flatten-list
                   (seq-mapcat
                    (lambda (spec) (make-list (car spec) (cdr spec)))
                    '((2 modus) (2 au) (4 doric) (4 ef)))))))
-    (cond
-     ((eq 'modus prefix)
-      (if background-mode
-          (modus-themes-load-random background-mode)
-        (spike-leung/load-theme-by-time
-         #'modus-themes-load-random-light
-         #'modus-themes-load-random-dark)))
-     ((eq 'au prefix)
-      (if background-mode
-          (au-themes-load-random background-mode)
-        (spike-leung/load-theme-by-time
-         #'au-themes-load-random-light
-         #'au-themes-load-random-dark)))
-     ((eq 'ef prefix)
+    (if variant
+        (spike-leung/themes-load-random--variant variant prefix)
       (cond
-       ((eq background-mode 'light) (ef-themes-load-random-light))
-       ((eq background-mode 'dark) (ef-themes-load-random-dark))
-       (t (spike-leung/load-theme-by-time #'ef-themes-load-random-light #'ef-themes-load-random-dark))))
-     ((eq 'doric prefix)
-      (if background-mode
-          (doric-themes-load-random background-mode)
-        (spike-leung/load-theme-by-time
-         #'doric-themes-load-random-light
-         #'doric-themes-load-random-dark))))))
+       ((eq 'day time-phase) (spike-leung/themes-load-random--variant 'light prefix))
+       ;; au-themes 對比度比較低
+       ;; 黎明和黃昏天色較暗，亮色主題會顯得太亮，暗色主題又太暗，au-themes 就剛好
+       ((or (eq 'dawn time-phase) (eq 'dusk time-phase)) (au-themes-load-random-light))
+       ((eq 'night time-phase) (spike-leung/themes-load-random--variant 'dark prefix))))
+    (if (eq 'night time-phase)
+        (setq spike-leung/current-theme-variant 'dark)
+      (setq spike-leung/current-theme-variant 'light))))
 
-(defvar spike-leung/current-theme-background-mode 'light
-  "Current theme's background-mode value，can be 'light or 'dark, default to 'light.")
+(defvar spike-leung/current-theme-variant 'light
+  "Current theme's variant value，can be light or dark, default to light.")
 
 (defun light()
   "Load random light themes."
   (interactive)
-  (setq spike-leung/current-theme-background-mode 'light)
+  (setq spike-leung/current-theme-variant 'light)
   (spike-leung/themes-load-random 'light)
   (modify-frame-parameters nil `((alpha . 100))))
 
 (defun dark()
   "Load random dark themes."
   (interactive)
-  (setq spike-leung/current-theme-background-mode 'dark)
+  (setq spike-leung/current-theme-variant 'dark)
   (spike-leung/themes-load-random 'dark)
   ;; 暗色主题适当降低透明度，看起来更好看。不同的主题适合不同的透明度。
   (let ((theme (format "%s" custom-enabled-themes)))
@@ -184,18 +175,15 @@ set of themes to either dark or light variants."
 
 ;; 要在 desktop 加载后再执行，避免被 desktop 记录的主题覆盖，导致混乱
 (add-hook 'desktop-after-read-hook #'spike-leung/themes-load-random)
-
-(keymap-global-set "<f6>" #'(lambda ()
-                              (interactive)
-                              (spike-leung/load-theme-by-time #'light #'dark)))
+(keymap-global-set "<f6>" #'spike-leung/themes-load-random)
 
 (defun spike-leung/save-org-html-htmlize-generate-css (&rest _)
   "Save content generated by `org-html-htmlize-generate-css' to files."
   (with-current-buffer "*html*"
     (cond
-     ((eq spike-leung/current-theme-background-mode 'light)
+     ((eq spike-leung/current-theme-variant 'light)
       (write-region nil nil "~/git/taxodium/scripts/light.txt" nil))
-     ((eq spike-leung/current-theme-background-mode 'dark)
+     ((eq spike-leung/current-theme-variant 'dark)
       (write-region nil nil "~/git/taxodium/scripts/dark.txt" nil))))
   (kill-buffer "*html*"))
 
