@@ -84,6 +84,13 @@
              :repo "protesilaos/doric-themes"
              :branch "main"))
 
+(use-package au-themes
+  :straight (au-themes
+             :type git
+             :host github
+             :repo "szymonwilczek/au-themes"
+             :branch "main"))
+
 (defun spike-leung/load-theme-by-time (light-fn dark-fn)
   "Call LIGHT-FN between sunrise and sunset, otherwise DARK-FN."
 
@@ -114,13 +121,17 @@ set of themes to either dark or light variants."
   (require 'modus-themes)
   (require 'ef-themes)
   (require 'doric-themes)
+  (require 'au-themes)
   ;; remove unlike doric dark themes
   (setq doric-themes-dark-themes (seq-filter
                                   (lambda (t)
                                     (not (eq t 'doric-pine)))
                                   doric-themes-dark-themes))
-  (let* ((prefixes '(modus doric ef doric ef doric ef))
-         (prefix (nth (random (length prefixes)) prefixes)))
+  (let ((prefix (seq-random-elt
+                 (flatten-list
+                  (seq-mapcat
+                   (lambda (spec) (make-list (car spec) (cdr spec)))
+                   '((2 modus) (2 au) (4 doric) (4 ef)))))))
     (cond
      ((eq 'modus prefix)
       (if background-mode
@@ -128,6 +139,12 @@ set of themes to either dark or light variants."
         (spike-leung/load-theme-by-time
          #'modus-themes-load-random-light
          #'modus-themes-load-random-dark)))
+     ((eq 'au prefix)
+      (if background-mode
+          (au-themes-load-random background-mode)
+        (spike-leung/load-theme-by-time
+         #'au-themes-load-random-light
+         #'au-themes-load-random-dark)))
      ((eq 'ef prefix)
       (cond
        ((eq background-mode 'light) (ef-themes-load-random-light))
@@ -162,7 +179,7 @@ set of themes to either dark or light variants."
       (modify-frame-parameters nil `((alpha . 80))))
      ((string-match-p "ef-" theme)
       (modify-frame-parameters nil `((alpha . 92))))
-     ((string-match-p "doric-" theme)
+     ((or (string-match-p "doric-" theme) (string-match-p "au-" theme))
       (modify-frame-parameters nil `((alpha . 95)))))))
 
 ;; 要在 desktop 加载后再执行，避免被 desktop 记录的主题覆盖，导致混乱
