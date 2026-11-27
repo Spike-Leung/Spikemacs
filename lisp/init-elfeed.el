@@ -324,7 +324,7 @@
           ("https://granary.io/url?input=html&output=rss&url=https://asteriisms.com/blog" :title "Aster's Asterisms" blaugust2026)
           ("https://davehenry.blog/atom.xml" :title "Dave Henry Blog" blaugust2026)
           ("https://82mhz.net/index.xml" :title "82MHz" blaugust2026)
-          ("https://www.bongotwisty.blog/index.xml" :title "BongoTwisty" blaugust2026)
+          ("https://www.bongotwisty.blog/index.xml" :title "Bongo Twisty" blaugust2026)
           ("https://welshtroll.co.uk/feed/" :title "Point, Click, Repeat" blaugust2026)
           ("https://nerdgirlthoughts.game.blog/feed/" :title "Nerd Girl Thoughts" blaugust2026)
           ("https://lyonsinbeta.com/feed.xml" :title "Lyons in Beta" blaugust2026)
@@ -354,6 +354,9 @@
           ("https://blog.avas.space/feed/" :title "ava")
           ("https://ikuka.blog/blog/atom.xml" :title "ikuka")
           ("https://olliewilliams.xyz/rss.xml" :title "Ollie Williams" frontend)
+          ("https://treats.kagi.com/changelog/assistant/feed.xml" :title "Kagi" kagi assistant changelog)
+          ("https://treats.kagi.com/changelog/search/feed.xml"  :title "Kagi" kagi search changelog)
+          ("https://treats.kagi.com/changelog/translate/feed.xml" :title "Kagi" kagi translate changelog)
           ;; !!no-update, but you can fetch them manually
           ("https://z.arlmy.me/atom.xml" :title "素生" :no-update t blaugust2026)
           ("https://manateelazycat.github.io/feed.xml" :title "Andy Stewart" :no-update t emacs)
